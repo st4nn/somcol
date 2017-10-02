@@ -16,6 +16,7 @@ function fun_Inicio()
     {
       $.extend( Usuario, data);
       localStorage.setItem("mj_somcol", JSON.stringify(Usuario));    
+      $(".lblUsuario").text(Usuario.Nombre);
 
       if (Usuario.idPerfil > 1)
       {

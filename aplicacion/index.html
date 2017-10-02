@@ -129,6 +129,25 @@
             <li>
               <a class="label" id="lblNombreUsuario"></a>
             </li>
+            <li class="dropdown dropdown-fw dropdown-mega">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
+              data-animation="fade" role="button"> <i class="icon glyphicon glyphicon-th" aria-hidden="true"></i></a>
+              <ul class="dropdown-menu" role="menu">
+                <li role="presentation">
+                  <div class="mega-content">
+                    <div class="example-buttons">
+                      <button class="btn btn-icon white bg-teal-500 btnCargarMenu" data-sitio="copasst" title="COPASST"><i class="icon fa-users"></i></button>
+                      <button class="btn btn-icon white bg-red-500 btnCargarMenu" data-sitio="ausentismo" title="Ausentismo"><i class="icon fa-user-times"></i></button>
+                      <button class="btn btn-icon white bg-purple-500 btnCargarMenu" data-sitio="fallasDeControl" title="Fallas de Control"><i class="icon fa-sitemap"></i></button>
+                      <button class="btn btn-icon white bg-blue-500 btnCargarMenu" data-sitio="capacitaciones" title="Capacitaciones"><i class="icon fa-graduation-cap"></i></button>
+                      <button class="btn btn-icon white bg-orange-500 btnCargarMenu" data-sitio="indicadores" title="Indicadores"><i class="icon fa-bar-chart"></i></button>
+                      <button class="btn btn-icon white bg-brown-800 btnCargarMenu" data-sitio="administracion" title="Administración"><i class="icon fa-cogs"></i></button>
+                    </div>               
+                  </div>
+                </li>
+              </ul>
+            </li>
+        
             <li class="dropdown" id="toggleUser">
               <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
                 data-animation="scale-up" role="button">
@@ -159,20 +178,14 @@
           <div id="contenedorMenu">
             <div class="site-menu">
               <h1 class="site-menu-item">
+                <!--
                 <a href="javascript:void(0)">
                   <img class="col-xs-12 margin-bottom-25 imgLogoEmpresa" height="auto" src="../server/Archivos/InserteLogoAqui_1024.png" alt="">
                 </a>
+              -->
               </h1>
               <h1 class="site-menu-category text-center lblUsuario"></h1>
             </div>
-            <div class="example-buttons col-md-12">
-              <button class="btn btn-icon white bg-teal-500 btnCargarMenu" data-sitio="copasst" title="COPASST"><i class="icon fa-users"></i></button>
-              <button class="btn btn-icon white bg-red-500 btnCargarMenu" data-sitio="ausentismo" title="Ausentismo"><i class="icon fa-user-times"></i></button>
-              <button class="btn btn-icon white bg-purple-500 btnCargarMenu" data-sitio="fallasDeControl" title="Fallas de Control"><i class="icon fa-sitemap"></i></button>
-              <button class="btn btn-icon white bg-blue-500 btnCargarMenu" data-sitio="capacitaciones" title="Capacitaciones"><i class="icon fa-graduation-cap"></i></button>
-              <button class="btn btn-icon white bg-orange-500 btnCargarMenu" data-sitio="indicadores" title="Indicadores"><i class="icon fa-bar-chart"></i></button>
-              <button class="btn btn-icon white bg-red-500 btnCargarMenu" data-sitio="administracion" title="Administración"><i class="icon fa-cogs"></i></button>
-            </div>               
             <ul class="site-menu">
                 <li class="site-menu-category"></li>
             </ul>
@@ -189,6 +202,7 @@
     </div>
   <!-- Page -->
   <input id="txtCoordenadas_Global" type="hidden">
+  
   <div id="contenedorDeModulos">
 
   </div>
@@ -291,6 +305,5 @@
   //AppCalendar.run();
   });
   </script>
-  
 </body>
 </html>

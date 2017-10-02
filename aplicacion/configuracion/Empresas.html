@@ -1,0 +1,157 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<h3 class="page-title">Empresas</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+ 		<div id="cntEmpresas_Listado">
+	  		<form id="frmEmpresas_Buscar" class="page-search-form buscarGoogle" role="search">
+	  			<h1 class="text-center buscarGoogle_titulo">Empresas</h1>
+			    <div class="row">
+				    <div class="row col-sm-12 buscarGoogle_col">
+				      <div class="input-search">
+				        <i class="input-search-icon wb-search" aria-hidden="true"></i>
+				        <input type="text" class="form-control" id="txtReportes_OT_Buscar" placeholder="Buscar">
+				        <button type="button" class="input-search-close icon wb-close" aria-label="Close"></button>
+				      </div>
+				    </div>
+				    <div class="row col-sm-12 buscarGoogle_col">
+					    <div class="col-lg-2 hidden-sm buscarGoogle_col_del"></div>
+					    	<button type="submit" class="btn btn-success col-lg-4 col-sm-5  col-xs-12 margin-10 ladda-button" data-style="expand-left" data-size="l">
+					    		<span class="ladda-label">
+					    			<i class="icon wb-search" aria-hidden="true"></i> Buscar
+					    		</span>
+					    	</button>		    
+					    	<button type="button" class="btn btn-warning col-lg-4 col-sm-5  col-xs-12 margin-10" id="btnEmpresas_CrearEmpresa">
+					    		<i class="icon wb-plus" aria-hidden="true"></i> Crear Empresa
+					    	</button>
+					    <div class="col-lg-2 col-sm-1 buscarGoogle_col_del"></div>
+				    </div>
+			    </div>
+		  	</form>
+
+	      	<br><br>
+		    <div class="panel panel-primary panel-bordered col-md-12">
+		      <div class="panel-heading">
+		        <div class="panel-actions">
+		          <!--
+		          <button id="btnEmpresas_Listado_Actualizar" class="btn btn-success btn-floating"><i class="icon wb-refresh"></i></button> 
+		          -->
+		        </div>
+		      </div>
+		      <div class="panel-body">
+		      	<ul id="tblEmpresas_Listado" class="list-group list-group-dividered hide">
+		      		
+		      	</ul>
+		      </div>
+		    </div>
+		</div>
+		
+
+		<div id="cntEmpresas_Creacion" class="hide">
+			<div class="page-header">
+                <h1 class="page-title" id="lblEmpresas_Creacion_Titulo"></h1>
+                <div class="page-header-actions">
+                  
+                    <div class="">
+                    	<a id="lnkEmpresas_VolverABusqueda" href="#">
+                    		<i class="icon icon-2x fa-arrow-left "></i> 
+                    		<span class="text-middle">Volver a la Búsqueda</span>
+                    	</a>
+                    </div>
+                  
+                </div>
+            </div>
+
+            <div class="col-md-12">
+            	<div class="panel panel-bordered panel-primary col-lg-8">
+            		<div class="panel-heading">
+            			<div class="panel-actions">
+            				<button id="btnEmpresas_Crear_Limpiar" class="btn btn-success btn-floating btn-danger">
+            					<i class="icon wb-refresh"></i>
+            				</button> 
+				        	
+				        	<button id="btnEmpresas_Crear_Borrar" class="btn btn-success btn-floating btn-danger">
+				        		<i class="icon wb-trash"></i>
+				        	</button> 
+				        </div>
+            		</div>
+            		<div class="panel-body">
+            			<form id="frmEmpresas_Crear">
+            				<input type="hidden" class="form-control guardar" id="txtEmpresas_Crear_id" value="NULL">
+            				<div class="form-group col-md-12 col-lg-6">
+								<label class="col-lg-12 col-md-4 control-label">Nombre
+									<span class="required">*</span>
+								</label>
+								<div class="col-lg-12 col-md-8">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="icon fa-barcode" aria-hidden="true"></i>
+										</span>
+										<input type="text" class="form-control guardar" id="txtEmpresas_Crear_Nombre" required>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group col-md-12 col-lg-6">
+								<label class="col-lg-12 col-md-4 control-label">Dirección
+								</label>
+								<div class="col-lg-12 col-md-8">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="icon fa-barcode" aria-hidden="true"></i>
+										</span>
+										<input type="text" class="form-control guardar" id="txtEmpresas_Crear_Direccion">
+									</div>
+								</div>
+							</div>
+
+							
+							<div class="form-group col-sm-6">
+								<label class="col-lg-12 col-md-4 control-label">Correo de Contacto
+									<span class="required">*</span>
+								</label>
+								<div class="col-lg-12 col-md-8">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="icon wb-envelope" aria-hidden="true"></i>
+										</span>
+										<input type="mail" class="form-control guardar" id="txtEmpresas_Crear_Correo" required>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group col-sm-6">
+								<label class="col-lg-12 col-md-4 control-label">Teléfono de Contacto
+								</label>
+								<div class="col-lg-12 col-md-8">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="icon fa-phone" aria-hidden="true"></i>
+										</span>
+										<input type="number" class="form-control guardar" id="txtEmpresas_Crear_Telefono">
+									</div>
+								</div>
+							</div>
+            			</form>
+            		</div>
+            	</div>
+            	<div class="col-lg-4">
+	            	<div class="panel panel-bordered panel-primary">
+	            		<div class="panel-body">
+	            			<div>
+	            				<h4>Logo de la Empresa</h4>
+	            				<div id="cntEmpresas_Imagen"></div>	
+	            			</div>
+	            			
+	            		</div>
+	            	</div>
+            	</div>
+
+            	<button id="btnEmpresas_Guardar" class="btn btn-success btn-block"><i class="icon fa-floppy-o"></i> Guardar</button>	
+            </div>
+		</div>
+	</div>
+</div>
+
+<script src="../js/empresas.js"></script>

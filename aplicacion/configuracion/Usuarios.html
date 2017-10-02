@@ -1,0 +1,215 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<h3 class="page-title">Usuarios</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+ 		<div id="cntUsuarios_Listado">
+	  		<form id="frmUsuarios_Buscar" class="page-search-form buscarGoogle" role="search">
+	  			<h1 class="text-center buscarGoogle_titulo">Usuarios</h1>
+			    <div class="row">
+				    <div class="row col-sm-12 buscarGoogle_col">
+				      <div class="input-search">
+				        <i class="input-search-icon wb-search" aria-hidden="true"></i>
+				        <input type="text" class="form-control" id="txtReportes_OT_Buscar" placeholder="Buscar">
+				        <button type="button" class="input-search-close icon wb-close" aria-label="Close"></button>
+				      </div>
+				    </div>
+				    <div class="row col-sm-12 buscarGoogle_col">
+					    <div class="col-lg-2 hidden-sm buscarGoogle_col_del"></div>
+					    	<button type="submit" class="btn btn-success col-lg-4 col-sm-5  col-xs-12 margin-10 ladda-button" data-style="expand-left" data-size="l">
+					    		<span class="ladda-label">
+					    			<i class="icon wb-search" aria-hidden="true"></i> Buscar
+					    		</span>
+					    	</button>		    
+					    	<button type="button" class="btn btn-warning col-lg-4 col-sm-5  col-xs-12 margin-10" id="btnUsuarios_CrearUsuario">
+					    		<i class="icon wb-plus" aria-hidden="true"></i> Crear Usuario
+					    	</button>
+					    <div class="col-lg-2 col-sm-1 buscarGoogle_col_del"></div>
+				    </div>
+			    </div>
+		  	</form>
+
+	      	<br><br>
+		    <div class="panel panel-primary panel-bordered col-md-12">
+		      <div class="panel-heading">
+		        <div class="panel-actions">
+		          <!--
+		          <button id="btnUsuarios_Listado_Actualizar" class="btn btn-success btn-floating"><i class="icon wb-refresh"></i></button> 
+		          -->
+		        </div>
+		      </div>
+		      <div class="panel-body">
+		      	<ul id="tblUsuarios_Listado" class="list-group list-group-dividered hide">
+		      		
+		      	</ul>
+		      </div>
+		    </div>
+		</div>
+		
+
+		<div id="cntUsuarios_Creacion" class="hide">
+			<div class="page-header">
+                <h1 class="page-title" id="lblUsuarios_Creacion_Titulo"></h1>
+                <div class="page-header-actions">
+                  
+                    <div class="">
+                    	<a id="lnkUsuarios_VolverABusqueda" href="#">
+                    		<i class="icon icon-2x fa-arrow-left "></i> 
+                    		<span class="text-middle">Volver a la Búsqueda</span>
+                    	</a>
+                    </div>
+                  
+                </div>
+            </div>
+
+			<form id="frmUsuarios_Crear">
+	            <div class="col-md-12">
+	            	<div class="panel panel-bordered panel-primary col-lg-8">
+	            		<div class="panel-heading">
+	            			<div class="panel-actions">
+	            				<button id="btnUsuarios_Crear_Limpiar" class="btn btn-success btn-floating btn-danger">
+	            					<i class="icon wb-refresh"></i>
+	            				</button> 
+					        	
+					        	<button id="btnUsuarios_Crear_Borrar" class="btn btn-success btn-floating btn-danger">
+					        		<i class="icon wb-trash"></i>
+					        	</button> 
+					        </div>
+	            		</div>
+	            		<div class="panel-body">
+            				<input type="hidden" class="form-control guardar" id="txtUsuarios_Crear_id" value="NULL">
+            				<div class="form-group col-md-12 col-lg-6">
+								<label class="col-lg-12 col-md-4 control-label">Nombre
+									<span class="required">*</span>
+								</label>
+								<div class="col-lg-12 col-md-8">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="icon fa-barcode" aria-hidden="true"></i>
+										</span>
+										<input type="text" class="form-control guardar" id="txtUsuarios_Crear_Nombre" required>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group col-md-12 col-lg-6">
+								<label class="col-lg-12 col-md-4 control-label">Cargo
+								</label>
+								<div class="col-lg-12 col-md-8">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="icon fa-barcode" aria-hidden="true"></i>
+										</span>
+										<input type="text" class="form-control guardar" id="txtUsuarios_Crear_Cargo">
+									</div>
+								</div>
+							</div>
+
+							
+							<div class="form-group col-sm-12">
+								<label class="col-lg-12 col-md-4 control-label">Correo de Contacto
+									<span class="required">*</span>
+								</label>
+								<div class="col-lg-12 col-md-8">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="icon wb-envelope" aria-hidden="true"></i>
+										</span>
+										<input type="mail" class="form-control guardar" id="txtUsuarios_Crear_Correo" required>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group col-sm-6">
+								<label class="col-lg-12 col-md-4 control-label">Perfil
+								</label>
+								<div class="col-lg-12 col-md-8">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="icon fa-user-secret" aria-hidden="true"></i>
+										</span>
+										<select class="form-control guardar" id="txtUsuarios_Crear_idPerfil" required>
+											<option value="1">Administrador</option>
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group col-sm-6">
+								<label class="col-lg-12 col-md-4 control-label">Empresa
+								</label>
+								<div class="col-lg-12 col-md-8">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="icon fa-building" aria-hidden="true"></i>
+										</span>
+										<select class="form-control guardar" id="txtUsuarios_Crear_idEmpresa" required>
+											<option value="1">Soporte</option>
+										</select>
+									</div>
+								</div>
+							</div>
+	            		</div>
+	            	</div>
+	            	<div class="col-lg-4">
+		            	<div class="panel panel-bordered panel-primary">
+		            		<div class="panel-body">
+		            			<div>
+		            				<h4>Sesión de Usuario</h4>
+		            			</div>
+
+		            			<div class="form-group">
+									<label class="col-lg-12 col-md-4 control-label">Usuario
+										<span class="required">*</span>
+									</label>
+									<div class="col-lg-12 col-md-8">
+										<div class="input-group">
+											<span class="input-group-addon">
+												<i class="icon wb-user" aria-hidden="true"></i>
+											</span>
+											<input type="text" class="form-control guardar" id="txtUsuarios_Crear_nUsuario" required>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-lg-12 col-md-4 control-label">Clave
+										<span class="required">*</span>
+									</label>
+									<div class="col-lg-12 col-md-8">
+										<div class="input-group">
+											<span class="input-group-addon">
+												<i class="icon fa-key" aria-hidden="true"></i>
+											</span>
+											<input type="password" class="form-control guardar" id="txtUsuarios_Crear_Clave" required>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-lg-12 col-md-4 control-label">Nuevamente la clave
+										<span class="required">*</span>
+									</label>
+									<div class="col-lg-12 col-md-8">
+										<div class="input-group">
+											<span class="input-group-addon">
+												<i class="icon fa-asterisk" aria-hidden="true"></i>
+											</span>
+											<input type="password" class="form-control guardar" id="txtUsuarios_Crear_Clave2" required>
+										</div>
+									</div>
+								</div>
+		            			
+		            		</div>
+		            	</div>
+	            	</div>
+
+            		<button type="submit" class="btn btn-success btn-block"><i class="icon fa-floppy-o"></i> Guardar</button>	
+            	</div>
+            </form>
+		</div>
+	</div>
+</div>
+
+<script src="../js/usuarios.js"></script>
