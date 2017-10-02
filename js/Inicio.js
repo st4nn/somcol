@@ -15,7 +15,7 @@ function fun_Inicio()
     } else
     {
       $.extend( Usuario, data);
-      localStorage.setItem("ls_sisof", JSON.stringify(Usuario));    
+      localStorage.setItem("mj_somcol", JSON.stringify(Usuario));    
 
       if (Usuario.idPerfil > 1)
       {

@@ -24,10 +24,10 @@
   }
 }
 .site-navbar .navbar-container {
-  background-color: #008ECA;/*Barra al lado del brand*/
+  background-color: #37474F;/*Barra al lado del brand*/
   border-bottom-style: solid;
   border-bottom-width: 6px;
-  border-bottom-color: #B1D355;
+  border-bottom-color: #607D8B;
 }
 @media (min-width: 768px) {
   .site-navbar .navbar-container {
@@ -53,7 +53,7 @@ body {
   height:         calc(100% - 66px);
   font-family: "Roboto", sans-serif;
   color: rgba(55, 71, 79, .9);
-  background: #526069;/*Fondo del Menu*/
+  background: #76838F;/*Fondo del Menu*/
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
   box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
 }

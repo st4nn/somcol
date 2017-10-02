@@ -159,10 +159,10 @@
 
         var animation = $trigger.data('animation');
         if (animation) {
-          var $menu = $target.children('.dropdown-menu');
-          $menu.addClass('animation-' + animation);
+            var $menu = $target.children('.dropdown-menu');
+            $menu.addClass('animation-' + animation);
 
-          $menu.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+            $menu.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
             $menu.removeClass('animation-' + animation);
           });
         }

@@ -1,70 +1,66 @@
 <!-- Page -->
+<style>
+  .fButton
+  {
+    filter:alpha(opacity=80);
+    -moz-opacity:.80;
+    opacity:.8;
+    font-size: 20px;
+    color: white;
+  }
+  .fButton:hover
+  {
+    cursor: pointer;
+    opacity: 100;
+    color: #E4EAEC;
+  }
+  .fButton i
+  {
+    padding : 25px;
+    margin-right : 10px;
+    margin-left : -20px;
+    font-size: 35px;
+  }
+</style>
 <div class="page" style="min-height: 90vh;">
+  <img class alt="">
   <div class="page-content padding-30 container-fluid">
     <div class="row">
-      <div class="col-sm-6 col-lg-4">
-
-        <div class="widget">
-          <div class="widget-header bg-blue-grey-200 padding-30 clearfix">
-            
-            <input type="hidden" id="txtInicio_idEmpresa">
-
-            <img class="col-xs-12 margin-bottom-25 imgLogoEmpresa" height="auto" src="../server/Archivos/InserteLogoAqui_1024.png" alt="">
-              <div class="font-size-20 margin-bottom-15 lblEmpresa_Nombre">{Nombre de Empresa}</div>
-              <p class="margin-bottom-5 text-nowrap"><i class="icon wb-map margin-right-10" aria-hidden="true"></i>
-                <span class="text-break lblEmpresa_Direccion">{Ubicación}</span>
-              </p>
-              <p class="margin-bottom-5 text-nowrap"><i class="icon fa-phone margin-right-10" aria-hidden="true"></i>
-                <span class="text-break lblEmpresa_Telefono">{Telefono}</span>
-              </p>
-              <p class="margin-bottom-5 text-nowrap"><i class="icon wb-envelope margin-right-10" aria-hidden="true"></i>
-                <span class="text-break lblEmpresa_Responsable">{Responsable}</span>
-              </p>
-          </div>
-          <div class="widget-content">
-          </div>
-        </div>
-        
-      </div>
-      <div class="col-sm-6 col-lg-8">
-        <h1>Bienvenido <span class="lblUsuario"></span></h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-        
-
-
-        <div class="row">
-          <div class="row col-sm-12 hidden-xs hidden-sm hidden-md margin-top-50">
-            <div class="col-sm-12 margin-top-50">
+        <h1 class="lblEmpresa_Nombre text-center">{Nombre Empresa}</h1>
+        <br>
+        <div>
+          <div class="col-sm-6 col-md-4">
+            <div class="bg-teal-400 fButton margin-5 btnCargarMenu" data-sitio="copasst">
+                <i class="icon fa-users bg-teal-800 "></i>COPASST
             </div>
           </div>
-          <div class="col-lg-6">
-              <div class="bg-blue-grey-600" style="padding: 5px;"> 
-                <button class="btn btn-info btn-block white font-size-30 text-left btnCargarMenu" data-sitio="Estado">  
-                    <i class="icon bg-cyan-700 pull-left fa-line-chart icon-circle" aria-hidden="true" style="position: absolute; bottom:-9px;"></i>
-                    <span style="margin-left: 130px;">Estado</span>
-                </button>
-              </div>
+          <div class="col-sm-6 col-md-4">
+            <div class="bg-red-400 fButton margin-5 btnCargarMenu" data-sitio="ausentismo">
+                <i class="icon fa-user-times bg-red-800 "></i> Ausentismo
+            </div>
           </div>
-          <div class="col-lg-6">
-              <div class="bg-blue-grey-600" style="padding: 5px;"> 
-                <button class="btn btn-info btn-block white font-size-30 text-right btnCargarMenu" data-sitio="SG_SST">  
-                    <span style="margin-right: 130px;">SG SST</span>
-                    <i class="icon bg-cyan-700 pull-right fa-medkit icon-circle" aria-hidden="true" style="position: absolute; bottom:-9px; right: 30px;"></i>
-                </button>
-              </div>
+          <div class="col-sm-6 col-md-4">
+            <div class="bg-purple-400 fButton margin-5 btnCargarMenu" data-sitio="fallasDeControl">
+                <i class="icon fa-sitemap bg-purple-800 "></i> Fallas de Control
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <div class="bg-blue-400 fButton margin-5 btnCargarMenu" data-sitio="capacitaciones">
+                <i class="icon fa-graduation-cap bg-blue-800 "></i> Capacitaciones
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <div class="bg-orange-400 fButton margin-5 btnCargarMenu" data-sitio="indicadores">
+                <i class="icon fa-bar-chart bg-orange-800 "></i> Indicadores
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-md-4">
+            <div class="bg-red-400 fButton margin-5 btnCargarMenu" data-sitio="administracion">
+                <i class="icon fa-cogs bg-red-800 "></i> Administración
+            </div>
           </div>
         </div>
-        <div class="row margin-top-25"> 
-          <div class="col-sm-12">
-            <button class="btn btn-warning btn-block font-size-30 btnCargarMenu" data-sitio="Configuracion">
-              <i class="icon icon-circle bg-orange-700 fa-cogs"></i>
-              Administración
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
