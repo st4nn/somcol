@@ -32,6 +32,9 @@ function fun_Inicio()
               $(".lblEmpresa_Responsable").text(val.Correo);
 
               $("#txtInicio_idEmpresa").val(val.id);
+
+              $('.site-navbar .navbar-container').css('background-color' , '#' + val.colorPrimario);
+              $('.site-menubar').css('background' , '#' + val.colorSecundario);
           });
         }, 'json');
       }

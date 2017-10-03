@@ -167,6 +167,8 @@ $(document).ready(function()
 	                        tds += '<p class="col-lg-3 col-md-4 col-sm-6">';
 	                          tds += '<small><strong>Creado por:</strong> <a href="mailto:' + val.uCorreo + '">' + val.Usuario +'</a></small>';
 	                        tds += '</p>';
+	                        tds += '<input class="txtEmpresas_ColorPrimario" type="hidden" value="' + val.colorPrimario + '">';
+	                        tds += '<input class="txtEmpresas_ColorSecundario" type="hidden" value="' + val.colorSecundario + '">';
 	                      tds += '</div>';
 	                      tds += '<div class="media-footer">';
 	                        tds += '<button type="button" idEmpresa="' + val.id + '"class="btn btn-outline btn-success btn-sm col-md-2 margin-left-5 btnEmpresas_Abrir"><i class="icon wb-play"></i>Abrir</button>';
@@ -238,6 +240,9 @@ $(document).ready(function()
 
 		tmp = $(this).attr("idEmpresa");
 		$("#txtEmpresas_Crear_id").val(tmp);
+
+		document.getElementById("txtEmpresas_Crear_ColorPrincipal").jscolor.fromString($(contenedor).find('.txtEmpresas_ColorPrimario').val());
+		document.getElementById("txtEmpresas_Crear_ColorSecundario").jscolor.fromString($(contenedor).find('.txtEmpresas_ColorSecundario').val());
 	});
 
 	$(document).delegate('.btnEmpresas_Activacion', 'click', function(event) 
