@@ -22,9 +22,9 @@ function fun_Inicio()
       {
         $.post('../server/php/proyecto/Empresas_Cargar.php', {Usuario: Usuario.id, Parametro : ''}, function(data, textStatus, xhr) 
         {
+          Empresa = data[0];
           $.each(data, function(index, val) 
           {
-            console.log('../server/php/' + val.Ruta + '/' + val.Archivo);
               $(".imgLogoEmpresa").attr("src", '../server/php/' + val.Ruta + '/' + val.Archivo);
               $(".lblEmpresa_Nombre").text(val.Nombre);
               

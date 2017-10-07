@@ -2,7 +2,7 @@
    include("../conectar.php"); 
    $link = Conectar();
 
-   $idCantidato = addslashes($_POST['idCantidato']);
+   $idCantidato = addslashes($_POST['idCandidato']);
    $Votos = addslashes($_POST['Votos']);
 
 

@@ -2,6 +2,8 @@ $(document).ready(function()
 {
 	Copasst_ActaDeEleccionYConformacion();
 
+  window.cntCopasst_AEC_Resultados = null;
+
   $("#frmCopasst_AEC .datepicker").datepicker({
         clearBtn: true,
         language: "es",
@@ -78,16 +80,14 @@ $(document).ready(function()
     });
   });
 
-  $('.txtCopasst_AEC_Candidato_Votos').on('change', function()
-  {
+  $(document).delegate('.txtCopasst_AEC_Candidato_Votos', 'change', function(event) {
     var idCandidato = $(this).attr('data-idCandidato');
     var Votos = $(this).val();
     $.post('../server/php/proyecto/cp_CambiarVotos.php', {idCandidato: idCandidato, Votos: Votos}, function(data, textStatus, xhr) 
-    {});
-
-  });
-
-  
+    {
+      Copasst_GraficarResultado(); 
+    });
+  }); 
 });
 
 function Copasst_ActaDeEleccionYConformacion()
@@ -123,5 +123,88 @@ function Copasst_AgregarCandidato(datos)
 
 function Copasst_CargarDatos()
 {
+  var tmpAnio = $('#txtCopasst_AEC_Anio').val();
+  $('#frmCopasst_AEC')[0].reset();
+  $('#frmCopasst_AEC_Candidatos_Empleador')[0].reset();
+  $('#frmCopasst_AEC')[0].reset();
 
+  $('#txtCopasst_AEC_Anio').val(tmpAnio);
+
+  $('#tblCopasst_AEC_Candidatos tbody tr').remove();
+  $('#tblCopasst_AEC_Candidatos_Empleador tbody tr').remove();
+
+  var datos = {
+    Usuario : Usuario.id,
+    idEmpresa : $('#txtInicio_idEmpresa').val(),
+    Anio : $('#txtCopasst_AEC_Anio').val()
+  };
+
+  $.post('../server/php/proyecto/cp_CargarDatos.php', datos, function(data, textStatus, xhr) 
+  {
+    if (data.Datos != 0)
+    {
+      $.each(data.Datos, function(index, val) 
+      {
+        $('#txtCopasst_AEC_' + index).val(val);
+      });
+    }
+
+    if (data.Candidatos != 0)
+    {
+      $.each(data.Candidatos, function(index, val) 
+      {
+        Copasst_AgregarCandidato(val);
+      });
+    }
+    Copasst_GraficarResultado();
+  }, 'json');
+}
+
+function Copasst_GraficarResultado()
+{
+  var filas = $('#tblCopasst_AEC_Candidatos tbody tr');
+  if (filas.length == 0)
+  {
+    $('#cntCopasst_AEC_Resultados').hide();
+  } else
+  {
+    $('#cntCopasst_AEC_Resultados').show();
+
+    var tmpCeldas;
+    var datos = {labels : [''], data : [0]};
+    $.each(filas, function(index, val) 
+    {
+      tmpCeldas = $(val).find('td');
+      datos.labels.push($(tmpCeldas[1]).text());
+      datos.data.push($(tmpCeldas[4]).find('input').val());
+    });
+
+    var cP = hexTorgb(Empresa.colorPrimario);
+    
+     var barChartData = {
+            labels: datos.labels,
+            datasets: [{
+                label: '',
+                backgroundColor: 'rgba(' + cP.r + ',' + cP.g + ',' + cP.b + ', 0.6)',
+                borderColor: '#' + Empresa.colorPrimario,
+                borderWidth: 1,
+                data: datos.data
+            }]
+        };
+    
+    var ctx = document.getElementById("cntCopasst_AEC_Resultados").getContext("2d");
+    if (window.cntCopasst_AEC_Resultados != null)
+    {
+      window.cntCopasst_AEC_Resultados.destroy();
+    }
+
+    window.cntCopasst_AEC_Resultados = new Chart(ctx, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+            responsive: true
+        },
+        scaleStartValue: 0
+    });
+  }
 }

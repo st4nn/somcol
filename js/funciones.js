@@ -1,4 +1,5 @@
 var Usuario = null;
+var Empresa = null;
 var usuarioPermisos = null;
 
 $(document).ready(function() {
@@ -700,4 +701,13 @@ function devolverNumText(string){//solo letras y numeros
        if (filtro.indexOf(string.charAt(i)) != -1) 
        out += string.charAt(i);
     return out;
+}
+
+function hexTorgb(h)
+{
+  return {
+    r : parseInt(h.substring(0,2),16), 
+    g : parseInt(h.substring(2,4),16),
+    b : parseInt(h.substring(4,6),16) 
+  };
 }
