@@ -24,6 +24,7 @@ function fun_Inicio()
         {
           $.each(data, function(index, val) 
           {
+            console.log('../server/php/' + val.Ruta + '/' + val.Archivo);
               $(".imgLogoEmpresa").attr("src", '../server/php/' + val.Ruta + '/' + val.Archivo);
               $(".lblEmpresa_Nombre").text(val.Nombre);
               

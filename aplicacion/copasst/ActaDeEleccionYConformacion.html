@@ -5,18 +5,18 @@
 		<h3 class="page-title">Acta de Elección y Conformación</h3>
 	</div>
  	<div class="page-content container-fluid">
- 		<div class="panel panel-primary panel-bordered">
- 			<div class="panel-heading">
-				<div class="panel-actions">
-		      	</div>
-            </div>
- 			<div class="panel-body">
-				<form id="frmCopasst_EntregaEPP">
+		<form id="frmCopasst_AEC">
+	 		<div class="panel panel-primary panel-bordered">
+	 			<div class="panel-heading">
+					<div class="panel-actions">
+			      	</div>
+	            </div>
+	 			<div class="panel-body">
 			 		<div class="row">
 				 		<div class="form-group col-sm-5 pull-right">
 				 			<div class="form-group">
 			                  <div class="input-group">
-			                    <input id="txtCopasst_AEC_Anio" class="form-control">
+			                    <input id="txtCopasst_AEC_Anio" class="form-control guardar">
 			                    <span class="input-group-btn">
 			                      <button id="btnCopasst_AEC_Actualizar" type="button" class="btn btn-primary">
 			                      	<i class="icon wb-refresh" aria-hidden="true"></i>
@@ -28,91 +28,169 @@
 			 		</div>
 
 			 		<div class="row">
-			 			<div class="col-sm-12 text-right font-size-24">
-			 				<div class="col-md-4 text-right">
-			                	<label for="btnCopasst_Cargo_AgregarEPP" class="control-label font-size-12">Personal</label>
-			              	</div>
-			              	<div class="col-md-8">
-			              		<div class="form-group">
-				                  <div class="input-group">
-				                    <select id="txtCopasst_EntregaEPP_Personal" class="form-control">
-			                		</select>
-				                    <span class="input-group-btn">
-				                      <button id="txtCopasst_EntregaEPP_Personal_Agregar" type="button" class="btn btn-primary">
-				                      	<i class="icon wb-arrow-down" aria-hidden="true"></i>
-				                      </button>
-				                    </span>
-				                  </div>
-				                </div>
-			              	</div>
+			 			<div class="col-sm-7">
+				 			<div class="form-group">
+					        	<label for="txtCopasst_AEC_Responsable_SGSST" class="control-label">Responsable del SGSST</label>
+					        	<input class="form-control guardar" id="txtCopasst_AEC_Responsable_SGSST">
+					        </div>
 			 			</div>
-			 			<div class="col-sm-12">
-					 		<div class="row">
-					 			<h3><small>Cedula: </small><span id="lblCopasst_EntregaEPP_Cedula"></span></h3>
-					 		</div>
-					 		<div class="row">
-					 			<h3><small>Nombre: </small><span id="lblCopasst_EntregaEPP_Nombre"></span></h3>
-					 			<small id="lblCopasst_EntregaEPP_Cargo"></small>
-					 		</div>
+
+			 			<div class="col-sm-5">
+				 			<div class="form-group">
+					        	<label for="txtCopasst_AEC_Responsable_SGSST_Cargo" class="control-label">Cargo</label>
+					        	<input class="form-control guardar" type="text" id="txtCopasst_AEC_Responsable_SGSST_Cargo">
+					        </div>
 			 			</div>
-			 			<input type="hidden" class="guardar" id="txtCopasst_EntregaEPP_idPersonal" required="">
 			 		</div>
 
 			 		<div class="row">
-			 			<div class="form-group">
-				        	<label for="txtCopasst_EntregaEPP_Proyecto" class="control-label">Proyecto</label>
-				        	<input class="form-control guardar" id="txtCopasst_EntregaEPP_Proyecto" required="">
-				        </div>
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtCopasst_AEC_Fecha_Apertura" class="control-label">Fecha de Apertura Convocatoria</label>
+					        	<input class="form-control datepicker guardar" id="txtCopasst_AEC_Fecha_Apertura">
+					        </div>
+			 			</div>
+
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtCopasst_AEC_Fecha_Cierre" class="control-label">Fecha de Cierre Convocatoria</label>
+					        	<input class="form-control datepicker guardar" id="txtCopasst_AEC_Fecha_Cierre">
+					        </div>
+			 			</div>
 			 		</div>
 
 			 		<div class="row">
-			 			<div class="form-group">
-				        	<label for="txtCopasst_EntregaEPP_idEPP" class="control-label">Elemento de Protección</label>
-				        	<select class="form-control guardar" id="txtCopasst_EntregaEPP_idEPP" required="">
-				        	</select>
+				 		<div class="form-group col-sm-6 pull-right">
+				 			<div class="form-group">
+				 				<label for="txtCopasst_AEC_Trabajadores_Directos" class="control-label">Número total de trabajadores Directos</label>
+			                    <input type="number" id="txtCopasst_AEC_Trabajadores_Directos" class="form-control guardar">
+			                </div>
+			                <p><i>	10 - 49 (1 Y 1)		50 - 499 (2 Y 2)		500 - 999 (3 Y 3)	MAS SUPLENTES</i></p>
 				        </div>
 			 		</div>
 
 			 		<div class="row">
 			 			<div class="col-sm-6">
 				 			<div class="form-group">
-					        	<label for="txtCopasst_EntregaEPP_Talla" class="control-label">Talla</label>
-					        	<input class="form-control guardar" id="txtCopasst_EntregaEPP_Talla">
-					        </div>
-			 			</div>
-
-			 			<div class="col-sm-6">
-				 			<div class="form-group">
-					        	<label for="txtCopasst_EntregaEPP_Cantidad" class="control-label">Cantidad</label>
-					        	<input class="form-control guardar" type="number" id="txtCopasst_EntregaEPP_Cantidad" required="">
+					        	<label for="txtCopasst_AEC_Fecha_Apertura" class="control-label">Fecha de Apertura Elecciones</label>
+					        	<input class="form-control datepicker guardar" id="txtCopasst_AEC_Fecha_Elecciones">
 					        </div>
 			 			</div>
 			 		</div>
 
-			 		<button type="button" class="btn btn-success btn-block">Agregar</button>
-				</form>
- 			</div>
- 		</div>
+			 		<button type="button" class="btn btn-success btn-block">Guardar</button>
+	 			</div>
+	 		</div>
+		</form>
  		<div class="panel panel-primary panel-bordered">
  			<div class="panel-heading">
+ 				<h3 class="panel-title">Candidatos por parte de los Trabajadores</h3>
 				<div class="panel-actions">
 		      	</div>
             </div>
  			<div class="panel-body">
- 				<table id="tblCopasst_EntregaEPP_Entregados" class="table table-hover table-striped">
- 					<thead>
- 						<tr>
-	 						<th></th>
-	 						<th>Item</th>
-	 						<th>EPP</th>
-	 						<th>Talla</th>
-	 						<th>Cantidad</th>
-	 						<th>Fecha Entrega</th>
-	 						<th></th>
- 						</tr>
- 					</thead>
- 					<tbody></tbody>
- 				</table>
+ 				<form id="frmCopasst_AEC_Candidatos">
+	 				<div class="row">
+	 					<div class="col-sm-5">
+	 						<div class="form-group">
+					        	<label for="txtCopasst_AEC_Candidato_Nombre" class="control-label">Nombre</label>
+					        	<input class="form-control" id="txtCopasst_AEC_Candidato_Nombre" required="true">
+					        </div>
+	 					</div>
+
+	 					<div class="col-sm-3">
+	 						<div class="form-group">
+					        	<label for="txtCopasst_AEC_Candidato_Cargo" class="control-label">Cargo</label>
+					        	<input class="form-control" id="txtCopasst_AEC_Candidato_Cargo">
+					        </div>
+	 					</div>
+
+	 					<div class="col-sm-3">
+	 						<div class="form-group">
+					        	<label for="txtCopasst_AEC_Candidato_Identificacion" class="control-label"># de Identificación</label>
+					        	<input class="form-control" id="txtCopasst_AEC_Candidato_Identificacion" required="true">
+					        </div>
+	 					</div>
+
+	 					<div class="col-sm-1">
+	 						<br>
+	 						<button type="submit" class="btn btn-icon btn-primary"><i class="icon fa-plus"></i></button>
+	 					</div>
+	 				</div>
+	 			</form>
+
+				<table id="tblCopasst_AEC_Candidatos" class="table table-hover table-striped">
+					<thead>
+						<tr>
+							<th></th>
+							<th>NOMBRE</th>
+							<th>CARGO</th>
+							<th># DE IDENTIFICACIÓN</th>
+							<th># DE VOTOS</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+ 			</div>
+ 		</div>
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
+ 				<h3 class="panel-title">Resultados</h3>
+				<div class="panel-actions">
+		      	</div>
+            </div>
+ 			<div class="panel-body">
+ 			</div>
+ 		</div>
+
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
+ 				<h3 class="panel-title">Candidatos por parte del Empleador</h3>
+				<div class="panel-actions">
+		      	</div>
+            </div>
+ 			<div class="panel-body">
+ 				<form id="frmCopasst_AEC_Candidatos_Empleador">
+	 				<div class="row">
+	 					<div class="col-sm-5">
+	 						<div class="form-group">
+					        	<label for="txtCopasst_AEC_Candidato_Empleador_Nombre" class="control-label">Nombre</label>
+					        	<input class="form-control" id="txtCopasst_AEC_Candidato_Empleador_Nombre" required="true">
+					        </div>
+	 					</div>
+
+	 					<div class="col-sm-3">
+	 						<div class="form-group">
+					        	<label for="txtCopasst_AEC_Candidato_Empleador_Cargo" class="control-label">Cargo</label>
+					        	<input class="form-control" id="txtCopasst_AEC_Candidato_Empleador_Cargo">
+					        </div>
+	 					</div>
+
+	 					<div class="col-sm-3">
+	 						<div class="form-group">
+					        	<label for="txtCopasst_AEC_Candidato_Empleador_Identificacion" class="control-label"># de Identificación</label>
+					        	<input class="form-control" id="txtCopasst_AEC_Candidato_Empleador_Identificacion" required="true">
+					        </div>
+	 					</div>
+
+	 					<div class="col-sm-1">
+	 						<br>
+	 						<button type="submit" class="btn btn-icon btn-primary"><i class="icon fa-plus"></i></button>
+	 					</div>
+	 				</div>
+	 			</form>
+
+				<table id="tblCopasst_AEC_Candidatos_Empleador" class="table table-hover table-striped">
+					<thead>
+						<tr>
+							<th></th>
+							<th>NOMBRE</th>
+							<th>CARGO</th>
+							<th># DE IDENTIFICACIÓN</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
  			</div>
  		</div>
 	</div>
