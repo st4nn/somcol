@@ -2,55 +2,44 @@
    include("../conectar.php"); 
    $link = Conectar();
 
-   $id = addslashes($_POST['id']);
    $idEmpresa = addslashes($_POST['idEmpresa']);
-   $idUsuario = addslashes($_POST['idUsuario']);
+   $idUsuario = addslashes($_POST['Usuario']);
 
    $Anio = addslashes($_POST['Anio']);
-   $Tipo = addslashes($_POST['Tipo']);
-   $Nombre = addslashes($_POST['Nombre']);
-   $Cargo = addslashes($_POST['Cargo']);
-   $Identificacion = addslashes($_POST['Identificacion']);
-   $Votos = addslashes($_POST['Votos']);
+   $Responsable_SGSST = addslashes($_POST['Responsable_SGSST']);
+   $Responsable_SGSST_Cargo = addslashes($_POST['Responsable_SGSST_Cargo']);
+   $Fecha_Apertura = addslashes($_POST['Fecha_Apertura']);
+   $Fecha_Cierre = addslashes($_POST['Fecha_Cierre']);
+   $Trabajadores_Directos = addslashes($_POST['Trabajadores_Directos']);
+   $Fecha_Elecciones = addslashes($_POST['Fecha_Elecciones']);
 
-   if ($id == "" OR is_null($id) OR $id == " " OR $id == "NULL" OR $id == "0")
-   {
-      $id = "NULL";
-   }
 
-      $sql = "INSERT INTO cp_AEC_Candidatos(id, idEmpresa, idUsuario, Anio, Tipo, Nombre, Cargo, Identificacion, Votos) VALUES 
+      $sql = "INSERT INTO cp_AEC(idUsuario, idEmpresa, Anio, Responsable_SGSST, Responsable_SGSST_Cargo, Fecha_Apertura, Fecha_Cierre, Trabajadores_Directos, Fecha_Elecciones) VALUES 
       (
-         $id, 
-         '" . $idEmpresa . "',
          '" . $idUsuario . "',
+         '" . $idEmpresa . "',
          '" . $Anio . "',
-         '" . $Tipo . "',
-         '" . $Nombre . "',
-         '" . $Cargo . "',
-         '" . $Identificacion . "',
-         '" . $Votos . "'
+         '" . $Responsable_SGSST . "',
+         '" . $Responsable_SGSST_Cargo . "',
+         '" . $Fecha_Apertura . "',
+         '" . $Fecha_Cierre . "',
+         '" . $Trabajadores_Directos . "',
+         '" . $Fecha_Elecciones . "'
       ) ON DUPLICATE KEY UPDATE
-      idEmpresa = VALUES(idEmpresa),
-      idUsuario = VALUES(idUsuario),
-      Anio = VALUES(Anio),
-      Tipo = VALUES(Tipo),
-      Nombre = VALUES(Nombre),
-      Cargo = VALUES(Cargo),
-      Identificacion = VALUES(Identificacion),
-      Votos = VALUES(Votos);";
+      Responsable_SGSST = VALUES(Responsable_SGSST),
+      Responsable_SGSST_Cargo = VALUES(Responsable_SGSST_Cargo),
+      Fecha_Apertura = VALUES(Fecha_Apertura),
+      Fecha_Cierre = VALUES(Fecha_Cierre),
+      Trabajadores_Directos = VALUES(Trabajadores_Directos),
+      Fecha_Elecciones = VALUES(Fecha_Elecciones),
+      idUsuario = VALUES(idUsuario);";
 
       $link->query(utf8_decode($sql));
 
 
       if ( $link->error == "")
       {
-         if ($id == 'NULL')
-         {
-            echo $link->insert_id;
-         } else
-         {
-            echo $id;
-         }
+         echo $link->insert_id;
       } else
       {
          echo $link->error;

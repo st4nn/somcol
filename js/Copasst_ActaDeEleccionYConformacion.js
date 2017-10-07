@@ -63,6 +63,17 @@ $(document).ready(function()
       datos = $.parseJSON(datos);
       datos.idEmpresa = $('#txtInicio_idEmpresa').val();
 
+      $.post('../server/php/proyecto/cp_GuardarDatos.php', datos, function(data, textStatus, xhr) 
+      {
+        if (isNaN(data))
+        {
+          Mensaje('Error', data, 'danger');
+        } else
+        {
+          Mensaje("!", 'Los datos han sido ingresados correctamente', 'success');
+        }
+      });
+
     });
   });
 
