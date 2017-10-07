@@ -11,60 +11,62 @@ $(document).ready(function()
         todayHighlight: true
     });
 
-  $("#frmCopasst_AEC_Candidatos").on("submit", function(evento)
+  $(".frmCopasst_AEC_Candidatos").on("submit", function(evento)
   {
     evento.preventDefault();
-    if ($('#txtCopasst_AEC_Candidato_Nombre').val() == '')
+    var idObj = $(this).attr('id');
+    var Tipo = $(this).attr('data-tipo');
+    if ($('#' + idObj + ' .txtCopasst_AEC_Candidato_Nombre').val() == '')
     {
-      $('#txtCopasst_AEC_Candidato_Nombre').focus();
+      $('#' + idObj + ' .txtCopasst_AEC_Candidato_Nombre').focus();
     } else
     {
-      if ($('#txtCopasst_AEC_Candidato_Identificacion').val() == '') 
+      if ($('#' + idObj + ' .txtCopasst_AEC_Candidato_Identificacion').val() == '') 
       {
-        $('#txtCopasst_AEC_Candidato_Identificacion').focus();
+        $('#' + idObj + ' .txtCopasst_AEC_Candidato_Identificacion').focus();
       } else
       {
         var datos = {
           id : 0,
-          Nombre : $('#txtCopasst_AEC_Candidato_Nombre').val(),
-          Cargo : $('#txtCopasst_AEC_Candidato_Cargo').val(),
-          Identificacion : $('#txtCopasst_AEC_Candidato_Identificacion').val(),
-          Votos : 0
+          Nombre : $('#' + idObj + ' .txtCopasst_AEC_Candidato_Nombre').val(),
+          Cargo : $('#' + idObj + ' .txtCopasst_AEC_Candidato_Cargo').val(),
+          Identificacion : $('#' + idObj + ' .txtCopasst_AEC_Candidato_Identificacion').val(),
+          Tipo : Tipo,
+          Votos : 0,
+          idEmpresa : $('#txtInicio_idEmpresa').val(),
+          idUsuario : Usuario.id,
+          Anio : $('#txtCopasst_AEC_Anio').val()
         };
-        Copasst_AgregarCandidato(datos);
-        $('#txtCopasst_AEC_Candidato_Nombre').val('');
-        $('#txtCopasst_AEC_Candidato_Cargo').val('');
-        $('#txtCopasst_AEC_Candidato_Identificacion').val('');
+
+        $.post('../server/php/proyecto/cp_AgregarCandidato.php', datos, function(data, textStatus, xhr) 
+        {
+          if (isNaN(data))
+          {
+            Mensaje('Error', data, 'danger');
+          } else
+          {
+            Copasst_AgregarCandidato(datos);
+            $('#' + idObj + ' .txtCopasst_AEC_Candidato_Nombre').val('');
+            $('#' + idObj + ' .txtCopasst_AEC_Candidato_Cargo').val('');
+            $('#' + idObj + ' .txtCopasst_AEC_Candidato_Identificacion').val('');
+          }
+        });
       }
     }
   });
 
-  $("#btnCopasst_AEC_Candidatos_Empleador").on("submit", function(evento)
+  $('#frmCopasst_AEC').on('submit', function(evento)
   {
     evento.preventDefault();
-    if ($('#txtCopasst_AEC_Candidato_Empleador_Nombre').val() == '')
+    $(this).generarDatosEnvio('txtCopasst_AEC_', function(datos)
     {
-      $('#txtCopasst_AEC_Candidato_Empleador_Nombre').focus();
-    } else
-    {
-      if ($('#txtCopasst_AEC_Candidato_Empleador_Identificacion').val() == '') 
-      {
-        $('#txtCopasst_AEC_Candidato_Empleador_Identificacion').focus();
-      } else
-      {
-        var datos = {
-          id : 0,
-          Nombre : $('#txtCopasst_AEC_Candidato_Empleador_Nombre').val(),
-          Cargo : $('#txtCopasst_AEC_Candidato_Empleador_Cargo').val(),
-          Identificacion : $('#txtCopasst_AEC_Candidato_Empleador_Identificacion').val()
-        };
-        Copasst_AgregarCandidatoEmpleador(datos);
-        $('#txtCopasst_AEC_Candidato_Empleador_Nombre').val('');
-        $('#txtCopasst_AEC_Candidato_Empleador_Cargo').val('');
-        $('#txtCopasst_AEC_Candidato_Empleador_Identificacion').val('');
-      }
-    }
+      datos = $.parseJSON(datos);
+      datos.idEmpresa = $('#txtInicio_idEmpresa').val();
+
+    });
   });
+
+  
 });
 
 function Copasst_ActaDeEleccionYConformacion()
@@ -75,7 +77,7 @@ function Copasst_ActaDeEleccionYConformacion()
 
 function Copasst_AgregarCandidato(datos)
 {
-  var tds = '<tr>';
+  var tds = '<tr data-tipo="' + datos.Tipo + '">';
     tds += '<td>';
       tds += '<button class="btn btn-pure btn-primary icon wb-edit"></button>';
       tds += '<button class="btn btn-pure btn-danger icon wb-close"></button>';
@@ -83,21 +85,17 @@ function Copasst_AgregarCandidato(datos)
     tds += '<td>' + datos.Nombre + '</td>';
     tds += '<td>' + datos.Cargo + '</td>';
     tds += '<td>' + datos.Identificacion + '</td>';
-    tds += '<td><input type="number" value="' + datos.Votos + '" placeholder="Votos" class="form-control"></td>';
+    if (datos.Tipo == 'Trabajador')
+    {
+      tds += '<td><input type="number" value="' + datos.Votos + '" placeholder="Votos" class="form-control"></td>';
+    }
   tds += '</tr>';
-  $('#tblCopasst_AEC_Candidatos tbody').prepend(tds);
-}
 
-function Copasst_AgregarCandidatoEmpleador(datos)
-{
-  var tds = '<tr>';
-    tds += '<td>';
-      tds += '<button class="btn btn-pure btn-primary icon wb-edit"></button>';
-      tds += '<button class="btn btn-pure btn-danger icon wb-close"></button>';
-    tds += '</td>';
-    tds += '<td>' + datos.Nombre + '</td>';
-    tds += '<td>' + datos.Cargo + '</td>';
-    tds += '<td>' + datos.Identificacion + '</td>';
-  tds += '</tr>';
-  $('#tblCopasst_AEC_Candidatos_Empleador tbody').prepend(tds);
+  if (datos.Tipo == 'Trabajador')
+  {
+   $('#tblCopasst_AEC_Candidatos tbody').prepend(tds);
+  } else
+  {
+    $('#tblCopasst_AEC_Candidatos_Empleador tbody').prepend(tds);
+  }
 }
