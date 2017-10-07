@@ -11,12 +11,15 @@
    $ColorPrincipal = addslashes($_POST['ColorPrincipal']);
    $ColorSecundario = addslashes($_POST['ColorSecundario']);
 
+   $ActividadEconomica = addslashes($_POST['ActividadEconomica']);
+   $RepresentanteLegal = addslashes($_POST['RepresentanteLegal']);
+
    if ($id == "" OR is_null($id) OR $id == " " OR $id == "NULL")
    {
       $id = "NULL";
    }
 
-      $sql = "INSERT INTO Empresas(id, Nombre, Direccion, Correo, Telefono, colorPrimario, colorSecundario, idUsuario) VALUES 
+      $sql = "INSERT INTO Empresas(id, Nombre, Direccion, Correo, Telefono, colorPrimario, colorSecundario, ActividadEconomica, RepresentanteLegal, idUsuario) VALUES 
       (
          $id, 
          '" . $Nombre . "',
@@ -25,6 +28,8 @@
          '" . $Telefono . "',
          '" . $ColorPrincipal . "',
          '" . $ColorSecundario . "',
+         '" . $ActividadEconomica . "',
+         '" . $RepresentanteLegal . "',
          '" . $idUsuario . "'
       ) ON DUPLICATE KEY UPDATE
       Nombre = VALUES(Nombre),
@@ -33,6 +38,8 @@
       Telefono = VALUES(Telefono),
       colorPrimario = VALUES(colorPrimario),
       colorSecundario = VALUES(colorSecundario),
+      ActividadEconomica = VALUES(ActividadEconomica),
+      RepresentanteLegal = VALUES(RepresentanteLegal),
       Telefono = VALUES(Telefono),
       idUsuario = VALUES(idUsuario);";
 

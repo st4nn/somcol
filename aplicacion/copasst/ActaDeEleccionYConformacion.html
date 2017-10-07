@@ -1,0 +1,121 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<button class="btn btn-primary pull-right btn-pill-left btnCopasst_VerEPPEntregados">Volver</button>
+		<h3 class="page-title">Acta de Elección y Conformación</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
+				<div class="panel-actions">
+		      	</div>
+            </div>
+ 			<div class="panel-body">
+				<form id="frmCopasst_EntregaEPP">
+			 		<div class="row">
+				 		<div class="form-group col-sm-5 pull-right">
+				 			<div class="form-group">
+			                  <div class="input-group">
+			                    <input id="txtCopasst_AEC_Anio" class="form-control">
+			                    <span class="input-group-btn">
+			                      <button id="btnCopasst_AEC_Actualizar" type="button" class="btn btn-primary">
+			                      	<i class="icon wb-refresh" aria-hidden="true"></i>
+			                      </button>
+			                    </span>
+			                  </div>
+			                </div>
+				        </div>
+			 		</div>
+
+			 		<div class="row">
+			 			<div class="col-sm-12 text-right font-size-24">
+			 				<div class="col-md-4 text-right">
+			                	<label for="btnCopasst_Cargo_AgregarEPP" class="control-label font-size-12">Personal</label>
+			              	</div>
+			              	<div class="col-md-8">
+			              		<div class="form-group">
+				                  <div class="input-group">
+				                    <select id="txtCopasst_EntregaEPP_Personal" class="form-control">
+			                		</select>
+				                    <span class="input-group-btn">
+				                      <button id="txtCopasst_EntregaEPP_Personal_Agregar" type="button" class="btn btn-primary">
+				                      	<i class="icon wb-arrow-down" aria-hidden="true"></i>
+				                      </button>
+				                    </span>
+				                  </div>
+				                </div>
+			              	</div>
+			 			</div>
+			 			<div class="col-sm-12">
+					 		<div class="row">
+					 			<h3><small>Cedula: </small><span id="lblCopasst_EntregaEPP_Cedula"></span></h3>
+					 		</div>
+					 		<div class="row">
+					 			<h3><small>Nombre: </small><span id="lblCopasst_EntregaEPP_Nombre"></span></h3>
+					 			<small id="lblCopasst_EntregaEPP_Cargo"></small>
+					 		</div>
+			 			</div>
+			 			<input type="hidden" class="guardar" id="txtCopasst_EntregaEPP_idPersonal" required="">
+			 		</div>
+
+			 		<div class="row">
+			 			<div class="form-group">
+				        	<label for="txtCopasst_EntregaEPP_Proyecto" class="control-label">Proyecto</label>
+				        	<input class="form-control guardar" id="txtCopasst_EntregaEPP_Proyecto" required="">
+				        </div>
+			 		</div>
+
+			 		<div class="row">
+			 			<div class="form-group">
+				        	<label for="txtCopasst_EntregaEPP_idEPP" class="control-label">Elemento de Protección</label>
+				        	<select class="form-control guardar" id="txtCopasst_EntregaEPP_idEPP" required="">
+				        	</select>
+				        </div>
+			 		</div>
+
+			 		<div class="row">
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtCopasst_EntregaEPP_Talla" class="control-label">Talla</label>
+					        	<input class="form-control guardar" id="txtCopasst_EntregaEPP_Talla">
+					        </div>
+			 			</div>
+
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtCopasst_EntregaEPP_Cantidad" class="control-label">Cantidad</label>
+					        	<input class="form-control guardar" type="number" id="txtCopasst_EntregaEPP_Cantidad" required="">
+					        </div>
+			 			</div>
+			 		</div>
+
+			 		<button type="button" class="btn btn-success btn-block">Agregar</button>
+				</form>
+ 			</div>
+ 		</div>
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
+				<div class="panel-actions">
+		      	</div>
+            </div>
+ 			<div class="panel-body">
+ 				<table id="tblCopasst_EntregaEPP_Entregados" class="table table-hover table-striped">
+ 					<thead>
+ 						<tr>
+	 						<th></th>
+	 						<th>Item</th>
+	 						<th>EPP</th>
+	 						<th>Talla</th>
+	 						<th>Cantidad</th>
+	 						<th>Fecha Entrega</th>
+	 						<th></th>
+ 						</tr>
+ 					</thead>
+ 					<tbody></tbody>
+ 				</table>
+ 			</div>
+ 		</div>
+	</div>
+</div>
+
+<script src="../js/Copasst_ActaDeEleccionYConformacion.js"></script>

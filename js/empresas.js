@@ -17,6 +17,12 @@ $(document).ready(function()
 		$("#cntEmpresas_Creacion").slideDown();	
 
 		$("#btnEmpresas_Crear_Borrar").hide();
+
+		$("#frmEmpresas_Crear")[0].reset();
+		document.getElementById("txtEmpresas_Crear_ColorPrincipal").jscolor.fromString('37474F');
+		document.getElementById("txtEmpresas_Crear_ColorSecundario").jscolor.fromString('76838F');
+
+		
 	});
 
 	$("#cntEmpresas_Imagen").iniciar_CargadorImagenes({idObj : 'Empresas_Crear'});
@@ -167,6 +173,12 @@ $(document).ready(function()
 	                        tds += '<p class="col-lg-3 col-md-4 col-sm-6">';
 	                          tds += '<small><strong>Creado por:</strong> <a href="mailto:' + val.uCorreo + '">' + val.Usuario +'</a></small>';
 	                        tds += '</p>';
+	                        tds += '<p class="col-sm-12">';
+	                          tds += '<small><i>Actividad Económica</i>: </small><span class="txtEmpresas_ActividadEconomica">' + val.ActividadEconomica + '</span>';
+	                        tds += '</p>';
+	                        tds += '<p class="col-sm-12">';
+	                          tds += '<strong><small>Representante Legal:</small> <i class="txtEmpresas_RepresentanteLegal">' + val.RepresentanteLegal + '</i></strong>';
+	                        tds += '</p>';
 	                        tds += '<input class="txtEmpresas_ColorPrimario" type="hidden" value="' + val.colorPrimario + '">';
 	                        tds += '<input class="txtEmpresas_ColorSecundario" type="hidden" value="' + val.colorSecundario + '">';
 	                      tds += '</div>';
@@ -236,6 +248,8 @@ $(document).ready(function()
 		$("#txtEmpresas_Crear_Direccion").val($(tmp[0]).text());
 		$("#txtEmpresas_Crear_Telefono").val($(tmp[2]).text());
 		$("#txtEmpresas_Crear_Correo").val($(tmp[1]).text());
+		$("#txtEmpresas_Crear_Correo").val($(tmp[1]).text());
+		$("#txtEmpresas_Crear_Correo").val($(tmp[1]).text());
 		
 
 		tmp = $(this).attr("idEmpresa");
@@ -243,6 +257,9 @@ $(document).ready(function()
 
 		document.getElementById("txtEmpresas_Crear_ColorPrincipal").jscolor.fromString($(contenedor).find('.txtEmpresas_ColorPrimario').val());
 		document.getElementById("txtEmpresas_Crear_ColorSecundario").jscolor.fromString($(contenedor).find('.txtEmpresas_ColorSecundario').val());
+
+		$("#txtEmpresas_Crear_ActividadEconomica").val($(contenedor).find('.txtEmpresas_ActividadEconomica').text());
+		$("#txtEmpresas_Crear_RepresentanteLegal").val($(contenedor).find('.txtEmpresas_RepresentanteLegal').text());
 	});
 
 	$(document).delegate('.btnEmpresas_Activacion', 'click', function(event) 
