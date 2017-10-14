@@ -7,6 +7,11 @@ function fun_Inicio()
     $(this).inicio_CargarMenu();
   });
 
+  $('#lnkInicio_Ausentismo').on('click', function()
+  {
+    cargarModulo('ausentismo/home.html', 'Ausentismo');
+  });
+
   $.post('../server/php/proyecto/Usuarios_Cargar.php', {u: Usuario.id, k : Usuario.hash}, function(data, textStatus, xhr) 
   {
     if (data == 0)

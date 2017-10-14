@@ -100,6 +100,8 @@ ALTER TABLE `Empresas` ADD `NIT` VARCHAR(25) NOT NULL AFTER `Nombre`;
 
 INSERT INTO `Perfiles` (`idPerfil`, `Nombre`) VALUES ('2', 'Coordinador por Empresa');
 
+ALTER TABLE `cp_AEC_Candidatos` ADD `Posicion` VARCHAR(25) NOT NULL DEFAULT 'Candidato' AFTER `Votos`;
+
 ALTER TABLE `cp_AEC_Candidatos` CHANGE `Posicion` `Posicion` VARCHAR(25) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'Candidato';
 
 
