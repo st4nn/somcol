@@ -191,7 +191,17 @@
                     <tbody></tbody>
                 </table>
             </div>
-        </div>         
+        </div>  
+
+        <div id="cntCopasst_ActasReunion_CajaArchivos" class="panel panel-bordered panel-primary">
+            <div class="panel-body">
+                <div>
+                    <h4></h4>
+                    <div id="cntCopasst_ActasReunion_Archivos"></div>
+                </div>
+                
+            </div>
+        </div>       
 	</div>
 </div>
 
@@ -314,7 +324,49 @@
 
     function cpActas_CargarActa(idActa)
     {
-        $("#cntCopasst_ActasReunion_Archivos").cargarArchivos({Prefijo : idActa, Proceso : 'Copast ActasReunion'});
+        $('#frmCopasst_ADR')[0].reset();
+        $('#cntCopasst_ActasReunion_CajaArchivos').hide();
+        $("#modulo_copasst_ActasDeReunion_Acta_html .datepicker").val(obtenerFecha().substring(0, 10));
+        $('#tblCopasst_ADR_Asistentes tbody tr').remove();
+        $('#tblCopasst_ADR_Compromisos tbody tr').remove();
+
+        $.post('../server/php/proyecto/cp_Actas_CargarActa.php', {Usuario: Usuario.id, idActa : idActa}, function(data, textStatus, xhr) {
+            if (data.d != 0)
+            {
+                $.each(data.d, function(index, val) 
+                {
+                    if ($('#txtCopasst_ADR_' + index).length != 0)
+                    {
+                     $('#txtCopasst_ADR_' + index).val(val);
+                    }
+                });
+            }
+
+            if (data.a != 0)
+            {
+                $.each(data.a, function(index, val) 
+                {
+                    cpActas_AgregarAsistente(val);
+                });
+            }
+
+            if (data.c != 0)
+            {
+                $.each(data.c, function(index, val) 
+                {
+                    cpActas_AgregarCompromiso(val);
+                });
+            }
+
+        }, 'json');
+        if (idActa != 0)
+        {
+            $('#cntCopasst_ActasReunion_CajaArchivos').show();
+            $("#cntCopasst_ActasReunion_Archivos").iniciarObjArchivos({objPrefijo : $("#txtInicio_idEmpresa"), Proceso: "Copast ActasReunion", Usuario: Usuario.id});
+
+            $("#cntCopasst_ActasReunion_Archivos").cargarArchivos({Prefijo : idActa, Proceso : 'Copast ActasReunion'});
+
+        } 
     }
 
     

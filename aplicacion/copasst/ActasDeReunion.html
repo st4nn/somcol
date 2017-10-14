@@ -21,17 +21,7 @@
 	</div>
  	<div class="page-content container-fluid">
     	<div id='cntCopasstActasDeReunion_Fichas' class="col-sm-12">
-            <!--
-            <div class="panel panel-bordered panel-primary">
-        		<div class="panel-body">
-        			<div>
-        				<h4></h4>
-        				<div id="cntCopasst_ActasReunion_Archivos"></div>
-        			</div>
-        			
-        		</div>
-        	</div>
-        -->
+            
     	</div>
             
 	</div>
@@ -43,10 +33,12 @@
         $(document).delegate('.btnCopasstActasDeReunion_VerActa', 'click', function(event) 
         {
             var idActa = $(this).attr('data-idActa');
+            var idBDActa = $(this).attr('data-idBDActa');
             event.preventDefault();
             cargarModulo('copasst/ActasDeReunion_Acta.html', 'Acta de Reunión', function()
             {
                 $('#lblCopasst_ADR_Numero').text(idActa);
+                cpActas_CargarActa(idBDActa);
             });
         });
     });
