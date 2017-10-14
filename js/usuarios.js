@@ -1,6 +1,5 @@
 $(document).ready(function()
 {
-	console.log("algo");
 	$("#lnkUsuarios_VolverABusqueda").on("click", function(evento)
 	{
 		evento.preventDefault();

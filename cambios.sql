@@ -97,3 +97,5 @@ ALTER TABLE `cp_AEC` ADD UNIQUE (`idEmpresa`, `Anio`);
 /**************************************20171014*****************/
 
 ALTER TABLE `Empresas` ADD `NIT` VARCHAR(25) NOT NULL AFTER `Nombre`;
+
+INSERT INTO `Perfiles` (`idPerfil`, `Nombre`) VALUES ('2', 'Coordinador por Empresa');
