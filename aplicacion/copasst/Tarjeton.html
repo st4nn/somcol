@@ -5,10 +5,12 @@
 	</div>
  	<div class="page-content container-fluid">
         <div class="row">
+            <h3 class="text-center">TARJETON ELECCION INTEGRANTES COPASST</h4>
+            <h4 class="text-center">COMITÉ PARITARIO DE SEGURIDAD Y SALUD EN EL TRABAJO </h4>
         	<div id="cntCopasstTarjeton_Candidatos" class="col-sm-12">
             	
         	</div>
-            <div id="cntCopasst_Tarjeton_CargadorImagenes" class="col-sm-4">
+            <div id="cntCopasst_Tarjeton_CargadorImagenes" class="col-sm-4 hide">
                 <div id="cntCopasst_Tarjeton_Imagen"></div> 
                 <div class="row">
                     <br><br><br><br><br><br><br><br><br><br><br><br>
@@ -67,7 +69,9 @@
         }); 
     });
 
-    $.post('../server/php/proyecto/cp_CargarCandidatos.php', {Usuario : Usuario.id, Empresa : $('#txtInicio_idEmpresa').val()}, function(data, textStatus, xhr) 
+    function funCopasst_Tarjeton_CargarCandidatos()
+    {
+        $.post('../server/php/proyecto/cp_CargarCandidatos.php', {Usuario : Usuario.id, Empresa : $('#txtInicio_idEmpresa').val()}, function(data, textStatus, xhr) 
         {
             $('#cntCopasstTarjeton_Candidatos div').remove();
             if (data != 0)
@@ -125,4 +129,5 @@
                 });
             }
         }, 'json');
+    }
 </script>
