@@ -711,3 +711,4 @@ function hexTorgb(h)
     b : parseInt(h.substring(4,6),16) 
   };
 }
+

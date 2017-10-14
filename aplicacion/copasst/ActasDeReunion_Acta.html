@@ -1,0 +1,321 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<h3 class="page-title">Acta de Reunión No <strong id="lblCopasst_ADR_Numero"></strong></h3>
+	</div>
+ 	<div class="page-content container-fluid">
+        <form id="frmCopasst_ADR">
+            <div class="panel panel-bordered">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtCopasst_ADR_Lugar" class="control-label">Lugar de Reunión</label>
+                                <input class="form-control guardar" type="text" id="txtCopasst_ADR_Lugar">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtCopasst_ADR_Fecha" class="control-label">Fecha   </label>
+                                <input class="form-control guardar datepicker" type="text" id="txtCopasst_ADR_Fecha">
+                            </div>
+                        </div>
+                    </div> 
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtCopasst_ADR_Departamento" class="control-label">Departamento</label>
+                                <input class="form-control guardar" type="text" id="txtCopasst_ADR_Departamento">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtCopasst_ADR_Municipio" class="control-label">Municipio</label>
+                                <input class="form-control guardar" type="text" id="txtCopasst_ADR_Municipio">
+                            </div>
+                        </div>
+                    </div>  
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="txtCopasst_ADR_Referencia" class="control-label">Referencia</label>
+                                <input class="form-control guardar" type="text" id="txtCopasst_ADR_Referencia">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="txtCopasst_ADR_Referencia" class="control-label">Objetivo de la Reunión</label>
+                                <textarea class="form-control guardar" type="text" id="txtCopasst_ADR_Objetivo"></textarea>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <div class="panel panel-bordered">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="txtCopasst_ADR_Temas" class="control-label">Temas a Tratar</label>
+                                <textarea rows="6" class="form-control guardar" type="text" id="txtCopasst_ADR_Temas"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-bordered">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="txtCopasst_ADR_Desarrollo" class="control-label">Desarrollo de los Temas</label>
+                                <textarea rows="12" class="form-control guardar" type="text" id="txtCopasst_ADR_Desarrollo"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-success btn-block" type="submit"> Guardar</button>
+                </div>
+            </div>
+        </form>
+        <div class="panel panel-primary panel-bordered">
+            <div class="panel-heading">
+                <h3 class="panel-title">Asistentes a la Reunión</h3>
+                <div class="panel-actions">
+                </div>
+            </div>
+            <div class="panel-body">
+                <form id="frmCopasst_ADR_Asistentes">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txtCopasst_ADR_Asistentes_Nombre" class="control-label">Nombre</label>
+                                <input class="form-control guardar" id="txtCopasst_ADR_Asistentes_Nombre" required="true">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txtCopasst_ADR_Asistentes_Cargo" class="control-label">Cargo</label>
+                                <input class="form-control guardar" id="txtCopasst_ADR_Asistentes_Cargo">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label for="txtCopasst_ADR_Asistentes_Telefono" class="control-label">Telefono</label>
+                                <input class="form-control guardar" id="txtCopasst_ADR_Asistentes_Telefono">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txtCopasst_ADR_Asistentes_Correo" class="control-label">Correo Electrónico</label>
+                                <input type="email" class="form-control guardar" id="txtCopasst_ADR_Asistentes_Correo">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-1">
+                            <br>
+                            <button type="submit" class="btn btn-icon btn-primary"><i class="icon fa-plus"></i></button>
+                        </div>
+                    </div>
+                </form>
+
+                <table id="tblCopasst_ADR_Asistentes" class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>NOMBRE</th>
+                            <th>CARGO</th>
+                            <th>TELEFONO</th>
+                            <th>CORREO</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel panel-primary panel-bordered">
+            <div class="panel-heading">
+                <h3 class="panel-title">Asistentes a la Reunión</h3>
+                <div class="panel-actions">
+                </div>
+            </div>
+            <div class="panel-body">
+                <form id="frmCopasst_ADR_Compromisos">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txtCopasst_ADR_Compromisos_Descripcion" class="control-label">Descripción del Compromiso</label>
+                                <input class="form-control guardar" id="txtCopasst_ADR_Compromisos_Descripcion" required="true">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txtCopasst_ADR_Compromisos_Responsable" class="control-label">Responsable</label>
+                                <input class="form-control guardar" id="txtCopasst_ADR_Compromisos_Responsable">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txtCopasst_ADR_Compromisos_Fecha" class="control-label">Fecha Estima de Ejecución</label>
+                                <input class="form-control datepicker guardar" id="txtCopasst_ADR_Compromisos_Fecha">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-1">
+                            <br>
+                            <button type="submit" class="btn btn-icon btn-primary"><i class="icon fa-plus"></i></button>
+                        </div>
+                    </div>
+                </form>
+
+                <table id="tblCopasst_ADR_Compromisos" class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Descripción Compromiso</th>
+                            <th>Responsable</th>
+                            <th>Fecha Estimada</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>         
+	</div>
+</div>
+
+<script>
+    $(document).ready(function()
+    {
+        $("#modulo_copasst_ActasDeReunion_Acta_html .datepicker").val(obtenerFecha().substring(0, 10));
+
+        $("#modulo_copasst_ActasDeReunion_Acta_html .datepicker").datepicker({
+            clearBtn: true,
+            language: "es",
+            orientation: "top auto",
+            daysOfWeekHighlighted: "0",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        $('#frmCopasst_ADR').on('submit', function(event)
+        {
+            event.preventDefault();
+            $(this).generarDatosEnvio('txtCopasst_ADR_', function(datos)
+            {
+                datos = $.parseJSON(datos);
+                datos.idEmpresa = $('#txtInicio_idEmpresa').val();
+                datos.NoActa = $('#lblCopasst_ADR_Numero').text();
+
+                $.post('../server/php/proyecto/cp_Actas_GuardarDatos.php', datos, 
+                    function(data, textStatus, xhr) 
+                    {
+                        if (isNaN(data))
+                        {
+                          Mensaje('Error', data, 'danger');
+                        } else
+                        {
+                          Mensaje("!", 'Los datos han sido ingresados correctamente', 'success');
+                        }
+                    });
+            });
+        });
+
+        $('#frmCopasst_ADR_Asistentes').on('submit', function(event)
+        {
+            event.preventDefault();
+            $(this).generarDatosEnvio('txtCopasst_ADR_Asistentes_', function(datos)
+            {
+                datos = $.parseJSON(datos);
+                datos.id = 'NULL';
+                datos.Anio = $('#txtCopasst_ADR_Fecha').val().substring(0, 10);
+                datos.idEmpresa = $('#txtInicio_idEmpresa').val();
+                datos.NoActa = $('#lblCopasst_ADR_Numero').text();
+
+                $.post('../server/php/proyecto/cp_Actas_GuardarAsistentes.php', datos, function(data, textStatus, xhr) {
+                    if (isNaN(data))
+                    {
+                      Mensaje('Error', data, 'danger');
+                    } else
+                    {
+                      datos.id = data;
+                      cpActas_AgregarAsistente(datos);
+                      $('#frmCopasst_ADR_Asistentes')[0].reset();
+                    }
+                });
+            });
+        });
+
+        $('#frmCopasst_ADR_Compromisos').on('submit', function(event)
+        {
+            event.preventDefault();
+            $(this).generarDatosEnvio('txtCopasst_ADR_Compromisos_', function(datos)
+            {
+                datos = $.parseJSON(datos);
+                datos.id = 'NULL';
+                datos.Anio = $('#txtCopasst_ADR_Fecha').val().substring(0, 10);
+                datos.idEmpresa = $('#txtInicio_idEmpresa').val();
+                datos.NoActa = $('#lblCopasst_ADR_Numero').text();
+
+                $.post('../server/php/proyecto/cp_Actas_GuardarCompromiso.php', datos, function(data, textStatus, xhr) {
+                    if (isNaN(data))
+                    {
+                      Mensaje('Error', data, 'danger');
+                    } else
+                    {
+                      datos.id = data;
+                      cpActas_AgregarCompromiso(datos);
+                      $('#frmCopasst_ADR_Compromisos')[0].reset();
+                    }
+                });
+            });
+        });
+    });
+
+    function cpActas_AgregarAsistente(datos)
+    {
+        var tds = '<tr>';
+            tds += '<td>';
+              tds += '<button data-idAsistente="' + datos.id + '" class="btn btn-pure btn-danger icon wb-close btnCopasst_ADR_QuitarAsistente"></button>';
+            tds += '</td>';
+            tds += '<td>' + datos.Nombre + '</td>';
+            tds += '<td>' + datos.Cargo + '</td>';
+            tds += '<td>' + datos.Telefono + '</td>';
+            tds += '<td>' + datos.Correo + '</td>';
+          tds += '</tr>';
+
+          $('#tblCopasst_ADR_Asistentes').append(tds);
+    }
+
+    function cpActas_AgregarCompromiso(datos)
+    {
+        var tds = '<tr>';
+            tds += '<td>';
+              tds += '<button data-idAsistente="' + datos.id + '" class="btn btn-pure btn-danger icon wb-close btnCopasst_ADR_QuitarCompromiso"></button>';
+            tds += '</td>';
+            tds += '<td>' + datos.Descripcion + '</td>';
+            tds += '<td>' + datos.Responsable + '</td>';
+            tds += '<td>' + datos.Fecha + '</td>';
+          tds += '</tr>';
+
+          $('#tblCopasst_ADR_Compromisos').append(tds);
+    }
+
+    function cpActas_CargarActa(idActa)
+    {
+        $("#cntCopasst_ActasReunion_Archivos").cargarArchivos({Prefijo : idActa, Proceso : 'Copast ActasReunion'});
+    }
+
+    
+</script>

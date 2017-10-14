@@ -101,3 +101,124 @@ ALTER TABLE `Empresas` ADD `NIT` VARCHAR(25) NOT NULL AFTER `Nombre`;
 INSERT INTO `Perfiles` (`idPerfil`, `Nombre`) VALUES ('2', 'Coordinador por Empresa');
 
 ALTER TABLE `cp_AEC_Candidatos` CHANGE `Posicion` `Posicion` VARCHAR(25) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'Candidato';
+
+
+--
+-- Estructura de tabla para la tabla `cp_Actas`
+--
+
+CREATE TABLE `cp_Actas` (
+  `id` int(11) NOT NULL,
+  `Anio` int(11) NOT NULL,
+  `NoActa` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `idEmpresa` int(11) NOT NULL,
+  `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Lugar` varchar(120) NOT NULL,
+  `Fecha` date NOT NULL,
+  `Departamento` varchar(65) NOT NULL,
+  `Municipio` varchar(65) NOT NULL,
+  `Referencia` varchar(120) NOT NULL,
+  `Objetivo` longtext NOT NULL,
+  `Temas` longtext NOT NULL,
+  `Desarrollo` longtext NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `cp_Actas`
+--
+ALTER TABLE `cp_Actas`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `Anio` (`Anio`,`NoActa`,`idEmpresa`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `cp_Actas`
+--
+ALTER TABLE `cp_Actas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
+
+
+--
+-- Estructura de tabla para la tabla `cp_Actas_Asistentes`
+--
+
+CREATE TABLE `cp_Actas_Asistentes` (
+  `id` int(11) NOT NULL,
+  `idEmpresa` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `NoActa` int(11) NOT NULL,
+  `Anio` int(11) NOT NULL,
+  `Nombre` varchar(120) NOT NULL,
+  `Cargo` varchar(85) NOT NULL,
+  `Telefono` varchar(25) NOT NULL,
+  `Correo` varchar(85) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `cp_Actas_Asistentes`
+--
+ALTER TABLE `cp_Actas_Asistentes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `cp_Actas_Asistentes`
+--
+ALTER TABLE `cp_Actas_Asistentes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
+
+
+
+--
+-- Estructura de tabla para la tabla `cp_Actas_Compromisos`
+--
+
+CREATE TABLE `cp_Actas_Compromisos` (
+  `id` int(11) NOT NULL,
+  `idEmpresa` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `NoActa` int(11) NOT NULL,
+  `Anio` int(11) NOT NULL,
+  `Descripcion` longtext NOT NULL,
+  `Responsable` varchar(120) NOT NULL,
+  `Fecha` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `cp_Actas_Compromisos`
+--
+ALTER TABLE `cp_Actas_Compromisos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `cp_Actas_Compromisos`
+--
+ALTER TABLE `cp_Actas_Compromisos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
+
+ALTER TABLE `cp_Actas_Compromisos` ADD `fechaCumplimiento` DATE NOT NULL AFTER `Fecha`;
