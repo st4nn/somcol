@@ -19,6 +19,14 @@ $(document).ready(function()
         todayHighlight: true
     });
 
+  $('#txtCopasst_AEC_Fecha_Apertura').on('change', function()
+  {
+    var arrFecha = $(this).val().split('-');
+    var tmpAnio = parseInt(arrFecha[0]) + 2;
+    var tmpFecha = tmpAnio + '-' + arrFecha[1] + '-' + arrFecha[2]
+    $('#txtCopasst_AEC_Fecha_Cierre').val(tmpFecha);
+  });
+
   $(".frmCopasst_AEC_Candidatos").on("submit", function(evento)
   {
     evento.preventDefault();
@@ -43,7 +51,8 @@ $(document).ready(function()
           Votos : 0,
           idEmpresa : $('#txtInicio_idEmpresa').val(),
           idUsuario : Usuario.id,
-          Anio : $('#txtCopasst_AEC_Anio').val()
+          Anio : $('#txtCopasst_AEC_Anio').val(),
+          Posicion : 'Candidato'
         };
 
         $.post('../server/php/proyecto/cp_AgregarCandidato.php', datos, function(data, textStatus, xhr) 
@@ -94,6 +103,17 @@ $(document).ready(function()
       Copasst_GraficarResultado(); 
     });
   });
+
+  $(document).delegate('.txtCopasst_AEC_Candidato_Posicion', 'change', function(event) {
+    var idCandidato = $(this).attr('data-idCandidato');
+    var Posicion = $(this).val();
+    $.post('../server/php/proyecto/cp_CambiarPosicion.php', {idCandidato: idCandidato, Posicion: Posicion}, function(data, textStatus, xhr) 
+    {
+      
+    });
+  });
+
+  
 
   $(document).delegate('.btnCopasst_AEC_QuitarCandidato', 'click', function(event) 
   {
@@ -146,6 +166,15 @@ function Copasst_AgregarCandidato(datos)
     {
       tds += '<td><input type="number" data-idCandidato="' + datos.id + '" value="' + datos.Votos + '" placeholder="Votos" class="form-control txtCopasst_AEC_Candidato_Votos"></td>';
     }
+
+    if (datos.Tipo != 'Jurados')
+    {
+      tds += '<td><select data-idCandidato="' + datos.id + '" class="form-control txtCopasst_AEC_Candidato_Posicion">';
+        tds += '<option value="Candidato">Candidato</option>';
+        tds += '<option value="Pincipal">Principal</option>';
+        tds += '<option value="Suplente">Suplente</option>';
+      tds += '</select><td>';
+    }
   tds += '</tr>';
 
   if (datos.Tipo == 'Trabajador')
@@ -153,8 +182,16 @@ function Copasst_AgregarCandidato(datos)
    $('#tblCopasst_AEC_Candidatos tbody').prepend(tds);
   } else
   {
-    $('#tblCopasst_AEC_Candidatos_Empleador tbody').prepend(tds);
+    if (datos.Tipo == 'Empleador')
+    {
+      $('#tblCopasst_AEC_Candidatos_Empleador tbody').prepend(tds);
+    } else
+    {
+      $('#tblCopasst_AEC_Candidatos_Jurados tbody').prepend(tds);
+    }
   }
+
+  $('.txtCopasst_AEC_Candidato_Posicion[data-idCandidato="' + datos.id + '"]').val(datos.Posicion);
 }
 
 function Copasst_CargarDatos()

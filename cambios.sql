@@ -99,3 +99,5 @@ ALTER TABLE `cp_AEC` ADD UNIQUE (`idEmpresa`, `Anio`);
 ALTER TABLE `Empresas` ADD `NIT` VARCHAR(25) NOT NULL AFTER `Nombre`;
 
 INSERT INTO `Perfiles` (`idPerfil`, `Nombre`) VALUES ('2', 'Coordinador por Empresa');
+
+ALTER TABLE `cp_AEC_Candidatos` CHANGE `Posicion` `Posicion` VARCHAR(25) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'Candidato';

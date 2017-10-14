@@ -4,29 +4,122 @@
 		<h3 class="page-title">Tarjeton</h3>
 	</div>
  	<div class="page-content container-fluid">
-    	<div class="col-sm-12">
-        	<div class="panel panel-bordered panel-primary">
-        		<div class="panel-body">
-        			<div>
-        				<h4></h4>
-        				<div id="cntCopasst_Tarjeton_Archivos"></div>
-        			</div>
-        			
-        		</div>
+        <div class="row">
+        	<div id="cntCopasstTarjeton_Candidatos" class="col-sm-12">
+            	
         	</div>
-    	</div>
+            <div id="cntCopasst_Tarjeton_CargadorImagenes" class="col-sm-4">
+                <div id="cntCopasst_Tarjeton_Imagen"></div> 
+                <div class="row">
+                    <br><br><br><br><br><br><br><br><br><br><br><br>
+                    <div class="col-sm-6">
+                        <button id="bntCopasstTarjetos_CargadorImagenes_Subir" data-idCandidato="0" class="btn btn-primary btn-block">Subir</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button class="btn btn-danger btn-block" id="bntCopasstTarjetos_CargadorImagenes_Cancelar">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
             
 	</div>
 </div>
 
 <script>
-    $(document).ready(function()
+    $('#cntCopasst_Tarjeton_Imagen').iniciar_CargadorImagenes({idObj : 'Candidatos_Foto'});
+
+    $(document).delegate('.lnkCopasstTarjeto_CambiarImagen', 'click', function(event) 
     {
-        $("#cntCopasst_Tarjeton_Archivos").iniciarObjArchivos({objPrefijo : $("#txtInicio_idEmpresa"), Proceso: "Copast Tarjeton", Usuario: Usuario.id});
+        event.preventDefault();
+        $('#imgCandidatos_Foto_Preview').attr('src', '');
+        $('#cntCopasstTarjeton_Candidatos').removeClass('col-sm-12');
+        $('#cntCopasstTarjeton_Candidatos').addClass('col-sm-8')
+        $('#cntCopasst_Tarjeton_CargadorImagenes').addClass('col-sm-4');
+        $('#cntCopasst_Tarjeton_CargadorImagenes').slideDown();
+
+        $('#bntCopasstTarjetos_CargadorImagenes_Subir').attr('data-idCandidato', $(this).attr('data-idCandidato'));
+
+        $('#txtCandidatos_Foto_Archivo').trigger('click');
     });
 
-    function copasst_Tarjeton_cargarArchivos()
+    $('#bntCopasstTarjetos_CargadorImagenes_Cancelar').on('click', function(evento)
     {
-        $("#cntCopasst_Tarjeton_Archivos").cargarArchivos({Prefijo : $("#txtInicio_idEmpresa").val(), Proceso : 'Copast Tarjeton'});
-    }
+        evento.preventDefault();
+        $('#cntCopasst_Tarjeton_CargadorImagenes').slideUp();
+        $('#cntCopasst_Tarjeton_CargadorImagenes').removeClass('col-sm-4');
+        $('#cntCopasstTarjeton_Candidatos').removeClass('col-sm-8')
+        $('#cntCopasstTarjeton_Candidatos').addClass('col-sm-12');
+    });
+
+    $('#bntCopasstTarjetos_CargadorImagenes_Subir').on('click', function(evento)
+    {
+        evento.preventDefault();
+        var data = $(this).attr('data-idCandidato');
+        subirArchivos(files, {
+            Prefijo : data,
+            Proceso : 'Candidatos_Foto',
+            Observaciones : '',
+            Usuario : Usuario.id
+        }, function()
+        {
+            $('#bntCopasstTarjetos_CargadorImagenes_Cancelar').trigger('click');
+            $('.lnkCopasstTarjeto_CambiarImagen[data-idCandidato="' + data + '"] img').attr('src', $('#imgCandidatos_Foto_Preview').attr('src'));
+        }); 
+    });
+
+    $.post('../server/php/proyecto/cp_CargarCandidatos.php', {Usuario : Usuario.id, Empresa : $('#txtInicio_idEmpresa').val()}, function(data, textStatus, xhr) 
+        {
+            $('#cntCopasstTarjeton_Candidatos div').remove();
+            if (data != 0)
+            {
+                var tds = '';
+                $.each(data, function(index, val) {
+                    tds += '<div class="col-lg-4 col-md-6">';
+                      tds += '<div class="widget widget-shadow text-center">';
+                        tds += '<div class="widget-header cover overlay" style="height: calc(100% - 100px);">';
+                          tds += '<img class="cover-image" src="../assets/photos/placeholder.png" alt="..." style="height: 100%;">';
+                          tds += '<div class="overlay-panel vertical-align">';
+                            tds += '<div class="vertical-align-middle">';
+                              tds += '<a data-idCandidato="' + val.id + '" class="avatar avatar-100 bg-white margin-bottom-10 img-bordered lnkCopasstTarjeto_CambiarImagen" href="javascript:void(0)">';
+                                tds += '<img data-idCandidato="' + val.id + '" src="../assets/portraits/5.png" alt="">';
+                              tds += '</a>';
+                              tds += '<div class="font-size-20 black">' + val.Nombre + '</div>';
+                              tds += '<div class="font-size-14 blue-grey-600">' + val.Cargo + '</div>';
+                            tds += '</div>';
+                          tds += '</div>';
+                        tds += '</div>';
+                      tds += '</div>';
+                    tds += '</div>';
+                });
+
+                tds += '<div class="col-lg-4 col-md-6">';
+                  tds += '<div class="widget widget-shadow text-center">';
+                    tds += '<div class="widget-header cover overlay" style="height: calc(100% - 100px);">';
+                      tds += '<img class="cover-image" src="../assets/photos/placeholder.png" alt="..." style="height: 100%;">';
+                      tds += '<div class="overlay-panel vertical-align">';
+                        tds += '<div class="vertical-align-middle">';
+                          tds += '<a class="avatar avatar-100 bg-white margin-bottom-10 img-bordered" href="javascript:void(0)">';
+                            tds += '<img src="../assets/portraits/white.png" alt="">';
+                          tds += '</a>';
+                          tds += '<div class="font-size-20 black">Voto en Blanco</div>';
+                          tds += '<div class="font-size-14 blue-grey-600"></div>';
+                        tds += '</div>';
+                      tds += '</div>';
+                    tds += '</div>';
+                  tds += '</div>';
+                tds += '</div>';
+
+                $('#cntCopasstTarjeton_Candidatos').append(tds);
+
+                objs = $('#cntCopasstTarjeton_Candidatos lnkCopasstTarjeto_CambiarImagen');
+                $.each(objs, function(index, val) 
+                {
+                    var idCandidato = $(val).attr('data-idCandidato');
+                    $.post('../server/php/proyecto/cp_CargarFotosCandidato.php', {Usuario: Usuario.id, idCandidato : idCandidato}, function(data, textStatus, xhr) 
+                    {
+                        
+                    }, 'json');
+                });
+            }
+        }, 'json');
 </script>
