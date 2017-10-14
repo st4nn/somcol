@@ -72,7 +72,7 @@
             cp_Actas_Compromisos
             INNER JOIN cp_Actas ON cp_Actas.Anio = cp_Actas_Compromisos.Anio AND cp_Actas.NoActa = cp_Actas_Compromisos.NoActa AND cp_Actas.idEmpresa = cp_Actas_Compromisos.idEmpresa
          WHERE
-            cp_Actas.id = '$idActa';;";
+            cp_Actas.id = '$idActa';";
             
    $result = $link->query(utf8_decode($sql));
    $idx = 0;
