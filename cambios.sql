@@ -224,3 +224,44 @@ ALTER TABLE `cp_Actas_Compromisos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
 
 ALTER TABLE `cp_Actas_Compromisos` ADD `fechaCumplimiento` DATE NOT NULL AFTER `Fecha`;
+
+
+--
+-- Estructura de tabla para la tabla `personal`
+--
+
+CREATE TABLE `personal` (
+  `id` int(11) NOT NULL,
+  `idEmpresa` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Cedula` varchar(25) NOT NULL,
+  `Nombres` varchar(85) NOT NULL,
+  `Apellidos` varchar(85) NOT NULL,
+  `FechaNacimiento` date NOT NULL,
+  `Genero` varchar(5) NOT NULL,
+  `Cargo` varchar(135) NOT NULL,
+  `Grupo` varchar(45) NOT NULL,
+  `Regional` varchar(130) NOT NULL,
+  `NombreEPS` varchar(85) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `personal`
+--
+ALTER TABLE `personal`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `personal`
+--
+ALTER TABLE `personal`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;

@@ -1,0 +1,84 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<h3 class="page-title">Listado de Personal</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+        <div class="panel panel-primary panel-bordered">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button class="btn btn-primary lnkAbrirModulo" Titulo="Agregar Persona" vinculo="personal/agregar.html" data-callback="personalAgregarPersona_Nuevo"><i class="icon fa-user-plus"></i> Agregar Persona</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <table id="tblPersonal_Listado" class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Cedula</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th>Género</th>
+                            <th>Cargo</th>
+                            <th>Grupo</th>
+                            <th>Regional</th>
+                            <th>Nombre de entidad EPS</th>
+                        </tr>   
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+	</div>
+</div>
+<script>
+    $(document).ready(function()
+    {
+        $(document).delegate('.btnPersonal_Listado_Editar', 'click', function(event) {
+            event.preventDefault();
+            var idPersona = $(this).attr('idPersonal');
+            var fila = $(this).parent('td').parent('tr').find('td');
+            cargarModulo('personal/agregar.html', 'Editar Persona', function()
+            {
+                $.each(fila, function(index, val) 
+                {
+                    $('#txtPersonal_Agregar_id').val(idPersona);
+                     if ($(val).attr('data-campo') != undefined)
+                     {
+                        $('#txtPersonal_Agregar_' + $(val).attr('data-campo')).val($(val).text());
+                     }
+                });
+            });
+
+        });
+    });
+
+    function personal_listado_Cargar()
+    {
+        $('#tblPersonal_Listado tbody tr').remove();
+        $.post('../server/php/proyecto/personal_cargar.php', {Usuario: Usuario.id, idEmpresa : $('#txtInicio_idEmpresa').val()}, function(data, textStatus, xhr) 
+        {
+            if (data != 0)
+            {
+                var tds = ''
+                $.each(data, function(index, val) 
+                {
+                    tds += '<tr>';
+                        tds += '<td><button idPersonal="' + val.id + '" class="btn btn-pure btn-primary icon wb-edit btnPersonal_Listado_Editar"></button><button idPersonal="' + val.id + '" class="btn btn-pure btn-danger icon wb-close btnPersonal_Listado_Quitar"></button></td>';
+                        tds += '<td data-campo="Cedula">' + val.Cedula + '</td>';
+                        tds += '<td data-campo="Nombres">' + val.Nombres + '</td>';
+                        tds += '<td data-campo="Apellidos">' + val.Apellidos + '</td>';
+                        tds += '<td data-campo="FechaNacimiento">' + val.FechaNacimiento + '</td>';
+                        tds += '<td data-campo="Genero">' + val.Genero + '</td>';
+                        tds += '<td data-campo="Cargo">' + val.Cargo + '</td>';
+                        tds += '<td data-campo="Grupo">' + val.Grupo + '</td>';
+                        tds += '<td data-campo="Regional">' + val.Regional + '</td>';
+                        tds += '<td data-campo="NombreEPS">' + val.NombreEPS + '</td>';
+                    tds += '</tr>';
+                });
+                $('#tblPersonal_Listado').crearDataTable(tds, function(){}, false);
+            }
+        }, 'json');
+    }
+</script>

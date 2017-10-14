@@ -1,0 +1,140 @@
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<h3 class="page-title"></h3>
+	</div>
+ 	<div class="page-content container-fluid">
+        <div class="panel panel-primary panel-bordered">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button class="btn btn-warning lnkAbrirModulo" Titulo="Listado de Personal" vinculo="personal/listado.html"><i class="icon fa-arrow-left"></i> Volver</button>
+                </div>
+            </div>
+            <div class="panel-body">
+            	<form id="frmPersonal_Agregar">
+            		<input id="txtPersonal_Agregar_id" type="hidden" class="form-control guardar">
+            		<div class="row">
+				 		<div class="form-group col-sm-5 pull-right">
+				 			<div class="form-group">
+				 				<label for="txtPersonal_Agregar_Cedula" class="control-label">Cedula</label>
+			                    <input id="txtPersonal_Agregar_Cedula" class="form-control guardar">
+			                </div>
+				        </div>
+			 		</div>
+
+            		<div class="row">
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtPersonal_Agregar_Nombres" class="control-label">Nombres</label>
+					        	<input class="form-control guardar" id="txtPersonal_Agregar_Nombres">
+					        </div>
+			 			</div>
+
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtPersonal_Agregar_Apellidos" class="control-label">Apellidos</label>
+					        	<input class="form-control guardar" type="text" id="txtPersonal_Agregar_Apellidos">
+					        </div>
+			 			</div>
+			 		</div>
+
+			 		<div class="row">
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtPersonal_Agregar_FechaNacimiento" class="control-label">Fecha de Nacimiento</label>
+					        	<input class="form-control guardar datepicker" id="txtPersonal_Agregar_FechaNacimiento">
+					        </div>
+			 			</div>
+
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtPersonal_Agregar_Genero" class="control-label">Genero</label>
+					        	<select class="form-control guardar" id="txtPersonal_Agregar_Genero">
+					        		<option value=""></option>
+					        		<option value="M">Masculino</option>
+					        		<option value="F">Femenino</option>
+					        	</select>
+					        </div>
+			 			</div>
+			 		</div>
+
+			 		<div class="row">
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtPersonal_Agregar_Cargo" class="control-label">Cargo</label>
+					        	<input class="form-control guardar" id="txtPersonal_Agregar_Cargo">
+					        </div>
+			 			</div>
+
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtPersonal_Agregar_Grupo" class="control-label">Grupo</label>
+					        	<select class="form-control guardar" id="txtPersonal_Agregar_Grupo">
+					        		<option value=""></option>
+					        		<option value="Operativo">Operativo</option>
+					        		<option value="Administrativo">Administrativo</option>
+					        	</select>
+					        </div>
+			 			</div>
+			 		</div>
+
+			 		<div class="row">
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtPersonal_Agregar_Regional" class="control-label">Regional</label>
+					        	<input class="form-control guardar" id="txtPersonal_Agregar_Regional">
+					        </div>
+			 			</div>
+
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtPersonal_Agregar_NombreEPS" class="control-label">Nombre de Entidad EPS</label>
+					        	<input class="form-control guardar" type="text" id="txtPersonal_Agregar_NombreEPS">
+					        </div>
+			 			</div>
+			 		</div>
+			 		<button type="submit" class="btn btn-success btn-block text-center"> Guardar</button>
+			 	</form>
+            </div>
+        </div>
+	</div>
+</div>
+<script>
+	$(document).ready(function()
+	{		
+		$('#frmPersonal_Agregar .datepicker').datepicker({
+	        clearBtn: true,
+	        language: "es",
+	        orientation: "top auto",
+	        daysOfWeekHighlighted: "0",
+	        autoclose: true,
+	        todayHighlight: true
+	    });
+
+	    $('#frmPersonal_Agregar').on('submit', function(evento)
+	    {
+	    	evento.preventDefault();
+	    	$(this).generarDatosEnvio('txtPersonal_Agregar_', function(datos)
+	    	{
+	    		datos = $.parseJSON(datos);
+      			datos.idEmpresa = $('#txtInicio_idEmpresa').val();
+
+      			$.post('../server/php/proyecto/personal_Guardar.php', datos, function(data, textStatus, xhr) 
+      			{
+      				if (isNaN(data))
+			        {
+			          Mensaje('Error', data, 'danger');
+			        } else
+			        {
+			          Mensaje("!", 'Los datos han sido ingresados correctamente', 'success');
+			        }
+      			});
+
+	    	});
+	    });
+	});
+
+	function personalAgregarPersona_Nuevo()
+	{
+		$('#frmPersonal_Agregar')[0].reset();
+	}
+</script>

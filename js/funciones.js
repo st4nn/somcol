@@ -236,7 +236,12 @@ function calcularTiempoPublicacion(fecha)
 
 $.fn.crearDataTable = function(tds, callback, responsive)
 {
-  responsive = responsive || true;
+  if (responsive == undefined)
+  {
+    responsive = true;
+  }
+  
+
   if (callback === undefined)
     {callback = function(){};}
 
