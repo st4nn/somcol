@@ -111,13 +111,16 @@
 
                 $('#cntCopasstTarjeton_Candidatos').append(tds);
 
-                objs = $('#cntCopasstTarjeton_Candidatos lnkCopasstTarjeto_CambiarImagen');
+                objs = $('#cntCopasstTarjeton_Candidatos .lnkCopasstTarjeto_CambiarImagen');
                 $.each(objs, function(index, val) 
                 {
                     var idCandidato = $(val).attr('data-idCandidato');
                     $.post('../server/php/proyecto/cp_CargarFotosCandidato.php', {Usuario: Usuario.id, idCandidato : idCandidato}, function(data, textStatus, xhr) 
                     {
-                        
+                        if (data != 0)
+                        {
+                            $('.lnkCopasstTarjeto_CambiarImagen[data-idCandidato="' + data.Prefijo + '"] img').attr('src', '../server/php/' +  data.Ruta + '/' + data.Nombre);
+                        }
                     }, 'json');
                 });
             }
