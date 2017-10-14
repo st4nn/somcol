@@ -3,6 +3,7 @@
    $link = Conectar();
    $id = addslashes($_POST['id']);
    $Nombre = addslashes($_POST['Nombre']);
+   $NIT = addslashes($_POST['NIT']);
    $Direccion = addslashes($_POST['Direccion']);
    $Correo = addslashes($_POST['Correo']);
    $Telefono = addslashes($_POST['Telefono']);
@@ -19,10 +20,11 @@
       $id = "NULL";
    }
 
-      $sql = "INSERT INTO Empresas(id, Nombre, Direccion, Correo, Telefono, colorPrimario, colorSecundario, ActividadEconomica, RepresentanteLegal, idUsuario) VALUES 
+      $sql = "INSERT INTO Empresas(id, Nombre, NIT, Direccion, Correo, Telefono, colorPrimario, colorSecundario, ActividadEconomica, RepresentanteLegal, idUsuario) VALUES 
       (
          $id, 
          '" . $Nombre . "',
+         '" . $NIT . "',
          '" . $Direccion . "',
          '" . $Correo . "',
          '" . $Telefono . "',
@@ -33,6 +35,7 @@
          '" . $idUsuario . "'
       ) ON DUPLICATE KEY UPDATE
       Nombre = VALUES(Nombre),
+      NIT = VALUES(NIT),
       Direccion = VALUES(Direccion),
       Correo = VALUES(Correo),
       Telefono = VALUES(Telefono),

@@ -1,0 +1,82 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<h3 class="page-title"></h3>
+	</div>
+ 	<div class="page-content container-fluid">
+        <div class="row">
+            <div class="col-sm-8 col-md-7">
+                <img src="" height="100px" id="imgCopasst_NotificacionTR_Logo">
+                <h1 class="text-center" id="lblCopasst_NotificacionTR_Empresa"></h1>
+                <h3 class="text-center" id="lblCopasst_NotificacionTR_Empresa_Direccion"></h3>
+                <h4 class="text-center" id="lblCopasst_NotificacionTR_Empresa_Telefono"></h4>
+                <br>
+                <h4 class="text-center">MEMORANDO</h4>
+                <p><strong>DE: </strong> JURADO DE VOTACIÓN COPPASST</p>
+                <p><strong class="">PARA: </strong> <select id="txtCopasst_NotificacionTR_Candidatos" class="form-control"></select></p>
+                <p><strong>Asunto:</strong> CONFORMACIÓN DEL COMITÉ PARITARIO DE SALUD OCUPACIONAL       (COPASO) Y COMITÉ DE CONVIVNCIA LABORAL (CCL)</p>
+                <p><strong>Fecha:</strong> <input id="txtCopasst_NotificacionTR_Fecha" type="text" class="form-control datepicker"></p>
+                <br>
+                <p>Cordial Saludo</p>
+                <p>Me permito comunicarle que de acuerdo con las votaciones realizadas usted ha sido nombrado como Representante por parte de los trabajadores en el Comité Paritario de Seguridad y Salud en el Trabajo (COPASST) del consorcio.</p>
+                <p>Le agradecemos comunicar por este mismo medio su aceptación a dicho nombramiento</p>
+                <strong>Cordialmente</strong><br><br>
+                <strong>COMITÉ DIRECTIVO ELECCIONES COPASST<br>Representante Legal</strong>
+
+            </div>
+        	<div class="col-sm-4 col-md-5 hidden-xs">
+            	<div class="panel panel-bordered panel-primary">
+            		<div class="panel-body">
+            			<div>
+            				<h4></h4>
+            				<div id="cntCopasst_NotificacionTR_Archivos"></div>
+            			</div>
+            			
+            		</div>
+            	</div>
+        	</div>
+        </div>
+            
+	</div>
+</div>
+
+<script>
+    $(document).ready(function()
+    {
+        $("#cntCopasst_NotificacionTR_Archivos").iniciarObjArchivos({objPrefijo : $("#txtInicio_idEmpresa"), Proceso: "Copast NotificacionTR", Usuario: Usuario.id});
+
+        $("#txtCopasst_NotificacionTR_Fecha").datepicker({
+            clearBtn: true,
+            language: "es",
+            orientation: "top auto",
+            daysOfWeekHighlighted: "0",
+            autoclose: true,
+            todayHighlight: true
+        });
+    });
+
+    function copasst_NotificacionTR_cargarArchivos()
+    {
+        $("#cntCopasst_NotificacionTR_Archivos").cargarArchivos({Prefijo : $("#txtInicio_idEmpresa").val(), Proceso : 'Copast NotificacionTR'});
+
+        $('#lblCopasst_NotificacionTR_Empresa').text(Empresa.Nombre);
+        $('#lblCopasst_NotificacionTR_Empresa_Direccion').text(Empresa.Direccion);
+        $('#lblCopasst_NotificacionTR_Empresa_Telefono').text(Empresa.Telefono);
+        $('#imgCopasst_NotificacionTR_Logo').attr('src', '../server/php/' + Empresa.Ruta + '/' + Empresa.Archivo);
+
+        $.post('../server/php/proyecto/cp_CargarCandidatos.php', {Usuario : Usuario.id, Empresa : $('#txtInicio_idEmpresa').val()}, function(data, textStatus, xhr) 
+        {
+            $('#txtCopasst_NotificacionTR_Candidatos option').remove();
+            if (data != 0)
+            {
+                var tds = '';
+                $.each(data, function(index, val) {
+                     tds += '<option value="' + val.id + '">' + val.Nombre + '</option>';
+                });
+                $('#txtCopasst_NotificacionTR_Candidatos').append(tds);
+            }
+        }, 'json');
+
+
+    }
+</script>

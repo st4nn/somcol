@@ -1,16 +1,6 @@
 $(document).ready(function()
 {
-	Copasst_ActaDeEleccionYConformacion();
-
-  window.cntCopasst_AEC_Resultados = null;
-
-  $("#btnCopasst_AEC_Actualizar").on('click', function(evento)
-  {
-    evento.preventDefault();
-    Copasst_CargarDatos();
-  });
-
-  $("#frmCopasst_AEC .datepicker").datepicker({
+  $("#frmCopasst_PDA .datepicker").datepicker({
         clearBtn: true,
         language: "es",
         orientation: "top auto",
@@ -19,7 +9,7 @@ $(document).ready(function()
         todayHighlight: true
     });
 
-  $(".frmCopasst_AEC_Candidatos").on("submit", function(evento)
+  $("#frmCopasst_PDA").on("submit", function(evento)
   {
     evento.preventDefault();
     var idObj = $(this).attr('id');

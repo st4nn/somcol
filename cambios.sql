@@ -93,3 +93,7 @@ ALTER TABLE `cp_AEC`
 
 
 ALTER TABLE `cp_AEC` ADD UNIQUE (`idEmpresa`, `Anio`);
+
+/**************************************20171014*****************/
+
+ALTER TABLE `Empresas` ADD `NIT` VARCHAR(25) NOT NULL AFTER `Nombre`;

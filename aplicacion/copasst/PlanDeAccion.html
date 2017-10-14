@@ -1,0 +1,89 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<!--
+		<button class="btn btn-primary pull-right btn-pill-left btnCopasst_VerEPPEntregados">Volver</button>
+	-->
+		<h3 class="page-title">Resumen Planes de Acción</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
+ 				<h3 class="panel-title"></h3>
+				<div class="panel-actions">
+		      	</div>
+            </div>
+ 			<div class="panel-body">
+ 				<form id="frmCopasst_PDA" class="frmCopasst_PDA_Candidatos" data-tipo='Trabajador'>
+ 					<div class="row">
+ 						<div class="col-sm-6">
+	 						<div class="form-group">
+					        	<label for="txtCopasst_PDA_ActaNo" class="control-label">Acta No.</label>
+								<input id="txtCopasst_PDA_ActaNo" class="form-control">
+					        </div>
+	 					</div>
+	 					<div class="col-sm-6">
+	 						<div class="form-group">
+					        	<label for="txtCopasst_PDA_FechaActa" class="control-label">Fecha Acta</label>
+								<input id="txtCopasst_PDA_FechaActa" class="form-control datepicker">
+					        </div>
+	 					</div>
+ 					</div>
+ 					<div class="row">
+ 						<div class="col-sm-12">
+	 						<div class="form-group">
+					        	<label for="txtCopasst_PDA_Descripcion" class="control-label">Descripción de la Acción</label>
+								<textarea id="txtCopasst_PDA_Descripcion" class="form-control"></textarea>
+					        </div>
+	 					</div>
+ 					</div>
+	 				<div class="row">
+	 					<div class="col-sm-5">
+	 						<div class="form-group">
+					        	<label for="txtCopasst_PDA_Responsable" class="control-label">Responsable</label>
+					        	<input class="form-control" id="txtCopasst_PDA_Responsable" required="true">
+					        </div>
+	 					</div>
+
+	 					<div class="col-sm-3">
+	 						<div class="form-group">
+					        	<label for="txtCopasst_PDA_FechaEstimada" class="control-label">Fecha estimada de Realización</label>
+					        	<input class="form-control datepicker" id="txtCopasst_PDA_FechaEstimada">
+					        </div>
+	 					</div>
+
+	 					<div class="col-sm-3">
+	 						<div class="form-group">
+					        	<label for="txtCopasst_PDA_FechaEjecucion" class="control-label">Fecha de Ejecución</label>
+					        	<input class="form-control datepicker" id="txtCopasst_PDA_FechaEjecucion" required="true">
+					        </div>
+	 					</div>
+
+	 					<div class="col-sm-1">
+	 						<br>
+	 						<button type="submit" class="btn btn-icon btn-primary"><i class="icon fa-plus"></i></button>
+	 					</div>
+	 				</div>
+	 			</form>
+
+				<table id="tblCopasst_PDA_Candidatos" class="table table-hover table-striped">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Acta No</th>
+							<th>Fecha Acta</th>
+							<th>Descripción de la Acción</th>
+							<th>Responsable</th>
+							<th>Fecha Estimada de Realización</th>
+							<th>Fecha de Ejecución</th>
+							<th>Estado</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+ 			</div>
+ 		</div>
+	</div>
+</div>
+
+<script src="../js/Copasst_PlanDeAccion.js"></script>

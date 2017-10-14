@@ -1,0 +1,32 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<h3 class="page-title">Actas de Reunión</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+    	<div class="col-sm-12">
+        	<div class="panel panel-bordered panel-primary">
+        		<div class="panel-body">
+        			<div>
+        				<h4></h4>
+        				<div id="cntCopasst_ActasReunion_Archivos"></div>
+        			</div>
+        			
+        		</div>
+        	</div>
+    	</div>
+            
+	</div>
+</div>
+
+<script>
+    $(document).ready(function()
+    {
+        $("#cntCopasst_ActasReunion_Archivos").iniciarObjArchivos({objPrefijo : $("#txtInicio_idEmpresa"), Proceso: "Copast ActasReunion", Usuario: Usuario.id});
+    });
+
+    function copasst_ActasReunion_cargarArchivos()
+    {
+        $("#cntCopasst_ActasReunion_Archivos").cargarArchivos({Prefijo : $("#txtInicio_idEmpresa").val(), Proceso : 'Copast ActasReunion'});
+    }
+</script>
