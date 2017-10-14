@@ -1,11 +1,28 @@
 <!-- Page -->
+<style>
+    .cntCopasstActasDeReunion_Ficha .fa-thumb-tack
+    {
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        -moz-transform: rotate(60deg);
+        -webkit-transform: rotate(60deg);
+        -ms--transform: rotate(60deg);
+        transform: rotate(60deg);
+        margin-left: 1em;
+
+        color:red;
+    }
+</style>
 <div class="page" style="min-height: 90vh;">
 	<div class="page-header">
 		<h3 class="page-title">Actas de Reunión</h3>
 	</div>
  	<div class="page-content container-fluid">
-    	<div class="col-sm-12">
-        	<div class="panel panel-bordered panel-primary">
+    	<div id='cntCopasstActasDeReunion_Fichas' class="col-sm-12">
+            <!--
+            <div class="panel panel-bordered panel-primary">
         		<div class="panel-body">
         			<div>
         				<h4></h4>
@@ -14,6 +31,7 @@
         			
         		</div>
         	</div>
+        -->
     	</div>
             
 	</div>
@@ -22,11 +40,53 @@
 <script>
     $(document).ready(function()
     {
-        $("#cntCopasst_ActasReunion_Archivos").iniciarObjArchivos({objPrefijo : $("#txtInicio_idEmpresa"), Proceso: "Copast ActasReunion", Usuario: Usuario.id});
+        //$("#cntCopasst_ActasReunion_Archivos").iniciarObjArchivos({objPrefijo : $("#txtInicio_idEmpresa"), Proceso: "Copast ActasReunion", Usuario: Usuario.id});
     });
 
-    function copasst_ActasReunion_cargarArchivos()
+    function copasst_ActasReunion_cargarActas()
     {
-        $("#cntCopasst_ActasReunion_Archivos").cargarArchivos({Prefijo : $("#txtInicio_idEmpresa").val(), Proceso : 'Copast ActasReunion'});
+        $('#cntCopasstActasDeReunion_Fichas div').remove();
+        var tds = '<div class="row">';
+        for (var i = 0; i < 24; i++) 
+        {
+            if (i%3 == 0)
+            {
+                tds += '</div><div class="row">';
+            }
+            tds += '<div class="col-sm-4 cntCopasstActasDeReunion_Ficha">';
+              tds += '<!-- Widget -->';
+              tds += '<div class="widget widget-shadow text-center font-size-16">';
+                tds += '<div class="widget-content">';
+                  tds += '<div class="bg-yellow-700 padding-30 white ">';
+                    tds += '<div>';
+                      tds += '<i class="font-size-30 icon fa-thumb-tack"></i>';
+                    tds += '</div>';
+                    tds += '<div>';
+                      tds += '<span class="font-size-20">Acta No.';
+                        tds += '<span class="font-size-30">' + (i+1) + '</span>';
+                      tds += '</span>';
+                    tds += '</div>';
+                    tds += '<div class="cntCopasstActasDeReunion_Ficha_Mensaje"></div>';
+                    tds += '<div class="cntCopasstActasDeReunion_Ficha_Fecha"><i><small></small></i></div>';
+                    tds += '<button type="button" data-idActa="' + (i+1) + '" class="btn btn-direction btn-up btn-warning btn-outline hide btnCopasstActasDeReunion_VerActa">Ver Acta</button>';
+                  tds += '</div>';
+                tds += '</div>';
+              tds += '</div>';
+              tds += '<!-- End Widget -->';
+            tds += '</div>';
+        }
+        tds += '</div>';
+
+        $('#cntCopasstActasDeReunion_Fichas').append(tds);
+
+        var idx = 0;
+
+        $.post('../server/php/proyecto/cp_CargarActas_home.php', {Usuario: Usuario.id, idEmpresa : $('#txtInicio_idEmpresa').val()}, function(data, textStatus, xhr) {
+            /*optional stuff to do after success */
+        });
+
+        $('.btnCopasstActasDeReunion_VerActa[data-idActa="' + (idx+1)+ '"]').slideDown();
+
+        //$("#cntCopasst_ActasReunion_Archivos").cargarArchivos({Prefijo : $("#txtInicio_idEmpresa").val(), Proceso : 'Copast ActasReunion'});
     }
 </script>
