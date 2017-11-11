@@ -47,11 +47,19 @@
 
 			 		<div class="row">
 			 			<div class="col-sm-6">
-				 			<div class="form-group">
-					        	<label for="txtAusentismo_Registrar_FechaNacimiento" class="control-label">Fecha de Nacimiento</label>
-					        	<input class="frmAusentismo_Registrar_Control form-control datepicker" id="txtAusentismo_Registrar_FechaNacimiento">
-					        </div>
-			 			</div>
+				 			<div class="col-sm-6">
+					 			<div class="form-group">
+						        	<label for="txtAusentismo_Registrar_FechaNacimiento" class="control-label">Fecha de Nacimiento</label>
+						        	<input class="frmAusentismo_Registrar_Control form-control datepicker" id="txtAusentismo_Registrar_FechaNacimiento">
+						        </div>
+				 			</div>
+				 			<div class="col-sm-6">
+					 			<div class="form-group">
+						        	<label for="txtAusentismo_Registrar_FechaNacimiento" class="control-label">Edad</label>
+						        	<input class="frmAusentismo_Registrar_Control form-control datepicker" id="txtAusentismo_Registrar_Edad">
+						        </div>
+				 			</div>
+				 		</div>
 
 			 			<div class="col-sm-6">
 				 			<div class="form-group">
@@ -110,11 +118,12 @@
             </div>
             <div class="panel-body">
             	<form id="frmAusentismo_Registrar">
+            		<input class="guardar" type="hidden" id="txtAusentismo_Registrar_id" value="NULL">
             		<div class="row">
 			 			<div class="col-sm-6">
 				 			<div class="form-group">
 					        	<label for="txtAusentismo_Registrar_TipoEvento" class="control-label">Tipo de Evento</label>
-					        	<select class="form-control guardar" id="txtAusentismo_Registrar_TipoEvento">
+					        	<select class="form-control guardar" id="txtAusentismo_Registrar_TipoEvento" required="true">
 					        		<option value="Accidentalidad">Accidentalidad</option>
 					        		<option value="Maternidad">Maternidad</option>
 					        		<option value="Paternidad">Paternidad</option>
@@ -129,9 +138,8 @@
 
 			 			<div class="col-sm-6">
 				 			<div class="form-group">
-					        	<label for="txtAusentismo_Registrar_IncapacidadTipo" class="control-label">Nombre de Entidad EPS</label>
-					        	<select class="form-control guardar" type="text" id="txtAusentismo_Registrar_IncapacidadTipo">
-					        		<option value=""></option>
+					        	<label for="txtAusentismo_Registrar_IncapacidadTipo" class="control-label">Incapacidad</label>
+					        	<select class="form-control guardar" id="txtAusentismo_Registrar_IncapacidadTipo" required="true">
 					        		<option value="Inicial">Inicial</option>
 					        		<option value="Prorroga">Prorroga</option>
 					        	</select>
@@ -143,55 +151,46 @@
 			 			<div class="col-sm-6">
 				 			<div class="form-group">
 					        	<label for="txtAusentismo_Registrar_FechaInicial" class="control-label">Fecha Inicial</label>
-					        	<input class="form-control guardar datepicker" id="txtAusentismo_Registrar_FechaInicial">
+					        	<input class="form-control guardar datepicker" id="txtAusentismo_Registrar_FechaInicial" required="true">
 					        </div>
 			 			</div>
 
 			 			<div class="col-sm-6">
 				 			<div class="form-group">
 					        	<label for="txtAusentismo_Registrar_IncapacidadTipo" class="control-label">Fecha Final</label>
-					        	<input class="form-control guardar datepicker" type="text" id="txtAusentismo_Registrar_FechaFinal">
+					        	<input class="form-control guardar datepicker" type="text" id="txtAusentismo_Registrar_FechaFinal" required="true">
 					        </div>
 			 			</div>
 			 		</div>
 
 			 		<div class="row">
 			 			<div class="col-sm-6">
-				 			<div class="form-group">
+				 			<div id="cntAusentismo_Registrar_CodigoDiagnostico" class="form-group">
 					        	<label for="txtAusentismo_Registrar_CodigoDiagnostico" class="control-label">Código Diagnóstivo</label>
-					        	<input class="form-control guardar" id="txtAusentismo_Registrar_CodigoDiagnostico">
+					        	<input class="form-control guardar" id="txtAusentismo_Registrar_CodigoDiagnostico" required="true">
 					        </div>
 			 			</div>
 
 			 			<div class="col-sm-6">
 				 			<div class="form-group">
-					        	<label for="txtAusentismo_Registrar_Descripcion" class="control-label">Descripción</label>
-					        	<textarea class="form-control guardar" id="txtAusentismo_Registrar_Descripcion"></textarea>
+					        	<label for="txtAusentismo_Registrar_Descripcion" class="control-label">Observaciones</label>
+					        	<textarea class="form-control guardar" id="txtAusentismo_Registrar_Observaciones"></textarea>
 					        </div>
 			 			</div>
 			 		</div>
 
-			 		<div class="row">
-			 			<div class="col-sm-6">
-				 			<div class="form-group">
-					        	<label for="txtAusentismo_Registrar_Sistema" class="control-label">Sistema</label>
-					        	<input class="form-control guardar" id="txtAusentismo_Registrar_Sistema">
-					        </div>
-			 			</div>
-
-			 			<div class="col-sm-6">
-				 			<div class="form-group">
-					        	<label for="txtAusentismo_Registrar_SubSistema" class="control-label">Sub Sistema</label>
-					        	<input class="form-control guardar" type="text" id="txtAusentismo_Registrar_SubSistema">
-					        </div>
-			 			</div>
-			 		</div>
 			 		<button type="submit" class="btn btn-success btn-block text-center">Guardar</button>
             	</form>
             </div>
         </div>
 	</div>
 </div>
+<style>
+	#cntAusentismo_Registrar_CodigoDiagnostico .tt-dropdown-menu {
+	  max-height: 150px;
+	  overflow-y: auto;
+	}
+</style>
 <script>
 	$(document).ready(function()
 	{		
@@ -221,6 +220,11 @@
 	    				 	$('#txtAusentismo_Registrar_' + index).val(val);	
 	    				 }
 	    			});
+
+	    			var tEdad = calcularEdad($('#txtAusentismo_Registrar_FechaNacimiento').val());
+	    			$('#txtAusentismo_Registrar_Edad').val(tEdad.anios);
+
+
 	    		}
 	    	}, 'json');
 	    });
@@ -232,20 +236,50 @@
 	    	{
 	    		datos = $.parseJSON(datos);
       			datos.idEmpresa = $('#txtInicio_idEmpresa').val();
+      			datos.idPersonal = $('#txtAusentismo_Registrar_id').val();
 
-      			$.post('../server/php/proyecto/ausentismo_registrar.php', datos, function(data, textStatus, xhr) 
-      			{
-      				if (isNaN(data))
-			        {
-			          Mensaje('Error', data, 'danger');
-			        } else
-			        {
-			          Mensaje("!", 'Los datos han sido ingresados correctamente', 'success');
-			        }
-      			});
-
+      			if (datos.idPersonal == ''){
+      				Mensaje('Error', 'Debes ingresar una Cedula válida y registrada', 'danger');
+      				$('#txtAusentismo_Registrar_Cedula').focus();
+      			} else {
+	      			$.post('../server/php/proyecto/ausentismo_registrar.php', datos, function(data, textStatus, xhr) 
+	      			{
+	      				if (isNaN(data))
+				        {
+				          Mensaje('Error', data, 'danger');
+				        } else
+				        {
+				          Mensaje("!", 'Los datos han sido ingresados correctamente', 'success');
+				          $('#frmAusentismo_Registrar')[0].reset();
+				          $('#txtAusentismo_Registrar_id').val('NULL');
+				        }
+	      			});
+      			}
 	    	});
 	    });
+
+	    var cieX = new Bloodhound({
+		  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+		  queryTokenizer: Bloodhound.tokenizers.whitespace,
+		  remote: {
+		    url: '../server/php/proyecto/cargarCieX.php?p=%QUERY',
+		    wildcard: '%QUERY'
+		  }
+		});
+
+	    $('#txtAusentismo_Registrar_CodigoDiagnostico').typeahead(null, {
+		  name: 'cieX',
+		  display: 'Codigo',
+		  source: cieX,
+		  templates: {
+		    empty: [
+		      '<div class="empty-message">',
+		        'Ningún código coincide con la descripción escrita',
+		      '</div>'
+		    ].join('\n'),
+		    suggestion: Handlebars.compile('<div><strong>{{Codigo}}</strong> – {{Descripcion}}<br><i>{{Sistema}}</i> <small>{{Subsistema}}</small></div>')
+		   }
+		});
 	});
 
 	function personalAgregarPersona_Nuevo()

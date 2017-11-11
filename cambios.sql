@@ -265,3 +265,40 @@ ALTER TABLE `personal`
 --
 ALTER TABLE `personal`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
+
+/**************************************20171010*****************/
+
+
+CREATE TABLE `au_registro` (
+  `id` int(11) NOT NULL,
+  `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `idEmpresa` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `idPersonal` int(11) NOT NULL,
+  `TipoEvento` varchar(45) NOT NULL,
+  `IncapacidadTipo` varchar(45) NOT NULL,
+  `FechaInicial` date NOT NULL,
+  `FechaFinal` date NOT NULL,
+  `CodigoDiagnostico` varchar(25) NOT NULL,
+  `Observaciones` longtext NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `au_registro`
+--
+ALTER TABLE `au_registro`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `au_registro`
+--
+ALTER TABLE `au_registro`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;

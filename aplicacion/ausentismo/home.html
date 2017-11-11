@@ -5,7 +5,7 @@
 	</div>
  	<div class="page-content container-fluid">
  		<div class="col-sm-12">
-          <div class="bg-orange-400 fButton margin-5 lnkAbrirModulo" Titulo="Listado de Personal" vinculo="personal/listado.html" data-callback="personal_listado_Cargar">
+          <div class="bg-orange-400 fButton margin-5 lnkAbrirModulo" Titulo="Listado de Personal" vinculo="personal/listado.html" data-callback="fun_Ausentismo_AbrirListadoDePersonal">
               <i class="icon fa-group bg-orange-800 "></i>Listado de Personal
           </div>
         </div>
@@ -23,3 +23,10 @@
         </div>
  	</div>
  </div>
+ <script>
+  function fun_Ausentismo_AbrirListadoDePersonal(){
+    $('#btnPersonal_Listado_Volver').cambiarDireccionamiento('Ausentismo', 'ausentismo/home.html');
+
+    personal_listado_Cargar();
+  }
+ </script>

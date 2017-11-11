@@ -6,7 +6,7 @@
         <div class="panel panel-primary panel-bordered">
             <div class="panel-heading">
                 <div class="panel-actions">
-                    <button class="btn btn-warning lnkAbrirModulo" Titulo="Listado de Personal" vinculo="personal/listado.html"><i class="icon fa-arrow-left"></i> Volver</button>
+                    <button id="btnPersonal_Volver" class="btn btn-warning lnkAbrirModulo" Titulo="Listado de Personal" vinculo="personal/listado.html" data-callback="personal_listado_Cargar"><i class="icon fa-arrow-left"></i> Volver</button>
                 </div>
             </div>
             <div class="panel-body">
@@ -126,6 +126,7 @@
 			        } else
 			        {
 			          Mensaje("!", 'Los datos han sido ingresados correctamente', 'success');
+			          $('#frmPersonal_Agregar')[0].reset();
 			        }
       			});
 
