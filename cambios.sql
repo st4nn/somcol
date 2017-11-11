@@ -269,18 +269,32 @@ ALTER TABLE `personal`
 /**************************************20171010*****************/
 
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `au_registro`
+--
+
 CREATE TABLE `au_registro` (
   `id` int(11) NOT NULL,
   `fechaCargue` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `idEmpresa` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
   `idPersonal` int(11) NOT NULL,
+  `Edad` int(11) NOT NULL,
   `TipoEvento` varchar(45) NOT NULL,
   `IncapacidadTipo` varchar(45) NOT NULL,
   `FechaInicial` date NOT NULL,
   `FechaFinal` date NOT NULL,
   `CodigoDiagnostico` varchar(25) NOT NULL,
-  `Observaciones` longtext NOT NULL
+  `Observaciones` longtext NOT NULL,
+  `RangoDeEdad` varchar(16) NOT NULL,
+  `DiasDeIncapacidad` int(11) NOT NULL,
+  `Dia` int(11) NOT NULL,
+  `Mes` int(11) NOT NULL,
+  `Anio` int(11) NOT NULL,
+  `DiaDeLaSemana` varchar(10) NOT NULL,
+  `Trimestre` varchar(4) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -301,4 +315,4 @@ ALTER TABLE `au_registro`
 -- AUTO_INCREMENT de la tabla `au_registro`
 --
 ALTER TABLE `au_registro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;COMMIT;

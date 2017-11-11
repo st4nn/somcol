@@ -237,6 +237,7 @@
 	    		datos = $.parseJSON(datos);
       			datos.idEmpresa = $('#txtInicio_idEmpresa').val();
       			datos.idPersonal = $('#txtAusentismo_Registrar_id').val();
+      			datos.Edad = $('#txtAusentismo_Registrar_Edad').val();
 
       			if (datos.idPersonal == ''){
       				Mensaje('Error', 'Debes ingresar una Cedula válida y registrada', 'danger');
@@ -251,7 +252,6 @@
 				        {
 				          Mensaje("!", 'Los datos han sido ingresados correctamente', 'success');
 				          $('#frmAusentismo_Registrar')[0].reset();
-				          $('#txtAusentismo_Registrar_id').val('NULL');
 				        }
 	      			});
       			}

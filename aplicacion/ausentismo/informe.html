@@ -1,0 +1,150 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<h3 class="page-title">Registro de Ausentismo Laboral</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+        <div class="panel panel-primary panel-bordered">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button class="btn btn-primary lnkAbrirModulo" Titulo="Registrar Ausentismo" vinculo="ausentismo/registrar.html"><i class="icon fa-user-plus"></i> Registrar Ausentismo</button>
+
+                    <button class="btn btn-warning lnkAbrirModulo" Titulo="Ausentismo" vinculo="ausentismo/home.html"><i class="icon fa-arrow-left"></i> Volver</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <form id="frmAusentismo_Listado">
+                        <div class="col-sm-6">
+                            <label for="txtAusentismo_Listado_Desde" class="control-label">Desde</label>
+                            <div class="form-group">
+                                <input class="form-control datepicker guardar" id="txtAusentismo_Listado_Desde">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="txtAusentismo_Listado_Hasta" class="control-label">Hasta</label>
+                            <div class="form-group">
+                              <div class="input-group">
+                                <input id="txtAusentismo_Listado_Hasta" class="form-control datepicker guardar">
+                                <span class="input-group-btn">
+                                  <button type="submit" class="btn btn-primary">
+                                    <i class="icon wb-refresh" aria-hidden="true"></i>
+                                  </button>
+                                </span>
+                              </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class='table-responsive'>
+                    <table id="tblAusentismo_Listado" class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>No.</th>
+                                <th>Cedula</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Fecha de Nacimiento</th>
+                                <th>Edad</th>
+                                <th>Rango de edad</th>
+                                <th>Género</th>
+                                <th>Cargo</th>
+                                <th>Grupo</th>
+                                <th>Regional</th>
+                                <th>Tipo de Evento</th>
+                                <th>Incapacidad</th>
+                                <th>Fecha Inicial</th>
+                                <th>Fecha Final</th>
+                                <th># días de incapacidad</th>
+                                <th>Día</th>
+                                <th>Mes</th>
+                                <th>Año</th>
+                                <th>Día de la semana</th>
+                                <th>Trimestre</th>
+                                <th>Código Diagnostico</th>
+                                <th>Descripción</th>
+                                <th>Sistema</th>
+                                <th>Sub-Sistema</th>
+                                <th>Nombre de entidad EPS</th>
+                                <th>Observaciones</th>
+                            </tr>   
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+<script>
+    $(document).ready(function()
+    {
+        $("#frmAusentismo_Listado .datepicker").datepicker({
+            clearBtn: true,
+            language: "es",
+            orientation: "top auto",
+            daysOfWeekHighlighted: "0",
+            autoclose: true,
+            todayHighlight: true
+        });
+        
+        var tFecha = obtenerFecha();
+        $('#txtAusentismo_Listado_Desde').val(tFecha.substring(0, 8) + '01');
+        $('#txtAusentismo_Listado_Hasta').val(tFecha.substring(0, 10));
+
+        $('#frmAusentismo_Listado').on('submit', function(event){
+            event.preventDefault();
+            var datos = {
+                idUsuario : Usuario.id,
+                idEmpresa : $('#txtInicio_idEmpresa').val(),
+                Desde : $('#txtAusentismo_Listado_Desde').val(),
+                Hasta : $('#txtAusentismo_Listado_Hasta').val()
+            };
+            $.post('../server/php/proyecto/ausentismo_cargarAusentismo.php', datos, function(data, textStatus, xhr) {
+                var tds = '';
+
+                $.each(data, function(index, val) {
+                    tds += '<tr>';
+                        tds += '<td></td>';
+                        tds += '<td>' + val.id + '</td>';
+                        tds += '<td>' + val.Cedula + '</td>';
+                        tds += '<td>' + val.Nombres + '</td>';
+                        tds += '<td>' + val.Apellidos + '</td>';
+                        tds += '<td>' + val.FechaNacimiento + '</td>';
+                        tds += '<td>' + val.Edad + '</td>';
+                        tds += '<td>' + val.RangoDeEdad + '</td>';
+                        tds += '<td>' + val.Genero + '</td>';
+                        tds += '<td>' + val.Cargo + '</td>';
+                        tds += '<td>' + val.Grupo + '</td>';
+                        tds += '<td>' + val.Regional + '</td>';
+                        tds += '<td>' + val.TipoEvento + '</td>';
+                        tds += '<td>' + val.IncapacidadTipo + '</td>';
+                        tds += '<td>' + val.FechaInicial + '</td>';
+                        tds += '<td>' + val.FechaFinal + '</td>';
+                        tds += '<td>' + val.DiasDeIncapacidad + '</td>';
+                        tds += '<td>' + val.Dia + '</td>';
+                        tds += '<td>' + val.Mes + '</td>';
+                        tds += '<td>' + val.Anio + '</td>';
+                        tds += '<td>' + val.DiaDeLaSemana + '</td>';
+                        tds += '<td>' + val.Trimestre + '</td>';
+                        tds += '<td>' + val.CodigoDiagnostico + '</td>';
+                        tds += '<td>' + val.Descripcion + '</td>';
+                        tds += '<td>' + val.Sistema + '</td>';
+                        tds += '<td>' + val.Subsistema + '</td>';
+                        tds += '<td>' + val.NombreEPS + '</td>';
+                        tds += '<td>' + val.Observaciones + '</td>';
+                    tds += '</tr>';
+                });
+
+                $('#tblAusentismo_Listado').crearDataTable(tds, function(){}, false);
+                
+            }, 'json');
+        });
+
+    });
+
+    function fun_Ausentismo_CargarDatos(){
+        $('#frmAusentismo_Listado').trigger('submit');
+    }
+</script>
