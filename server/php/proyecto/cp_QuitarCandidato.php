@@ -2,11 +2,11 @@
    include("../conectar.php"); 
    $link = Conectar();
 
-   $idCantidato = addslashes($_POST['idCandidato']);
+   $idCandidato = addslashes($_POST['idCandidato']);
    $Usuario = addslashes($_POST['Usuario']);
 
 
-      $sql = "DELETE FROM cp_AEC_Candidatos WHERE idCandidato = '$idCandidato';";
+      $sql = "DELETE FROM cp_AEC_Candidatos WHERE id = '$idCandidato';";
 
       $link->query(utf8_decode($sql));
 

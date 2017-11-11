@@ -4,7 +4,24 @@
 		<h3 class="page-title"></h3>
 	</div>
  	<div class="page-content container-fluid">
-        <div class="row">
+        <div class="row hidden-xs">
+            <div class="form-group col-sm-12">
+                <label class="col-lg-12 col-md-4 control-label">Tipo
+                </label>
+                <div class="col-lg-12 col-md-8">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon fa-at" aria-hidden="true"></i>
+                        </span>
+                        <select class="form-control guardar" id="txtNotificacion_Tipo" required>
+                            <option value="1">Elección del Trabajador</option>
+                            <option value="1">Elección del Empleador</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="cntNotificiacion_1" class="row cntNotificiacion">
             <div class="col-sm-8 col-md-7">
                 <img src="" height="100px" id="imgCopasst_NotificacionTR_Logo">
                 <h1 class="text-center" id="lblCopasst_NotificacionTR_Empresa"></h1>
@@ -36,6 +53,39 @@
             	</div>
         	</div>
         </div>
+
+        <div id="cntNotificiacion_2" class="row hide cntNotificiacion">
+            <div class="col-sm-8 col-md-7">
+                <img src="" height="100px" id="imgCopasst_NotificacionEM_Logo">
+                <h1 class="text-center" id="lblCopasst_NotificacionEM_Empresa"></h1>
+                <h3 class="text-center" id="lblCopasst_NotificacionEM_Empresa_Direccion"></h3>
+                <h4 class="text-center" id="lblCopasst_NotificacionEM_Empresa_Telefono"></h4>
+                <br>
+                <h4 class="text-center">MEMORANDO</h4>
+                <p><strong>DE: </strong> JURADO DE VOTACIÓN COPPASST</p>
+                <p><strong class="">PARA: </strong> <select id="txtCopasst_NotificacionEM_Candidatos" class="form-control"></select></p>
+                <p><strong>Asunto:</strong> CONFORMACIÓN DEL COMITÉ PARITARIO DE SALUD OCUPACIONAL       (COPASO) Y COMITÉ DE CONVIVNCIA LABORAL (CCL)</p>
+                <p><strong>Fecha:</strong> <input id="txtCopasst_NotificacionEM_Fecha" type="text" class="form-control datepicker"></p>
+                <br>
+                <p>Cordial Saludo</p>
+                <p>Me permito comunicarle que la Gerencia del Consorcio CEISMA decidió nombrarlo como Representante por parte del empleador del Comité Paritario de Seguridad y Salud en el Trabajo (COPASST) del consorcio.</p>
+                <p>Le agradecemos comunicar por este mismo medio su aceptación a dicho nombramiento</p>
+                <strong>Cordialmente</strong><br><br>
+                <strong><span id="lblCopasst_NotificacionEM_RepresentanteLegal"></span><br>Representante Legal</strong>
+
+            </div>
+            <div class="col-sm-4 col-md-5 hidden-xs">
+                <div class="panel panel-bordered panel-primary">
+                    <div class="panel-body">
+                        <div>
+                            <h4></h4>
+                            <div id="cntCopasst_NotificacionEM_Archivos"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
             
 	</div>
 </div>
@@ -53,10 +103,17 @@
             autoclose: true,
             todayHighlight: true
         });
+
+        $('#txtNotificacion_Tipo').on('change', function(){
+           $('.cntNotificiacion').hide();
+           var valor = $(this).val();
+           $('#cntNotificiacion_' + valor).slideDown();
+        });
     });
 
-    function copasst_NotificacionTR_cargarArchivos()
-    {
+    function copasst_NotificacionTR_cargarArchivos() {
+        alert('algo');
+        console.log(Empresa);
         $("#cntCopasst_NotificacionTR_Archivos").cargarArchivos({Prefijo : $("#txtInicio_idEmpresa").val(), Proceso : 'Copast NotificacionTR'});
 
         $('#lblCopasst_NotificacionTR_Empresa').text(Empresa.Nombre);
@@ -74,6 +131,7 @@
                      tds += '<option value="' + val.id + '">' + val.Nombre + '</option>';
                 });
                 $('#txtCopasst_NotificacionTR_Candidatos').append(tds);
+                $('#txtCopasst_NotificacionEM_Candidatos').append(tds);
             }
         }, 'json');
 

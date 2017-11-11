@@ -205,6 +205,8 @@ function Copasst_CargarDatos()
 
   $('#tblCopasst_AEC_Candidatos tbody tr').remove();
   $('#tblCopasst_AEC_Candidatos_Empleador tbody tr').remove();
+  $('#tblCopasst_AEC_Candidatos_Jurados tbody tr').remove();
+  
 
   var datos = {
     Usuario : Usuario.id,

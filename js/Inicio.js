@@ -19,26 +19,27 @@ function fun_Inicio()
       localStorage.setItem("mj_somcol", JSON.stringify(Usuario));    
       $(".lblUsuario").text(Usuario.Nombre);
 
+      $.post('../server/php/proyecto/Empresas_Cargar.php', {Usuario: Usuario.id, Parametro : ''}, function(data, textStatus, xhr) 
+      {
+        Empresa = data[0];
+        $.each(data, function(index, val) 
+        {
+            $(".imgLogoEmpresa").attr("src", '../server/php/' + val.Ruta + '/' + val.Archivo);
+            $(".lblEmpresa_Nombre").text(val.Nombre);
+            
+            $(".lblEmpresa_Direccion").text(val.Direccion);
+            $(".lblEmpresa_Telefono").text(val.Telefono);
+            $(".lblEmpresa_Responsable").text(val.Correo);
+
+            $("#txtInicio_idEmpresa").val(val.id);
+
+            $('.site-navbar .navbar-container').css('background-color' , '#' + val.colorPrimario);
+            $('.site-menubar').css('background' , '#' + val.colorSecundario);
+        });
+      }, 'json');
+      
       if (Usuario.idPerfil > 1)
       {
-        $.post('../server/php/proyecto/Empresas_Cargar.php', {Usuario: Usuario.id, Parametro : ''}, function(data, textStatus, xhr) 
-        {
-          Empresa = data[0];
-          $.each(data, function(index, val) 
-          {
-              $(".imgLogoEmpresa").attr("src", '../server/php/' + val.Ruta + '/' + val.Archivo);
-              $(".lblEmpresa_Nombre").text(val.Nombre);
-              
-              $(".lblEmpresa_Direccion").text(val.Direccion);
-              $(".lblEmpresa_Telefono").text(val.Telefono);
-              $(".lblEmpresa_Responsable").text(val.Correo);
-
-              $("#txtInicio_idEmpresa").val(val.id);
-
-              $('.site-navbar .navbar-container').css('background-color' , '#' + val.colorPrimario);
-              $('.site-menubar').css('background' , '#' + val.colorSecundario);
-          });
-        }, 'json');
       }
     }
   }, 'json');
