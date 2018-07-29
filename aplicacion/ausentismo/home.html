@@ -1,10 +1,17 @@
 <!-- Page -->
-<div class="page" style="min-height: 90vh; background: url('../assets/images/Ausentismo.png') no-repeat; background-size: 100%;">
-	<div class="page-header">
-		<h3 class="page-title"></h3>
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header bg-white">
+		<h3 class="page-title">Ausentismo</h3>
+		<div class="page-header-actions">
+	      <button type="button" class="btn btn-sm btn-round lnkAbrirModulo" Titulo="Inicio" vinculo="Inicio.html">
+	        <i class="icon wb-home" aria-hidden="true"></i>
+	        <span class="text hidden-xs">Inicio</span>
+	      </button>
+	    </div>
 	</div>
- 	<div class="page-content container-fluid">
- 		<div class="col-sm-12">
+ 	<div class="page-content container-fluid bg-white">
+      <div class="col-sm-6">
+ 		    <div class="col-sm-12" style="margin-top:20%;">
           <div class="bg-orange-400 fButton margin-5 lnkAbrirModulo" Titulo="Listado de Personal" vinculo="personal/listado.html" data-callback="fun_Ausentismo_AbrirListadoDePersonal">
               <i class="icon fa-group bg-orange-800 "></i>Listado de Personal
           </div>
@@ -17,10 +24,22 @@
         </div>
 
         <div class="col-sm-12">
-          <div class="bg-light-green-400 fButton margin-5 lnkAbrirModulo" Titulo="Registros de Ausentismo Laboral" vinculo="ausentismo/informe.html" data-callback="fun_Ausentismo_CargarDatos">
+          <div class="bg-light-green-400 fButton margin-5 lnkAbrirModulo" Titulo="Registros de Ausentismo Laboral" vinculo="ausentismo/graficas.html" data-callback="funAusentismo_CargarTiposDeEvento">
               <i class="icon fa-file-text-o bg-light-green-800 "></i>Informes
           </div>
         </div>
+
+        <div class="col-sm-12 hide">
+          <div class="bg-purple-400 fButton margin-5 lnkAbrirModulo" Titulo="Gráficas de Ausentismo Laboral" vinculo="ausentismo/informe.html" data-callback="fun_Ausentismo_CargarDatos">
+              <i class="icon fa-file-text-o bg-purple-800 "></i>Gráficas
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div id="canvas-holder" style="width:100%; margin-top: 10%;">
+            <canvas id="cntAusentismo_ChartHome"></canvas>
+        </div>
+      </div>
  	</div>
  </div>
  <script>
@@ -29,4 +48,68 @@
 
     personal_listado_Cargar();
   }
+
+  function ausentismo_AbrirHome(){
+    $.post('../server/php/proyecto/ausentismo_cargarGrafica_Home.php', {idUsuario : Usuario.id, idEmpresa: Usuario.idEmpresa}, function(data, textStatus, xhr) {
+      
+      const colors = [
+        'rgba(255, 99, 132, 0.5)',
+        "rgba(255, 159, 64, 0.5)",
+        "rgba(255, 205, 86, 0.5)",
+        "rgba(75, 192, 192, 0.5)",
+        "rgba(54, 162, 235, 0.5)",
+        'rgba(192, 99, 132, 0.5)',
+        "rgba(159, 159, 64, 0.5)",
+        "rgba(64, 205, 86, 0.5)"
+      ];
+
+      var _data = [];
+      var _colors = [];
+      var _labels = [];
+
+      $.each(data, function(index, val) {
+         _colors.push(colors[index]);
+         _labels.push(val.Etiqueta);
+         _data.push(val.Cantidad);
+      });
+      var config = {
+          data: {
+              datasets: [{
+                  data: _data,
+                  backgroundColor: _colors,
+                  label: '' // for legend
+              }],
+              labels: _labels
+          },
+          options: {
+              responsive: true,
+              legend: {
+                  position: 'right',
+              },
+              title: {
+                  display: true,
+                  text: ''
+              },
+              scale: {
+                ticks: {
+                  beginAtZero: true
+                },
+                reverse: false
+              },
+              animation: {
+                  animateRotate: false,
+                  animateScale: true
+              }
+          }
+      };
+
+
+      var ctx = document.getElementById("cntAusentismo_ChartHome");
+      window.myPolarArea = Chart.PolarArea(ctx, config);
+    }, 'json');
+  }
  </script>
+
+    <script>
+    
+  </script>

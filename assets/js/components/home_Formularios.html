@@ -1,0 +1,38 @@
+<div class="content animate-panel">
+    <div class="row">
+        <div class="col-lg-12 text-center m-t-md">
+            <h2>
+                Formularios
+            </h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="hpanel">
+                <div class="panel-heading hbuilt">
+                    <div class="pull-right">
+                        <a id="btnFormularios_CrearNuevo" class="btn btn-default btn-xs">Crear Nuevo Formulario</a>
+                    </div>
+                    Formularios Creados
+                </div>
+                <div class="panel-body">
+
+                </div>
+                <div class="panel-footer">
+                    Formularios Disponibles
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function funFormularios_Home(){
+        $('#btnFormularios_CrearNuevo').on("click", function(event){
+            event.preventDefault();
+            cargarModulo('formularios/crear.html', 'Crear Formulario');
+        });
+    }
+
+    funFormularios_Home();
+</script>

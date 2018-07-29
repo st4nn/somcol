@@ -3,6 +3,7 @@
   include("datosUsuario.php"); 
    $link = Conectar();
    $idUsuario = addslashes($_POST['Usuario']);
+   $Anio = addslashes($_POST['Anio']);
    $idEmpresa = addslashes($_POST['Empresa']);
    
    $Usuario = datosUsuario($idUsuario);
@@ -13,7 +14,10 @@
       $eUsuario = " AND cp_AEC_Candidatos.idEmpresa = '" . $Usuario['idEmpresa'] . "'";
    }
 
-   $Anio = date('Y');
+   $tipo = '';
+   if (array_key_exists('Tipo', $_POST)){
+      $tipo = " AND cp_AEC_Candidatos.Tipo = '". addslashes($_POST['Tipo']) . "' ";
+   }
 
    $sql = "SELECT
             cp_AEC_Candidatos.*
@@ -21,7 +25,7 @@
             cp_AEC_Candidatos
          WHERE
             cp_AEC_Candidatos.idEmpresa = '$idEmpresa'
-            AND cp_AEC_Candidatos.Anio = '$Anio' $eUsuario;";
+            AND cp_AEC_Candidatos.Anio = '$Anio' $tipo $eUsuario;";
             
    $result = $link->query(utf8_decode($sql));
    $idx = 0;

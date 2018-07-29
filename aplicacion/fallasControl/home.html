@@ -1,0 +1,38 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh; background: url('../assets/images/mistake-876597_640.png') no-repeat; background-size: 100%;">
+	<div class="page-header">
+		<h3 class="page-title"></h3>
+	</div>
+ 	<div class="page-content container-fluid">
+ 		<div class="col-sm-12">
+          <div class="bg-orange-400 fButton margin-5 lnkAbrirModulo" Titulo="Archivos" vinculo="fallasControl/archivos.html" data-callback="fun_fallasControl_CargarArchivos">
+              <i class="icon fa-file-archive-o bg-orange-800 "></i>Archivos
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="bg-blue-400 fButton margin-5 lnkAbrirModulo" Titulo="Base de Datos" vinculo="fallasControl/bd_ficha.html">
+              <i class="icon fa-database bg-blue-800 "></i>Base de Datos
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="bg-light-green-400 fButton margin-5 lnkAbrirModulo" Titulo="Registros de Ausentismo Laboral" vinculo="ausentismo/informe.html" data-callback="fun_Ausentismo_CargarDatos">
+              <i class="icon fa-tasks bg-light-green-800 "></i>Bd Seguimientos
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="bg-purple-400 fButton margin-5 lnkAbrirModulo" Titulo="Gráficas de Ausentismo Laboral" vinculo="ausentismo/graficas.html" data-callback="funAusentismo_CargarTiposDeEvento">
+              <i class="icon fa-file-text-o bg-purple-800 "></i>Informes
+          </div>
+        </div>
+ 	</div>
+ </div>
+ <script>
+  function fun_Ausentismo_AbrirListadoDePersonal(){
+    $('#btnPersonal_Listado_Volver').cambiarDireccionamiento('Ausentismo', 'ausentismo/home.html');
+
+    personal_listado_Cargar();
+  }
+ </script>

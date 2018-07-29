@@ -73,9 +73,8 @@ body
 
 #cntLogin
 {
-  background: rgba(255, 255, 255, 0.85);
-}
-#cntTitulo
-{
-  background: rgba(33, 150, 243, 0.7);
+  background: rgba(255, 255, 255, 0.7);
+  position:absolute;
+  top:1em;
+  right:1em;
 }

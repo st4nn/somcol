@@ -14,7 +14,7 @@
   background-color: #000;
 }
 .site-navbar .navbar-header .navbar-brand {
-  font-family: "Roboto", sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   color: #526069;
   cursor: pointer;
 }
@@ -25,9 +25,9 @@
 }
 .site-navbar .navbar-container {
   background-color: #37474F;/*Barra al lado del brand*/
-  border-bottom-style: solid;
+  /*border-bottom-style: solid;
   border-bottom-width: 6px;
-  border-bottom-color: #607D8B;
+  border-bottom-color: #607D8B;*/
 }
 @media (min-width: 768px) {
   .site-navbar .navbar-container {
@@ -42,7 +42,7 @@ body {
   height: 100%;
 }
 body {
-  padding-top: 66px;
+  padding-top: 53px;
 }
 .site-menubar {
   position: fixed;
@@ -51,7 +51,7 @@ body {
   height: 100%;
   height: -webkit-calc(100% - 66px);
   height:         calc(100% - 66px);
-  font-family: "Roboto", sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   color: rgba(55, 71, 79, .9);
   background: #76838F;/*Fondo del Menu*/
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
@@ -735,7 +735,7 @@ body.site-gridmenu-active {
 .page-title {
   margin-top: 0;
   margin-bottom: 0;
-  font-size: 26px;
+  font-size: 16px;
 }
 .page-title > .icon {
   margin-right: .3em;
@@ -745,7 +745,7 @@ body.site-gridmenu-active {
 }
 .page-header {
   position: relative;
-  padding: 30px 30px;
+  padding: 12px 30px;
   margin-top: 0;
   margin-bottom: 0;
   background: transparent;
@@ -9893,9 +9893,166 @@ h4.example-title {
 
 
 
-.buscarGoogle
-{
+.buscarGoogle{
   margin: auto;
   margin-top: 20vh;
   width: 40%;
+}
+
+.navbar-container{
+  height:2.5em !important;
+  margin-left:0 !important;
+}
+.cntLogo{
+position:absolute;
+right: 4em;
+padding:1em;
+}
+.site-navbar{
+  min-height:6.7em !important;
+  height:6.7em;
+}
+
+.cntEmpresa{
+  position:absolute;
+  margin-left:2em;
+  max-height:50px;
+  padding-top: 3px;
+}
+
+.cntEmpresa img{
+  margin:2px
+}
+.cntUbicacionModulo{
+  text-align:center;
+  color:white;
+  width:100%;
+  padding:3px;
+  font-size:13px;
+  margin-top:4em;
+}
+#contenedorDeModulos{
+  margin-top:3em;
+}
+
+
+.cntUbicacionModulo{
+  display:none;
+}
+
+.page-header{
+  background: #8e9eab; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #8e9eab, #eef2f3); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #8e9eab, #eef2f3);
+}
+.page-title{
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.page{
+  background: #ece9e6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #ece9e6, #ffffff); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #ece9e6, #ffffff);
+  background-size: 100%;
+}
+
+#canvas-holder{
+  background:white;
+  height: 60vh;
+  border-left:solid 2px;
+}
+
+
+.fButton{
+    filter:alpha(opacity=80);
+    -moz-opacity:.80;
+    opacity:.8;
+    font-size: 20px;
+    color: white;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+0,2989d8+50,207cca+51,7db9e8+100;Blue+Gloss+Default */
+    background: rgb(30,87,153); /* Old browsers */ /* FF3.6-15 */ /* Chrome10-25,Safari5.1-6 */
+background: -webkit-linear-gradient(rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%, rgba(32,124,202,1) 51%, rgba(125,185,232,1) 100%);
+ background: -o-linear-gradient(rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%, rgba(32,124,202,1) 51%, rgba(125,185,232,1) 100%);
+  background: linear-gradient(rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%, rgba(32,124,202,1) 51%, rgba(125,185,232,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
+}
+  
+.fButton:hover{
+  cursor: pointer;
+  opacity: 100;
+  color: #E4EAEC;
+}
+.fButton i{
+  padding : 25px;
+  margin-right : 10px;
+  margin-left : -20px;
+  font-size: 35px;
+  min-width: 100px;
+  text-align: center;
+  
+}
+
+
+.cntHomeButtons{
+  bottom: 3em;
+  position: absolute;
+  text-align: right;
+  width: 97%;
+}
+.cntHomeButtons > div{
+  display: inline-block;
+}
+
+.cntHomeButtons .fButton{
+  text-align: center;
+  min-width: 100px;
+  width: 100%;
+}
+
+.cntHomeButtons .fButton > h4{
+  border: solid: 3px red !important;
+  color: white;
+  font-size: 13px;
+  margin: 1em;
+  margin-right: 1em;
+  padding: 0 0 0.5em 0;
+  min-height: 3em;
+  width: calc(100% - 2em);
+  
+}
+
+.cntHomeButtons .fButton i{
+  background: none;
+  display: block;
+  padding: 1em;
+ 
+  text-align: center;
+  margin: auto;
+  width: 100%;
+  min-width: 100px;
+}
+
+@media (max-width: 767px){
+  .cntHomeButtons{
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+    position: inline;
+    width: calc(100% - 3em);
+  }
+  
+}
+
+.navbar-brand-logo{
+  opacity: 0.2;
+}
+
+
+#imgCopasst_NotificacionTR_Logo{
+  display: none;
+}
+
+.cntCopasst_Anio{
+  margin: 1em;
+  float: right;
 }

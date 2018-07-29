@@ -7,6 +7,11 @@ function fun_Inicio()
     $(this).inicio_CargarMenu();
   });
 
+  $('#lblInicio').on('click', function(event){
+    event.preventDefault();
+    cargarModulo('Inicio.html', 'AUTOGESTIÓN SGS-ST');
+  });
+
 
   $.post('../server/php/proyecto/Usuarios_Cargar.php', {u: Usuario.id, k : Usuario.hash}, function(data, textStatus, xhr) 
   {
@@ -34,7 +39,7 @@ function fun_Inicio()
             $("#txtInicio_idEmpresa").val(val.id);
 
             $('.site-navbar .navbar-container').css('background-color' , '#' + val.colorPrimario);
-            $('.site-menubar').css('background' , '#' + val.colorSecundario);
+            $('.cntUbicacionModulo').css('background' , '#' + val.colorSecundario);
         });
       }, 'json');
       

@@ -7,7 +7,7 @@ $(document).ready(function()
         daysOfWeekHighlighted: "0",
         autoclose: true,
         todayHighlight: true
-    });; 
+    });
 });
 
 function cpActas_CargarCompromisos()
@@ -17,7 +17,7 @@ function cpActas_CargarCompromisos()
   var datos = {
     Usuario : Usuario.id,
     idEmpresa : $('#txtInicio_idEmpresa').val(),
-    Anio : '2017'
+    Anio : $('#txtCopasst_Anio').val()
   };
 
   $.post('../server/php/proyecto/cp_Actas_CargarCompromisos.php', datos, function(data, textStatus, xhr) 

@@ -4,6 +4,13 @@
 		<h3 class="page-title">Tarjeton</h3>
 	</div>
  	<div class="page-content container-fluid">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button class="btn btn-warning lnkAbrirModulo" Titulo="COPASST" vinculo="copasst/home.html"><i class="icon fa-arrow-left"></i> Volver</button>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <h3 class="text-center">TARJETON ELECCION INTEGRANTES COPASST</h4>
             <h4 class="text-center">COMITÉ PARITARIO DE SEGURIDAD Y SALUD EN EL TRABAJO </h4>
@@ -21,6 +28,18 @@
                         <button class="btn btn-danger btn-block" id="bntCopasstTarjetos_CargadorImagenes_Cancelar">Cancelar</button>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="txtCopasst_Tarjeton_LinkVotacion" class="control-label">Link de Votación</label>
+                <a class="form-control" target='_blank' id="txtCopasst_Tarjeton_LinkVotacion"></a>
+            </div>
+
+            <div class="form-group">
+                <label for="txtCopasst_Tarjeton_LinkResultados" class="control-label">Link de resultados</label>
+                <a class="form-control" target='_blank' id="txtCopasst_Tarjeton_LinkResultados"></a>
             </div>
         </div>
             
@@ -69,10 +88,30 @@
         }); 
     });
 
-    function funCopasst_Tarjeton_CargarCandidatos()
-    {
-        $.post('../server/php/proyecto/cp_CargarCandidatos.php', {Usuario : Usuario.id, Empresa : $('#txtInicio_idEmpresa').val()}, function(data, textStatus, xhr) 
-        {
+    function funCopasst_Tarjeton_CargarCandidatos(){
+        $('#txtCopasst_Tarjeton_LinkVotacion').text('');
+        $('#txtCopasst_Tarjeton_LinkResultados').text('');
+
+        $('#txtCopasst_Tarjeton_LinkVotacion').attr('href', '#');
+        $('#txtCopasst_Tarjeton_LinkResultados').attr('href', '#');
+
+        $.post('../server/php/proyecto/cp_cargarLink.php', {
+            Anio : $('#txtCopasst_Anio').val(),
+            idEmpresa : Usuario.idEmpresa
+        }, function(data, textStatus, xhr) {
+            $('#txtCopasst_Tarjeton_LinkVotacion').text('https://somcol.com.co/app/votacion/?' + data);
+            $('#txtCopasst_Tarjeton_LinkResultados').text('https://somcol.com.co/app/votacion/resultados.html?' + data);
+
+            $('#txtCopasst_Tarjeton_LinkVotacion').attr('href', 'https://somcol.com.co/app/votacion/?' + data);
+            $('#txtCopasst_Tarjeton_LinkResultados').attr('href', 'https://somcol.com.co/app/votacion/resultados.html?' + data);
+        });
+
+        $.post('../server/php/proyecto/cp_CargarCandidatos.php', {
+            Usuario : Usuario.id, 
+            Empresa : $('#txtInicio_idEmpresa').val(),
+            Anio : $ ('#txtCopasst_Anio').val(),
+            Tipo : 'Trabajador'
+        }, function(data, textStatus, xhr) {
             $('#cntCopasstTarjeton_Candidatos div').remove();
             if (data != 0)
             {

@@ -1,43 +1,61 @@
 <!-- Page -->
-<div class="page" style="min-height: 90vh; background: url('../assets/images/Copasst.png') no-repeat; background-size: 100%;">
+<div class="page" style="min-height: 90vh;">
+<!--
+ background: url('../assets/images/Copasst.png') no-repeat; background-size: 100%;">
+-->
 	<div class="page-header">
-		<h3 class="page-title"></h3>
+		<h3 class="page-title">Copasst</h3>
+    <div class="page-header-actions">
+      <button type="button" class="btn btn-sm btn-round lnkAbrirModulo" Titulo="Inicio" vinculo="Inicio.html">
+        <i class="icon wb-home" aria-hidden="true"></i>
+        <span class="text hidden-xs">Inicio</span>
+      </button>
+    </div>
 	</div>
  	<div class="page-content container-fluid">
+    <div class="row">
+      <div class="col-sm-4 cntCopasst_Anio">
+        <input id="txtCopasst_Anio" type="number" class="form-control">
+      </div>
+    </div>
  		<div class="col-sm-12 col-md-6">
-          <div class="bg-orange-400 fButton margin-5 lnkAbrirModulo" Titulo="Acta de Elección y Conformación"  data-callback="Copasst_CargarDatos" vinculo="copasst/ActaDeEleccionYConformacion.html">
-              <i class="icon fa-group bg-orange-800"></i>Acta de Elección y Conformación
-          </div>
-        </div>
+      <div class="bg-orange-400 fButton margin-5 lnkAbrirModulo" Titulo="Acta de Elección y Conformación"  data-callback="Copasst_CargarDatos" vinculo="copasst/ActaDeEleccionYConformacion.html">
+          <i class="icon fa-group bg-orange-800"></i>Acta de Elección y Conformación
+      </div>
+    </div>
 
-        <div class="col-sm-12 col-md-6">
-          <div vinculo="copasst/Tarjeton.html" class="bg-blue-400 fButton margin-5 lnkAbrirModulo" Titulo="Tarjetón"  data-callback="funCopasst_Tarjeton_CargarCandidatos">
-              <i class="icon fa-picture-o bg-blue-800 "></i>Tarjeton
-          </div>
-        </div>
+    <div class="col-sm-12 col-md-6">
+      <div vinculo="copasst/Tarjeton.html" class="bg-blue-400 fButton margin-5 lnkAbrirModulo" Titulo="Tarjetón"  data-callback="funCopasst_Tarjeton_CargarCandidatos">
+          <i class="icon fa-picture-o bg-blue-800 "></i>Tarjeton
+      </div>
+    </div>
 
-        <div class="col-sm-12 col-md-6">
-          <div vinculo="copasst/notificacionTrabajador.html" class="bg-light-green-400 fButton margin-5 lnkAbrirModulo" Titulo="Notificación Elección"  data-callback="copasst_NotificacionTR_cargarArchivos">
-              <i class="icon fa-bullhorn bg-light-green-800 "></i>Notificación Elección
-          </div>
-        </div>
+    <div class="col-sm-12 col-md-6">
+      <div vinculo="copasst/notificacionTrabajador.html" class="bg-light-green-400 fButton margin-5 lnkAbrirModulo" Titulo="Notificación Elección"  data-callback="copasst_NotificacionTR_cargarArchivos">
+          <i class="icon fa-bullhorn bg-light-green-800 "></i>Notificación Elección
+      </div>
+    </div>
 
-        <div class="col-sm-12 col-md-6">
-          <div vinculo="copasst/Funciones.html" class="bg-purple-400 fButton margin-5 lnkMenuBar_Item">
-              <i class="icon fa-check-square-o bg-purple-800"></i>Funciones COPASST
-          </div>
-        </div>
+    <div class="col-sm-12 col-md-6">
+      <div vinculo="copasst/Funciones.html" class="bg-purple-400 fButton margin-5 lnkMenuBar_Item">
+          <i class="icon fa-check-square-o bg-purple-800"></i>Funciones COPASST
+      </div>
+    </div>
 
-        <div class="col-sm-12 col-md-6">
-          <div vinculo="copasst/ActasDeReunion.html" class="bg-grey-400 fButton margin-5 lnkAbrirModulo" Titulo="Actas de Reunión" data-callback="copasst_ActasReunion_cargarActas">
-              <i class="icon fa-thumb-tack bg-grey-800 "></i>Actas de Reunión
-          </div>
-        </div>
+    <div class="col-sm-12 col-md-6">
+      <div vinculo="copasst/ActasDeReunion.html" class="bg-grey-400 fButton margin-5 lnkAbrirModulo" Titulo="Actas de Reunión" data-callback="copasst_ActasReunion_cargarActas">
+          <i class="icon fa-thumb-tack bg-grey-800 "></i>Actas de Reunión
+      </div>
+    </div>
 
-        <div class="col-sm-12 col-md-6">
-          <div vinculo="copasst/PlanDeAccion.html" class="bg-cyan-400 fButton margin-5 lnkAbrirModulo" data-callback="cpActas_CargarCompromisos" Titulo="Planes de Acción">
-              <i class="icon fa-calendar bg-cyan-800 "></i>Planes de Acción
-          </div>
-        </div>
+    <div class="col-sm-12 col-md-6">
+      <div vinculo="copasst/PlanDeAccion.html" class="bg-cyan-400 fButton margin-5 lnkAbrirModulo" data-callback="cpActas_CargarCompromisos" Titulo="Planes de Acción">
+          <i class="icon fa-calendar bg-cyan-800 "></i>Planes de Acción
+      </div>
+    </div>
  	</div>
  </div>
+ <script>
+   var tFecha = obtenerFecha().substring(0, 10); 
+    $("#txtCopasst_Anio").val(tFecha.substring(0, 4));  
+ </script>

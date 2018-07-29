@@ -117,8 +117,8 @@ $(document).ready(function()
 
 		$("#tblEmpresas_Listado").slideDown();
 
-		var l = Ladda.create(this);
-		l.start();
+		/*var l = Ladda.create(this);
+		l.start();*/
 
 		$("#tblEmpresas_Listado li").remove();
 

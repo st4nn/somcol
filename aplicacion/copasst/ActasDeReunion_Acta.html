@@ -1,11 +1,70 @@
+<style>
+    @media print{
+        button, form{
+           display: none !important;
+        }
+        #txtCopasst_ADR_Logo{
+            display: block !important;
+            position: fixed;
+            top : 10px;
+        }
+
+        select, input, textarea{
+            outline: none !important;
+            border: none !important;
+            -webkit-appearance: none !important;
+            -moz-appearance: none !important;
+            text-indent: 1px !important;
+            display: inline !important;
+        }
+
+  #frmCopasst_ADR{
+    display: block !important;
+  }
+  
+  #frmCopasst_ADR .form-group{
+    margin: 0;
+  }
+  #frmCopasst_ADR .control-label{
+    font-weight: 500;
+    width: 11em;
+  }
+  #frmCopasst_ADR .form-control{
+    width: calc(100% - 12em) !important;
+  }
+
+  #frmCopasst_ADR textarea.form-control{
+    width: 100% !important;
+  }
+  table {
+    background:none !important;
+    margin-top: -3em;
+  }
+
+  .panel{
+    margin-top: -3em;
+  }
+
+  #cntCopasst_ActasReunion_CajaArchivos{
+    display: none !important;
+  }
+}
+</style>
 <!-- Page -->
+
 <div class="page" style="min-height: 90vh;">
+    <img id="txtCopasst_ADR_Logo" class="hide" height="100px" src="" alt="">
 	<div class="page-header">
 		<h3 class="page-title">Acta de Reunión No <strong id="lblCopasst_ADR_Numero"></strong></h3>
 	</div>
  	<div class="page-content container-fluid">
         <form id="frmCopasst_ADR">
             <div class="panel panel-bordered">
+                <div class="panel-heading">
+                    <div class="panel-actions">
+                        <button class="btn btn-warning lnkAbrirModulo" type="button" Titulo="Actas de Reunión" vinculo="copasst/ActasDeReunion.html" data-callback="copasst_ActasReunion_cargarActas"><i class="icon fa-arrow-left"></i> Volver</button>
+                    </div>
+                </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-6">
@@ -144,7 +203,7 @@
         </div>
         <div class="panel panel-primary panel-bordered">
             <div class="panel-heading">
-                <h3 class="panel-title">Asistentes a la Reunión</h3>
+                <h3 class="panel-title">Compromisos de la Reunión</h3>
                 <div class="panel-actions">
                 </div>
             </div>
@@ -193,7 +252,7 @@
             </div>
         </div>  
 
-        <div id="cntCopasst_ActasReunion_CajaArchivos" class="panel panel-bordered panel-primary">
+        <div id="cntCopasst_ActasReunion_CajaArchivos" class="panel panel-bordered panel-primary xs-hidden">
             <div class="panel-body">
                 <div>
                     <h4></h4>
@@ -325,6 +384,7 @@
     function cpActas_CargarActa(idActa)
     {
         $('#frmCopasst_ADR')[0].reset();
+        $('#txtCopasst_ADR_Logo').attr('src', '../server/php/' + Empresa.Ruta + '/' + Empresa.Archivo);
         $('#cntCopasst_ActasReunion_CajaArchivos').hide();
         $("#modulo_copasst_ActasDeReunion_Acta_html .datepicker").val(obtenerFecha().substring(0, 10));
         $('#tblCopasst_ADR_Asistentes tbody tr').remove();
@@ -342,10 +402,8 @@
                 });
             }
 
-            if (data.a != 0)
-            {
-                $.each(data.a, function(index, val) 
-                {
+            if (data.a !== undefined && data.a !== 0){
+                $.each(data.a, function(index, val) {
                     cpActas_AgregarAsistente(val);
                 });
             }
@@ -359,8 +417,8 @@
             }
 
         }, 'json');
-        if (idActa != 0)
-        {
+        if (idActa != 0){
+            $('#cntCopasst_ActasReunion_Archivos div').remove();
             $('#cntCopasst_ActasReunion_CajaArchivos').show();
             $("#cntCopasst_ActasReunion_Archivos").iniciarObjArchivos({objPrefijo : $("#txtInicio_idEmpresa"), Proceso: "Copast ActasReunion", Usuario: Usuario.id});
 

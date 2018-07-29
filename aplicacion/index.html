@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js css-menubar" lang="en">
+<html class="no-js" lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -62,6 +62,7 @@
     <link rel="stylesheet" href="../assets/fonts/web-icons/web-icons.min.css">
     <link rel="stylesheet" href="../assets/fonts/brand-icons/brand-icons.min.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" href="../assets/fonts/weather-icons/weather-icons.css">
     <link rel="stylesheet" href="../assets/fonts/ionicons/ionicons.css">
     <link rel="stylesheet" href="../assets/fonts/font-awesome/font-awesome.css">
@@ -80,70 +81,16 @@
     Breakpoints();
     </script>
   </head>
-  <body class="dashboard site-menubar-fold" data-auto-menubar="false">
+  <body class="dashboard">
     <!--[if lt IE 8]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <nav class="site-navbar navbar navbar-default navbar-fixed-top navbar-mega" role="navigation">
-      <div class="navbar-header">
-        <button type="button" id="btnInicio_OcultarMenu" class="navbar-toggle hamburger hamburger-close navbar-toggle-left hided"
-        data-toggle="menubar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="hamburger-bar"></span>
-        </button>
-        <button type="button" class="navbar-toggle collapsed" data-target="#site-navbar-collapse"
-        data-toggle="collapse">
-        <i class="icon wb-more-horizontal" aria-hidden="true"></i>
-        </button>
-        <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
-          <img class="navbar-brand-logo" src="../assets/images/logo.png">
-          <span class="navbar-brand-text"> Somcol</span>
-        </div>
-      </div>
       <div class="navbar-container container-fluid">
         <!-- Navbar Collapse -->
-        <div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
-          <!-- Navbar Toolbar -->
-          <ul class="nav navbar-toolbar">
-            <li class="hidden-float" id="toggleMenubar">
-              <a data-toggle="menubar" href="#" role="button">
-                <i class="icon hamburger hamburger-arrow-left">
-                <span class="sr-only">Toggle menubar</span>
-                <span class="hamburger-bar"></span>
-                </i>
-              </a>
-            </li>
-            <li class="hidden-xs" id="toggleFullscreen">
-              <a>
-                <strong id="lblUbicacionModulo"></strong>
-              </a>
-              
-            </li>
-          </ul>
-          <!-- End Navbar Toolbar -->
-          <!-- Navbar Toolbar Right -->
           <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
-            <li>
-              <a class="label" id="lblNombreUsuario"></a>
-            </li>
-            <li class="dropdown dropdown-fw dropdown-mega">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
-              data-animation="fade" role="button"> <i class="icon glyphicon glyphicon-th" aria-hidden="true"></i></a>
-              <ul class="dropdown-menu" role="menu">
-                <li role="presentation">
-                  <div class="mega-content">
-                    <div class="example-buttons">
-                      <button class="btn btn-icon white bg-green-500 lnkMenuBar_Item" title="Inicio" vinculo="Inicio.html"><i class="icon fa-home"></i><span class="hide">Inicio</span></button>
-                      <button class="btn btn-icon white bg-teal-500 btnCargarMenu" data-sitio="copasst" title="COPASST"><i class="icon fa-users"></i></button>
-                      <button class="btn btn-icon white bg-red-500 btnCargarMenu" data-sitio="ausentismo" title="Ausentismo"><i class="icon fa-user-times"></i></button>
-                      <button class="btn btn-icon white bg-purple-500 btnCargarMenu" data-sitio="fallasDeControl" title="Fallas de Control"><i class="icon fa-sitemap"></i></button>
-                      <button class="btn btn-icon white bg-blue-500 btnCargarMenu" data-sitio="capacitaciones" title="Capacitaciones"><i class="icon fa-graduation-cap"></i></button>
-                      <button class="btn btn-icon white bg-orange-500 btnCargarMenu" data-sitio="indicadores" title="Indicadores"><i class="icon fa-bar-chart"></i></button>
-                      <button class="btn btn-icon white bg-brown-800 btnCargarMenu" data-sitio="administracion" title="Administración"><i class="icon fa-cogs"></i></button>
-                    </div>               
-                  </div>
-                </li>
-              </ul>
+            <li role="presentation lblHomeUsuario">
+              <small class="white">Bienvenido(a) </small><span class="lblUsuario white"></span>
             </li>
         
             <li class="dropdown" id="toggleUser">
@@ -155,9 +102,6 @@
                 </span>
               </a>
               <ul class="dropdown-menu" role="menu">
-                <li role="presentation">
-                  <span class="lblUsuario btn btn-info"></span>
-                </li>
                 <li class="divider" role="presentation"></li>
                 <li role="presentation">
                   <a id="lblCerrarSesion" href="#" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Cerrar Sesión</a>
@@ -165,75 +109,19 @@
               </ul>
             </li>
           </ul>
-          <!-- End Navbar Toolbar Right -->
-        </div>
         <!-- End Navbar Collapse -->
       </div>
+      <div class="cntEmpresa">
+        <img class="imgLogoEmpresa" height="48" width="auto" alt="">
+        <strong class="lblEmpresa_Nombre"></strong>
+      </div>
+      <div class="cntLogo">
+          <img class="navbar-brand-logo" src="../assets/images/somcol.png">
+      </div>
+      <div class="cntUbicacionModulo">
+        <span id="lblUbicacionModulo"></span>
+      </div>
     </nav>
-    <div class="site-menubar">
-      <div class="site-menubar-body">
-        <div>
-          <div id="contenedorMenu">
-            <div class="site-menu">
-              <h1 class="site-menu-item">
-                <!--
-                <a href="javascript:void(0)">
-                  <img class="col-xs-12 margin-bottom-25 imgLogoEmpresa" height="auto" src="../server/Archivos/InserteLogoAqui_1024.png" alt="">
-                </a>
-              -->
-              </h1>
-              <h1 class="site-menu-category text-center lblUsuario"></h1>
-            </div>
-            <ul class="site-menu">
-              <li  class="site-menu-item">
-                <img src="" class="imgLogoEmpresa hidden-xs" style="width: 100%; bottom: 2em;">
-              </li>
-                <li class="site-menu-category"></li>
-
-                <li  class="site-menu-item">
-                  <a vinculo="Inicio.html" href="javascript:void(0)" class="lnkMenuBar_Item">
-                    <i class="site-menu-icon fa-home" aria-hidden="true"></i>
-                    <span class="site-menu-title">Inicio</span>
-                  </a>
-                </li>
-
-                <li  class="site-menu-item">
-                  <a vinculo="copasst/home.html" href="javascript:void(0)" class="lnkMenuBar_Item">
-                    <i class="site-menu-icon fa-group" aria-hidden="true"></i>
-                    <span class="site-menu-title">COPASST</span>
-                  </a>
-                </li>
-
-                <li  class="site-menu-item">
-                  <a vinculo="ausentismo/home.html" href="javascript:void(0)" class="lnkMenuBar_Item">
-                    <i class="site-menu-icon fa-user-times" aria-hidden="true"></i>
-                    <span class="site-menu-title">Ausentismo</span>
-                  </a>
-                </li>
-
-                <li  class="site-menu-item">
-                  <a vinculo="configuracion/home.html" href="javascript:void(0)" class="lnkMenuBar_Item">
-                    <i class="site-menu-icon fa-cogs" aria-hidden="true"></i>
-                    <span class="site-menu-title">Administración</span>
-                  </a>
-                </li>
-
-
-            </ul>
-          
-          </div>
-        </div>
-      </div>
-    <!-- Footer -->
-      <!--
-      <div class="ribbon ribbon-clip ribbon-reverse ribbon-bottom ribbon-warning">
-        <span class="ribbon-inner lblUsuario"></span>
-      </div>
-      -->
-      <!--
-      
-    -->
-    </div>
   <!-- Page -->
   <input id="txtCoordenadas_Global" type="hidden">
   
@@ -257,7 +145,7 @@
   <script src="../assets/js/core.js"></script>
   <script src="../assets/js/site.js"></script>
   <script src="../assets/js/sections/menu.js"></script>
-  <script src="../assets/js/sections/menubar.js"></script>
+  
   <script src="../assets/vendor/typeahead-js/typeahead.jquery.min.js"></script>
   <script src="../assets/vendor/select2/js/select2.full.min.js"></script>
   <script src="../assets/vendor/select2/js/i18n/es.js"></script>

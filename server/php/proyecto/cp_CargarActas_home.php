@@ -4,6 +4,7 @@
    $link = Conectar();
    $idUsuario = addslashes($_POST['Usuario']);
    $idEmpresa = addslashes($_POST['idEmpresa']);
+   $Anio = addslashes($_POST['Anio']);
    
    $Usuario = datosUsuario($idUsuario);
 
@@ -12,8 +13,6 @@
    {
       //$eUsuario = " AND cp_AEC_Candidatos.idEmpresa = '" . $Usuario['idEmpresa'] . "'";
    }
-
-   $Anio = date('Y');
 
    $sql = "SELECT
             cp_Actas.*

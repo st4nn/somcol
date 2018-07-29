@@ -147,10 +147,9 @@ $(document).ready(function()
   }); 
 });
 
-function Copasst_ActaDeEleccionYConformacion()
-{
-  var tFecha = obtenerFecha().substring(0, 10); 
-  $("#txtCopasst_AEC_Anio").val(tFecha.substring(0, 4));  
+function Copasst_ActaDeEleccionYConformacion(){
+  $("#txtCopasst_AEC_Anio").val($('#txtCopasst_Anio').val());  
+  $('#txtCopasst_AEC_Logo').attr('src', '../server/php/' + Empresa.Ruta + '/' + Empresa.Archivo);
 }
 
 function Copasst_AgregarCandidato(datos)
@@ -194,9 +193,9 @@ function Copasst_AgregarCandidato(datos)
   $('.txtCopasst_AEC_Candidato_Posicion[data-idCandidato="' + datos.id + '"]').val(datos.Posicion);
 }
 
-function Copasst_CargarDatos()
-{
+function Copasst_CargarDatos(){
   var tmpAnio = $('#txtCopasst_AEC_Anio').val();
+  $('#txtCopasst_Anio').val(tmpAnio);
   $('#frmCopasst_AEC')[0].reset();
   $('#frmCopasst_AEC_Candidatos_Empleador')[0].reset();
   $('#frmCopasst_AEC')[0].reset();
@@ -259,7 +258,7 @@ function Copasst_GraficarResultado()
      var barChartData = {
             labels: datos.labels,
             datasets: [{
-                label: '',
+                label: '# de Votos',
                 backgroundColor: 'rgba(' + cP.r + ',' + cP.g + ',' + cP.b + ', 0.6)',
                 borderColor: '#' + Empresa.colorPrimario,
                 borderWidth: 1,
@@ -277,9 +276,11 @@ function Copasst_GraficarResultado()
         type: 'bar',
         data: barChartData,
         options: {
+          maintainAspectRatio : false,
             responsive: true
         },
         scaleStartValue: 0
     });
+    window.cntCopasst_AEC_Resultados.canvas.parentNode.style.height = '380px';
   }
 }

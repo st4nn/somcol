@@ -1,0 +1,196 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<h3 class="page-title">Ficha para Base de Datos</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+        <div class="panel panel-primary panel-bordered">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button class="btn btn-warning lnkAbrirModulo" Titulo="Gestión Fallas de Control" vinculo="fallasControl/home.html"><i class="icon fa-arrow-left"></i> Volver</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <form id="frmFallasControl_BDF" class="row">
+                    <input id="txtFallasControl_BDF_idArchivo" type="hidden" class="guardar">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_DescCorta" class="control-label">Descripción Corta</label>
+                                <textarea class="form-control guardar" id="txtFallasControl_BDF_DescCorta"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_FechaDeRemision" class="control-label">Fecha de Remisión</label>
+                                <input class="form-control datepicker guardar" id="txtFallasControl_BDF_FechaDeRemision">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_FechaDeFalla" class="control-label">Fecha del Incidente/Falla de Control</label>
+                                <input class="form-control datepicker guardar" id="txtFallasControl_BDF_FechaDeFalla">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_HoraDeFalla" class="control-label">Hora del Incidente/Falla de Control</label>
+                                <input type="time" class="form-control guardar" id="txtFallasControl_BDF_HoraDeFalla">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Lugar" class="control-label">Lugar de Ocurrencia</label>
+                                <input class="form-control guardar" id="txtFallasControl_BDF_Lugar">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Dependencia" class="control-label">Dependencia</label>
+                                <input class="form-control guardar" id="txtFallasControl_BDF_Dependencia">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Contratista" class="control-label">Empresa Contratista</label>
+                                <input class="form-control guardar" id="txtFallasControl_BDF_Contratista">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Contrato" class="control-label">Número de Contrato</label>
+                                <input class="form-control guardar" id="txtFallasControl_BDF_Contrato">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Tipo" class="control-label">Tipo</label>
+                                <input class="form-control guardar" id="txtFallasControl_BDF_Tipo">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Consecuencia" class="control-label">Consecuencia</label>
+                                <input class="form-control guardar" id="txtFallasControl_BDF_Consecuencia">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_RAM" class="control-label">RAM</label>
+                                <input class="form-control guardar" id="txtFallasControl_BDF_RAM">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Personas" class="control-label">1. Personas</label>
+                                <select class="form-control guardar" id="txtFallasControl_BDF_Personas">
+                                    <option value="Ninguna">Ninguna</option>
+                                    <option value="Con perdida de tiempo">Con perdida de tiempo</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Propiedad" class="control-label">2. Propiedad</label>
+                                <select class="form-control guardar" id="txtFallasControl_BDF_Propiedad">
+                                    <option value="Ninguna">Ninguna</option>
+                                    <option value="Con daño a la propiedad">Con daño a la propiedad</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Propiedad" class="control-label">3. Ambiente o Proceso</label>
+                                <select class="form-control guardar" id="txtFallasControl_BDF_Propiedad">
+                                    <option value="Ninguna">Ninguna</option>
+                                    <option value="Con daño al Ambiente">Con daño al Ambiente</option>
+                                    <option value="Con daño al Proceso">Con daño al Proceso</option>
+                                    <option value="Con daño al Proceso y al Ambiente">Con daño al Proceso y al Ambiente</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Afectado_Cedula" class="control-label">Documento del Afectado</label>
+                                <input class="form-control guardar" id="txtFallasControl_BDF_Afectado_Cedula">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Afectado_Nombre" class="control-label">Nombre del Afectado</label>
+                                <input class="form-control guardar" id="txtFallasControl_BDF_Afectado_Nombre">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Afectado_Cargo" class="control-label">Cargo del Afectado</label>
+                                <input class="form-control guardar" id="txtFallasControl_BDF_Afectado_Cargo">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Actividad" class="control-label">Actividad</label>
+                                <input class="form-control guardar" id="txtFallasControl_BDF_Actividad">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Clasificacion" class="control-label">Clasificación</label>
+                                <select class="form-control guardar" id="txtFallasControl_BDF_Clasificacion">
+                                    <option value="Ninguna">Ninguna</option>
+                                    <option value="Acto Inseguro">Acto Inseguro</option>
+                                    <option value="Condición Insegura">Condición Insegura</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Descripcion" class="control-label">Describa cómo sucedió el hecho <small>Qué, Cómo, Por qué, Donde</small></label>
+                                <textarea class="form-control guardar" id="txtFallasControl_BDF_Descripcion"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+	</div>
+</div>
+<script>
+
+</script>

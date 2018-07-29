@@ -130,9 +130,6 @@ $(document).ready(function()
 
 		$("#tblUsuarios_Listado").slideDown();
 
-		var l = Ladda.create(this);
-		l.start();
-
 		$("#tblUsuarios_Listado li").remove();
 
 

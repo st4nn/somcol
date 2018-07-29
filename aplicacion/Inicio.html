@@ -7,6 +7,12 @@
     opacity:.8;
     font-size: 20px;
     color: white;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+0,2989d8+50,207cca+51,7db9e8+100;Blue+Gloss+Default */
+background: rgb(30,87,153); /* Old browsers */
+background: -moz-linear-gradient(top, rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%, rgba(32,124,202,1) 51%, rgba(125,185,232,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
   }
   .fButton:hover
   {
@@ -14,143 +20,159 @@
     opacity: 100;
     color: #E4EAEC;
   }
-  .fButton i
-  {
+  .fButton i{
     padding : 25px;
     margin-right : 10px;
     margin-left : -20px;
     font-size: 35px;
     min-width: 100px;
     text-align: center;
+    
+  }
+
+  .cntHomeButtons > div{
+    float: none;
   }
 </style>
-<div class="page" style="min-height: 90vh; background: url('../assets/images/Inicio.png') no-repeat; background-size: 100%;">
-  <img class alt="">
-  <div class="page-content container-fluid">
-    <div class="row">
-      <div class="col-md-9">
-        <input type="hidden" id="txtInicio_idEmpresa">
-        <h3 class="text-center"><small>Bienvenido: </small><span class="lblUsuario">{Nombre Usuario}</span></h3>
-        <h1 class="lblEmpresa_Nombre text-center">{Nombre Empresa}</h1>
-        <br>
-        <div class="col-sm-12 col-md-6">
-          <div class="bg-teal-400 fButton margin-5 lnkAbrirModulo" vinculo="copasst/home.html" Titulo="COPASST">
-              <i class="icon fa-users bg-teal-800 "></i>COPASST
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-6">
-          <div class="bg-red-400 fButton margin-5 lnkAbrirModulo" vinculo="ausentismo/home.html" Titulo="Ausentismo">
-              <i class="icon fa-user-times bg-red-800 "></i> Ausentismo
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-6">
-          <div class="bg-purple-400 fButton margin-5" data-sitio="fallasDeControl">
-              <i class="icon fa-sitemap bg-purple-800 "></i> Fallas de Control
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-6">
-          <div class="bg-blue-400 fButton margin-5" data-sitio="capacitaciones">
-              <i class="icon fa-graduation-cap bg-blue-800 "></i> Capacitaciones
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-6">
-          <div class="bg-orange-400 fButton margin-5" data-sitio="indicadores">
-              <i class="icon fa-bar-chart bg-orange-800 "></i> Indicadores
-          </div>
-        </div>
+<div class="page" style="min-height: 90vh; 
 
-        <div class="col-sm-12 col-md-6">
-          <div class="bg-blue-grey-400 fButton margin-5 lnkAbrirModulo" vinculo="configuracion/home.html" Titulo="Administración">
-              <i class="icon fa-cogs bg-blue-grey-800 "></i> Administración
-          </div>
+   background: #ece9e6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #ece9e6, #ffffff); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #ece9e6, #ffffff);
+  background-size: 100%;">
+  <div class="page-header">
+    <h3 class="page-title">Autogestión SG-SST</h3>
+  </div>
+  <div class="page-content container-fluid">
+  
+    <div class="cntHomeButtons row">
+      <input type="hidden" id="txtInicio_idEmpresa">
+      
+      <div class="col-sm-4 col-md-2 col-xs-12">
+        <div class="bg-blue-400 fButton margin-5 lnkAbrirModulo" vinculo="copasst/home.html" Titulo="COPASST">
+            <i class="icon fa-users bg-blue-800 "></i>
+            <h4>COPASST</h4>
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="panel panel-bordered panel-dark">
-          <div class="panel-heading">
-            <h3 class="panel-title">Notificaciones</h3>
-          </div>
-          <div class="panel-body" style="height: 75vh; overflow-y: scroll;">
-            <h5>RECENT ACTIVITY</h5>
-            <ul class="timeline timeline-icon timeline-single timeline-simple timeline-feed">
-              <li class="timeline-item">
-                <div class="timeline-dot bg-pink-600">
-                  <i class="icon wb-heart" aria-hidden="true"></i>
-                </div>
-                <div class="timeline-content">
-                  <small>
-                    <time datetime="2015-07-08">6 minutes ago</time>
-                  </small>
-                  <p>Melissa liked your activity Drinks At My Place.</p>
-                </div>
-              </li>
-              <li class="timeline-item">
-                <div class="timeline-dot bg-green-600">
-                  <i class="icon wb-check" aria-hidden="true"></i>
-                </div>
-                <div class="timeline-content">
-                  <small>
-                    <time datetime="2015-07-08">10 minutes ago</time>
-                  </small>
-                  <p>Tina is attending your activity Coffee @Starbucks</p>
-                </div>
-              </li>
-              <li class="timeline-item">
-                <div class="timeline-dot bg-green-600">
-                  <i class="icon wb-chat" aria-hidden="true"></i>
-                </div>
-                <div class="timeline-content">
-                  <small>
-                    <time datetime="2015-07-08">15 minutes ago</time>
-                  </small>
-                  <p>Melissa liked your activity Drinks At My Place.</p>
-                </div>
-              </li>
-              <li class="timeline-item">
-                <div class="timeline-dot">
-                  <i class="icon wb-plus" aria-hidden="true"></i>
-                </div>
-                <div class="timeline-content">
-                  <small>
-                    <time datetime="2015-07-08">20 minutes ago</time>
-                  </small>
-                  <p>Josh is now following you</p>
-                </div>
-              </li>
-            </ul>
+      <div class="col-sm-4 col-md-2 col-xs-12">
+        <div class="bg-blue-400 fButton margin-5 lnkAbrirModulo" vinculo="ausentismo/home.html" Titulo="Ausentismo" data-callback="ausentismo_AbrirHome">
+            <i class="icon fa-user-times bg-blue-800 "></i>
+            <h4> Ausentismo</h4>
+        </div>
+      </div>
+      <div class="col-sm-4 col-md-2 col-xs-12">
+        <div class="bg-blue-400 fButton margin-5" data-sitio="fallasDeControl">
+            <i class="icon fa-sitemap bg-blue-800 "></i>
+            <h4> Fallas de Control</h4>
+        </div>
+      </div>
+      <div class="col-sm-4 col-md-2 col-xs-12">
+        <div class="bg-blue-400 fButton margin-5" data-sitio="capacitaciones">
+            <i class="icon fa-graduation-cap bg-blue-800 "></i>
+            <h4> Capacitaciones</h4>
+        </div>
+      </div>
+      <!--
+      <div class="col-sm-4 col-md-2 col-xs-12">
+        <div class="bg-blue-400 fButton margin-5" data-sitio="indicadores">
+            <i class="icon fa-bar-chart bg-blue-800 "></i>
+            <h4> Indicadores</h4>
+        </div>
+      </div>
+    -->
 
-            <h5 class="margin-top-50">TASK STATISTICS</h5>
-            <div class="contextual-progress">
-              <div class="clearfix">
-                <div class="progress-title">Features development</div>
-                <div class="progress-label">70%</div>
+      <div class="col-sm-4 col-md-2 col-xs-12">
+        <div class="bg-blue-400 fButton margin-5 lnkAbrirModulo" vinculo="configuracion/home.html" Titulo="Administración">
+            <i class="icon fa-cogs bg-blue-800 "></i>
+            <h4> Administración</h4>
+        </div>
+      </div>
+    </div>
+    <div id="cntNotificaciones" class="col-md-3 hide">
+      <div class="panel panel-bordered panel-dark">
+        <div class="panel-heading">
+          <h3 class="panel-title">Notificaciones</h3>
+        </div>
+        <div class="panel-body" style="height: 75vh; overflow-y: scroll;">
+          <h5>RECENT ACTIVITY</h5>
+          <ul class="timeline timeline-icon timeline-single timeline-simple timeline-feed">
+            <li class="timeline-item">
+              <div class="timeline-dot bg-pink-600">
+                <i class="icon wb-heart" aria-hidden="true"></i>
               </div>
-              <div class="progress" data-goal="70" data-plugin="progress">
-                <div class="progress-bar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70" style="width: 70%" role="progressbar">
-                  <span class="progress-label"></span>
-                </div>
+              <div class="timeline-content">
+                <small>
+                  <time datetime="2015-07-08">6 minutes ago</time>
+                </small>
+                <p>Melissa liked your activity Drinks At My Place.</p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <div class="timeline-dot bg-green-600">
+                <i class="icon wb-check" aria-hidden="true"></i>
+              </div>
+              <div class="timeline-content">
+                <small>
+                  <time datetime="2015-07-08">10 minutes ago</time>
+                </small>
+                <p>Tina is attending your activity Coffee @Starbucks</p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <div class="timeline-dot bg-green-600">
+                <i class="icon wb-chat" aria-hidden="true"></i>
+              </div>
+              <div class="timeline-content">
+                <small>
+                  <time datetime="2015-07-08">15 minutes ago</time>
+                </small>
+                <p>Melissa liked your activity Drinks At My Place.</p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <div class="timeline-dot">
+                <i class="icon wb-plus" aria-hidden="true"></i>
+              </div>
+              <div class="timeline-content">
+                <small>
+                  <time datetime="2015-07-08">20 minutes ago</time>
+                </small>
+                <p>Josh is now following you</p>
+              </div>
+            </li>
+          </ul>
+
+          <h5 class="margin-top-50">TASK STATISTICS</h5>
+          <div class="contextual-progress">
+            <div class="clearfix">
+              <div class="progress-title">Features development</div>
+              <div class="progress-label">70%</div>
+            </div>
+            <div class="progress" data-goal="70" data-plugin="progress">
+              <div class="progress-bar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70" style="width: 70%" role="progressbar">
+                <span class="progress-label"></span>
               </div>
             </div>
-            <div class="contextual-progress">
-              <div class="clearfix">
-                <div class="progress-title">Uploading files</div>
-                <div class="progress-label">30%</div>
-              </div>
-              <div class="progress" data-goal="60" data-plugin="progress">
-                <div class="progress-bar progress-bar-success" aria-valuemin="0" aria-valuemax="100" aria-valuenow="30" style="width: 30%" role="progressbar">
-                  <span class="progress-label"></span>
-                </div>
+          </div>
+          <div class="contextual-progress">
+            <div class="clearfix">
+              <div class="progress-title">Uploading files</div>
+              <div class="progress-label">30%</div>
+            </div>
+            <div class="progress" data-goal="60" data-plugin="progress">
+              <div class="progress-bar progress-bar-success" aria-valuemin="0" aria-valuemax="100" aria-valuenow="30" style="width: 30%" role="progressbar">
+                <span class="progress-label"></span>
               </div>
             </div>
-            <div class="contextual-progress">
-              <div class="clearfix">
-                <div class="progress-title">Traffc Margins</div>
-                <div class="progress-label">90%</div>
-              </div>
-              <div class="progress" data-goal="60" data-plugin="progress">
-                <div class="progress-bar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="90" style="width: 90%" role="progressbar">
-                  <span class="progress-label"></span>
-                </div>
+          </div>
+          <div class="contextual-progress">
+            <div class="clearfix">
+              <div class="progress-title">Traffc Margins</div>
+              <div class="progress-label">90%</div>
+            </div>
+            <div class="progress" data-goal="60" data-plugin="progress">
+              <div class="progress-bar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="90" style="width: 90%" role="progressbar">
+                <span class="progress-label"></span>
               </div>
             </div>
           </div>

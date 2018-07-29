@@ -4,16 +4,14 @@
    $link = Conectar();
    $idUsuario = addslashes($_POST['Usuario']);
    $idEmpresa = addslashes($_POST['idEmpresa']);
+   $Anio = addslashes($_POST['Anio']);
    
    $Usuario = datosUsuario($idUsuario);
 
    $eUsuario = "";
-   if ($Usuario['idPerfil'] > 1)
-   {
+   if ($Usuario['idPerfil'] > 1){
       //$eUsuario = " AND cp_AEC_Candidatos.idEmpresa = '" . $Usuario['idEmpresa'] . "'";
    }
-
-   $Anio = date('Y');
 
    $sql = "
          SELECT

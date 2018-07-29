@@ -1,18 +1,68 @@
+<style>
+	@media print{
+	    button, form{
+	       display: none !important;
+	    }
+	    .cntCopasst_Notificacion #imgCopasst_NotificacionTR_Logo{
+	        display: block !important;
+	        position: fixed;
+	        top : 10px;
+	    }
+
+	    select, input{
+	        outline: none !important;
+	        border: none !important;
+	        -webkit-appearance: none !important;
+	        -moz-appearance: none !important;
+	        text-indent: 1px !important;
+	        display: inline !important;
+	    }
+
+  #frmCopasst_AEC{
+    display: block !important;
+  }
+  
+  #frmCopasst_AEC .form-group{
+    margin: 0;
+  }
+  #frmCopasst_AEC .control-label{
+    font-weight: 500;
+    width: 16em;
+  }
+  #frmCopasst_AEC .form-control{
+    width: calc(100% - 17em) !important;
+  }
+  table {
+    margin-top: -3em;
+  }
+
+  .panel{
+    margin-top: -3em;
+  }
+  #txtCopasst_AEC_Logo{
+  	display: block !important;
+    position: fixed;
+    top : 10px;
+  }
+}
+</style>
 <!-- Page -->
+
 <div class="page" style="min-height: 90vh;">
+	<img id="txtCopasst_AEC_Logo" class="hide" height="100px" src="" alt="">
 	<div class="page-header">
-		<!--
-		<button class="btn btn-primary pull-right btn-pill-left btnCopasst_VerEPPEntregados">Volver</button>
-	-->
 		<h3 class="page-title">Acta de Elección y Conformación</h3>
 	</div>
  	<div class="page-content container-fluid">
+ 		<div class="panel">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button class="btn btn-warning lnkAbrirModulo" Titulo="COPASST" vinculo="copasst/home.html"><i class="icon fa-arrow-left"></i> Volver</button>
+                </div>
+            </div>
+        </div>
 		<form id="frmCopasst_AEC">
 	 		<div class="panel panel-primary panel-bordered">
-	 			<div class="panel-heading">
-					<div class="panel-actions">
-			      	</div>
-	            </div>
 	 			<div class="panel-body">
 			 		<div class="row">
 				 		<div class="form-group col-sm-5 pull-right">
@@ -57,6 +107,22 @@
 				 			<div class="form-group">
 					        	<label for="txtCopasst_AEC_Fecha_Cierre" class="control-label">Fecha de Cierre Convocatoria</label>
 					        	<input class="form-control datepicker guardar" id="txtCopasst_AEC_Fecha_Cierre">
+					        </div>
+			 			</div>
+			 		</div>
+
+			 		<div class="row">
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtCopasst_AEC_Fecha_AperturaVotaciones" class="control-label">Fecha de Apertura Votaciones</label>
+					        	<input class="form-control datepicker guardar" id="txtCopasst_AEC_Fecha_AperturaVotaciones">
+					        </div>
+			 			</div>
+
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtCopasst_AEC_Fecha_CierreVotaciones" class="control-label">Fecha de Cierre Votaciones</label>
+					        	<input class="form-control datepicker guardar" id="txtCopasst_AEC_Fecha_CierreVotaciones">
 					        </div>
 			 			</div>
 			 		</div>
@@ -135,69 +201,77 @@
 				</table>
  			</div>
 		</div>
+		
+		<div class="row">
+			<div class="col-md-12">
+		 		<div class="panel panel-primary panel-bordered">
+		 			<div class="panel-heading">
+		 				<h3 class="panel-title">Candidatos por parte de los Trabajadores</h3>
+						<div class="panel-actions">
+				      	</div>
+		            </div>
+		 			<div class="panel-body">
+		 				<form id="frmCopasst_AEC_Candidatos" class="frmCopasst_AEC_Candidatos" data-tipo='Trabajador'>
+			 				<div class="row">
+			 					<div class="col-sm-5">
+			 						<div class="form-group">
+							        	<label for="txtCopasst_AEC_Candidato_Nombre" class="control-label">Nombre</label>
+							        	<input class="form-control txtCopasst_AEC_Candidato_Nombre" id="txtCopasst_AEC_Candidato_Nombre" required="true">
+							        </div>
+			 					</div>
 
- 		<div class="panel panel-primary panel-bordered">
- 			<div class="panel-heading">
- 				<h3 class="panel-title">Candidatos por parte de los Trabajadores</h3>
-				<div class="panel-actions">
-		      	</div>
-            </div>
- 			<div class="panel-body">
- 				<form id="frmCopasst_AEC_Candidatos" class="frmCopasst_AEC_Candidatos" data-tipo='Trabajador'>
-	 				<div class="row">
-	 					<div class="col-sm-5">
-	 						<div class="form-group">
-					        	<label for="txtCopasst_AEC_Candidato_Nombre" class="control-label">Nombre</label>
-					        	<input class="form-control txtCopasst_AEC_Candidato_Nombre" id="txtCopasst_AEC_Candidato_Nombre" required="true">
-					        </div>
-	 					</div>
+			 					<div class="col-sm-3">
+			 						<div class="form-group">
+							        	<label for="txtCopasst_AEC_Candidato_Cargo" class="control-label">Cargo</label>
+							        	<input class="form-control txtCopasst_AEC_Candidato_Cargo" id="txtCopasst_AEC_Candidato_Cargo">
+							        </div>
+			 					</div>
 
-	 					<div class="col-sm-3">
-	 						<div class="form-group">
-					        	<label for="txtCopasst_AEC_Candidato_Cargo" class="control-label">Cargo</label>
-					        	<input class="form-control txtCopasst_AEC_Candidato_Cargo" id="txtCopasst_AEC_Candidato_Cargo">
-					        </div>
-	 					</div>
+			 					<div class="col-sm-3">
+			 						<div class="form-group">
+							        	<label for="txtCopasst_AEC_Candidato_Identificacion" class="control-label"># de Identificación</label>
+							        	<input class="form-control txtCopasst_AEC_Candidato_Identificacion" id="txtCopasst_AEC_Candidato_Identificacion" required="true">
+							        </div>
+			 					</div>
 
-	 					<div class="col-sm-3">
-	 						<div class="form-group">
-					        	<label for="txtCopasst_AEC_Candidato_Identificacion" class="control-label"># de Identificación</label>
-					        	<input class="form-control txtCopasst_AEC_Candidato_Identificacion" id="txtCopasst_AEC_Candidato_Identificacion" required="true">
-					        </div>
-	 					</div>
+			 					<div class="col-sm-1">
+			 						<br>
+			 						<button type="submit" class="btn btn-icon btn-primary"><i class="icon fa-plus"></i></button>
+			 					</div>
+			 				</div>
+			 			</form>
 
-	 					<div class="col-sm-1">
-	 						<br>
-	 						<button type="submit" class="btn btn-icon btn-primary"><i class="icon fa-plus"></i></button>
-	 					</div>
-	 				</div>
-	 			</form>
-
-				<table id="tblCopasst_AEC_Candidatos" class="table table-hover table-striped">
-					<thead>
-						<tr>
-							<th></th>
-							<th>NOMBRE</th>
-							<th>CARGO</th>
-							<th># DE IDENTIFICACIÓN</th>
-							<th># DE VOTOS</th>
-							<th>POSICIÓN</th>
-						</tr>
-					</thead>
-					<tbody></tbody>
-				</table>
- 			</div>
- 		</div>
- 		<div class="panel panel-primary panel-bordered">
- 			<div class="panel-heading">
- 				<h3 class="panel-title">Resultados</h3>
-				<div class="panel-actions">
-		      	</div>
-            </div>
- 			<div class="panel-body">
- 				<canvas id="cntCopasst_AEC_Resultados" class="col-md-12"></canvas>
- 			</div>
- 		</div>
+						<table id="tblCopasst_AEC_Candidatos" class="table table-hover table-striped">
+							<thead>
+								<tr>
+									<th></th>
+									<th>NOMBRE</th>
+									<th>CARGO</th>
+									<th># DE IDENTIFICACIÓN</th>
+									<th># DE VOTOS</th>
+									<th>POSICIÓN</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+		 			</div>
+		 		</div>
+		 	</div>
+	 	</div>
+	 	<div class="row">
+		 	<div class="col-md-12 cntCopasst_AEC_Resultados">
+		 		<div class="panel panel-primary panel-bordered">
+		 			<div class="panel-heading">
+		 				<h3 class="panel-title">Resultados</h3>
+						<div class="panel-actions">
+				      	</div>
+		            </div>
+		 			<div class="panel-body">
+		 				<canvas id="cntCopasst_AEC_Resultados" class="col-md-12"></canvas>
+		 			</div>
+		 		</div>
+		 	</div>
+		</div>
 
  		<div class="panel panel-primary panel-bordered">
  			<div class="panel-heading">

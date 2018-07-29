@@ -33,6 +33,8 @@
 		$fileName = uniqid("file_");
 	}
 
+	$fileName = utf8_encode($fileName);
+
 	if (!file_exists($targetDir . "/" . $fileName))
 	{
 		if (move_uploaded_file($_FILES[0]["tmp_name"],  $targetDir . "/" . $fileName))

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>VOTACIÓN COPASST</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta content="" name="description" />
+  <meta content="" name="author" />
+  <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+  <link href="css/style_responsive.css" rel="stylesheet" />
+  <link href="css/style_default.css" rel="stylesheet" id="style_color" />
+</head>
+<body id="lock-body">
+  <div class="lock-header">
+      <!-- BEGIN LOGO -->
+      <a href="../index.html" id="logo" class="center">
+          <img id="imgLogo" style="max-height: 50px;" src="" alt="logo" class="center" />
+          <h5 id="lblEmpresa"></h5>
+      </a>
+      <!-- END LOGO -->
+  </div>
+
+  <!-- BEGIN LOCK -->
+  <div id="lock">
+    <!-- BEGIN LOCK FORM -->
+    <form id="lockform" class="form-vertical no-padding no-margin" action="index.html">
+      <div class="lock-title">
+          
+          <h3>VOTACIÓN COPASST <span id="lblAnio"></span></h3>
+          <br>
+          <small>!PARTICIPA EN EL CAMBIO, VOTA POR TU REPRESENTANTE!</small>
+      </div>
+      <div class="lock-avatar-row">
+          <div class="lock-round">
+              <img src="img/lock-avatar.jpg" alt="">
+          </div>
+      </div>
+      <div class="control-wrap lock-identity">
+          <h3>Bienvenido</h3>
+          <div class="lock-form-row">
+              <div id="frmLogin" class="form-search">
+                  <div class="relogin">
+                      <a>Por favor ingresa tu número de Cedula</a>
+                  </div>
+                  <div class="input-append">
+                      <input id="txtCedula" type="password" placeholder="Cedula" class="m-wrap">
+                      <button class="btn tarquoise" type="submit"><i class=" icon-arrow-right"></i></button>
+                  </div>
+                  <p id="lblAccesoDenegado">La Cedula no se encuentra inscrita. <br>Por favor contacte al area administrativa</p>
+              </div>
+          </div>
+      </div>
+
+    </form>
+
+    <!-- END LOCK FORM -->        
+    
+  </div>
+  <!-- END LOCK -->
+  <!-- BEGIN COPYRIGHT -->
+  <div id="login-copyright">
+      2018 &copy; somcol.
+  </div>
+  <!-- END COPYRIGHT -->
+  <!-- BEGIN JAVASCRIPTS -->
+  <script src="js/jquery-1.8.3.min.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="js/jquery.blockui.js"></script>
+  <script src="js/jStore.js"></script>
+  <script src="js/scripts.js"></script>
+  <script>
+    jQuery(document).ready(function() {     
+      //App.initLOCK();
+      $(document).on("ready", loginArranque);
+      function loginArranque()
+      {
+        $("#lockform").slideUp();
+        localStorage.clear();
+        const datos = {
+          idEmpresa : getParameterByName('e'),
+          Anio : getParameterByName('a'),
+          key : getParameterByName('p')
+        };
+        $.post('php/cargarDatos.php', datos, function(data, textStatus, xhr) {
+          if (data != 0){
+            $("#lockform").slideDown();
+            const arrEmpresa = {Empresa : '', Logo : ''};
+            $.each(data, function(index, val) {
+               const _path = '../server/php/' + val.Ruta + '/' + val.Logo;
+               
+               arrEmpresa.Empresa = val.Nombre;
+               arrEmpresa.Logo = _path;
+
+               $('#imgLogo').attr('src', _path);
+               $('#lblEmpresa').text(val.Nombre);
+            });
+            $("#lockform").on("submit", function(evento)
+              {
+                evento.preventDefault();
+                $.post('php/validarUsuario.php', {
+                  Cedula: $("#txtCedula").val(), 
+                  idEmpresa: datos.idEmpresa
+                }, function(data2, textStatus, xhr) 
+                {
+                  if (parseInt(data2) == 0){
+                    $("#lblAccesoDenegado").fadeIn(300).delay(2600).fadeOut(600);
+                  } else
+                  {
+                    $.extend(true, data2, arrEmpresa);
+                    data2.Anio = datos.Anio;
+                    
+                    localStorage.setItem("somcol_votacion", JSON.stringify(data2));
+                    window.location = "votacion.html";
+                  }
+                }, "json");
+              });
+          } 
+        }, 'json');
+      }
+    });
+
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+  </script>
+  <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

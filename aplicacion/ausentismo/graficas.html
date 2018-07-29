@@ -1,0 +1,309 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<h3 class="page-title">Gráficas de Ausentismo Laboral</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+        <div class="panel panel-primary panel-bordered">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button class="btn btn-primary lnkAbrirModulo" Titulo="Tabla Ausentismos" vinculo="ausentismo/informe.html"><i class="icon fa-table"></i> Ver Tabla</button>
+                    <button class="btn btn-primary lnkAbrirModulo" Titulo="Registrar Ausentismo" vinculo="ausentismo/registrar.html"><i class="icon fa-user-plus"></i> Registrar Ausentismo</button>
+                    <button class="btn btn-warning lnkAbrirModulo" Titulo="Ausentismo" vinculo="ausentismo/home.html"><i class="icon fa-arrow-left"></i> Volver</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <form id="frmAusentismo_Graficas">
+                        <div class="col-sm-6">
+                            <label for="txtAusentismo_Graficas_Desde" class="control-label">Desde</label>
+                            <div class="form-group">
+                                <input class="form-control datepicker guardar" id="txtAusentismo_Graficas_Desde">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="txtAusentismo_Graficas_Hasta" class="control-label">Hasta</label>
+                            <div class="form-group">
+                              <div class="input-group">
+                                <input id="txtAusentismo_Graficas_Hasta" class="form-control datepicker guardar">
+                                <span class="input-group-btn">
+                                  <button type="submit" class="btn btn-primary">
+                                    <i class="icon wb-refresh" aria-hidden="true"></i>
+                                  </button>
+                                </span>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-12">
+                            <label for="txtAusentismo_Graficas_TipoDeEvento" class="control-label">Tipo de Evento</label>
+                            <div class="form-group">
+                                <select id="txtAusentismo_Graficas_TipoDeEvento" class="form-control guardar" multiple="true">
+                                </select>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary panel-bordered">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button id="btnAusentismo_CambiarGrafica_Atras" class="btn btn-primary"><i class="icon fa-arrow-left"></i> Anterior</button>
+                    <button id="btnAusentismo_CambiarGrafica_Adelante" class="btn btn-primary"> Siguiente <i class="icon fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <input type="hidden" id="txtAusentismo_Graficas_NumGrafica" value="1">
+                    <h1><center id="lblAusentismo_Graficas_Titulo"></center></h1>
+                    <canvas id="cntAustentismo_Grafica" class="col-md-12"></canvas>
+                    <div class='table-responsive'>
+                        <table id="tblAusentismo_Resultados" class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Total Casos</th>
+                                    <th>Días</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+<script>
+    var vAusentismo_TipoDeGrafica = [
+        'Por Tipo de Evento',
+        'Por Subsistema',
+        'Por Tipo de Enfermedad',
+        'Ausentismo por Trabajador',
+        'Por Rangos de Edad',
+        'Por Genero',
+        'Por Días de la Semana',
+        'Comportamiento del Ausentismo en el Tiempo'    
+    ];
+
+    $(document).ready(function()
+    {
+        $("#frmAusentismo_Graficas .datepicker").datepicker({
+            clearBtn: true,
+            language: "es",
+            orientation: "top auto",
+            daysOfWeekHighlighted: "0",
+            autoclose: true,
+            todayHighlight: true
+        });
+        
+        var tFecha = obtenerFecha();
+        $('#txtAusentismo_Graficas_Desde').val(tFecha.substring(0, 8) + '01');
+        $('#txtAusentismo_Graficas_Hasta').val(tFecha.substring(0, 10));
+
+        $('#btnAusentismo_CambiarGrafica_Adelante').on('click', function(event){
+            event.preventDefault();
+            var idx = parseInt($('#txtAusentismo_Graficas_NumGrafica').val());
+            idx++;
+            idx = funAusentismo_CambiarIDXDeGrafica(idx);
+            funAusentismo_CargarGrafica(idx);
+        });
+
+        $('#btnAusentismo_CambiarGrafica_Atras').on('click', function(event){
+            event.preventDefault();
+            var idx = parseInt($('#txtAusentismo_Graficas_NumGrafica').val());
+            idx--;
+            idx = funAusentismo_CambiarIDXDeGrafica(idx);
+            funAusentismo_CargarGrafica(idx);
+        });
+
+        function funAusentismo_CambiarIDXDeGrafica(idx){
+            if (idx < 0){
+                idx = (vAusentismo_TipoDeGrafica.length - 1);
+            }
+
+            if (idx >= vAusentismo_TipoDeGrafica.length){
+                idx = 0;
+            }
+            return idx;
+        }
+    });
+
+    function funAusentismo_CargarTiposDeEvento(){
+        $('#txtAusentismo_Graficas_TipoDeEvento option').remove();
+        $.post('../server/php/proyecto/ausentismo_cargarTipoDeEvento.php', 
+            {
+                idUsuario: Usuario.id,
+                idEmpresa : $('#txtInicio_idEmpresa').val(),
+                Desde : $('#txtAusentismo_Graficas_Desde').val(),
+                Hasta : $('#txtAusentismo_Graficas_Hasta').val()
+            }, function(data, textStatus, xhr) {
+                var tds = '';
+                $.each(data, function(index, val) {
+                   tds += '<option value="' + val.TipoEvento + '" selected="true">' + val.TipoEvento + '</option>';  
+                });
+                $('#txtAusentismo_Graficas_TipoDeEvento').append(tds);
+                funAusentismo_CargarGrafica(0);
+        }, 'json');
+    }
+
+    function funAusentismo_CargarGrafica(numGrafica){
+        $.post('../server/php/proyecto/ausentismo_cargarGrafica_' + numGrafica + '.php', {
+                idUsuario: Usuario.id,
+                idEmpresa : $('#txtInicio_idEmpresa').val(),
+                Desde : $('#txtAusentismo_Graficas_Desde').val(),
+                Hasta : $('#txtAusentismo_Graficas_Hasta').val()
+            }, function(data, textStatus, xhr) {
+                var datos = {labels : [], data_Cantidad : [], data_Dias : []};
+                $('#lblAusentismo_Graficas_Titulo').text(vAusentismo_TipoDeGrafica[(numGrafica)]);
+                $('#txtAusentismo_Graficas_NumGrafica').val(numGrafica);
+                var idx = numGrafica;
+                $('#tblAusentismo_Resultados tbody tr').remove();
+                var tds = '';
+
+                if (idx < 7){
+                    $.each(data, function(index, val) 
+                    {
+                      datos.labels.push(val.Etiqueta);
+                      datos.data_Cantidad.push(val.Cantidad);
+                      datos.data_Dias.push(val.Dias);
+                      tds += '<tr>';
+                        tds += '<td>' + val.Etiqueta + '</td>';
+                        tds += '<td>' + val.Cantidad + '</td>';
+                        tds += '<td>' + val.Dias + '</td>';
+                      tds += '</tr>';
+                    });
+
+                    $('#tblAusentismo_Resultados tbody').append(tds);
+
+                    var cP = hexTorgb(Empresa.colorPrimario);
+                    var cP2 = hexTorgb(Empresa.colorSecundario);
+                    
+                     var barChartData = {
+                            labels: datos.labels,
+                            datasets: [{
+                                label: 'Total Casos',
+                                backgroundColor: 'rgba(' + cP.r + ',' + cP.g + ',' + cP.b + ', 0.6)',
+                                borderColor: '#' + Empresa.colorPrimario,
+                                borderWidth: 1,
+                                data: datos.data_Cantidad
+                            },
+                            {
+                                label: 'Días',
+                                backgroundColor: 'rgba(' + cP2.r + ',' + cP2.g + ',' + cP2.b + ', 0.6)',
+                                borderColor: '#' + Empresa.colorSecundario,
+                                borderWidth: 1,
+                                data: datos.data_Dias
+                            }]
+                        };
+                    
+                    var ctx = document.getElementById("cntAustentismo_Grafica").getContext("2d");
+                    if (window.cntAustentismo_Grafica_ != null && window.cntAustentismo_Grafica_ != undefined)
+                    {
+                      window.cntAustentismo_Grafica_.destroy();
+                    }
+
+                    window.cntAustentismo_Grafica_ = new Chart(ctx, {
+                        type: 'bar',
+                        data: barChartData,
+                        options: {
+                            responsive: true
+                        },
+                        scaleStartValue: 0
+                    });
+                } else { 
+                    var randomScalingFactor = function() {
+                        return Math.round(Math.random() * 255);
+                    };
+
+                    let
+                        _dataSets = [],
+                        _labels = [],
+                        _data = [],
+                        _color = {}
+                        _idx = 0,
+                        _max = 0;
+
+                    $.each(data, function(index, val) {
+                        if (_idx === 0){
+                            $.each(val, function(index2, val2) {
+                                 _labels.push(val2.mes);
+                            });
+
+                            _idx++;
+                        }
+                        _color = {
+                            r : randomScalingFactor(),
+                            g : randomScalingFactor(),
+                            b : randomScalingFactor()
+                        }
+                        
+                        _data = [];
+                        $.each(val, function(index2, val2) {
+                             _data.push(val2.cantidad);
+                             if (val2.cantidad > _max){
+                                _max = val2.cantidad;
+                             }
+                        });
+
+                         _dataSets.push({
+                                label: index,
+                                data: _data,
+                                borderColor: 'rgb(' + _color.r + ', ' + _color.g + ', ' + _color.b + ')',
+                                backgroundColor: 'rgba(0, 0, 0, 0)',
+                                fill: false
+                            });
+                    });
+
+                    var config = {
+                        type: 'line',
+                        data: {
+                            labels: _labels,
+                            datasets: _dataSets
+                        },
+                        options: {
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: ''
+                            },
+                            tooltips: {
+                                mode: 'index'
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true
+                                    }
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Cantidad de Registros'
+                                    },
+                                    ticks: {
+                                        suggestedMin: 0,
+                                        suggestedMax: (_max + 5)
+                                    }
+                                }]
+                            }
+                        }
+                    };
+
+                     var ctx = document.getElementById("cntAustentismo_Grafica").getContext("2d");
+                    if (window.cntAustentismo_Grafica_ != null && window.cntAustentismo_Grafica_ != undefined)
+                    {
+                      window.cntAustentismo_Grafica_.destroy();
+                    }
+
+                    window.cntAustentismo_Grafica_ = new Chart(ctx, config);
+                }
+        }, 'json');
+    }
+</script>
