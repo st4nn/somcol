@@ -15,7 +15,7 @@
             FROM
                au_registro
             WHERE 
-               idEmpresa = '$idEmpresa'
+               au_registro.idEmpresa = '$idEmpresa'
                AND DATE_FORMAT(au_registro.FechaInicial, '%Y') = '" . substr($Desde, 0, 4) . "'
             GROUP BY 
                au_registro.TipoEvento,

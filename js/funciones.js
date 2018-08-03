@@ -292,11 +292,10 @@ $.fn.crearDataTable = function(tds, callback, responsive)
   if ($("#" + idObj + "_wrapper").length == 1)
     {
         $(this).dataTable().fnDestroy();
+        $(this).find("tbody").find("tr").remove();
     } 
 
-    if (tds != undefined && tds != "")
-    {
-      $(this).find("tbody").find("tr").remove();
+    if (tds != undefined && tds != ""){
       $("#" + idObj + " tbody").append(tds);
     }
 
@@ -727,7 +726,7 @@ $.fn.cambiarDireccionamiento = function(titulo, vinculo, nCallback){
   }
 
   if (vinculo == undefined || vinculo == null) {
-    vinculo = $(this).attr('Titulo');
+    vinculo = $(this).attr('vinculo');
   }
 
   if (nCallback == undefined || nCallback == null) {

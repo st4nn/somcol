@@ -13,7 +13,10 @@
                SUM(au_registro.DiasDeIncapacidad) AS Dias
             FROM
                au_registro
-            WHERE au_registro.idEmpresa = '$idEmpresa'
+            WHERE 
+               au_registro.idEmpresa = '$idEmpresa'
+               AND au_registro.FechaInicial >= '$Desde 00:00:00'
+               AND au_registro.FechaInicial <= '$Hasta 23:59:59'
             GROUP BY au_registro.RangoDeEdad;";
 
    $result = $link->query(utf8_decode($sql));

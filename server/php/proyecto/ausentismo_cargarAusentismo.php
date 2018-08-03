@@ -24,7 +24,11 @@
             FROM
                au_registro
                INNER JOIN personal ON au_registro.idPersonal = personal.id
-               INNER JOIN confCieX ON confCieX.Codigo = au_registro.CodigoDiagnostico;";
+               INNER JOIN confCieX ON confCieX.Codigo = au_registro.CodigoDiagnostico
+            WHERE 
+               au_registro.idEmpresa = '$idEmpresa'
+               AND au_registro.FechaInicial >= '$Desde 00:00:00'
+               AND au_registro.FechaInicial <= '$Hasta 23:59:59';";
 
    $result = $link->query(utf8_decode($sql));
    $idx=0;

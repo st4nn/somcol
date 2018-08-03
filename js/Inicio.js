@@ -105,3 +105,8 @@ function fun_Inicio()
     $(this).removeClass('buscarGoogle');
   }
 }
+
+function personal_desde_Inicio(){
+  $('#btnPersonal_Listado_Volver').cambiarDireccionamiento('Inicio', 'Inicio.html');
+  personal_listado_Cargar();
+}

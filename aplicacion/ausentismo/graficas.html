@@ -121,6 +121,11 @@
             funAusentismo_CargarGrafica(idx);
         });
 
+        $('#frmAusentismo_Graficas').on('submit', function(e){
+            e.preventDefault();
+            funAusentismo_CargarTiposDeEvento();
+        });
+
         function funAusentismo_CambiarIDXDeGrafica(idx){
             if (idx < 0){
                 idx = (vAusentismo_TipoDeGrafica.length - 1);
@@ -152,6 +157,9 @@
     }
 
     function funAusentismo_CargarGrafica(numGrafica){
+        if (window.cntAustentismo_Grafica_ != null && window.cntAustentismo_Grafica_ != undefined){
+          window.cntAustentismo_Grafica_.destroy();
+        }
         $.post('../server/php/proyecto/ausentismo_cargarGrafica_' + numGrafica + '.php', {
                 idUsuario: Usuario.id,
                 idEmpresa : $('#txtInicio_idEmpresa').val(),
@@ -202,10 +210,6 @@
                         };
                     
                     var ctx = document.getElementById("cntAustentismo_Grafica").getContext("2d");
-                    if (window.cntAustentismo_Grafica_ != null && window.cntAustentismo_Grafica_ != undefined)
-                    {
-                      window.cntAustentismo_Grafica_.destroy();
-                    }
 
                     window.cntAustentismo_Grafica_ = new Chart(ctx, {
                         type: 'bar',

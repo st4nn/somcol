@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
   <meta name="description" content="bootstrap admin template">
   <meta name="author" content="">
-  <title>Login | SOMCOL</title>
+  <title>Login | ESDRAS</title>
   <link rel="shortcut icon" href="assets/images/favicon.ico">
   <!-- Stylesheets -->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -28,6 +28,13 @@
   <script>
     Breakpoints();
   </script>
+  <style>
+    #footimage{
+      bottom: 0;
+      position: fixed;
+      right: 1em;
+    }
+  </style>
 </head>
 <body class="page-login-v3 layout-full" style="background:'assets/images/fondoIndex.jpg' !important;">
   <!--[if lt IE 8]>
@@ -37,7 +44,7 @@
   <div class="page animsition vertical-align text-center" data-animsition-in="fade-in"
   data-animsition-out="fade-out">
     <div class="page-content vertical-align-middle">
-      <img class="brand-img" src="assets/images/somcol.png" alt="...">
+      <img class="brand-img" src="assets/images/esdras.png" alt="...">
       <div class="panel" id="cntLogin">
         <div class="panel-body">
           <form id="frmLogin">
@@ -55,9 +62,11 @@
             <div class="alert bg-red-600 blue-grey-100 hide"></div>
             <button class="btn btn-success pull-right" id="btnLogin_Entrar">ENTRAR</button>
           </form>
+
         </div>
       </div>
     </div>
+    <h6 id="footimage">Desarrolado por <img src="assets/images/somcol.png" height="37" /></h6>
   </div>
   <!-- End Page -->
   <!-- Core  -->

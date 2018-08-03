@@ -284,3 +284,5 @@ function Copasst_GraficarResultado()
     window.cntCopasst_AEC_Resultados.canvas.parentNode.style.height = '380px';
   }
 }
+
+

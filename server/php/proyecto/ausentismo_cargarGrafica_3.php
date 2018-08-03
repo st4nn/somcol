@@ -14,7 +14,10 @@
             FROM
                au_registro
                LEFT JOIN personal ON personal.id = au_registro.idPersonal
-            WHERE au_registro.idEmpresa = '$idEmpresa'
+            WHERE 
+               au_registro.idEmpresa = '$idEmpresa'
+               AND au_registro.FechaInicial >= '$Desde 00:00:00'
+               AND au_registro.FechaInicial <= '$Hasta 23:59:59'
             GROUP BY au_registro.idPersonal;";
 
    $result = $link->query(utf8_decode($sql));
