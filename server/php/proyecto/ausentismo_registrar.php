@@ -3,6 +3,7 @@
    $link = Conectar();
 
    $id = addslashes($_POST['id']);
+   $id = addslashes($_POST['Prefijo']);
    $idEmpresa = addslashes($_POST['idEmpresa']);
    $idUsuario = addslashes($_POST['Usuario']);
 
@@ -42,10 +43,11 @@
       $id = "NULL";
    }
 
-      $sql = "INSERT INTO au_registro(id, idEmpresa, idUsuario, idPersonal, Edad, TipoEvento, IncapacidadTipo, FechaInicial, FechaFinal, CodigoDiagnostico, Observaciones, RangoDeEdad, DiasDeIncapacidad, Dia, Mes, Anio, DiaDeLaSemana, Trimestre) VALUES 
+      $sql = "INSERT INTO au_registro(id, Prefijo, idEmpresa, idUsuario, idPersonal, Edad, TipoEvento, IncapacidadTipo, FechaInicial, FechaFinal, CodigoDiagnostico, Observaciones, RangoDeEdad, DiasDeIncapacidad, Dia, Mes, Anio, DiaDeLaSemana, Trimestre) VALUES 
       (
          $id, 
          '" . $idEmpresa . "',
+         '" . $Prefijo . "',
          '" . $idUsuario . "',
          '" . $idPersonal . "',
          '" . $Edad . "',

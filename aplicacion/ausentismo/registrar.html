@@ -264,7 +264,7 @@
 				        } else
 				        {
 				          Mensaje("!", 'Los datos han sido ingresados correctamente', 'success');
-				          $('#frmAusentismo_Registrar')[0].reset();
+				          ausentismo_Nuevo();
 				        }
 	      			});
       			}
@@ -295,7 +295,7 @@
 		});
 	});
 
-	function personalAgregarPersona_Nuevo(){
+	function ausentismo_Nuevo(){
 		$('#frmAusentismo_Registrar')[0].reset();
 		$('#txtAusentismo_Registrar_Prefijo').val(obtenerPrefijo());
 
