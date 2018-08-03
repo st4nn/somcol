@@ -119,6 +119,7 @@
             <div class="panel-body">
             	<form id="frmAusentismo_Registrar">
             		<input class="guardar" type="hidden" id="txtAusentismo_Registrar_id" value="NULL">
+            		<input class="guardar" type="hidden" id="txtAusentismo_Registrar_Prefijo" value="NULL">
             		<div class="row">
 			 			<div class="col-sm-6">
 				 			<div class="form-group">
@@ -183,6 +184,18 @@
             	</form>
             </div>
         </div>
+
+        <div class="col-sm-12">
+ 			<div class="panel panel-bordered panel-primary">
+                <div class="panel-body">
+                    <div>
+                        <h4></h4>
+                        <div id="cntAusentismo_Registro_Archivos"></div>
+                    </div>
+                    
+                </div>
+            </div>
+ 		</div>
 	</div>
 </div>
 <style>
@@ -284,5 +297,10 @@
 
 	function personalAgregarPersona_Nuevo(){
 		$('#frmAusentismo_Registrar')[0].reset();
+		$('#txtAusentismo_Registrar_Prefijo').val(obtenerPrefijo());
+
+		$("#cntAusentismo_Registro_Archivos").iniciarObjArchivos({objPrefijo : $("#txtAusentismo_Registrar_Prefijo"), Proceso: "Registro Ausentismo", Usuario: Usuario.id});
+
+		$("#cntAusentismo_Registro_Archivos").cargarArchivos({Prefijo : $("#txtAusentismo_Registrar_Prefijo").val(), Proceso : 'Registro Ausentismo'});
 	}
 </script>
