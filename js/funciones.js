@@ -6,8 +6,7 @@ $(document).ready(function() {
 	aplicacion();
   Usuario = JSON.parse(localStorage.getItem('mj_somcol'));
 
-  if (Usuario == null || Usuario == undefined)
-  {
+  if (Usuario == null || Usuario == undefined){
     cerrarSesion();
   } else
   {

@@ -36,7 +36,7 @@ function cpActas_CargarCompromisos()
           tds += '<td>' + val.Responsable + '</td>'
           tds += '<td>' + val.Fecha + '</td>'
           tds += '<td><input type="date" class="form-control"></td>'
-          tds += '<td></td>'
+          tds += '<td>' + (val.fechaCumplimiento === '0000-00-00' ? 'Pendiente': 'Completado') + '</td>'
         tds += '</tr>';
       });
 

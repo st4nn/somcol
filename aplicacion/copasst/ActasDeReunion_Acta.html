@@ -5,8 +5,8 @@
         }
         #txtCopasst_ADR_Logo{
             display: block !important;
-            position: fixed;
-            top : 10px;
+            position: absolute;
+            top : -90px;
         }
 
         select, input, textarea{
@@ -48,12 +48,23 @@
   #cntCopasst_ActasReunion_CajaArchivos{
     display: none !important;
   }
+
+  .cntCoppast_Header{
+    display: block !important;
+    position: absolute;
+    top : -80px;
+    left: 110px;
+  }
 }
 </style>
 <!-- Page -->
 
 <div class="page" style="min-height: 90vh;">
-    <img id="txtCopasst_ADR_Logo" class="hide" height="100px" src="" alt="">
+    <img id="txtCopasst_ADR_Logo" class="hide" height="80px" src="" alt="">
+    <div class="cntCoppast_Header hide">
+        <h5 class="txtCopasst_Empresa"></h5>
+        <h6 class="txtCopasst_EmpresaNit"></h6>
+    </div>
 	<div class="page-header">
 		<h3 class="page-title">Acta de Reunión No <strong id="lblCopasst_ADR_Numero"></strong></h3>
 	</div>
@@ -77,7 +88,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtCopasst_ADR_Fecha" class="control-label">Fecha   </label>
-                                <input class="form-control guardar datepicker" type="text" id="txtCopasst_ADR_Fecha" required="true">
+                                <input class="form-control guardar datepicker" type="text" id="txtCopasst_ADR_Fecha" required="true" autocomplete="off">
                             </div>
                         </div>
                     </div> 
@@ -227,7 +238,7 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label for="txtCopasst_ADR_Compromisos_Fecha" class="control-label">Fecha Estima de Ejecución</label>
-                                <input class="form-control datepicker guardar" id="txtCopasst_ADR_Compromisos_Fecha">
+                                <input class="form-control datepicker guardar" id="txtCopasst_ADR_Compromisos_Fecha" autocomplete="off">
                             </div>
                         </div>
 
@@ -384,6 +395,8 @@
 
     function cpActas_CargarActa(idActa)
     {
+        $('.txtCopasst_Empresa').text(Empresa.Nombre);
+        $('.txtCopasst_EmpresaNit').text(Empresa.NIT);
         $('#frmCopasst_ADR')[0].reset();
         $('#txtCopasst_ADR_Logo').attr('src', '../server/php/' + Empresa.Ruta + '/' + Empresa.Archivo);
         $('#cntCopasst_ActasReunion_CajaArchivos').hide();

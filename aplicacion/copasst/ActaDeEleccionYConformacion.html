@@ -3,11 +3,6 @@
 	    button, form{
 	       display: none !important;
 	    }
-	    .cntCopasst_Notificacion #imgCopasst_NotificacionTR_Logo{
-	        display: block !important;
-	        position: fixed;
-	        top : 10px;
-	    }
 
 	    select, input{
 	        outline: none !important;
@@ -18,38 +13,49 @@
 	        display: inline !important;
 	    }
 
-  #frmCopasst_AEC{
-    display: block !important;
-  }
-  
-  #frmCopasst_AEC .form-group{
-    margin: 0;
-  }
-  #frmCopasst_AEC .control-label{
-    font-weight: 500;
-    width: 16em;
-  }
-  #frmCopasst_AEC .form-control{
-    width: calc(100% - 17em) !important;
-  }
-  table {
-    margin-top: -3em;
-  }
+	  #frmCopasst_AEC{
+	    display: block !important;
+	  }
+	  
+	  #frmCopasst_AEC .form-group{
+	    margin: 0;
+	  }
+	  #frmCopasst_AEC .control-label{
+	    font-weight: 500;
+	    width: 16em;
+	  }
+	  #frmCopasst_AEC .form-control{
+	    width: calc(100% - 17em) !important;
+	  }
+	  table {
+	    margin-top: -3em;
+	  }
 
-  .panel{
-    margin-top: -3em;
-  }
-  #txtCopasst_AEC_Logo{
-  	display: block !important;
-    position: fixed;
-    top : 10px;
-  }
-}
+	  .panel{
+	    margin-top: -2.5em;
+	  }
+	  #txtCopasst_AEC_Logo{
+	  	display: block !important;
+	    position: absolute;
+	    top : -90px;
+	  }
+
+	  .cntCoppast_Header{
+	  	display: block !important;
+	    position: absolute;
+	    top : -80px;
+	    left: 110px;
+	  }
+	}
 </style>
 <!-- Page -->
 
 <div class="page" style="min-height: 90vh;">
-	<img id="txtCopasst_AEC_Logo" class="hide" height="100px" src="" alt="">
+	<img id="txtCopasst_AEC_Logo" class="hide" height="80px" src="" alt="">
+	<div class="cntCoppast_Header hide">
+		<h5 class="txtCopasst_Empresa"></h5>
+		<h6 class="txtCopasst_EmpresaNit"></h6>
+	</div>
 	<div class="page-header">
 		<h3 class="page-title">Acta de Elección y Conformación</h3>
 	</div>
@@ -99,14 +105,14 @@
 			 			<div class="col-sm-6">
 				 			<div class="form-group">
 					        	<label for="txtCopasst_AEC_Fecha_Apertura" class="control-label">Fecha de Apertura Convocatoria</label>
-					        	<input class="form-control datepicker guardar" id="txtCopasst_AEC_Fecha_Apertura">
+					        	<input class="form-control datepicker guardar" id="txtCopasst_AEC_Fecha_Apertura" autocomplete="off">
 					        </div>
 			 			</div>
 
 			 			<div class="col-sm-6">
 				 			<div class="form-group">
 					        	<label for="txtCopasst_AEC_Fecha_Cierre" class="control-label">Fecha de Cierre Convocatoria</label>
-					        	<input class="form-control datepicker guardar" id="txtCopasst_AEC_Fecha_Cierre">
+					        	<input class="form-control datepicker guardar" id="txtCopasst_AEC_Fecha_Cierre" autocomplete="off">
 					        </div>
 			 			</div>
 			 		</div>
@@ -115,14 +121,14 @@
 			 			<div class="col-sm-6">
 				 			<div class="form-group">
 					        	<label for="txtCopasst_AEC_Fecha_AperturaVotaciones" class="control-label">Fecha de Apertura Votaciones</label>
-					        	<input class="form-control datepicker guardar" id="txtCopasst_AEC_Fecha_AperturaVotaciones">
+					        	<input class="form-control datepicker guardar" id="txtCopasst_AEC_Fecha_AperturaVotaciones" autocomplete="off">
 					        </div>
 			 			</div>
 
 			 			<div class="col-sm-6">
 				 			<div class="form-group">
 					        	<label for="txtCopasst_AEC_Fecha_CierreVotaciones" class="control-label">Fecha de Cierre Votaciones</label>
-					        	<input class="form-control datepicker guardar" id="txtCopasst_AEC_Fecha_CierreVotaciones">
+					        	<input class="form-control datepicker guardar" id="txtCopasst_AEC_Fecha_CierreVotaciones" autocomplete="off">
 					        </div>
 			 			</div>
 			 		</div>
@@ -141,7 +147,7 @@
 			 			<div class="col-sm-6">
 				 			<div class="form-group">
 					        	<label for="txtCopasst_AEC_Fecha_Apertura" class="control-label">Fecha de Apertura Elecciones</label>
-					        	<input class="form-control datepicker guardar" id="txtCopasst_AEC_Fecha_Elecciones">
+					        	<input class="form-control datepicker guardar" id="txtCopasst_AEC_Fecha_Elecciones" autocomplete="off">
 					        </div>
 			 			</div>
 			 		</div>

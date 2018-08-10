@@ -27,14 +27,14 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtFallasControl_BDF_FechaDeRemision" class="control-label">Fecha de Remisión</label>
-                                <input class="form-control datepicker guardar" id="txtFallasControl_BDF_FechaDeRemision">
+                                <input class="form-control datepicker guardar" id="txtFallasControl_BDF_FechaDeRemision" autocomplete="off">
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtFallasControl_BDF_FechaDeFalla" class="control-label">Fecha del Incidente/Falla de Control</label>
-                                <input class="form-control datepicker guardar" id="txtFallasControl_BDF_FechaDeFalla">
+                                <input class="form-control datepicker guardar" id="txtFallasControl_BDF_FechaDeFalla" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -124,8 +124,8 @@
 
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="txtFallasControl_BDF_Propiedad" class="control-label">3. Ambiente o Proceso</label>
-                                <select class="form-control guardar" id="txtFallasControl_BDF_Propiedad">
+                                <label for="txtFallasControl_BDF_Proceso" class="control-label">3. Ambiente o Proceso</label>
+                                <select class="form-control guardar" id="txtFallasControl_BDF_Proceso">
                                     <option value="Ninguna">Ninguna</option>
                                     <option value="Con daño al Ambiente">Con daño al Ambiente</option>
                                     <option value="Con daño al Proceso">Con daño al Proceso</option>
@@ -186,11 +186,58 @@
                             </div>
                         </div>
                     </div>
+                    <button type="submit" class="btn btn-success btn-block"><i class="icon fas fa-floppy-o"></i> Guardar </button>
                 </form>
+            </div>
+        </div>
+
+        <div class="panel panel-bordered">
+            <div class="panel-body">
+                <div class="row">
+                    <div>
+                        <h4></h4>
+                        <div id="cntFallasControl_BDF_Archivos"></div>
+                    </div>
+                </div>
             </div>
         </div>
 	</div>
 </div>
 <script>
+    $('#frmFallasControl_BDF .datepicker').datepicker({
+        clearBtn: true,
+        language: "es",
+        orientation: "top auto",
+        daysOfWeekHighlighted: "0",
+        autoclose: true,
+        todayHighlight: true
+    });
+
+    $("#cntFallasControl_BDF_Archivos").iniciarObjArchivos({objPrefijo : $("#txtFallasControl_BDF_idArchivo"), Proceso: "Ficha Fallas de Control", Usuario: Usuario.id});
+
+    $('#frmFallasControl_BDF').on('submit', function(evento){
+        evento.preventDefault();
+        $(this).generarDatosEnvio('txtFallasControl_BDF_', function(datos){
+            datos = $.parseJSON(datos);
+            datos.idEmpresa = ($('#txtInicio_idEmpresa').val() || Usuario.idEmpresa);
+            datos.nombreUsuario = Usuario.Nombre
+            
+            $.post('../server/php/proyecto/fdc_registrar.php', datos, function(data, textStatus, xhr) {
+                if (isNaN(data)){
+                  Mensaje('Error', data, 'danger');
+                } else{
+                  Mensaje("!", 'Los datos han sido ingresados correctamente', 'success');
+                }
+            });
+        });
+    });
+
+    FallasControl_BDF_nuevo();
+
+    function FallasControl_BDF_nuevo(){
+        $('#txtFallasControl_BDF_idArchivo').val(obtenerPrefijo());
+        $('#frmFallasControl_BDF')[0].reset();
+        $("#cntFallasControl_Archivos").cargarArchivos({Prefijo : $("#txtFallasControl_BDF_idArchivo").val(), Proceso : 'Ficha Fallas de Control'});
+    }
 
 </script>

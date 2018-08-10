@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+<html class="no-js css-menubar" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta name="description" content="bootstrap admin template">
+  <meta name="author" content="">
+
+  <title>REPORTE DE ACTOS Y CONDICIONES INSEGURAS</title>
+
+  <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="../assets/images/favicon.ico">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-extend.min.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+
+  <!-- Plugins -->
+  <link rel="stylesheet" href="../assets/vendor/animsition/animsition.css">
+  <link rel="stylesheet" href="../assets/vendor/asscrollable/asScrollable.css">
+  <link rel="stylesheet" href="../assets/vendor/switchery/switchery.css">
+  <link rel="stylesheet" href="../assets/vendor/intro-js/introjs.css">
+  <link rel="stylesheet" href="../assets/vendor/slidepanel/slidePanel.css">
+  <link rel="stylesheet" href="../assets/vendor/flag-icon-css/flag-icon.css">
+
+  <!-- Page -->
+  <link rel="stylesheet" href="../assets/examples/css/pages/login-v3.css">
+
+  <!-- Fonts -->
+  <link rel="stylesheet" href="../assets/fonts/web-icons/web-icons.min.css">
+  <link rel="stylesheet" href="../assets/fonts/brand-icons/brand-icons.min.css">
+  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+
+  <link rel="stylesheet" href="../assets/vendor/bootstrap-datepicker/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="../assets/vendor/bootstrap-sweetalert/sweet-alert.css">
+
+  <!--[if lt IE 9]>
+    <script src="../assets/vendor/html5shiv/html5shiv.min.js"></script>
+    <![endif]-->
+
+  <!--[if lt IE 10]>
+    <script src="../assets/vendor/media-match/media.match.min.js"></script>
+    <script src="../assets/vendor/respond/respond.min.js"></script>
+    <![endif]-->
+  <<style>
+    body{
+      color: black !important;
+    }
+  </style>
+  <!-- Scripts -->
+  <script src="../assets/vendor/modernizr/modernizr.js"></script>
+  <script src="../assets/vendor/breakpoints/breakpoints.js"></script>
+  <script>
+    Breakpoints();
+  </script>
+</head>
+<body class="page-login layout-full page-dark">
+  <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+
+  <!-- Page -->
+  <div id="p2" class="page vertical-align text-center hide">
+    <div class="page-content vertical-align-middle">
+      <div class="brand">
+        <img class="brand-img" src="../assets/images/logo.png" alt="...">
+        <h2 class="brand-text">Remark</h2>
+      </div>
+      <div id="algo">
+      </div>
+    </div>
+  </div>
+  <!-- End Page -->
+
+    <!-- Page -->
+  <div id="p1" class="page vertical-align text-center">
+    <div class="page-content vertical-align-middle">
+      <p>REPORTE DE ACTOS Y CONDICIONES INSEGURAS</p>
+      <form id="frmLogin">
+        <div class="form-group">
+          <label class="" for="txtCC">Por favor ingrese su numero de Documento</label>
+          <input type="text" class="form-control" id="txtCC" placeholder="Numero de Documento">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+      </form>
+    </div>
+  </div>
+  <!-- End Page -->
+
+
+  <!-- Core  -->
+  <script src="../assets/vendor/jquery/jquery.js"></script>
+  <script src="../assets/vendor/bootstrap/bootstrap.js"></script>
+  <script src="../assets/vendor/animsition/jquery.animsition.js"></script>
+  <script src="../assets/vendor/asscroll/jquery-asScroll.js"></script>
+  <script src="../assets/vendor/mousewheel/jquery.mousewheel.js"></script>
+  <script src="../assets/vendor/asscrollable/jquery.asScrollable.all.js"></script>
+  <script src="../assets/vendor/ashoverscroll/jquery-asHoverScroll.js"></script>
+
+  <!-- Plugins -->
+  <script src="../assets/vendor/switchery/switchery.min.js"></script>
+  <script src="../assets/vendor/intro-js/intro.js"></script>
+  <script src="../assets/vendor/screenfull/screenfull.js"></script>
+  <script src="../assets/vendor/slidepanel/jquery-slidePanel.js"></script>
+
+  <!-- Plugins For This Page -->
+  <script src="../assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+
+  <!-- Scripts -->
+  <script src="../assets/js/core.js"></script>
+  <script src="../assets/js/site.js"></script>
+
+  <script src="../assets/js/configs/config-colors.js"></script>
+  <script src="../assets/js/configs/config-tour.js"></script>
+
+  <script src="../assets/js/components/asscrollable.js"></script>
+  <script src="../assets/js/components/slidepanel.js"></script>
+  <script src="../assets/js/components/switchery.js"></script>
+
+  <script src="../assets/vendor/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+  <script src="../assets/vendor/bootstrap-sweetalert/sweet-alert.js"></script>
+
+  <!-- Scripts For This Page -->
+  <script src="../assets/js/components/jquery-placeholder.js"></script>
+
+
+  <script>
+    var Usuario = null;
+    (function(document, window, $) {
+      'use strict';
+
+      var Site = window.Site;
+      $(document).ready(function() {
+        Site.run();
+        $('#frmLogin').on('submit', function(e){
+          e.preventDefault();
+          if ($('#txtCC').val() != ''){
+            $.post('php/validarUsuario.php', {cc: $('#txtCC').val()}, function(data, textStatus, xhr){
+              if (data.id > 0){
+                Usuario = {
+                  id : data.id,
+                  idEmpresa : data.idEmpresa,
+                  Nombre : data.Nombres + ' ' + data.Apellidos,
+                };
+                $('.brand-img').attr('src', '../server/php/' + data.Ruta + '/' + data.Logo);
+                $('.brand-text').text(data.Empresa);
+                $('#p1').slideUp();
+                $('#p2').slideDown();
+                cargarModulo();
+              } else{
+                Mensaje('Error', 'Acceso denegado', 'danger');
+              }
+            }, 'json');
+          }
+        });
+      });
+    })(document, window, jQuery);
+
+    function cargarModulo(){
+      $.get("../aplicacion/fallasControl/bd_ficha.html?tmpId=" + obtenerPrefijo(), function(data) {
+        $("#algo").html(data);
+        $('.lnkAbrirModulo').hide();
+      }).fail(function() {
+        Mensaje("Error", "No tiene permisos para acceder a este modulo", "danger");
+      }); 
+    }
+
+    function obtenerPrefijo(){
+      var f = new Date();
+      return f.getFullYear() + CompletarConCero(f.getMonth() +1, 2) + CompletarConCero(f.getDate(), 2) + CompletarConCero(f.getHours(), 2) + CompletarConCero(f.getMinutes(), 2) + CompletarConCero(f.getSeconds(), 2) + CompletarConCero(Usuario.id, 3);
+    }
+
+    function CompletarConCero(n, length){
+      n = n.toString();
+      while(n.length < length) n = "0" + n;
+      return n;
+    }
+
+    $.fn.iniciarObjArchivos = function(parametros){
+      var idObj = $(this).attr("id").replace("cnt", "");
+      var tds = "";
+      
+        tds += '<div id="cnt' + idObj + '_DivArchivo" class="col-md-12 form-group">';
+          tds += '<div class="input-group input-group-file">';
+            tds += '<span class="input-group-btn">';
+                tds += '<span class="btn btn-success col-md-12 btn-file">';
+                  tds += '<i class="icon wb-upload" aria-hidden="true"></i>';
+                  tds += 'Agregar Archivos';
+                  tds += '<input id="txt' + idObj + '_Archivo" type="file" name="...">';
+                tds += '</span>'; 
+            tds += '</span>';
+          tds += '</div>';
+        tds += '</div>';
+        tds += '<div class="row">';
+                tds += '<h4>Archivos Cargados</h4>';
+            tds += '<div class="margin-top-20">';
+                tds += '<div id="cnt' + idObj + '_DivArchivo_Listado" class="list-group-dividered list-group-full">';
+                tds += '</div>';
+            tds += '</div>';
+        tds += '</div>';
+
+        $(this).append(tds);
+        tds = "";
+
+        if ($("#cntModal_Archivos").length == 0){
+          tds += '<div class="modal fade" id="cntModal_Archivos" tabindex="-1" role="dialog" aria-hidden="true">';
+                tds += '<div class="modal-dialog">';
+                    tds += '<div class="modal-content">';
+                        tds += '<form id="frmModal_Archivo" class="form-horizontal" role="form">';
+                            tds += '<div class="modal-header">';
+                                tds += '<h4 class="modal-title">Guardar Archivo <span id="lblModal_Archivo_Nombre"></span></h4>';
+                            tds += '</div>';
+                            tds += '<div class="modal-body">';
+                                tds += '<div class="form-group">';
+                                    tds += '<div class="fg-line">';
+                                        tds += '<textarea id="txtModal_ArchivoDescripcion" class="form-control" rows="5" placeholder="Observaciones, Comentarios o Descripción del Archivo..."></textarea>';
+                                    tds += '</div>';
+                                tds += '</div>';
+                            tds += '</div>';
+                            tds += '<div class="modal-footer">';
+                                tds += '<button type="button" id="btnModal_Archivo_Cancelar" data-dismiss="modal" class="btn btn-warning">Cancelar</button>';
+                                tds += '<button type="submit" class="btn btn-success">Enviar</button>';
+                            tds += '</div>';
+                        tds += '</form>';
+                    tds += '</div>';
+                tds += '</div>';
+            tds += '</div>';
+
+            $("body").append(tds);
+
+             $("#btnModal_Archivo_Cancelar").on("click", function(evento){
+              evento.preventDefault();
+              $("#cntIngresar_Archivo").modal("hide");
+            });
+
+          $('#txt' + idObj + '_Archivo').on("change", function(event){
+            $("#txtModal_ArchivoDescripcion").val("");
+            $("#cntModal_Archivos").modal("show");
+            $("#lblModal_Archivo_Nombre").text($(this).val().replace("C:\\fakepath\\", ""));
+            $("#txtModal_ArchivoDescripcion").focus();
+
+            files = event.target.files;
+          });
+
+          $("#frmModal_Archivo").on("submit", function(evento){
+            evento.preventDefault();
+            $("#cntModal_Archivos").modal("hide");
+
+            var data = new FormData();
+
+            $.each(files, function(key, value){
+                data.append(key, value);
+            });
+
+            parametros.Prefijo = $(parametros.objPrefijo).val();
+
+            if (parametros != undefined && parametros != null){
+              $.each(parametros, function(index, val) {
+                if (index != 'objPrefijo'){
+                  data.append(index, val);
+                }
+              });
+            }
+
+
+            data.append("Observaciones", $("#txtModal_ArchivoDescripcion").val());
+            var nomArchivo = files[0].name;
+
+            $.ajax({
+                  url: '../server/php/subirArchivos.php',
+                  type: 'POST',
+                  data: data,
+                  cache: false,
+                  dataType: 'html',
+                  processData: false, // Don't process the files
+                  contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+                  success: function(data, textStatus, jqXHR)
+                  {
+                      if( parseInt(data) >= 1)
+                      {
+                        var extension = nomArchivo.split('.');
+                        if (extension.length > 0)
+                        {
+                          extension = extension[extension.length - 1];
+                        } else
+                        {
+                          extension = "obj";
+                        }
+
+                        var tds = "";
+                        tds += '<li class="list-group-item">';
+                          tds += '<small>';
+                            tds += '<time class="pull-right" datetime="' + obtenerFecha() + '">Hace un momento</time><br>';
+                          tds += '</small>';
+                          tds += '<p><a class="hightlight" href="../server/php/Archivos/' + parametros.Prefijo + '/' + nomArchivo + '" target="_blank">' + nomArchivo + '</a></p>';
+                          tds += '<p>' + $("#txtModal_ArchivoDescripcion").val() + '</p>';
+                          tds += '<small>Cargado por ';
+                            tds += '<a class="hightlight" href="javascript:void(0)">';
+                              tds += '<span> ' + Usuario.Nombre + '</span>';
+                            tds += '</a>';
+                          tds += '</small>';
+                        tds += '</li>';
+                        
+                        $('#cnt' + idObj + '_DivArchivo_Listado').prepend(tds);
+                      }
+                      else
+                      {
+                          Mensaje('Error:', data);
+                      }
+                  },
+                  error: function(jqXHR, textStatus, errorThrown)
+                  {
+                      // Handle errors here
+                      Mensaje('Error:', textStatus);
+                      $("#cntIngresar_Archivo").modal("show");
+                  }
+              });
+          });
+      }
+    }
+
+    $.fn.cargarArchivos = function(parametros){
+      var contenedor = $(this).find(".list-group-full");
+      $(contenedor).find("li").remove();
+      $.post("../server/php/proyecto/archivos_cargarPorPrefijo.php", parametros, function(data, textStatus, xhr) {
+        var tds = '';
+        if (data != 0){
+          $.each(data, function(index, val) {
+            tds += '<li class="list-group-item">';
+              tds += '<small><time class="pull-right" datetime="' + val.FechaCargue + '">' + calcularTiempoPublicacion(val.FechaCargue) + '</time></small>';
+              tds += '<p><a class="hightlight" href="../server/Archivos/' + val.Ruta + '/' + val.Nombre + '" target="_blank">' + val.Nombre + '</a></p>';
+              tds += '<p><small>' + val.Proceso + '</small><br>';
+              tds += val.Observaciones + '</p>';
+              tds += '<small>Cargado por';
+                tds += '<a class="hightlight" href="javascript:void(0)">';
+                  tds += '<span>' + val.Usuario + '</span>';
+                tds += '</a>';
+              tds += '</small>';
+            tds += '</li>';
+          });
+        }
+
+        $(contenedor).append(tds);
+
+      }, 'json');
+    }
+
+    $.fn.generarDatosEnvio = function(restricciones, callback){
+      if (callback === undefined)
+        {callback = function(){};}
+
+      var obj = $(this).find(".guardar");
+      var datos = {};
+      datos['Usuario'] = Usuario.id;
+
+      $.each(obj, function(index, val) 
+      {
+        if ($(val).attr("id") != undefined)
+        {
+          if (!$(val).hasClass('tt-hint'))
+          {
+            datos[$(val).attr("id").replace(restricciones, "")] = $(val).val();
+          }
+        }
+      });
+      datos = JSON.stringify(datos);  
+
+      callback(datos);
+    }
+
+    function Mensaje(Titulo, Mensaje, Tipo){
+      if (Tipo == "danger"){
+        Tipo = 'warning';
+      } 
+
+      swal({
+
+              title: Titulo,
+              text: Mensaje,
+              type: Tipo,
+              showCancelButton: true,
+              cancelButtonText : 'Cancelar'
+      }); 
+    }
+    
+  </script>
+
+
+</body>
+
+</html>

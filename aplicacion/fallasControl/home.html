@@ -1,7 +1,7 @@
 <!-- Page -->
 <div class="page" style="min-height: 90vh;">
   <div class="page-header bg-white">
-    <h3 class="page-title">Fallas de Control</h3>
+    <h3 class="page-title">Reporte de actos y condiciones inseguras</h3>
     <div class="page-header-actions">
         <button type="button" class="btn btn-sm btn-round lnkAbrirModulo" Titulo="Inicio" vinculo="Inicio.html">
           <i class="icon wb-home" aria-hidden="true"></i>
@@ -10,36 +10,128 @@
       </div>
   </div>
  	<div class="page-content container-fluid">
- 		<div class="col-sm-12">
-      <div class="bg-orange-400 fButton margin-5 lnkAbrirModulo" Titulo="Archivos" vinculo="fallasControl/archivos.html" data-callback="fun_fallasControl_CargarArchivos">
-          <i class="icon fa-file-archive-o bg-orange-800 "></i>Archivos
-      </div>
-    </div>
-
-    <div class="col-sm-12">
-      <div class="bg-blue-400 fButton margin-5 lnkAbrirModulo" Titulo="Base de Datos" vinculo="fallasControl/bd_ficha.html">
-          <i class="icon fa-database bg-blue-800 "></i>Base de Datos
-      </div>
-    </div>
-<!--
-        <div class="col-sm-12">
-          <div class="bg-light-green-400 fButton margin-5 lnkAbrirModulo" Titulo="Registros de Ausentismo Laboral" vinculo="ausentismo/informe.html" data-callback="fun_Ausentismo_CargarDatos">
-              <i class="icon fa-tasks bg-light-green-800 "></i>Bd Seguimientos
-          </div>
+    <div class="col-sm-6">
+   		<div class="col-sm-12">
+        <div class="bg-orange-400 fButton margin-5 lnkAbrirModulo" Titulo="Archivos" vinculo="fallasControl/archivos.html" data-callback="fun_fallasControl_CargarArchivos">
+            <i class="icon fa-file-archive-o bg-orange-800 "></i>Archivos
         </div>
+      </div>
 
-        <div class="col-sm-12">
-          <div class="bg-purple-400 fButton margin-5 lnkAbrirModulo" Titulo="Gráficas de Ausentismo Laboral" vinculo="ausentismo/graficas.html" data-callback="funAusentismo_CargarTiposDeEvento">
-              <i class="icon fa-file-text-o bg-purple-800 "></i>Informes
-          </div>
+      <div class="col-sm-12">
+        <div class="bg-blue-400 fButton margin-5 lnkAbrirModulo" Titulo="Base de Datos" vinculo="fallasControl/bd_ficha.html">
+            <i class="icon fa-database bg-blue-800 "></i>Base de Datos
         </div>
-      -->
+      </div>
+
+      <div class="col-sm-12">
+        <div class="bg-light-green-400 fButton margin-5 lnkAbrirModulo" Titulo="Base de Datos" vinculo="fallasControl/bd_ficha.html">
+            <i class="icon fa-search bg-light-green-800 "></i>Seguimiento
+        </div>
+      </div>
+
+      <div class="col-sm-12">
+        <div class="bg-purple-400 fButton margin-5 lnkAbrirModulo" Titulo="Base de Datos" vinculo="fallasControl/bd_ficha.html">
+            <i class="icon fa-line-chart bg-purple-800 "></i>Informes
+        </div>
+      </div>
  	</div>
+  <div class="col-sm-6">
+    <div id="canvas-FDC" style="width:100%; margin-top: 10%;">
+      <canvas id="cntFDC_ChartHome"></canvas>
+    </div>
+  </div>
  </div>
  <script>
-  function fun_Ausentismo_AbrirListadoDePersonal(){
-    $('#btnPersonal_Listado_Volver').cambiarDireccionamiento('Ausentismo', 'ausentismo/home.html');
+  function fdc_AbrirHome(){
+    $.post('../server/php/proyecto/fdc_cargarGrafica_Home.php', {idUsuario : Usuario.id, idEmpresa: Usuario.idEmpresa}, function(data, textStatus, xhr) {
+        var randomScalingFactor = function() {
+          return Math.round(Math.random() * 255);
+        };
 
-    personal_listado_Cargar();
+        let
+            _dataSets = [],
+            _labels = [],
+            _data = [],
+            _color = {}
+            _idx = 0,
+            _max = 0;
+
+        $.each(data, function(index, val) {
+            if (_idx === 0){
+                $.each(val, function(index2, val2) {
+                     _labels.push(val2.mes);
+                });
+
+                _idx++;
+            }
+            _color = {
+                r : randomScalingFactor(),
+                g : randomScalingFactor(),
+                b : randomScalingFactor()
+            }
+            
+            _data = [];
+            $.each(val, function(index2, val2) {
+                 _data.push(val2.cantidad);
+                 if (val2.cantidad > _max){
+                    _max = val2.cantidad;
+                 }
+            });
+
+             _dataSets.push({
+                    label: index,
+                    data: _data,
+                    borderColor: 'rgb(' + _color.r + ', ' + _color.g + ', ' + _color.b + ')',
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                    fill: false
+                });
+        });
+
+        var config = {
+            type: 'line',
+            data: {
+                labels: _labels,
+                datasets: _dataSets
+            },
+            scaleStartValue: 0,
+            options: {
+                maintainAspectRatio : false,
+                responsive: true,
+                title: {
+                    display: true,
+                    text: ''
+                },
+                tooltips: {
+                    mode: 'index'
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Cantidad de Registros'
+                        },
+                        ticks: {
+                            suggestedMin: 0,
+                            suggestedMax: (_max + 5)
+                        }
+                    }]
+                }
+            }
+        };
+
+         var ctx = document.getElementById("cntFDC_ChartHome").getContext("2d");
+        if (window.cntAustentismo_Grafica_ != null && window.cntAustentismo_Grafica_ != undefined){
+          window.cntAustentismo_Grafica_.destroy();
+        }
+
+        window.cntAustentismo_Grafica_ = new Chart(ctx, config);
+    }, 'json');
   }
  </script>

@@ -195,6 +195,8 @@ function Copasst_AgregarCandidato(datos)
 
 function Copasst_CargarDatos(){
   var tmpAnio = $('#txtCopasst_AEC_Anio').val();
+  $('.txtCopasst_Empresa').text(Empresa.Nombre);
+  $('.txtCopasst_EmpresaNit').text(Empresa.NIT);
   $('#txtCopasst_Anio').val(tmpAnio);
   $('#frmCopasst_AEC')[0].reset();
   $('#frmCopasst_AEC_Candidatos_Empleador')[0].reset();

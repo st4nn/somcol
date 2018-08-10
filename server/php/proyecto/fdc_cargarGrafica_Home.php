@@ -4,25 +4,22 @@
 
    $idUsuario = addslashes($_POST['idUsuario']);
    $idEmpresa = addslashes($_POST['idEmpresa']);
-   $Desde = addslashes($_POST['Desde']);
-   $Hasta = addslashes($_POST['Hasta']);
 
    $sql = "SELECT 
-               au_registro.TipoEvento AS Etiqueta,
-               DATE_FORMAT(au_registro.FechaInicial, '%Y-%m') AS Etiqueta2,
-               COUNT(au_registro.id) AS Cantidad,
-               SUM(au_registro.DiasDeIncapacidad) AS Dias
+               fallasDeControl.Clasificacion AS Etiqueta,
+               DATE_FORMAT(fallasDeControl.FechaDeRemision, '%Y-%m') AS Etiqueta2,
+               COUNT(fallasDeControl.id) AS Cantidad
             FROM
-               au_registro
+               fallasDeControl
             WHERE 
-               au_registro.idEmpresa = '$idEmpresa'
-               AND DATE_FORMAT(au_registro.FechaInicial, '%Y') = '" . substr($Desde, 0, 4) . "'
+               fallasDeControl.idEmpresa = '$idEmpresa'
+               AND DATE_FORMAT(fallasDeControl.FechaDeRemision, '%Y') = '" . date('Y') . "'
             GROUP BY 
-               au_registro.TipoEvento,
-               DATE_FORMAT(au_registro.FechaInicial, '%Y-%m') 
+               fallasDeControl.Clasificacion,
+               DATE_FORMAT(fallasDeControl.FechaDeRemision, '%Y-%m') 
             ORDER BY 
-               au_registro.TipoEvento,
-               au_registro.FechaInicial;";
+               fallasDeControl.Clasificacion, 
+               fallasDeControl.FechaDeRemision;";
 
    $result = $link->query(utf8_decode($sql));
    $idx=0;
@@ -46,14 +43,14 @@
                $tmpM = '0' . $i;
             }
 
-            array_push($Resultado[$row['Etiqueta']], ['mes' => substr($row['Etiqueta2'], 0, 4) . '-' . $tmpM, 'cantidad' => 0, 'dias' => 0 ]);
+            array_push($Resultado[$row['Etiqueta']], ['mes' => substr($row['Etiqueta2'], 0, 4) . '-' . $tmpM, 'cantidad' => 0 ]);
          }
 
-         array_push($Resultado[$row['Etiqueta']], ['mes' => $row['Etiqueta2'], 'cantidad' => intval($row['Cantidad']), 'dias' => $row['Dias'] ]);
+         array_push($Resultado[$row['Etiqueta']], ['mes' => $row['Etiqueta2'], 'cantidad' => intval($row['Cantidad']) ]);
 
          $meses[$row['Etiqueta']] = intval(substr($row['Etiqueta2'], 5, 2)) + 1;
       }
-      $y = substr($Desde, 0, 4);
+      $y = date('Y');
       
       foreach ($Resultado as $key => $value) {
          for ($i=1; $i < 12; $i++) { 
@@ -62,8 +59,9 @@
                $tmpM = '0' . ($i + 1);
             }
 
+
             if (!isset($value[intval($i)])){
-               array_push($Resultado[$key], ['mes' => $y . '-' . $tmpM, 'cantidad' => 0, 'dias' => 0 ]);
+               array_push($Resultado[$key], ['mes' => $y . '-' . $tmpM, 'cantidad' => 0 ]);
             }
          }
       }
