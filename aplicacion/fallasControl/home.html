@@ -24,15 +24,21 @@
       </div>
 
       <div class="col-sm-12">
-        <div class="bg-light-green-400 fButton margin-5 lnkAbrirModulo" Titulo="Base de Datos" vinculo="fallasControl/bd_ficha.html">
-            <i class="icon fa-search bg-light-green-800 "></i>Seguimiento
+        <div class="bg-light-green-400 fButton margin-5 lnkAbrirModulo" Titulo="Seguimiento de Actos y Condiciones inseguras" data-callback="fdc_CargarSeguimiento" vinculo="fallasControl/seguimiento.html">
+            <i class="icon fa-search bg-light-green-800"></i>Seguimiento
         </div>
       </div>
 
       <div class="col-sm-12">
-        <div class="bg-purple-400 fButton margin-5 lnkAbrirModulo" Titulo="Base de Datos" vinculo="fallasControl/bd_ficha.html">
-            <i class="icon fa-line-chart bg-purple-800 "></i>Informes
+        <div class="bg-purple-400 fButton margin-5" Titulo="Base de Datos" vinculo="fallasControl/bd_ficha.html">
+            <i class="icon fa-line-chart bg-purple-800"></i>Informes
         </div>
+      </div>
+      <div>
+        <i>
+          Se puede acceder al registro de Actos/Condiciones Insegur@s en la dirección 
+          <a target="_blank" href="../fdc">https://somcol.com.co/app/fdc</a>
+        <i>
       </div>
  	</div>
   <div class="col-sm-6">
@@ -119,7 +125,7 @@
                         },
                         ticks: {
                             suggestedMin: 0,
-                            suggestedMax: (_max + 5)
+                            suggestedMax: (_max + 2)
                         }
                     }]
                 }

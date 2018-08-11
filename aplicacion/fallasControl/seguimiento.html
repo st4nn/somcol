@@ -1,0 +1,69 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<h3 class="page-title">Seguimiento de Actos y Condiciones inseguras</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+        <div class="panel panel-primary panel-bordered">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button class="btn btn-warning lnkAbrirModulo" Titulo="Gestión Fallas de Control" vinculo="fallasControl/home.html"><i class="icon fa-arrow-left"></i> Volver</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <table id="tblFDC_PlanDeAccion" class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Fecha de Remisión</th>
+                                <th>Descripción Corta</th>
+                                <th>Tipo de Acción</th>
+                                <th>Actividad</th>
+                                <th>Responsable</th>
+                                <th>Fecha Estimada de Ejecución</th>
+                                <th>Fecha Real de Ejecución</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function fdc_CargarSeguimiento(){
+        $.post('../server/php/proyecto/fdcCargarSeguimiento.php', {Usuario : Usuario.id, idEmpresa : Empresa.id}, function(data, textStatus, xhr) {
+            if (data !== 0){
+                var tds = '';
+                let _estado = 'Abierta';
+                $.each(data, function(index, val) {
+                   tds+= '<tr>';
+                        tds+= '<td></td>';
+                        tds+= '<td><a href="#" idFalla="' +  val.idFalla + '" class="lnkFDC_AbrirFalla">' + val.FechaDeRemision + '</a></td>';
+                        tds+= '<td>' + val.DescCorta + '</td>';
+                        tds+= '<td>' + val.TipoDeAccion + '</td>';
+                        tds+= '<td>' + val.Actividad + '</td>';
+                        tds+= '<td>' + val.Responsable + '</td>';
+                        tds+= '<td>' + val.FechaEstimadaDeEjecucion + '</td>';
+                        tds+= '<td>' + val.FechaRealDeEjecucion + '</td>';
+                        if (val.TipoDeAccion === ''){
+                            _estado = 'Sin revisar';
+                        } else{
+                            if (val.FechaRealDeEjecucion !== '' && val.FechaRealDeEjecucion !== '0000-00-00'){
+                                _estado = 'Ejecutada';
+                            } else{
+                                _estado = 'Abierta';
+                            }
+                        }
+                            tds+= '<td><a href="#" idPlanDeAccion="' + val.idPlanDeAccion + '" class="lnkFDC_AbrirPlanDeAccion">' + _estado + '</a></td>';
+                    tds+= '</tr>  ';
+                });
+
+                $('#tblFDC_PlanDeAccion').crearDataTable(tds, function(){}, false);
+            }
+        }, 'json');
+    }
+</script>
