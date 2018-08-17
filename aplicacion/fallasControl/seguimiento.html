@@ -16,8 +16,10 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>Fecha de Remisión</th>
-                                <th>Descripción Corta</th>
+                                <th>Fecha</th>
+                                <th>Reportado Por</th>
+                                <th>Tipo</th>
+                                <th>Descripción</th>
                                 <th>Tipo de Acción</th>
                                 <th>Actividad</th>
                                 <th>Responsable</th>
@@ -34,6 +36,15 @@
     </div>
 </div>
 <script>
+    $(document).delegate('.lnkFDC_AbrirFalla', 'click', function(event) {
+        const _id = $(this).attr('idFalla');
+        cargarModulo('fallasControl/bd_ficha.html', 'Reporte de falla', function(){
+            $('#btnFallasControl_BDF_Volver').cambiarDireccionamiento('Seguimiento de Actos y Condiciones inseguras', 'fallasControl/seguimiento.html');
+            $('#btnFallasControl_BDF_Guardar').slideUp();
+            $('#txtFallasControl_BDF_idArchivo').val(_id);
+            FallasControl_BDF_cargar();
+        });
+    });
     function fdc_CargarSeguimiento(){
         $.post('../server/php/proyecto/fdcCargarSeguimiento.php', {Usuario : Usuario.id, idEmpresa : Empresa.id}, function(data, textStatus, xhr) {
             if (data !== 0){
@@ -43,6 +54,8 @@
                    tds+= '<tr>';
                         tds+= '<td></td>';
                         tds+= '<td><a href="#" idFalla="' +  val.idFalla + '" class="lnkFDC_AbrirFalla">' + val.FechaDeRemision + '</a></td>';
+                        tds+= '<td>' + val.nombreUsuario + '</td>';
+                        tds+= '<td>' + val.Tipo + '</td>';
                         tds+= '<td>' + val.DescCorta + '</td>';
                         tds+= '<td>' + val.TipoDeAccion + '</td>';
                         tds+= '<td>' + val.Actividad + '</td>';
@@ -58,7 +71,7 @@
                                 _estado = 'Abierta';
                             }
                         }
-                            tds+= '<td><a href="#" idPlanDeAccion="' + val.idPlanDeAccion + '" class="lnkFDC_AbrirPlanDeAccion">' + _estado + '</a></td>';
+                            tds+= '<td><a href="#" idFalla="' + val.idPlanDeAccion + '" class="lnkFDC_AbrirFalla">' + _estado + '</a></td>';
                     tds+= '</tr>  ';
                 });
 

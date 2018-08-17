@@ -1,6 +1,5 @@
 function fun_Inicio()
 {
-
   $(document).delegate('.btnCargarMenu', 'click', function(evento) 
   {
     evento.preventDefault();

@@ -8,6 +8,8 @@
       $sql = "SELECT 
                   fallasDeControl.id AS idFalla,
                   fallasDeControl.FechaDeRemision,
+                  fallasDeControl.nombreUsuario,
+                  fallasDeControl.Tipo,
                   fallasDeControl.DescCorta,
                   fdcPlanesDeAccion.id AS idPlanDeAccion,
                   fdcPlanesDeAccion.TipoDeAccion,

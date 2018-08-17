@@ -1,13 +1,13 @@
 <!-- Page -->
 <div class="page" style="min-height: 90vh;">
 	<div class="page-header">
-		<h3 class="page-title">Ficha para Base de Datos</h3>
+		<h3 class="page-title">Ficha para Reportar Actos y Condiciones Inseguras</h3>
 	</div>
  	<div class="page-content container-fluid">
         <div class="panel panel-primary panel-bordered">
             <div class="panel-heading">
                 <div class="panel-actions">
-                    <button class="btn btn-warning lnkAbrirModulo" Titulo="Gestión Fallas de Control" vinculo="fallasControl/home.html"><i class="icon fa-arrow-left"></i> Volver</button>
+                    <button id="btnFallasControl_BDF_Volver" class="btn btn-warning lnkAbrirModulo" Titulo="Gestión Fallas de Control" vinculo="fallasControl/home.html"><i class="icon fa-arrow-left"></i> Volver</button>
                 </div>
             </div>
             <div class="panel-body">
@@ -15,88 +15,136 @@
                     <input id="txtFallasControl_BDF_idArchivo" type="hidden" class="guardar">
 
                     <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Tipo" class="control-label">Tipo de Evento</label>
+                                <select class="form-control guardar" id="txtFallasControl_BDF_Tipo">
+                                    <option value="Acto Inseguro">Acto Inseguro</option>
+                                    <option value="Condición insegura">Condición insegura</option>
+                                    <option value="Incidente de trabajo">Incidente de trabajo</option>
+                                    <option value="Accidente de Trabajo">Accidente de Trabajo</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Clasificacion" class="control-label">Clasificación</label>
+                                <select class="form-control guardar txtSelectOtro" id="txtFallasControl_BDF_Clasificacion">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Lugar" class="control-label">Lugar de Ocurrencia</label>
+                                <select class="form-control guardar txtSelectOtro" id="txtFallasControl_BDF_Lugar">
+                                    <option value="Almacén / Bodega / Deposito">Almacén / Bodega / Deposito</option>
+                                    <option value="Zona de Producción">Zona de Producción</option>
+                                    <option value="Zona Recreativa o Deportiva">Zona Recreativa o Deportiva</option>
+                                    <option value="Corredores o pasillos">Corredores o pasillos</option>
+                                    <option value="Escaleras">Escaleras</option>
+                                    <option value="Parqueadero / Zona Vehicular">Parqueadero / Zona Vehicular</option>
+                                    <option value="Oficinas">Oficinas</option>
+                                    <option value="Puesto de Trabajo">Puesto de Trabajo</option>
+                                    <option value="Vehículo">Vehículo</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="txtFallasControl_BDF_DescCorta" class="control-label">Descripción Corta</label>
+                                <label for="txtFallasControl_BDF_DescCorta" class="control-label">Descripción del Evento <small>Qué, Cómo, Por qué, Donde</small></label>
                                 <textarea class="form-control guardar" id="txtFallasControl_BDF_DescCorta"></textarea>
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="txtFallasControl_BDF_FechaDeRemision" class="control-label">Fecha de Remisión</label>
+                                <label for="txtFallasControl_BDF_FechaDeRemision" class="control-label">Fecha del reporte</label>
                                 <input class="form-control datepicker guardar" id="txtFallasControl_BDF_FechaDeRemision" autocomplete="off">
                             </div>
                         </div>
 
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="txtFallasControl_BDF_FechaDeFalla" class="control-label">Fecha del Incidente/Falla de Control</label>
+                                <label for="txtFallasControl_BDF_FechaDeFalla" class="control-label">Fecha del evento</label>
                                 <input class="form-control datepicker guardar" id="txtFallasControl_BDF_FechaDeFalla" autocomplete="off">
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="txtFallasControl_BDF_HoraDeFalla" class="control-label">Hora del Incidente/Falla de Control</label>
+                                <label for="txtFallasControl_BDF_HoraDeFalla" class="control-label">Hora del Evento</label>
                                 <input type="time" class="form-control guardar" id="txtFallasControl_BDF_HoraDeFalla">
                             </div>
                         </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Consecuencia" class="control-label">Gravedad</label>
+                                <select class="form-control guardar" id="txtFallasControl_BDF_Consecuencia">
+                                    <option value="Muy Grave">Muy Grave</option>
+                                    <option value="Grave">Grave</option>
+                                    <option value="Moderada">Moderada</option>
+                                    <option value="Leve">Leve</option>
+                                    <option value="Sin Consecuencia">Sin Consecuencia</option>
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="txtFallasControl_BDF_Lugar" class="control-label">Lugar de Ocurrencia</label>
-                                <input class="form-control guardar" id="txtFallasControl_BDF_Lugar">
+                                <label for="txtFallasControl_BDF_RAM" class="control-label">Aceptabilidad</label>
+                                <input class="form-control guardar" id="txtFallasControl_BDF_RAM">
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="txtFallasControl_BDF_Dependencia" class="control-label">Dependencia</label>
-                                <input class="form-control guardar" id="txtFallasControl_BDF_Dependencia">
+                                <label for="txtFallasControl_BDF_Dependencia" class="control-label">Dependencia/Area</label>
+                                <select class="form-control guardar txtSelectOtro" id="txtFallasControl_BDF_Dependencia">
+                                    <option value="Recursos Humanos">Recursos Humanos</option>
+                                    <option value="Ventas">Ventas</option>
+                                    <option value="HSEQ">HSEQ</option>
+                                    <option value="Operativo">Operativo</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
                             </div>
                         </div>
 
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_Propio_Contratista" class="control-label">El evento fue le sucedió</label>
+                                <select class="form-control guardar txtSelectOtro" id="txtFallasControl_BDF_Propio_Contratista">
+                                    <option value="Propio">a un Propio</option>
+                                    <option value="Contratista">A Contratista</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="cntFallasControl_BDF_Contratista" class="row">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtFallasControl_BDF_Contratista" class="control-label">Empresa Contratista</label>
                                 <input class="form-control guardar" id="txtFallasControl_BDF_Contratista">
                             </div>
                         </div>
 
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtFallasControl_BDF_Contrato" class="control-label">Número de Contrato</label>
                                 <input class="form-control guardar" id="txtFallasControl_BDF_Contrato">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="txtFallasControl_BDF_Tipo" class="control-label">Tipo</label>
-                                <input class="form-control guardar" id="txtFallasControl_BDF_Tipo">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="txtFallasControl_BDF_Consecuencia" class="control-label">Consecuencia</label>
-                                <input class="form-control guardar" id="txtFallasControl_BDF_Consecuencia">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="txtFallasControl_BDF_RAM" class="control-label">RAM</label>
-                                <input class="form-control guardar" id="txtFallasControl_BDF_RAM">
                             </div>
                         </div>
                     </div>
@@ -158,27 +206,16 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-sm-6">
+                    <div class="row hide">
+                        <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="txtFallasControl_BDF_Actividad" class="control-label">Actividad</label>
-                                <input class="form-control guardar" id="txtFallasControl_BDF_Actividad">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="txtFallasControl_BDF_Clasificacion" class="control-label">Clasificación</label>
-                                <select class="form-control guardar" id="txtFallasControl_BDF_Clasificacion">
-                                    <option value="Ninguna">Ninguna</option>
-                                    <option value="Acto Inseguro">Acto Inseguro</option>
-                                    <option value="Condición Insegura">Condición Insegura</option>
-                                </select>
+                                <textarea class="form-control guardar" id="txtFallasControl_BDF_Actividad"></textarea>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row hide">
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="txtFallasControl_BDF_Descripcion" class="control-label">Describa cómo sucedió el hecho <small>Qué, Cómo, Por qué, Donde</small></label>
@@ -186,7 +223,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success btn-block"><i class="icon fas fa-floppy-o"></i> Guardar </button>
+                    <button type="submit" id="btnFallasControl_BDF_Guardar" class="btn btn-success btn-block"><i class="icon fas fa-floppy-o"></i> Guardar </button>
                 </form>
             </div>
         </div>
@@ -201,10 +238,65 @@
                 </div>
             </div>
         </div>
+
+        <div class="panel panel-bordered" id="cntFallasControl_BDF_PlanDeAccion">
+            <div class="page-header">
+                <h3 class="page-title">Plan de Acción</h3>
+            </div>
+            <div class="panel-body">
+                <form id="frmFallasControl_BDF_PlanDeAccion">
+                    <input type="hidden" class="guardar" id="txtFallasControl_BDF_PlanDeAccion_id"> 
+                    <input type="hidden" class="guardar" id="txtFallasControl_BDF_PlanDeAccion_idFalla"> 
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_PlanDeAccion_TipoDeAccion" class="control-label">Tipo de Acción</label>
+                                <select class="form-control guardar" id="txtFallasControl_BDF_PlanDeAccion_TipoDeAccion">
+                                    <option value="Preventiva">Preventiva</option>
+                                    <option value="Correctiva">Correctiva</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_PlanDeAccion_Responsable" class="control-label">Responsable</label>
+                                <input class="form-control guardar" id="txtFallasControl_BDF_PlanDeAccion_Responsable">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_PlanDeAccion_Actividad" class="control-label">Actividad</label>
+                                <textarea class="form-control guardar" id="txtFallasControl_BDF_PlanDeAccion_Actividad"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_PlanDeAccion_FechaEstimadaDeEjecucion" class="control-label">Fecha estimada de Ejecución</label>
+                                <input class="form-control guardar datepicker" id="txtFallasControl_BDF_PlanDeAccion_FechaEstimadaDeEjecucion">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtFallasControl_BDF_PlanDeAccion_FechaRealDeEjecucion" class="control-label">Fecha real de Ejecución</label>
+                                <input class="form-control guardar datepicker" id="txtFallasControl_BDF_PlanDeAccion_FechaRealDeEjecucion">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-block"><i class="icon fas fa-floppy-o"></i> Guardar </button>
+                </form>
+            </div>
+        </div>
 	</div>
 </div>
 <script>
-    $('#frmFallasControl_BDF .datepicker').datepicker({
+    $('#frmFallasControl_BDF .datepicker, #frmFallasControl_BDF_PlanDeAccion .datepicker').datepicker({
         clearBtn: true,
         language: "es",
         orientation: "top auto",
@@ -217,26 +309,197 @@
 
     $('#frmFallasControl_BDF').on('submit', function(evento){
         evento.preventDefault();
-        $(this).generarDatosEnvio('txtFallasControl_BDF_', function(datos){
+        if ($('#btnFallasControl_BDF_Guardar').is(':visible')){
+            $(this).generarDatosEnvio('txtFallasControl_BDF_', function(datos){
+                datos = $.parseJSON(datos);
+                datos.idEmpresa = ($('#txtInicio_idEmpresa').val() || Usuario.idEmpresa);
+                datos.nombreUsuario = Usuario.Nombre
+                
+                $.post('../server/php/proyecto/fdc_registrar.php', datos, function(data, textStatus, xhr) {
+                    if (isNaN(data)){
+                      Mensaje('Error', data, 'danger');
+                    } else{
+                      Mensaje("!", 'Los datos han sido ingresados correctamente', 'success');
+                    }
+                });
+            });
+        }
+    });
+
+    $('#txtFallasControl_BDF_Consecuencia').on('change', function(evento){
+        const _str = $(this).val();
+        let _ans = 'Aceptable';
+
+        if (_str === 'Muy Grave'){
+            _ans = 'No Aceptable';
+        }
+
+        if (_str === 'Grave'){
+            _ans = 'No Aceptable o Aceptable con control específico';
+        }
+
+        $('#txtFallasControl_BDF_RAM').val(_ans);
+    });
+
+    $('#txtFallasControl_BDF_Tipo').on('change', function(evento){
+        const _val = $(this).val();
+
+        let _options = ['Sin determinar', 'Otro'];
+        if (_val === 'Acto Inseguro'){
+            _options = ['No usar el equipo de Protección personal',
+                'Usar herramientas o equipos de manera incorrecta',
+                'Adoptar una posición incorrecta',
+                'Operar maquinaria o equipos sin autorización ',
+                'Exceder límites de velocidad',
+                'No usar cinturón de seguridad',
+                'No respetar normas de transito',
+                'Usar equipo defectuoso',
+                'Trabajar bajo el efecto de sustancias psicoactivas alcohólicas',
+                'Ignorar las condiciones de peligro',
+                'Efectuar mantenimiento a equipo en movimiento',
+                'No usar procedimientos de seguridad',
+                'Faltar el respeto a compañeros',
+                'Bajar corriendo escaleras',
+                'Otro'];
+        }
+
+        if (_val === 'Condición insegura'){
+            _options = ['Equipos en mal estado',
+            'Pisos en mal estado',
+            'No demarcar o asegurar áreas',
+            'Diseño de locales de trabajo inseguros',
+            'Señalizaciones inadecuadas o insuficientes',
+            'Herramientas defectuosas',
+            'Falta de orden y aseo.',
+            'Escasez de espacio para trabajar.',
+            'Almacenamiento Incorrecto',
+            'Niveles de ruido excesivo',
+            'Iluminación o ventilación inadecuada',
+            'Otro'];
+        }
+
+        $('#txtFallasControl_BDF_Clasificacion option').remove();
+
+        let tds = '';
+        _options.forEach(function(val) {
+            tds += `<option value="${val}">${val}</option>`;
+        });
+        
+        $('#txtFallasControl_BDF_Clasificacion').append(tds);
+    });
+
+    $('.txtSelectOtro').on('change', function(evento){
+        const self = this;
+        if ($(this).val() === 'Otro'){
+            bootbox.prompt({
+                title : 'Cual?',
+                buttons: {
+                    confirm: {
+                        label: 'Confirmar',
+                        className: 'btn-danger'
+                    },
+                    cancel: {
+                        label: 'Volver',
+                        className: 'btn-default'
+                    }
+                },
+                callback: function (result) {
+                  if (result){
+                    $(self).prepend(`<option value="${result}">${result}</option>`);
+                    $(self).val(result);
+                  } else{
+                    const _options = $(self).find('option');
+                    $(self).val($(_options[0]).val());
+                    $(self).trigger('change');
+                  }
+                }
+              });
+        }
+    });
+
+    $('#txtFallasControl_BDF_Propio_Contratista').on('change', function(event){
+        if ($(this).val() === 'Propio'){
+            $('#cntFallasControl_BDF_Contratista').slideUp();
+        } else{
+            $('#cntFallasControl_BDF_Contratista input').val('');
+            $('#cntFallasControl_BDF_Contratista').slideDown();
+        }
+    });
+
+    $('#frmFallasControl_BDF_PlanDeAccion').on('submit', function(evento){
+        evento.preventDefault();
+
+        $(this).generarDatosEnvio('txtFallasControl_BDF_PlanDeAccion_', function(datos){
             datos = $.parseJSON(datos);
             datos.idEmpresa = ($('#txtInicio_idEmpresa').val() || Usuario.idEmpresa);
-            datos.nombreUsuario = Usuario.Nombre
             
-            $.post('../server/php/proyecto/fdc_registrar.php', datos, function(data, textStatus, xhr) {
+            $.post('../server/php/proyecto/fdc_PlanDeAccion_registrar.php', datos, function(data, textStatus, xhr) {
                 if (isNaN(data)){
                   Mensaje('Error', data, 'danger');
                 } else{
                   Mensaje("!", 'Los datos han sido ingresados correctamente', 'success');
+                  fdc_CargarSeguimiento();
                 }
             });
         });
+        
     });
 
-    FallasControl_BDF_nuevo();
+    function FallasControl_BDF_cargar(){
+        $.post('../server/php/proyecto/fdc_cargar.php', {Usuario: Usuario.id, idFalla : $('#txtFallasControl_BDF_idArchivo').val()}, 
+            function(data, textStatus, xhr) {
+                data = data[(data.length - 1)];
+                
+                $('#txtFallasControl_BDF_PlanDeAccion_idFalla').val($('#txtFallasControl_BDF_idArchivo').val());
+
+                $('#txtFallasControl_BDF_Tipo').val(data.Tipo);
+                $('#txtFallasControl_BDF_Tipo').trigger('change');
+
+                if (data.Contratista === ''){
+                    $('#txtFallasControl_BDF_Propio_Contratista').val('Propio');
+                    $('#txtFallasControl_BDF_Propio_Contratista').trigger('change');
+                }
+
+                $("#cntFallasControl_Archivos").cargarArchivos({Prefijo : data.Prefijo, Proceso : 'Ficha Fallas de Control'});
+                _arrRestricted = ['Tipo'];
+                setTimeout(function(){
+                    $.each(data, function(index, val) {
+                        if (_arrRestricted.indexOf(index) < 0){
+                            if (index === 'HoraDeFalla'){
+                                $('#txtFallasControl_BDF_' + index).val(val.substring(11, 16));
+                            } else{
+                                if ($('#txtFallasControl_BDF_' + index).length > 0){
+                                    $('#txtFallasControl_BDF_' + index).val(val);
+                                }
+                            }
+                        }
+                    });
+
+                    $('txtFallasControl_BDF_idArchivo').val(data.Prefijo);
+
+                    $('#cntFallasControl_BDF_PlanDeAccion').show();
+                    $('#txtFallasControl_BDF_PlanDeAccion_id').val(data.PDA_id)
+                    $('#txtFallasControl_BDF_PlanDeAccion_TipoDeAccion').val(data.PDA_TipoDeAccion)
+                    $('#txtFallasControl_BDF_PlanDeAccion_Actividad').val(data.PDA_Actividad)
+                    $('#txtFallasControl_BDF_PlanDeAccion_Responsable').val(data.PDA_Responsable)
+                    $('#txtFallasControl_BDF_PlanDeAccion_FechaEstimadaDeEjecucion').val(data.PDA_FechaEstimadaDeEjecucion)
+                    $('#txtFallasControl_BDF_PlanDeAccion_FechaRealDeEjecucion').val(data.PDA_FechaRealDeEjecucion)
+                }, 100);
+            }, 'json');
+    }
 
     function FallasControl_BDF_nuevo(){
-        $('#txtFallasControl_BDF_idArchivo').val(obtenerPrefijo());
+        $('#cntFallasControl_BDF_PlanDeAccion').hide();
+        $('#btnFallasControl_BDF_Volver').cambiarDireccionamiento('Gestión Fallas de Control', 'fallasControl/home.html');
+        $('#btnFallasControl_BDF_Guardar').slideDown();
         $('#frmFallasControl_BDF')[0].reset();
+        $('#txtFallasControl_BDF_idArchivo').val(obtenerPrefijo());
+        $('#txtFallasControl_BDF_Consecuencia').val('Sin Consecuencia');
+        $('#txtFallasControl_BDF_Consecuencia').trigger('change');
+
+        $('#txtFallasControl_BDF_Tipo').trigger('change');
+        $('#txtFallasControl_BDF_Propio_Contratista').trigger('change');
+
         $("#cntFallasControl_Archivos").cargarArchivos({Prefijo : $("#txtFallasControl_BDF_idArchivo").val(), Proceso : 'Ficha Fallas de Control'});
     }
 

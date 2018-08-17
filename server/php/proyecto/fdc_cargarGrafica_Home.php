@@ -6,7 +6,7 @@
    $idEmpresa = addslashes($_POST['idEmpresa']);
 
    $sql = "SELECT 
-               fallasDeControl.Clasificacion AS Etiqueta,
+               fallasDeControl.Tipo AS Etiqueta,
                DATE_FORMAT(fallasDeControl.FechaDeRemision, '%Y-%m') AS Etiqueta2,
                COUNT(fallasDeControl.id) AS Cantidad
             FROM
@@ -15,10 +15,10 @@
                fallasDeControl.idEmpresa = '$idEmpresa'
                AND DATE_FORMAT(fallasDeControl.FechaDeRemision, '%Y') = '" . date('Y') . "'
             GROUP BY 
-               fallasDeControl.Clasificacion,
+               fallasDeControl.Tipo,
                DATE_FORMAT(fallasDeControl.FechaDeRemision, '%Y-%m') 
             ORDER BY 
-               fallasDeControl.Clasificacion, 
+               fallasDeControl.Tipo, 
                fallasDeControl.FechaDeRemision;";
 
    $result = $link->query(utf8_decode($sql));
