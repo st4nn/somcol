@@ -1,0 +1,283 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<h3 class="page-title">Informes de Fallas de Control</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+        <div class="panel panel-primary panel-bordered">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button class="btn btn-warning lnkAbrirModulo" vinculo="fallasControl/home.html" Titulo="Actos y condiciones inseguras" data-callback="fdc_AbrirHome"><i class="icon fa-arrow-left"></i> Volver</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <form id="frmFDC_Informes_Graficas">
+                        <div class="col-sm-6">
+                            <label for="txtFDC_Informes_Graficas_Desde" class="control-label">Desde</label>
+                            <div class="form-group">
+                                <input class="form-control datepicker guardar" id="txtFDC_Informes_Graficas_Desde" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="txtFDC_Informes_Graficas_Hasta" class="control-label">Hasta</label>
+                            <div class="form-group">
+                              <div class="input-group">
+                                <input id="txtFDC_Informes_Graficas_Hasta" autocomplete="off" class="form-control datepicker guardar">
+                                <span class="input-group-btn">
+                                  <button type="submit" class="btn btn-primary">
+                                    <i class="icon wb-refresh" aria-hidden="true"></i>
+                                  </button>
+                                </span>
+                              </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary panel-bordered">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button id="btnFDC_Informes_CambiarGrafica_Atras" class="btn btn-primary"><i class="icon fa-arrow-left"></i> Anterior</button>
+                    <button id="btnFDC_Informes_CambiarGrafica_Adelante" class="btn btn-primary"> Siguiente <i class="icon fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <input type="hidden" id="txtFDC_Informes_Graficas_NumGrafica" value="1">
+                    <h1><center id="lblFDC_Informes_Graficas_Titulo"></center></h1>
+                    <canvas id="cntAustentismo_Grafica" class="col-md-12"></canvas>
+                    <div class='table-responsive'>
+                        <table id="tblFDC_Informes_Resultados" class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Total Casos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+<script>
+    var vFDC_Informes_TipoDeGrafica = [
+        'NUMERO DE OBSERVACIONES REPORTADAS POR MES',
+        'DITRIBUCION DE EVENTOS EN EL TIEMPO',
+        'TIPO DE EVENTO',
+        'AFECTACION A PERSONAS',
+        'PROPIEDAD',
+        'AMBIENTE O PROCESO',
+        'TIPO DE FALLA DE CONTROL O CASI-ACCIDENTE',
+        'ESTADO PLANES DE ACCION DE FALLAS DE CONTROL'    
+    ];
+
+    $(document).ready(function()
+    {
+        $("#frmFDC_Informes_Graficas .datepicker").datepicker({
+            clearBtn: true,
+            language: "es",
+            orientation: "top auto",
+            daysOfWeekHighlighted: "0",
+            autoclose: true,
+            todayHighlight: true
+        });
+        
+        var tFecha = obtenerFecha();
+        $('#txtFDC_Informes_Graficas_Desde').val(tFecha.substring(0, 8) + '01');
+        $('#txtFDC_Informes_Graficas_Hasta').val(tFecha.substring(0, 10));
+
+        $('#btnFDC_Informes_CambiarGrafica_Adelante').on('click', function(event){
+            event.preventDefault();
+            var idx = parseInt($('#txtFDC_Informes_Graficas_NumGrafica').val());
+            idx++;
+            idx = funFDC_Informes_CambiarIDXDeGrafica(idx);
+            funFDC_Informes_CargarGrafica(idx);
+        });
+
+        $('#btnFDC_Informes_CambiarGrafica_Atras').on('click', function(event){
+            event.preventDefault();
+            var idx = parseInt($('#txtFDC_Informes_Graficas_NumGrafica').val());
+            idx--;
+            idx = funFDC_Informes_CambiarIDXDeGrafica(idx);
+            funFDC_Informes_CargarGrafica(idx);
+        });
+
+        $('#frmFDC_Informes_Graficas').on('submit', function(e){
+            e.preventDefault();
+            funFDC_Informes_CargarGrafica(0);
+        });
+
+        function funFDC_Informes_CambiarIDXDeGrafica(idx){
+            if (idx < 0){
+                idx = (vFDC_Informes_TipoDeGrafica.length - 1);
+            }
+
+            if (idx >= vFDC_Informes_TipoDeGrafica.length){
+                idx = 0;
+            }
+            return idx;
+        }
+    });
+
+    function funFDC_Informes_CargarGrafica(numGrafica){
+        numGrafica = numGrafica  || 0;
+        if (window.cntFDC_Informes_Grafica_ != null && window.cntFDC_Informes_Grafica_ != undefined){
+          window.cntFDC_Informes_Grafica_.destroy();
+        }
+        $.post('../server/php/proyecto/FDC_Informes_cargarGrafica_' + numGrafica + '.php', {
+                idUsuario: Usuario.id,
+                idEmpresa : $('#txtInicio_idEmpresa').val(),
+                Desde : $('#txtFDC_Informes_Graficas_Desde').val(),
+                Hasta : $('#txtFDC_Informes_Graficas_Hasta').val()
+            }, function(data, textStatus, xhr) {
+                var datos = {labels : [], data_Cantidad : [], data_Colores : []};
+                $('#lblFDC_Informes_Graficas_Titulo').text(vFDC_Informes_TipoDeGrafica[(numGrafica)]);
+                $('#txtFDC_Informes_Graficas_NumGrafica').val(numGrafica);
+                var idx = numGrafica;
+                $('#tblFDC_Informes_Resultados tbody tr').remove();
+                var tds = '';
+
+                var randomScalingFactor = function() {
+                    return Math.round(Math.random() * 255);
+                };
+
+                if (idx > 0){
+                    $.each(data, function(index, val) 
+                    {
+                      datos.labels.push(val.Etiqueta);
+                      datos.data_Cantidad.push(val.Cantidad);
+                      datos.data_Colores.push(`rgb(${randomScalingFactor()}, ${randomScalingFactor()}, ${randomScalingFactor()})`);
+
+                      tds += '<tr>';
+                        tds += '<td>' + val.Etiqueta + '</td>';
+                        tds += '<td>' + val.Cantidad + '</td>';
+                      tds += '</tr>';
+                    });
+
+                    $('#tblFDC_Informes_Resultados tbody').append(tds);
+                    
+                     var barChartData = {
+                            labels: datos.labels,
+                            datasets: [{
+                                backgroundColor: datos.data_Colores,
+                                data: datos.data_Cantidad
+                            }]
+                        };
+                    
+                    var ctx = document.getElementById("cntAustentismo_Grafica").getContext("2d");
+
+                    window.cntFDC_Informes_Grafica_ = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: barChartData,
+                        options: {
+                            maintainAspectRatio : false,
+                            responsive: true,
+                            legend: {
+                                position: 'right',
+                            },
+                            animation: {
+                                animateScale: true,
+                                animateRotate: true
+                            }
+                        },
+                        scaleStartValue: 0
+                    });
+
+                    window.cntFDC_Informes_Grafica_.canvas.parentNode.style.height = '380px';
+                } else {
+                    let
+                        _dataSets = [],
+                        _labels = [],
+                        _data = [],
+                        _color = {}
+                        _idx = 0,
+                        _max = 0;
+
+                    $.each(data, function(index, val) {
+                        if (_idx === 0){
+                            $.each(val, function(index2, val2) {
+                                 _labels.push(val2.mes);
+                            });
+
+                            _idx++;
+                        }
+                        _color = {
+                            r : randomScalingFactor(),
+                            g : randomScalingFactor(),
+                            b : randomScalingFactor()
+                        }
+                        
+                        _data = [];
+                        $.each(val, function(index2, val2) {
+                             _data.push(val2.cantidad);
+                             if (val2.cantidad > _max){
+                                _max = val2.cantidad;
+                             }
+                        });
+
+                         _dataSets.push({
+                                label: index,
+                                data: _data,
+                                borderColor: 'rgb(' + _color.r + ', ' + _color.g + ', ' + _color.b + ')',
+                                backgroundColor: 'rgba(0, 0, 0, 0)',
+                                fill: false
+                            });
+                    });
+
+                    var config = {
+                        type: 'line',
+                        data: {
+                            labels: _labels,
+                            datasets: _dataSets
+                        },
+                        scaleStartValue: 0,
+                        options: {
+                            maintainAspectRatio : false,
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: ''
+                            },
+                            tooltips: {
+                                mode: 'index'
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true
+                                    }
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Cantidad de Registros'
+                                    },
+                                    ticks: {
+                                        suggestedMin: 0,
+                                        suggestedMax: (_max + 5)
+                                    }
+                                }]
+                            }
+                        }
+                    };
+
+                     var ctx = document.getElementById("cntAustentismo_Grafica").getContext("2d");
+                    if (window.cntFDC_Informes_Grafica_ != null && window.cntFDC_Informes_Grafica_ != undefined){
+                      window.cntFDC_Informes_Grafica_.destroy();
+                    }
+
+                    window.cntFDC_Informes_Grafica_ = new Chart(ctx, config);
+                    window.cntFDC_Informes_Grafica_.canvas.parentNode.style.height = '380px';
+                }
+        }, 'json');
+    }
+</script>

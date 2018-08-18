@@ -24,7 +24,7 @@
       </div>
 
       <div class="col-sm-12">
-        <div class="bg-purple-400 fButton margin-5" Titulo="Base de Datos" vinculo="fallasControl/bd_ficha.html" data-callback="FallasControl_BDF_nuevo">
+        <div class="bg-purple-400 fButton margin-5 lnkAbrirModulo" Titulo="Informes de Fallas de Control" vinculo="fallasControl/informes.html" data-callback="funFDC_Informes_CargarGrafica">
             <i class="icon fa-line-chart bg-purple-800"></i>Informes
         </div>
       </div>
@@ -43,7 +43,7 @@
  </div>
  <script>
   function fdc_AbrirHome(){
-    $.post('../server/php/proyecto/fdc_cargarGrafica_Home.php', {idUsuario : Usuario.id, idEmpresa: Usuario.idEmpresa}, function(data, textStatus, xhr) {
+    $.post('../server/php/proyecto/FDC_Informes_cargarGrafica_0.php', {idUsuario : Usuario.id, idEmpresa: Usuario.idEmpresa}, function(data, textStatus, xhr) {
         var randomScalingFactor = function() {
           return Math.round(Math.random() * 255);
         };
