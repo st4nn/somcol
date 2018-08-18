@@ -200,30 +200,38 @@ $(document).ready(function()
 
 			$("#tblEmpresas_Listado").append(tds);
 
-		}, 'json').always(function() { l.stop(); });
+		}, 'json').always(function() { /*l.stop();*/ });
 	});
 
 	$(document).delegate('.btnEmpresas_Abrir', 'click', function(evento)
 		{
 			evento.preventDefault();
-			var contenedor = $(this).parent("div").parent('div');
-			var tmp = $(contenedor).find("img").attr("src");
-			$(".imgLogoEmpresa").attr("src", tmp);
-			
-			tmp = $(contenedor).find(".media-heading").find("span");
-			$(".lblEmpresa_Nombre").text($(tmp).text());
-			
-			tmp = $(contenedor).find(".media-body").find("p");
+			var tmpidEmpresa = $(this).attr("idEmpresa");
 
-			$(".lblEmpresa_Direccion").text($(tmp[0]).text());
-			$(".lblEmpresa_Telefono").text($(tmp[2]).text());
-			$(".lblEmpresa_Responsable").text($(tmp[1]).text());
+			$("#txtInicio_idEmpresa").val(tmpidEmpresa);
 
-			tmp = $(this).attr("idEmpresa");
+			$.post('../server/php/proyecto/Empresas_Cargar.php', 
+				{
+					Usuario: Usuario.id, 
+					Parametro : '',
+					idEmpresa : tmpidEmpresa
+				}, function(data, textStatus, xhr) {
+			        $.each(data, function(index, val) {
+			        	Empresa = val;
+			            $(".imgLogoEmpresa").attr("src", '../server/php/' + val.Ruta + '/' + val.Archivo);
+			            $(".lblEmpresa_Nombre").text(val.Nombre);
+			            
+			            $(".lblEmpresa_Direccion").text(val.Direccion);
+			            $(".lblEmpresa_Telefono").text(val.Telefono);
+			            $(".lblEmpresa_Responsable").text(val.Correo);
 
-			$("#txtInicio_idEmpresa").val(tmp);
+			            $("#txtInicio_idEmpresa").val(val.id);
 
-			cargarModulo("Inicio.html", 'Inicio');
+			            $('.site-navbar .navbar-container').css('background-color' , '#' + val.colorPrimario);
+			            $('.cntUbicacionModulo').css('background' , '#' + val.colorSecundario);
+			        });
+					cargarModulo("Inicio.html", 'Inicio');
+			     }, 'json');
 		});
 
 	$(document).delegate('.btnEmpresas_Editar', 'click', function(event) 

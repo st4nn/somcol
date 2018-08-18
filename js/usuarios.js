@@ -200,7 +200,7 @@ $(document).ready(function()
 
 			$("#tblUsuarios_Listado").append(tds);
 
-		}, 'json').always(function() { l.stop(); });
+		}, 'json').always(function() { /*l.stop(); */});
 	});
 
 	$(document).delegate('.btnUsuarios_Abrir', 'click', function(evento)

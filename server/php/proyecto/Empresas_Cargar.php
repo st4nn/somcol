@@ -8,16 +8,19 @@
    $Usuario = datosUsuario($idUsuario);
 
    $eUsuario = "";
-   if ($Usuario['idPerfil'] > 1)
-   {
+   if ($Usuario['idPerfil'] > 1){
       $eUsuario = " AND Empresas.id = '" . $Usuario['idEmpresa'] . "'";
    }
 
    $eParametro = "";
-   if ($Parametro != '')
-   {
+   if ($Parametro != ''){
       $eParametro = $Parametro;
    }  
+
+   if (array_key_exists('idEmpresa', $_POST)){
+      $eUsuario = '';
+      $eParametro = " AND Empresas.id = '" . addslashes($_POST['idEmpresa']) . "' ";
+   }
 
    $sql = "SELECT
             Empresas.*,

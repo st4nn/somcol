@@ -448,7 +448,9 @@
     function FallasControl_BDF_cargar(){
         $.post('../server/php/proyecto/fdc_cargar.php', {Usuario: Usuario.id, idFalla : $('#txtFallasControl_BDF_idArchivo').val()}, 
             function(data, textStatus, xhr) {
+                console.log(data);
                 data = data[(data.length - 1)];
+                console.log(data);
                 
                 $('#txtFallasControl_BDF_PlanDeAccion_idFalla').val($('#txtFallasControl_BDF_idArchivo').val());
 

@@ -8,6 +8,24 @@ $(document).ready(function()
         autoclose: true,
         todayHighlight: true
     });
+
+  $(document).delegate('.txtCP_PlanDeAccion_FechaCumplimiento', 'change', function(event) {
+    const _val = $(this).val();
+    const _id = $(this).attr('idPDA');
+    const self = this;
+    $.post('../server/php/proyecto/cp_Compromisos_ActualizarFecha.php', 
+      {
+        fechaCumplimiento: _val, 
+        id : _id, 
+        Usuario : Usuario.id
+      }, function(data, textStatus, xhr) {
+        const _tr = $(self).parent('td').parent('tr');
+        $(_tr).removeClass('rowPendiente');
+        $(_tr).addClass('rowCompletado');
+        const _arrTd = $(_tr).find('td');
+        $(_arrTd[7]).text('Completado');
+     }, 'json');
+  });
 });
 
 function cpActas_CargarCompromisos()
@@ -28,19 +46,28 @@ function cpActas_CargarCompromisos()
     if (data != 0){
       var tds = '';
       $.each(data, function(index, val){
-        tds += '<tr>';
-          tds += '<td></td>'
-          tds += '<td>' + val.NoActa + '</td>'
-          tds += '<td>' + val.fechaActa + '</td>'
-          tds += '<td>' + val.Descripcion + '</td>'
-          tds += '<td>' + val.Responsable + '</td>'
-          tds += '<td>' + val.Fecha + '</td>'
-          tds += '<td><input type="date" class="form-control"></td>'
-          tds += '<td>' + (val.fechaCumplimiento === '0000-00-00' ? 'Pendiente': 'Completado') + '</td>'
+        tds += `<tr class="${(val.fechaCumplimiento === '0000-00-00' ? 'rowPendiente': 'rowCompletado')}">`;
+          tds += '<td></td>';
+          tds += '<td>' + val.NoActa + '</td>';
+          tds += '<td>' + val.fechaActa + '</td>';
+          tds += '<td>' + val.Descripcion + '</td>';
+          tds += '<td>' + val.Responsable + '</td>';
+          tds += '<td>' + val.Fecha + '</td>';
+          tds += `<td><input idPDA="${val.id}" class="form-control datepicker txtCP_PlanDeAccion_FechaCumplimiento" value="${(val.fechaCumplimiento === '0000-00-00' ? '': val.fechaCumplimiento)}"></td>`;;
+          tds += '<td>' + (val.fechaCumplimiento === '0000-00-00' ? 'Pendiente': 'Completado') + '</td>';
         tds += '</tr>';
       });
 
-      $('#tblCopasst_PDA_Compromisos').crearDataTable(tds, function(){}, true);
+      $('#tblCopasst_PDA_Compromisos').crearDataTable(tds, function(){
+        $('#tblCopasst_PDA_Compromisos .datepicker').datepicker({
+            clearBtn: true,
+            language: "es",
+            orientation: "top auto",
+            daysOfWeekHighlighted: "0",
+            autoclose: true,
+            todayHighlight: true
+        });
+      }, true);
       Copasst_ActaDeEleccionYConformacion_Graficar(data);
     }
   }, 'json');

@@ -4,6 +4,13 @@
    $link = Conectar();
    $idUsuario = addslashes($_POST['Usuario']);
    $Parametro = addslashes($_POST['Parametro']);
+
+   $Usuario = datosUsuario($idUsuario);
+
+   $eUsuario = "";
+   if ($Usuario['idPerfil'] > 1){
+      $eUsuario = " AND Empresas.id = '" . $Usuario['idEmpresa'] . "'";
+   }
    
    $sql = "SELECT
             Empresas.*,
@@ -17,7 +24,7 @@
             LEFT JOIN (SELECT Prefijo, MAX(id) AS id FROM Archivos WHERE Proceso = 'empresa_Logo' GROUP BY Prefijo) bArchivos ON bArchivos.Prefijo = Empresas.id
             LEFT JOIN Archivos ON Archivos.id = bArchivos.id
          WHERE
-            Empresas.Estado > 0 AND (Empresas.Nombre LIKE '%$Parametro%'
+            Empresas.Estado > 0 $eUsuario AND (Empresas.Nombre LIKE '%$Parametro%'
             OR Empresas.Direccion LIKE '%$Parametro%'
             OR Empresas.Correo LIKE '%$Parametro%'
             OR Empresas.Telefono LIKE '%$Parametro%')
