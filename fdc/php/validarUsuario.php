@@ -3,6 +3,7 @@
    $link = Conectar();
 
    $Cedula = addslashes($_POST['cc']);
+   $idEmpresa = addslashes($_POST['idE']);
 
    $sql = "SELECT 
                personal.id,
@@ -19,7 +20,8 @@
                LEFT JOIN Archivos
                   on Archivos.Proceso = 'empresa_Logo' AND Empresas.id = Archivos.Prefijo
             WHERE 
-               Cedula = '$Cedula';";
+               Cedula = '$Cedula'
+               AND Empresas.id = '$idEmpresa';";
 
 
    $result = $link->query($sql);

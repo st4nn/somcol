@@ -8,7 +8,7 @@
    $Hasta = addslashes($_POST['Hasta']);
 
    $sql = "SELECT 
-               HOUR(fallasDeControl.HoraDeFalla) AS Etiqueta,
+               CONCAT(HOUR(fallasDeControl.HoraDeFalla), ':00') AS Etiqueta,
                COUNT(fallasDeControl.id) AS Cantidad
             FROM
                fallasDeControl

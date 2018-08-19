@@ -140,7 +140,7 @@
         $('#frmLogin').on('submit', function(e){
           e.preventDefault();
           if ($('#txtCC').val() != ''){
-            $.post('php/validarUsuario.php', {cc: $('#txtCC').val()}, function(data, textStatus, xhr){
+            $.post('php/validarUsuario.php', {cc: $('#txtCC').val(), idE : getParameterByName('e')}, function(data, textStatus, xhr){
               if (data.id > 0){
                 Usuario = {
                   id : data.id,
@@ -165,6 +165,8 @@
       $.get("../aplicacion/fallasControl/bd_ficha.html?tmpId=" + obtenerPrefijo(), function(data) {
         $("#algo").html(data);
         $('.lnkAbrirModulo').hide();
+        $('#cntFallasControl_BDF_PlanDeAccion').remove();
+
       }).fail(function() {
         Mensaje("Error", "No tiene permisos para acceder a este modulo", "danger");
       }); 
@@ -190,7 +192,7 @@
             tds += '<span class="input-group-btn">';
                 tds += '<span class="btn btn-success col-md-12 btn-file">';
                   tds += '<i class="icon wb-upload" aria-hidden="true"></i>';
-                  tds += 'Agregar Archivos';
+                  tds += 'Agregar Soporte';
                   tds += '<input id="txt' + idObj + '_Archivo" type="file" name="...">';
                 tds += '</span>'; 
             tds += '</span>';
@@ -386,6 +388,13 @@
               showCancelButton: true,
               cancelButtonText : 'Cancelar'
       }); 
+    }
+
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
     
   </script>

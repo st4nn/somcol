@@ -305,7 +305,11 @@
         todayHighlight: true
     });
 
-    $("#cntFallasControl_BDF_Archivos").iniciarObjArchivos({objPrefijo : $("#txtFallasControl_BDF_idArchivo"), Proceso: "Ficha Fallas de Control", Usuario: Usuario.id});
+    $("#cntFallasControl_BDF_Archivos").iniciarObjArchivos({
+        objPrefijo : $("#txtFallasControl_BDF_idArchivo"), 
+        Proceso: "Ficha Fallas de Control", 
+        btnTitulo : 'Agregar Soporte',
+        Usuario: Usuario.id});
 
     $('#frmFallasControl_BDF').on('submit', function(evento){
         evento.preventDefault();

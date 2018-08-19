@@ -1,4 +1,17 @@
 <!-- Page -->
+<style type="text/css" media="screen">
+    .rowSinRevisar{
+        background:  rgba(249,104,104, 0.1) !important;
+    }
+
+    .rowAbierto{
+        background:  rgba(242,166,84, 0.1) !important;
+    }
+
+    .rowEjecutada{
+        background:  rgba(58,169,158, 0.1) !important;
+    }
+</style>
 <div class="page" style="min-height: 90vh;">
 	<div class="page-header">
 		<h3 class="page-title">Seguimiento de Actos y Condiciones inseguras</h3>
@@ -46,7 +59,7 @@
         });
     });
     function fdc_CargarSeguimiento(){
-        $.post('../server/php/proyecto/fdcCargarSeguimiento.php', {Usuario : Usuario.id, idEmpresa : Empresa.id}, function(data, textStatus, xhr) {
+        $.post('../server/php/proyecto/fdcCargarSeguimiento.php', {Usuario : Usuario.id, idEmpresa : $('#txtInicio_idEmpresa').val()}, function(data, textStatus, xhr) {
             if (data !== 0){
                 var tds = '';
                 let _estado = 'Abierta';

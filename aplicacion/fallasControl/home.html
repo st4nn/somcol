@@ -31,7 +31,7 @@
       <div>
         <i>
           Se puede acceder al registro de Actos/Condiciones Insegur@s en la dirección 
-          <a target="_blank" href="../fdc">https://somcol.com.co/app/fdc</a>
+          <a id="lnkFDC_LinkPublico" target="_blank" href="../fdc?e=">https://somcol.com.co/app/fdc</a>
         <i>
       </div>
  	</div>
@@ -43,86 +43,57 @@
  </div>
  <script>
   function fdc_AbrirHome(){
-    $.post('../server/php/proyecto/FDC_Informes_cargarGrafica_0.php', {idUsuario : Usuario.id, idEmpresa: Usuario.idEmpresa}, function(data, textStatus, xhr) {
+    $('#lnkFDC_LinkPublico').attr('href', `../fdc/?e=${$('#txtInicio_idEmpresa').val()}`);
+    $('#lnkFDC_LinkPublico').text(`https://somcol.com.co/app/fdc/?e=${$('#txtInicio_idEmpresa').val()}`);
+    $.post('../server/php/proyecto/FDC_Informes_cargarGrafica_2.php', {
+      idUsuario : Usuario.id, 
+      idEmpresa: $('#txtInicio_idEmpresa').val(),
+      Desde : '0000-00-00',
+      Hasta : '2030-01-01'
+    }, function(data, textStatus, xhr) {
         var randomScalingFactor = function() {
           return Math.round(Math.random() * 255);
         };
 
-        let
+        const
             _dataSets = [],
             _labels = [],
-            _data = [],
-            _color = {}
-            _idx = 0,
-            _max = 0;
+            _data = [];
+
+        var cP = hexTorgb(Empresa.colorPrimario);
 
         $.each(data, function(index, val) {
-            if (_idx === 0){
-                $.each(val, function(index2, val2) {
-                     _labels.push(val2.mes);
-                });
-
-                _idx++;
-            }
-            _color = {
-                r : randomScalingFactor(),
-                g : randomScalingFactor(),
-                b : randomScalingFactor()
-            }
-            
-            _data = [];
-            $.each(val, function(index2, val2) {
-                 _data.push(val2.cantidad);
-                 if (val2.cantidad > _max){
-                    _max = val2.cantidad;
-                 }
-            });
-
-             _dataSets.push({
-                    label: index,
-                    data: _data,
-                    borderColor: 'rgb(' + _color.r + ', ' + _color.g + ', ' + _color.b + ')',
-                    backgroundColor: 'rgba(0, 0, 0, 0)',
-                    fill: false
-                });
+            _labels.push(val.Etiqueta);
+            _data.push(val.Cantidad);
         });
+         _dataSets.push({
+          label: 'Cantidad de Eventos',
+          backgroundColor: 'rgba(' + cP.r + ',' + cP.g + ',' + cP.b + ', 0.6)',
+          borderColor: '#' + Empresa.colorPrimario,
+          pointBackgroundColor: '#' + Empresa.colorPrimario,
+          data: _data
+         });
 
         var config = {
-            type: 'line',
+            type: 'radar',
             data: {
                 labels: _labels,
                 datasets: _dataSets
             },
             scaleStartValue: 0,
             options: {
-                maintainAspectRatio : false,
-                responsive: true,
-                title: {
-                    display: true,
-                    text: ''
-                },
-                tooltips: {
-                    mode: 'index'
-                },
-                scales: {
-                    xAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: true
-                        }
-                    }],
-                    yAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Cantidad de Registros'
-                        },
-                        ticks: {
-                            suggestedMin: 0,
-                            suggestedMax: (_max + 2)
-                        }
-                    }]
+              legend: {
+                position: 'top',
+              },
+              title: {
+                display: true,
+                text: ''
+              },
+              scale: {
+                ticks: {
+                  beginAtZero: true
                 }
+              }
             }
         };
 

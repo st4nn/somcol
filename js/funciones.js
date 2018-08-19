@@ -313,8 +313,7 @@ $.fn.destruirDataTable = function()
   $(this).find("tbody").find("tr").remove();
 }
 
-$.fn.iniciarObjArchivos = function(parametros)
-{
+$.fn.iniciarObjArchivos = function(parametros){
   var idObj = $(this).attr("id").replace("cnt", "");
   var tds = "";
   
@@ -323,7 +322,7 @@ $.fn.iniciarObjArchivos = function(parametros)
         tds += '<span class="input-group-btn">';
             tds += '<span class="btn btn-success col-md-12 btn-file">';
               tds += '<i class="icon wb-upload" aria-hidden="true"></i>';
-              tds += 'Agregar Archivos';
+              tds += (parametros.btnTitulo || 'Agregar Archivos');
               tds += '<input id="txt' + idObj + '_Archivo" type="file" name="...">';
             tds += '</span>'; 
         tds += '</span>';
