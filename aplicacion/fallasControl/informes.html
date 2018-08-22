@@ -48,7 +48,7 @@
                     <input type="hidden" id="txtFDC_Informes_Graficas_NumGrafica" value="1">
                     <h1><center id="lblFDC_Informes_Graficas_Titulo"></center></h1>
                     <canvas id="cntAustentismo_Grafica" class="col-md-12"></canvas>
-                    <div class='table-responsive'>
+                    <div class='table-responsive hide'>
                         <table id="tblFDC_Informes_Resultados" class="table table-hover table-striped">
                             <thead>
                                 <tr>
@@ -181,11 +181,25 @@
                             responsive: true,
                             legend: {
                                 position: 'right',
+                                labels : {
+                                    generateLabels: function(chart) {
+                                        var data = chart.data;
+                                        if (data.labels.length && data.datasets.length) {
+                                            return data.labels.map(function(label, i) {
+                                                return{
+                                                    text : `${datos.data_Cantidad[i]} ${label}`,
+                                                    fillStyle : datos.data_Colores[i],
+                                                    index: i
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
                             },
                             animation: {
                                 animateScale: true,
                                 animateRotate: true
-                            }
+                            },
                         },
                         scaleStartValue: 0
                     });

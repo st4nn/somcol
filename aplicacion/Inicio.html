@@ -1,39 +1,4 @@
 <!-- Page -->
-<style>
-  .fButton
-  {
-    filter:alpha(opacity=80);
-    -moz-opacity:.80;
-    opacity:.8;
-    font-size: 20px;
-    color: white;
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+0,2989d8+50,207cca+51,7db9e8+100;Blue+Gloss+Default */
-background: rgb(30,87,153); /* Old browsers */
-background: -moz-linear-gradient(top, rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%, rgba(32,124,202,1) 51%, rgba(125,185,232,1) 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
-  }
-  .fButton:hover
-  {
-    cursor: pointer;
-    opacity: 100;
-    color: #E4EAEC;
-  }
-  .fButton i{
-    padding : 25px;
-    margin-right : 10px;
-    margin-left : -20px;
-    font-size: 35px;
-    min-width: 100px;
-    text-align: center;
-    
-  }
-
-  .cntHomeButtons > div{
-    float: none;
-  }
-</style>
 <div class="page" style="min-height: 90vh; 
 
    background: #ece9e6; /* fallback for old browsers */
@@ -48,50 +13,42 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', end
     <div class="cntHomeButtons row">
       <input type="hidden" id="txtInicio_idEmpresa">
 
-      <div class="col-sm-3 col-md-2 col-xs-12">
-        <div class="bg-blue-400 fButton margin-5 lnkAbrirModulo" Titulo="Listado de Personal" vinculo="personal/listado.html" data-callback="personal_desde_Inicio">
-            <i class="icon fa-user bg-blue-800 "></i>
+        <div class="fIniButton lnkAbrirModulo" Titulo="Listado de Personal" vinculo="personal/listado.html" data-callback="personal_desde_Inicio">
+            <i class="icon fa-user"></i>
             <h4>Listado de Personal</h4>
         </div>
-      </div>
-
-      <div class="col-sm-3 col-md-2 col-xs-12">
-        <div class="bg-blue-400 fButton margin-5 lnkAbrirModulo" vinculo="copasst/home.html" Titulo="COPASST">
-            <i class="icon fa-users bg-blue-800 "></i>
+      
+        <div class="fIniButton lnkAbrirModulo" vinculo="copasst/home.html" Titulo="COPASST">
+            <i class="icon fa-users"></i>
             <h4>COPASST</h4>
         </div>
-      </div>
-      <div class="col-sm-3 col-md-2 col-xs-12">
-        <div class="bg-blue-400 fButton margin-5 lnkAbrirModulo" vinculo="ausentismo/home.html" Titulo="Ausentismo" data-callback="ausentismo_AbrirHome">
-            <i class="icon fa-user-times bg-blue-800 "></i>
+      
+        <div class="fIniButton lnkAbrirModulo" vinculo="ausentismo/home.html" Titulo="Ausentismo" data-callback="ausentismo_AbrirHome">
+            <i class="icon fa-user-times"></i>
             <h4> Ausentismo</h4>
         </div>
-      </div>
-      <div class="col-sm-3 col-md-2 col-xs-12">
-        <div class="bg-blue-400 fButton margin-5 lnkAbrirModulo" data-sitio="fallasDeControl" vinculo="fallasControl/home.html" Titulo="Actos y condiciones inseguras" data-callback="fdc_AbrirHome">
-            <i class="icon fa-sitemap bg-blue-800 "></i>
+      
+        <div class="fIniButton lnkAbrirModulo" data-sitio="fallasDeControl" vinculo="fallasControl/home.html" Titulo="Actos y condiciones inseguras" data-callback="fdc_AbrirHome">
+            <i class="icon fa-sitemap"></i>
             <h4> Actos y condiciones inseguras</h4>
         </div>
-      </div>
-      <div class="col-sm-3 col-md-2 col-xs-12">
-        <div class="bg-blue-400 fButton margin-5" data-sitio="capacitaciones">
-            <i class="icon fa-graduation-cap bg-blue-800 "></i>
+      
+        <div class="fIniButton" data-sitio="capacitaciones">
+            <i class="icon fa-graduation-cap"></i>
             <h4> Capacitaciones</h4>
         </div>
-      </div>
-      <div class="col-sm-3 col-md-2 col-xs-12">
-        <div class="bg-blue-400 fButton margin-5" data-sitio="indicadores">
-            <i class="icon fa-bar-chart bg-blue-800 "></i>
+      
+        <div class="fIniButton" data-sitio="indicadores">
+            <i class="icon fa-bar-chart"></i>
             <h4> Indicadores</h4>
         </div>
-      </div>
+      
 
-      <div class="col-sm-3 col-md-2 col-xs-12">
-        <div class="bg-blue-400 fButton margin-5 lnkAbrirModulo" vinculo="configuracion/home.html" Titulo="Administración">
-            <i class="icon fa-cogs bg-blue-800 "></i>
+        <div class="fIniButton lnkAbrirModulo" vinculo="configuracion/home.html" Titulo="Administración">
+            <i class="icon fa-cogs"></i>
             <h4> Administración</h4>
         </div>
-      </div>
+      
     </div>
     <div id="cntNotificaciones" class="col-md-3 hide">
       <div class="panel panel-bordered panel-dark">

@@ -58,14 +58,25 @@
         const
             _dataSets = [],
             _labels = [],
-            _data = [];
+            _data = [],
+            _opts = {
+              "Acto Inseguro" : 0,
+              "Condición insegura" : 1,
+              "Incidente de trabajo" : 2,
+              "Accidente de Trabajo" : 3
+            };
+
+        for (var index in _opts){
+          _labels.push(index);
+          _data.push(0);
+        }
 
         var cP = hexTorgb(Empresa.colorPrimario);
 
         $.each(data, function(index, val) {
-            _labels.push(val.Etiqueta);
-            _data.push(val.Cantidad);
+            _data[_opts[val.Etiqueta]] = parseInt(val.Cantidad, 10);
         });
+
          _dataSets.push({
           label: 'Cantidad de Eventos',
           backgroundColor: 'rgba(' + cP.r + ',' + cP.g + ',' + cP.b + ', 0.6)',

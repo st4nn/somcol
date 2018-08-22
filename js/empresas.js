@@ -228,6 +228,7 @@ $(document).ready(function()
 			            $("#txtInicio_idEmpresa").val(val.id);
 
 			            $('.site-navbar .navbar-container').css('background-color' , '#' + val.colorPrimario);
+			            $('.cntHomeButtons .fIniButton i').css('background-color' , '#' + val.colorPrimario);
 			            $('.cntUbicacionModulo').css('background' , '#' + val.colorSecundario);
 			        });
 					cargarModulo("Inicio.html", 'Inicio');
