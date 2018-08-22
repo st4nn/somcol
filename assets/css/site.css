@@ -9995,10 +9995,9 @@ background: -webkit-linear-gradient(rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%
 
 
 .cntHomeButtons{
-  bottom: 3em;
-  position: absolute;
+  display: inline-block;
   text-align: right;
-  width: 97%;
+  width: 100%;
 }
 .cntHomeButtons > div{
   display: inline-block;
@@ -10025,20 +10024,14 @@ background: -webkit-linear-gradient(rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%
   text-align: center;
 }
 
-@media (min-width: 767px){
-  .cntHomeButtons .fIniButton:hover{
-    margin-bottom: 1.5em;
-    opacity: 0.5;
-  }
+.cntHomeButtons .fIniButton:hover{
+  opacity: 0.5;
 }
-
 
 @media (max-width: 767px){
   .cntHomeButtons{
-    max-height: calc(100vh - 160px);
-    overflow-y: auto;
-    position: inline;
-    width: calc(100% - 3em);
+    position: relative;
+    width: calc(100% - 0.5em);
   }
 
   .cntHomeButtons .fIniButton{
@@ -10066,7 +10059,12 @@ background: -webkit-linear-gradient(rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%
     padding-top: 2.5em;
     text-align: left;
     vertical-align: top;
-    width: calc(100% - 8em);
+    width: calc(100% - 6.3em);
+  }
+
+  .cntHomeDashboard{
+    max-height: none;
+    overflow-y: visible;
   }
 }
 
@@ -10082,4 +10080,69 @@ background: -webkit-linear-gradient(rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%
 .cntCopasst_Anio{
   margin: 1em;
   float: right;
+}
+
+.cntHomeDashboard{
+  max-height: calc(100vh - 290px);
+  min-height: calc(100vh - 300px);
+  overflow-y: scroll;
+  width: 100%;
+}
+
+.cntHomeDashboard > div{
+  margin-top: 1em;
+}
+
+@media (max-width: 767px){
+  .cntHomeDashboard{
+    max-height: none;
+    min-height: none;
+  }
+}
+.cntCountPeople{
+  text-align: center;
+}
+.cntCountPeople h1{
+  margin: 0;
+  font-size: 50px;
+}
+.cntCountPeople i, 
+.lblInicio_CalendarIcon,
+.lblInicio_AlertsIcon{
+  color: rgba(0,0,0,0.05);
+  font-size: 70px;;
+  right: 14px;
+  position: absolute !important;
+  top: 14px;
+}
+
+.cntHomeDashboard .panel-title{
+  padding-top: 8px;
+  padding-bottom: 4px !important;
+}
+
+#cntInicio_Eventos > div{
+  border-bottom : solid 1px rgba(0, 0, 0, 0.05);
+}
+
+#cntInicio_Eventos > div p{
+  padding-top: 1.5em;
+}
+#cntInicio_Eventos > div span{
+  margin-top: 2px;
+  position: absolute;
+  border-radius: 8px;
+  padding: 2px;
+  font-weight: bold;
+  right: 1em;
+}
+
+#cntInicio_Eventos > div .success{
+    background: rgba(0,255,0,0.1);
+}
+#cntInicio_Eventos > div .warning{
+    background: rgba(0,0,255,0.1);
+}
+#cntInicio_Eventos > div .danger{
+    background: rgba(255,0,0,0.1);
 }

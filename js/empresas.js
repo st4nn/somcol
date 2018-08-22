@@ -230,6 +230,8 @@ $(document).ready(function()
 			            $('.site-navbar .navbar-container').css('background-color' , '#' + val.colorPrimario);
 			            $('.cntHomeButtons .fIniButton i').css('background-color' , '#' + val.colorPrimario);
 			            $('.cntUbicacionModulo').css('background' , '#' + val.colorSecundario);
+
+			            inicio_CargarDashboard();
 			        });
 					cargarModulo("Inicio.html", 'Inicio');
 			     }, 'json');

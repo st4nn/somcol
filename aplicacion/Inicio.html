@@ -9,7 +9,35 @@
     <h3 class="page-title">Autogestión SG-SST</h3>
   </div>
   <div class="page-content container-fluid">
-  
+    <div class="cntHomeDashboard row">
+      <div class="col-md-4 ">
+        <div class="panel cntCountPeople">
+          <h1 id="txtInicio_PersonalTotal">0</h1>
+          <h6>Personas asociadas a la empresa</h6>
+          <i class="icon fas fa-users"></i>
+        </div>
+        <div id="cntInicio_GraficasPersonal"></div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-bordered">
+          <div class="panel-heading">
+            <h3 class="panel-title">Eventos del Mes</h3>
+              <i class="icon fas fa-calendar lblInicio_CalendarIcon"></i>
+          </div>
+          <div id="cntInicio_Eventos" class="panel-body"></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-bordered">
+          <div class="panel-heading">
+            <h3 class="panel-title">Alertas</h3>
+              <i class="icon fas fa-exclamation-triangle lblInicio_AlertsIcon"></i>
+          </div>
+          <div id="cntInicio_Alertas" class="panel-body">
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="cntHomeButtons row">
       <input type="hidden" id="txtInicio_idEmpresa">
 
