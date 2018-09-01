@@ -10083,8 +10083,8 @@ background: -webkit-linear-gradient(rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%
 }
 
 .cntHomeDashboard{
-  max-height: calc(100vh - 290px);
-  min-height: calc(100vh - 300px);
+  max-height: calc(100vh - 320px);
+  min-height: calc(100vh - 330px);
   overflow-y: scroll;
   width: 100%;
 }
@@ -10145,4 +10145,13 @@ background: -webkit-linear-gradient(rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%
 }
 #cntInicio_Eventos > div .danger{
     background: rgba(255,0,0,0.1);
+}
+
+.lnkCapacitaciones_Matriz_AsignarPrograma{
+  cursor: pointer;
+  text-align: center;
+}
+
+#modulo_fallasControl_home_html .cntFallasControl_homeButtons{
+  margin-top: calc(5em);
 }

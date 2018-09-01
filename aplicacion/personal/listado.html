@@ -24,7 +24,7 @@
                             <th>Género</th>
                             <th>Cargo</th>
                             <th>Grupo</th>
-                            <th>Regional</th>
+                            <th>Sede</th>
                             <th>Nombre de entidad EPS</th>
                         </tr>   
                     </thead>
@@ -35,8 +35,7 @@
 	</div>
 </div>
 <script>
-    $(document).ready(function()
-    {
+    $(document).ready(function(){
         $(document).delegate('.btnPersonal_Listado_Editar', 'click', function(event) {
             event.preventDefault();
             var idPersona = $(this).attr('idPersonal');
@@ -53,6 +52,37 @@
                 });
             });
 
+        });
+
+        $(document).delegate('.btnPersonal_Listado_Quitar', 'click', function(event){
+            event.preventDefault();
+            const idPersonal = $(this).attr('idPersonal'),
+                row = $(this).parent('td').parent('tr');
+            let name = $(this).parent('td').parent('tr').find('td');
+
+            name = $(name[2]).text();
+            bootbox.confirm({
+                message : `Esta seguro de eliminar el registro de  ${name}?`,
+                buttons: {
+                    confirm: {
+                        label: `Si, eliminar`
+                    },
+                    cancel: {
+                        label: 'No',
+                    }
+                },
+                callback : function(result){
+                    if (result){
+                        $.post('../server/php/proyecto/personal_borrar.php', 
+                        {
+                            idUsuario   : Usuario.id,
+                            idPersonal  : idPersonal
+                        }, function(data, textStatus, xhr) {
+                           $(row).remove();
+                        });
+                    }
+                }
+            });
         });
     });
 

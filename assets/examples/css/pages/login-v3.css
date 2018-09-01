@@ -6,7 +6,7 @@
   width: 100%;
   height: 100%;
   content: '';
-  background: url("../../..//images/fondoIndex.jpg"), #62a8ea;
+  background: url("../../../images/fondoIndex.jpg"), #62a8ea;
   /* Old browsers */
   /* IE9 SVG, needs conditional override of 'filter' to 'none' */
   /*
@@ -71,10 +71,14 @@ body
   font-family: "Roboto", sans-serif;
 }
 
+#cntLogin > .panel-body > img{
+  width: 90%;
+  height: auto;
+}
 #cntLogin
 {
-  background: rgba(255, 255, 255, 0.7);
-  position:absolute;
+  background: rgba(255, 255, 255, 0.8);
+  
   top:1em;
   right:1em;
 }

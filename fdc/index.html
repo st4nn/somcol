@@ -67,7 +67,7 @@
     <div class="page-content vertical-align-middle">
       <div class="brand">
         <img class="brand-img" src="../assets/images/logo.png" alt="...">
-        <h2 class="brand-text">Remark</h2>
+        <h2 class="brand-text"></h2>
       </div>
       <div id="algo">
       </div>
@@ -78,6 +78,10 @@
     <!-- Page -->
   <div id="p1" class="page vertical-align text-center">
     <div class="page-content vertical-align-middle">
+      <div class="brand">
+        <img class="brand-img" src="../assets/images/logo.png" alt="...">
+        <h2 class="brand-text"></h2>
+      </div>
       <p>REPORTE DE ACTOS Y CONDICIONES INSEGURAS</p>
       <form id="frmLogin">
         <div class="form-group">
@@ -158,6 +162,11 @@
             }, 'json');
           }
         });
+
+        $.post('php/cde.php', {idE: getParameterByName('e')}, function(data, textStatus, xhr) {
+          $('.brand-img').attr('src', '../server/php/' + data.Ruta + '/' + data.Archivo);
+          $('.brand-text').text(data.Nombre);
+        }, 'json');
       });
     })(document, window, jQuery);
 

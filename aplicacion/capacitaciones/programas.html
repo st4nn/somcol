@@ -1,0 +1,226 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<h3 class="page-title">Matriz de Capacitaciones</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+        <div class="panel panel-primary panel-bordered">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button id="btnCapacitaciones_CrearTema" class="btn btn-success"> 
+                        <i class="icon fas fa-plus"></i> Nuevo Tema
+                    </button>
+                    <button class="btn btn-warning lnkAbrirModulo" Titulo="Capacitaciones" vinculo="capacitaciones/home.html"><i class="icon fa-arrow-left"></i> Volver</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-12 cntCapacitaciones_Matriz table-responsive">
+                    <table id="tblCapacitaciones_Matriz" class="table">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+<div class="modal fade" id="cntCapacitaciones_RegistroTema" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="frmCapacitaciones_CrearTema" class="form-horizontal" role="form">
+                <div class="modal-header">
+                    <h4 class="modal-title"><span id="lblCapacitaciones_CrearTema_Titulo">Crear</span> Tema</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" class="guardar" id="txtCapacitaciones_CrearTema_id">
+                    <div class="form-group">
+                        <label for="txtCapacitaciones_CrearTema_Programa" class="form-label">Programa</label>
+                        <input id="txtCapacitaciones_CrearTema_Programa" type="text" class="form-control guardar" placeholder="Programa">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtCapacitaciones_CrearTema_Tema" class="form-label">Tema</label>
+                        <input id="txtCapacitaciones_CrearTema_Tema" type="text" class="form-control guardar" placeholder="Tema">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtCapacitaciones_CrearTema_Tipo" class="form-label">Tipo</label>
+                        <select id="txtCapacitaciones_CrearTema_Tipo" class="form-control guardar" placeholder="Tipo">
+                            <option value="Capacitación">Capacitación</option>
+                            <option value="Charla">Charla</option>
+                            <option value="Divulgación">Divulgación</option>
+                            <option value="Curso">Curso</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtCapacitaciones_CrearTema_Intensidad" class="form-label">Intensidad</label>
+                        <select id="txtCapacitaciones_CrearTema_Intensidad" class="form-control guardar" placeholder="Intensidad">
+                            <option value="Básico">Básico</option>
+                            <option value="Avanzado">Avanzado</option>
+                            <option value="Especializado">Especializado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-warning">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $('#btnCapacitaciones_CrearTema').on('click', function(evento){
+        evento.preventDefault();
+        $('#lblCapacitaciones_CrearTema_Titulo').text('Crear');
+        $('#frmCapacitaciones_CrearTema')[0].reset();
+        $('#cntCapacitaciones_RegistroTema').modal('show');
+    });
+
+    $('#frmCapacitaciones_CrearTema').on('submit', function(evento){
+        evento.preventDefault();
+        $('#frmCapacitaciones_CrearTema').generarDatosEnvio('txtCapacitaciones_CrearTema_', function(datos){
+            datos = $.parseJSON(datos);
+            datos.idEmpresa = $('#txtInicio_idEmpresa').val();
+            $.post('../server/php/proyecto/capacitaciones_CrearTema.php', datos, function(data, textStatus, xhr) {
+                if (!isNaN(data)){
+                    $('#cntCapacitaciones_RegistroTema').modal('hide');
+                    capacitaciones_CargarMatriz();
+                } else{
+                    Mensaje("Error", data, 'danger');
+                }
+            });
+        });
+    });
+
+    $(document).delegate('.lnkCapacitaciones_Matriz_AsignarPrograma', 'click', function(event) {
+        const idTema    = $(this).parent('tr').attr('data-idtema');
+        const Cargo     = $(this).attr('data-cargo');
+        const campos    = $(this).parent('tr').find('td');
+        const _tipo     = ($(this).text() === 'X' ? 'quitar' : 'agregar');
+        const self = this;
+
+        bootbox.confirm({
+            message : `Esta seguro de ${_tipo} esta ${$(campos[4]).text()} de ${$(campos[3]).text()} del programa de ${$(campos[2]).text()} al cargo ${Cargo}`,
+            buttons: {
+                confirm: {
+                    label: `Si, ${_tipo}`
+                },
+                cancel: {
+                    label: 'No',
+                }
+            },
+            callback : function(result){
+                if (result){
+                    $.post('../server/php/proyecto/capacitaciones_AgregarAsignacion.php', 
+                    {
+                        idUsuario   : Usuario.id,
+                        idTema      : idTema,
+                        Cargo       : Cargo,
+                        Tipo        : _tipo
+                    }, function(data, textStatus, xhr) {
+                       const _nuevoValor = (_tipo === 'quitar' ? '' : 'X');
+                       $(self).text(_nuevoValor);
+                    });
+                }
+            }
+        });
+    });
+
+    $(document).delegate('.btnCapacitaciones_Editar', 'click', function(event) {
+        event.preventDefault();
+        const idTema    = $(this).parent('td').parent('tr').attr('data-idtema');
+        const campos    = $(this).parent('td').parent('tr').find('td');
+        $('#txtCapacitaciones_CrearTema_id').val(idTema)
+        $('#txtCapacitaciones_CrearTema_Programa').val($(campos[2]).text());
+        $('#txtCapacitaciones_CrearTema_Tema').val($(campos[3]).text());
+        $('#txtCapacitaciones_CrearTema_Tipo').val($(campos[4]).text());
+        
+        $('#lblCapacitaciones_CrearTema_Titulo').text('Editar');
+        $('#cntCapacitaciones_RegistroTema').modal('show');
+    });
+
+    $(document).delegate('.btnCapacitaciones_Quitar', 'click', function(event) {
+        event.preventDefault();
+        const idTema    = $(this).parent('td').parent('tr').attr('data-idtema');
+        const _fila     = $(this).parent('td').parent('tr');
+        const campos    = $(this).parent('td').parent('tr').find('td');
+
+        bootbox.confirm({
+            message : `Esta seguro de eliminar esta ${$(campos[4]).text()} de ${$(campos[3]).text()} del programa de ${$(campos[2]).text()}, esta acción no podra deshacerse`,
+            buttons: {
+                confirm: {
+                    label: `Si, eliminar`,
+                    className : 'btn-danger'
+                },
+                cancel: {
+                    label: 'No',
+                }
+            },
+            callback : function(result){
+                if (result){
+                    $.post('../server/php/proyecto/capacitaciones_borrarTema.php', 
+                    {
+                        idUsuario   : Usuario.id,
+                        idTema      : idTema
+                    }, function(data, textStatus, xhr) {
+                       $(_fila).remove();
+                    });
+                }
+            }
+        });
+    });
+
+
+    function capacitaciones_CargarMatriz(){
+        $('#tblCapacitaciones_Matriz').destruirDataTable();
+        $('#tblCapacitaciones_Matriz thead tr').remove();
+        $('#tblCapacitaciones_Matriz tbody tr').remove();
+        $.post('../server/php/proyecto/capacitaciones_CargarMatriz.php', 
+            {idUsuario: Usuario.id, 
+                idEmpresa : $('#txtInicio_idEmpresa').val()}, 
+        function(data, textStatus, xhr) {
+            let tds_head = '';
+            let tds_body = '';
+            if (data.temas.length === 0){
+                tds_head = `<tr>
+                        <th>No hay un programa de capacitación aún, empieza creando un nuevo tema</th>
+                    </tr>`;
+            } else{
+                tds_head = `<tr>
+                                <th></th>
+                                <th></th>
+                                <th>Programa</th>
+                                <th>Tema</th>
+                                <th>Tipo</th>`;
+                if (data.personal.length > 0){
+                    $.each(data.personal, function(index, val) {
+                         tds_head += `<th>${val}</th>`;
+                    });
+                }
+                tds_head += `</tr>`;
+                $.each(data.temas, function(index, val) {
+                     tds_body += `<tr data-idtema="${val.id}">
+                                    <td>
+                                        <button type="button" class="btn btn-pure btn-primary icon fa-edit btnCapacitaciones_Editar"></button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-pure btn-danger icon fa-times btnCapacitaciones_Quitar"></button>
+                                    </td>
+                                    <td>${val.Programa}</td>
+                                    <td>${val.Tema}</td>
+                                    <td>${val.Tipo}</td>`;
+                    $.each(data.personal, function(index2, val2) {
+                        data.asignaciones[val.id] = data.asignaciones[val.id] || [];
+                        const _val = (data.asignaciones[val.id].indexOf(val2) >= 0 ? 'X' : '');
+                        tds_body += `<td data-cargo="${val2}" class="lnkCapacitaciones_Matriz_AsignarPrograma">${_val}</td>`;
+                    });
+                    tds_body += `</tr>`;
+                });
+            }
+            $('#tblCapacitaciones_Matriz thead').append(tds_head);
+            $('#tblCapacitaciones_Matriz').crearDataTable(tds_body, function(){}, false);
+        }, 'json');
+    }
+</script>

@@ -1,0 +1,143 @@
+<style>
+    @media print{
+        .lnkAbrirModulo,
+        #frmCapacitaciones_Notificacion_Buscar{
+            display: none;
+        }
+
+        #txtCapacitaciones_Notificacion_Logo{
+            display: block !important;
+            position: absolute;
+            top : -90px;
+        }
+
+        .cntCoppast_Header{
+            display: block !important;
+            position: absolute;
+            top : -80px;
+            left: 110px;
+        }
+
+        #modulo_capacitaciones_notificacion_html table{
+            margin-top: 1em !important;
+
+        }
+
+    }
+</style>
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+    
+    <img id="txtCapacitaciones_Notificacion_Logo" class="hide" height="80px" src="" alt="">
+    <div class="cntCoppast_Header hide">
+        <h5 class="txtCopasst_Empresa"></h5>
+        <h6 class="txtCopasst_EmpresaNit"></h6>
+    </div>
+
+	<div class="page-header">
+		<h3 class="page-title">Notificación de Capacitaciones</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+        <div class="panel panel-primary panel-bordered">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button class="btn btn-warning lnkAbrirModulo" Titulo="Capacitaciones" vinculo="capacitaciones/home.html"><i class="icon fa-arrow-left"></i> Volver</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <form id="frmCapacitaciones_Notificacion_Buscar">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label" for="txtCapacitaciones_Notificacion_Cedula">Cedula</label>
+                              <div class="input-group">
+                                <input id="txtCapacitaciones_Notificacion_Cedula" class="form-control guardar">
+                                <span class="input-group-btn">
+                                  <button type="submit" class="btn btn-primary">
+                                    <i class="icon wb-search" aria-hidden="true"></i>
+                                  </button>
+                                </span>
+                              </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="cntCapacitaciones_Notificacion" class="row">
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+
+<script>
+    $('#txtCapacitaciones_Notificacion_Cedula').on('change', function(){
+        $('#frmCapacitaciones_Notificacion_Buscar').trigger('submit');    
+    });
+
+    $('#frmCapacitaciones_Notificacion_Buscar').on('submit', function(evento){
+        evento.preventDefault();
+        
+        $('#cntCapacitaciones_Notificacion div').remove();
+
+        if ($('#txtCapacitaciones_Notificacion_Cedula').val() !== ''){
+            $.post('../server/php/proyecto/capacitaciones_notificacion_cargar.php', 
+                {
+                    cedula: $('#txtCapacitaciones_Notificacion_Cedula').val(),
+                    Usuario : Usuario.id,
+                    idEmpresa : $('#txtInicio_idEmpresa').val()
+                }, 
+            function(data, textStatus, xhr) {
+                console.log(data);
+                var tds = '';
+                if (data.personal.id === undefined){
+                    tds = `<div>
+                            <h1>No se encontró ningún trabajador con ese número de cedula</h1>
+                        </div>`;
+                } else{
+                    const per = data.personal,
+                        temas = data.temas;
+
+                    const _vg = (per.Genero !== 'M' ? 'a' : 'o'),
+                        _titulog = (per.Genero !== 'M' ? 'La trabajadora' : 'El trabajador'),
+                        temasEnunciado = (temas.length === 0 ? `no tiene temas de capacitación asignados.` : `debe cumplir con las siguientes capacitaciones:`);
+
+                    tds = `<div>
+                            <p>${_titulog} <strong>${per.Nombres} ${per.Apellidos}</strong>, identificad${_vg} con el documento número: <strong>${per.Cedula}</strong>, quien actualmente se encuentra registrad${_vg} en el Cargo de <strong>${per.Cargo}</strong> ${temasEnunciado}
+                            </p>`;
+
+                    if (temas.length > 0){
+                        tds += `<table class="table table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Programa</th>
+                                            <th>Tipo</th>
+                                            <th>Tema</th>
+                                            <th>Intensidad</th>
+                                        <tr>
+                                    <thead>
+                                    <tbody>`;
+                        $.each(temas, function(index, val) {
+                            tds += `<tr>
+                                        <td>${val.Programa}</td>
+                                        <td>${val.Tipo}</td>
+                                        <td>${val.Tema}</td>
+                                        <td>${val.Intensidad}</td>
+                                    </tr> `;
+                        });
+                        tds += `    </tbody>
+                                </table>`;    
+                    }
+                    tds += `</div>`;
+                }
+                $('#cntCapacitaciones_Notificacion').append(tds);
+            }, 'json');
+        }
+    });
+
+    function funCapacitaciones_Notificacion(){
+        $('#txtCapacitaciones_Notificacion_Logo').attr('src', '../server/php/' + Empresa.Ruta + '/' + Empresa.Archivo);
+        $('.txtCopasst_Empresa').text(Empresa.Nombre);
+        $('.txtCopasst_EmpresaNit').text(Empresa.NIT);
+    }
+    
+</script>
