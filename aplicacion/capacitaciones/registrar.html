@@ -1,0 +1,92 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<h3 class="page-title">Registro de Asistencia a Capacitación</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+        <div class="panel panel-primary panel-bordered">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button id="btnCapacitaciones_Registro_Volver" class="btn btn-warning lnkAbrirModulo" Titulo="Capacitaciones" vinculo="capacitaciones/home.html"><i class="icon fa-arrow-left"></i> Volver</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <form id="frmCapacitacion_Registro">
+                    <input type="hidden" class="guardar" id="txtCapacitaciones_Registro_id">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtCapacitaciones_Registro_Fecha" class="control-label">Fecha</label>
+                                <input class="form-control datepicker guardar" id="txtCapacitaciones_Registro_Fecha">
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtCapacitaciones_Registro_Actividad" class="control-label">Actividad</label>
+                                <input class="form-control" id="txtCapacitaciones_Registro_Actividad">
+                                <input type="hidden" class="txtCapacitaciones_Registro_idTema">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtCapacitaciones_Registro_TipoDeEvento" class="control-label">Tipo de Evento</label>
+                                <input class="form-control" id="txtCapacitaciones_Registro_TipoDeEvento" readonly="true">
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtCapacitaciones_Registro_Duracion" class="control-label">Duracion <small>(Horas)</small></label>
+                                <input class="form-control guardar" type="number" id="txtCapacitaciones_Registro_Duracion">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtCapacitaciones_Registro_Lugar" class="control-label">Lugar</label>
+                                <input class="form-control guardar" id="txtCapacitaciones_Registro_Lugar">
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtCapacitaciones_Registro_Vigencia" class="control-label">Vigencia <small>(Meses)</small></label>
+                                <input class="form-control guardar" type="number" id="txtCapacitaciones_Registro_Vigencia">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="txtCapacitaciones_Registro_Responsable" class="control-label">Responsable</label>
+                                <input class="form-control guardar" id="txtCapacitaciones_Registro_Responsable">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-success btn-block">
+                        <i class="icon fas fa-floppy-o"></i>
+                        Registrar
+                    </button>
+                </form>
+            </div>
+        </div>
+	</div>
+</div>
+
+<script>
+    function funCapacitaciones_Registrar(){
+        $('#btnCapacitaciones_Registro_Volver').cambiarDireccionamiento('Capacitaciones', 'capacitaciones/home.html', "");
+        
+        $('#frmCapacitacion_Registro')[0].reset();
+        $('#txtCapacitaciones_Registro_Fecha').val(obtenerFecha().substring(0, 10));
+    }
+</script>

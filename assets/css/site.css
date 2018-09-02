@@ -9995,10 +9995,13 @@ background: -webkit-linear-gradient(rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%
 
 
 .cntHomeButtons{
-  display: inline-block;
-  text-align: right;
+   position: fixed;
+  text-align: right;  
+  right: 2em;
+  bottom: 0em;
   width: 100%;
 }
+
 .cntHomeButtons > div{
   display: inline-block;
 }
@@ -10154,4 +10157,22 @@ background: -webkit-linear-gradient(rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%
 
 #modulo_fallasControl_home_html .cntFallasControl_homeButtons{
   margin-top: calc(5em);
+}
+
+#tblCapacitaciones_Cumplimiento td,
+#tblCapacitaciones_Cumplimiento th{
+  border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+.tr_top_border td{
+  border-top: 1px solid rgba(0,0,0, 0.3) !important;
+}
+.td_border_right{
+  border-right: 1px solid rgba(0,0,0, 0.3) !important;
+}
+
+.tdCapacitaciones_Cumplimiento_P:hover,
+.tdCapacitaciones_Cumplimiento_Responsable:hover{
+  background: rgba(0,0,0,0.2);
+  cursor: pointer;
 }

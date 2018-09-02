@@ -23,22 +23,22 @@
                     <table id="tblCapacitaciones_Cumplimiento" class="table">
                         <thead>
                             <tr>
-                                <th rowspan="2">Programa</th>
-                                <th rowspan="2">Actividad</th>
-                                <th rowspan="2">Responsable</th>
-                                <th colspan="4" class="text-center">Ene</th>
-                                <th colspan="4" class="text-center">Feb</th>
-                                <th colspan="4" class="text-center">Mar</th>
-                                <th colspan="4" class="text-center">Abr</th>
-                                <th colspan="4" class="text-center">May</th>
-                                <th colspan="4" class="text-center">Jun</th>
-                                <th colspan="4" class="text-center">Jul</th>
-                                <th colspan="4" class="text-center">Ago</th>
-                                <th colspan="4" class="text-center">Sep</th>
-                                <th colspan="4" class="text-center">Oct</th>
-                                <th colspan="4" class="text-center">Nov</th>
-                                <th colspan="4" class="text-center">Dic</th>
-                                <th rowspan="2">Cumplimiento</th>
+                                <th rowspan="2" class="pr">Programa</th>
+                                <th rowspan="2" class="pr">Actividad</th>
+                                <th rowspan="2" class="td_border_right">Responsable</th>
+                                <th colspan="4" class="text-center td_border_right">Ene</th>
+                                <th colspan="4" class="text-center td_border_right">Feb</th>
+                                <th colspan="4" class="text-center td_border_right">Mar</th>
+                                <th colspan="4" class="text-center td_border_right">Abr</th>
+                                <th colspan="4" class="text-center td_border_right">May</th>
+                                <th colspan="4" class="text-center td_border_right">Jun</th>
+                                <th colspan="4" class="text-center td_border_right">Jul</th>
+                                <th colspan="4" class="text-center td_border_right">Ago</th>
+                                <th colspan="4" class="text-center td_border_right">Sep</th>
+                                <th colspan="4" class="text-center td_border_right">Oct</th>
+                                <th colspan="4" class="text-center td_border_right">Nov</th>
+                                <th colspan="4" class="text-center td_border_right">Dic</th>
+                                <!--<th rowspan="2">Cumplimiento</th>-->
                             </tr>
                             <tr id="cntCapacitaciones_Cumplimiento_filaSemanas">
 
@@ -59,57 +59,134 @@
             <th class="text-center">1</th>
             <th class="text-center">2</th>
             <th class="text-center">3</th>
-            <th class="text-center">4</th>`);
+            <th class="text-center td_border_right">4</th>`);
     }
 
     $('#txtCapacitaciones_Cumplimiento_Anio').val(obtenerFecha().substr(0, 4));
-    function capacitaciones_CargarCumplimiento(){
-        /*
-        $.post('../server/php/proyecto/capacitaciones_CargarMatriz.php', 
-            {idUsuario: Usuario.id, 
-                idEmpresa : $('#txtInicio_idEmpresa').val()}, 
-        function(data, textStatus, xhr) {
-            let tds_head = '';
-            let tds_body = '';
-            if (data.temas.length === 0){
-                tds_head = `<tr>
-                        <th>No hay un programa de capacitación aún, empieza creando un nuevo tema</th>
-                    </tr>`;
-            } else{
-                tds_head = `<tr>
-                                <th></th>
-                                <th></th>
-                                <th>Programa</th>
-                                <th>Tema</th>
-                                <th>Tipo</th>`;
-                if (data.personal.length > 0){
-                    $.each(data.personal, function(index, val) {
-                         tds_head += `<th>${val}</th>`;
+
+    $('#txtCapacitaciones_Cumplimiento_Anio').on('change', function(evento){
+        capacitaciones_CargarCumplimiento();
+    });
+
+    $(document).delegate('.tdCapacitaciones_Cumplimiento_Responsable', 'click', function(event) {
+        const _val = $(this).text(),
+            self = this,
+            idTema = $(this).attr('data-id');
+
+        bootbox.prompt({
+                title : 'Por favor ingrese el nombre del Responsable?',
+                value: _val,
+                buttons: {
+                    confirm: {
+                        label: 'Guardar',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'Volver sin guardar',
+                        className: 'btn-default'
+                    }
+                },
+                callback: function (result) {
+                  if (result){
+                    $.post('../server/php/proyecto/capacitaciones_asignarResponsable.php', 
+                    {
+                        Usuario : Usuario.id,
+                        idEmpresa: $('#txtInicio_idEmpresa').val(),
+                        idTema : idTema,
+                        Anio : $('#txtCapacitaciones_Cumplimiento_Anio').val(),
+                        Responsable : result
+                    }, function(data, textStatus, xhr) {
+                        $(self).text(result);
+                    });
+                  } 
+                }
+              });
+    });
+
+    $(document).delegate('.tdCapacitaciones_Cumplimiento_P', 'click', function(event) {
+        const self = this,
+            _arr = $(this).attr('id').split('_');
+            _tipoStr = ( $(this).text().trim() === '' ? 'programar' : 'quitar');
+
+
+        const _data = {
+            idTema  : _arr[3],
+            Mes     : _arr[4],
+            Semana  : _arr[5]
+        },
+        _meses = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        _semanas = ['', 'primera', 'segunda', 'tercera', 'cuarta'];
+
+        bootbox.confirm({
+            message : `Esta seguro de ${_tipoStr} esta actividad para la ${_semanas[_data.Semana]} semana de  ${_meses[_data.Mes]}?`,
+            buttons: {
+                confirm: {
+                    label: `Si, ${_tipoStr}`
+                },
+                cancel: {
+                    label: 'No',
+                }
+            },
+            callback : function(result){
+                if (result){
+                    _data.idUsuario = Usuario.id;
+                    _data.Anio = $('#txtCapacitaciones_Cumplimiento_Anio').val();
+                    _data.Accion = _tipoStr;
+
+                    $.post('../server/php/proyecto/capacitaciones_Programar.php',_data, 
+                    function(data, textStatus, xhr) {
+                        $(self).text((_tipoStr === 'quitar' ? '' : 'x'));
                     });
                 }
-                tds_head += `</tr>`;
-                $.each(data.temas, function(index, val) {
-                     tds_body += `<tr data-idtema="${val.id}">
-                                    <td>
-                                        <button type="button" class="btn btn-pure btn-primary icon fa-edit btnCapacitaciones_Editar"></button>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-pure btn-danger icon fa-times btnCapacitaciones_Quitar"></button>
-                                    </td>
-                                    <td>${val.Programa}</td>
-                                    <td>${val.Tema}</td>
-                                    <td>${val.Tipo}</td>`;
-                    $.each(data.personal, function(index2, val2) {
-                        data.asignaciones[val.id] = data.asignaciones[val.id] || [];
-                        const _val = (data.asignaciones[val.id].indexOf(val2) >= 0 ? 'X' : '');
-                        tds_body += `<td data-cargo="${val2}" class="lnkCapacitaciones_Matriz_AsignarPrograma">${_val}</td>`;
-                    });
-                    tds_body += `</tr>`;
-                });
             }
-            $('#tblCapacitaciones_Cumplimiento thead').append(tds_head);
-            $('#tblCapacitaciones_Cumplimiento').crearDataTable(tds_body, function(){}, false);
+        });
+
+
+
+
+
+    });
+    function capacitaciones_CargarCumplimiento(){
+        $('#tblCapacitaciones_Cumplimiento tbody tr').remove();
+        
+        $.post('../server/php/proyecto/capacitaciones_CargarCumplimiento.php', 
+            {   
+                idUsuario: Usuario.id, 
+                idEmpresa : $('#txtInicio_idEmpresa').val(),
+                Anio : $('#txtCapacitaciones_Cumplimiento_Anio').val()
+            }, 
+        function(data, textStatus, xhr) {
+            let tds = '';
+            $.each(data.temas, function(index, val) {
+                 tds += `<tr class="tr_top_border">
+                            <td rowspan="2" class="pr">${val.Programa}</td>
+                            <td rowspan="2" class="pr">${val.Tema}</td>
+                            <td rowspan="2" data-id="${val.id}" class="tdCapacitaciones_Cumplimiento_Responsable td_border_right">${val.Responsable}</td>`;
+                    for (var i = 0; i < 12; i++) {
+                        tds += `
+                            <td id="tdCapacitaciones_Cumplimiento_P_${val.id}_${(i+1)}_1"  class="text-center tdCapacitaciones_Cumplimiento_P"> </td>
+                            <td id="tdCapacitaciones_Cumplimiento_P_${val.id}_${(i+1)}_2"  class="text-center tdCapacitaciones_Cumplimiento_P"> </td>
+                            <td id="tdCapacitaciones_Cumplimiento_P_${val.id}_${(i+1)}_3"  class="text-center tdCapacitaciones_Cumplimiento_P"> </td>
+                            <td id="tdCapacitaciones_Cumplimiento_P_${val.id}_${(i+1)}_4"  class="text-center tdCapacitaciones_Cumplimiento_P td_border_right"> </td>`;
+                    }
+                 //tds += `   <td rowspan="2"></td>`;
+                 tds += `</tr>
+                        <tr>`;
+
+                    for (var i = 0; i < 12; i++) {
+                        tds += `
+                            <td id="tdCapacitaciones_Cumplimiento_E_${val.id}_${(i+1)}_1"  class="text-center"> </td>
+                            <td id="tdCapacitaciones_Cumplimiento_E_${val.id}_${(i+1)}_2"  class="text-center"> </td>
+                            <td id="tdCapacitaciones_Cumplimiento_E_${val.id}_${(i+1)}_3"  class="text-center"> </td>
+                            <td id="tdCapacitaciones_Cumplimiento_E_${val.id}_${(i+1)}_4"  class="text-center td_border_right"> </td>`;
+                    }
+                tds += `</tr>`;
+            });
+            $('#tblCapacitaciones_Cumplimiento tbody').append(tds);
+
+            $.each(data.programadas, function(index, val) {
+                $(`#tdCapacitaciones_Cumplimiento_P_${val.id}_${val.Mes}_${val.Semana}`).text('x');
+            });
         }, 'json');
-        */
     }
 </script>
