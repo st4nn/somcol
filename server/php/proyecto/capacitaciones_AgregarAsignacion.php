@@ -10,7 +10,7 @@
   	if ($Tipo == 'quitar'){
   		$sql = "DELETE FROM capacitaciones_Cargo WHERE idTema = '$idTema' AND Cargo = '$Cargo';";
   	} else{
-  		$sql = "INSERT INTO capacitaciones_Cargo (Cargo, idTema) VALUES ('$Cargo', '$idTema') ON DUPLICATE KEY UPDATE fechaCargue = CURRENT_TIMESTAMP;";
+  		$sql = "INSERT INTO capacitaciones_Cargo (Cargo, idTema) VALUES ('$Cargo', '$idTema') ON DUPLICATE KEY UPDATE idTema = idTema;";
   	}
 
     $link->query(utf8_decode($sql));

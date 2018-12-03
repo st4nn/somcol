@@ -10176,3 +10176,7 @@ background: -webkit-linear-gradient(rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%
   background: rgba(0,0,0,0.2);
   cursor: pointer;
 }
+
+.form-control{
+  border-color: rgba(0,0,0,0.4);
+}

@@ -7,6 +7,7 @@
    $Key = addslashes($_POST['key']);
 
    $sql = "SELECT 
+               Empresas.id AS idEmpresa,
                Empresas.Nombre,
                Empresas.Correo,
                Archivos.Ruta,

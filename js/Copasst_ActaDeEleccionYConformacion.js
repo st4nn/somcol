@@ -173,6 +173,8 @@ function Copasst_AgregarCandidato(datos)
         tds += '<option value="Pincipal">Principal</option>';
         tds += '<option value="Suplente">Suplente</option>';
       tds += '</select><td>';
+    } else{
+        $('#cntCopasst_AEC_FirmasJurados').append(`<div class="cntCopasstJuradosFirma"><h4>${datos.Nombre}</h4><h6>${datos.Cargo}</h6><h6>${datos.Identificacion}<h6></div>`);
     }
   tds += '</tr>';
 
@@ -201,6 +203,8 @@ function Copasst_CargarDatos(){
   $('#frmCopasst_AEC')[0].reset();
   $('#frmCopasst_AEC_Candidatos_Empleador')[0].reset();
   $('#frmCopasst_AEC')[0].reset();
+  
+  $('#cntCopasst_AEC_FirmasJurados div').remove();
 
   $('#txtCopasst_AEC_Anio').val(tmpAnio);
 

@@ -1,4 +1,8 @@
 <style>
+    #cntCopasst_ADR_Asistntes_Firmas{
+        display: none;
+    }
+
     @media print{
         button, form{
            display: none !important;
@@ -17,6 +21,22 @@
             text-indent: 1px !important;
             display: inline !important;
         }
+
+        #cntCopasst_ADR_Asistntes_Firmas{
+            display: block !important;
+        }
+
+        #cntCopasst_ADR_Asistntes_Firmas .panel-body p{
+            width: calc(50% - 4em);
+            border-top: 2px solid black;
+            padding-top: 8px;
+            margin-top: 6em;
+            margin-right: 2em;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+
 
   #frmCopasst_ADR{
     display: block !important;
@@ -53,8 +73,20 @@
     display: block !important;
     position: absolute;
     top : -80px;
-    left: 110px;
+    left: 210px;
   }
+
+    ::-webkit-scrollbar {
+        -webkit-appearance: none;
+        display: none;
+    }
+    ::-webkit-scrollbar-thumb {
+        display: none;
+    }
+
+    textarea{
+        overflow-y: visible;
+    }
 }
 </style>
 <!-- Page -->
@@ -122,7 +154,8 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="txtCopasst_ADR_Referencia" class="control-label">Objetivo de la Reunión</label>
-                                <textarea class="form-control guardar" type="text" id="txtCopasst_ADR_Objetivo"></textarea>
+                                <textarea class="form-control guardar fillPrintTextarea" type="text" id="txtCopasst_ADR_Objetivo"></textarea>
+                                <p id="printtxtCopasst_ADR_Objetivo" class="fillPrintTextarea"></p>
                             </div>
                         </div>
                     </div> 
@@ -134,7 +167,8 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="txtCopasst_ADR_Temas" class="control-label">Temas a Tratar</label>
-                                <textarea rows="6" class="form-control guardar" type="text" id="txtCopasst_ADR_Temas"></textarea>
+                                <textarea rows="6" class="form-control guardar fillPrintTextarea" type="text" id="txtCopasst_ADR_Temas"></textarea>
+                                <p id="printtxtCopasst_ADR_Temas" class="fillPrintTextarea"></p>
                             </div>
                         </div>
                     </div>
@@ -146,7 +180,8 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="txtCopasst_ADR_Desarrollo" class="control-label">Desarrollo de los Temas</label>
-                                <textarea rows="12" class="form-control guardar" type="text" id="txtCopasst_ADR_Desarrollo"></textarea>
+                                <textarea rows="12" class="form-control guardar fillPrintTextarea" type="text" id="txtCopasst_ADR_Desarrollo"></textarea>
+                                <p id="printtxtCopasst_ADR_Desarrollo" class="fillPrintTextarea"></p>
                             </div>
                         </div>
                     </div>
@@ -261,7 +296,17 @@
                     <tbody></tbody>
                 </table>
             </div>
-        </div>  
+        </div>
+
+        <div class="panel panel-primary panel-bordered" id="cntCopasst_ADR_Asistntes_Firmas">
+            <div class="panel-heading">
+                <h3 class="panel-title">Firmas de los Asistentes</h3>
+                <div class="panel-actions">
+                </div>
+            </div>
+            <div class="panel-body">
+            </div>
+        </div>
 
         <div id="cntCopasst_ActasReunion_CajaArchivos" class="panel panel-bordered panel-primary xs-hidden">
             <div class="panel-body">
@@ -377,6 +422,13 @@
           tds += '</tr>';
 
           $('#tblCopasst_ADR_Asistentes').append(tds);
+
+        tds = '<p>';
+            tds += '<strong>' + datos.Nombre + '</strong>';
+            tds += '<br/>' + datos.Cargo;
+        tds += '</p>';
+
+        $('#cntCopasst_ADR_Asistntes_Firmas .panel-body').append(tds);
     }
 
     function cpActas_AgregarCompromiso(datos)
@@ -393,8 +445,8 @@
           $('#tblCopasst_ADR_Compromisos').append(tds);
     }
 
-    function cpActas_CargarActa(idActa)
-    {
+    function cpActas_CargarActa(idActa){
+
         $('.txtCopasst_Empresa').text(Empresa.Nombre);
         $('.txtCopasst_EmpresaNit').text(Empresa.NIT);
         $('#frmCopasst_ADR')[0].reset();
@@ -403,6 +455,8 @@
         $("#modulo_copasst_ActasDeReunion_Acta_html .datepicker").val(obtenerFecha().substring(0, 10));
         $('#tblCopasst_ADR_Asistentes tbody tr').remove();
         $('#tblCopasst_ADR_Compromisos tbody tr').remove();
+        $('#cntCopasst_ADR_Asistntes_Firmas .panel-body p').remove();
+
 
         $.post('../server/php/proyecto/cp_Actas_CargarActa.php', {Usuario: Usuario.id, idActa : idActa}, function(data, textStatus, xhr) {
             if (data.d != 0)
@@ -430,6 +484,8 @@
                 });
             }
 
+            $('.fillPrintTextarea').trigger('change');
+
         }, 'json');
         if (idActa != 0){
             $('#cntCopasst_ActasReunion_Archivos div').remove();
@@ -440,6 +496,4 @@
 
         } 
     }
-
-    
 </script>

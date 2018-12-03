@@ -1,0 +1,457 @@
+<style>
+    @media print{
+        button, form{
+           display: none !important;
+        }
+        #txtCCL_ADR_Logo{
+            display: block !important;
+            position: absolute;
+            top : -90px;
+        }
+
+        select, input, textarea{
+            outline: none !important;
+            border: none !important;
+            -webkit-appearance: none !important;
+            -moz-appearance: none !important;
+            text-indent: 1px !important;
+            display: inline !important;
+        }
+
+  #frmCCL_ADR{
+    display: block !important;
+  }
+  
+  #frmCCL_ADR .form-group{
+    margin: 0;
+  }
+  #frmCCL_ADR .control-label{
+    font-weight: 500;
+    width: 11em;
+  }
+  #frmCCL_ADR .form-control{
+    width: calc(100% - 12em) !important;
+  }
+
+  #frmCCL_ADR textarea.form-control{
+    width: 100% !important;
+  }
+  table {
+    background:none !important;
+    margin-top: -3em;
+  }
+
+  .panel{
+    margin-top: -3em;
+  }
+
+  #cntCCL_ActasReunion_CajaArchivos{
+    display: none !important;
+  }
+
+  .cntCCL_Header{
+    display: block !important;
+    position: absolute;
+    top : -80px;
+    left: 210px;
+  }
+
+    ::-webkit-scrollbar {
+        -webkit-appearance: none;
+        display: none;
+    }
+    ::-webkit-scrollbar-thumb {
+        display: none;
+    }
+
+    textarea{
+        overflow-y: visible;
+    }
+}
+</style>
+<!-- Page -->
+
+<div class="page" style="min-height: 90vh;">
+    <img id="txtCCL_ADR_Logo" class="hide" height="80px" src="" alt="">
+    <div class="cntCCL_Header hide">
+        <h5 class="txtCCL_Empresa"></h5>
+        <h6 class="txtCCL_EmpresaNit"></h6>
+    </div>
+	<div class="page-header">
+		<h3 class="page-title">Acta de Reunión No <strong id="lblCCL_ADR_Numero"></strong></h3>
+	</div>
+ 	<div class="page-content container-fluid">
+        <form id="frmCCL_ADR">
+            <div class="panel panel-bordered">
+                <div class="panel-heading">
+                    <div class="panel-actions">
+                        <button class="btn btn-warning lnkAbrirModulo" type="button" Titulo="Actas de Reunión" vinculo="ccl/ActasDeReunion.html" data-callback="CCL_ActasReunion_cargarActas"><i class="icon fa-arrow-left"></i> Volver</button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtCCL_ADR_Lugar" class="control-label">Lugar de Reunión</label>
+                                <input class="form-control guardar" type="text" id="txtCCL_ADR_Lugar">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtCCL_ADR_Fecha" class="control-label">Fecha   </label>
+                                <input class="form-control guardar datepicker" type="text" id="txtCCL_ADR_Fecha" required="true" autocomplete="off">
+                            </div>
+                        </div>
+                    </div> 
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtCCL_ADR_Departamento" class="control-label">Departamento</label>
+                                <input class="form-control guardar" type="text" id="txtCCL_ADR_Departamento">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="txtCCL_ADR_Municipio" class="control-label">Municipio</label>
+                                <input class="form-control guardar" type="text" id="txtCCL_ADR_Municipio">
+                            </div>
+                        </div>
+                    </div>  
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="txtCCL_ADR_Referencia" class="control-label">Referencia</label>
+                                <input class="form-control guardar" type="text" id="txtCCL_ADR_Referencia">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="txtCCL_ADR_Referencia" class="control-label">Objetivo de la Reunión</label>
+                                <textarea class="form-control guardar" type="text" id="txtCCL_ADR_Objetivo"></textarea>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <div class="panel panel-bordered">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="txtCCL_ADR_Temas" class="control-label">Temas a Tratar</label>
+                                <textarea rows="6" class="form-control guardar" type="text" id="txtCCL_ADR_Temas"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-bordered">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="txtCCL_ADR_Desarrollo" class="control-label">Desarrollo de los Temas</label>
+                                <textarea rows="12" class="form-control guardar" type="text" id="txtCCL_ADR_Desarrollo"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-success btn-block" type="submit"> Guardar</button>
+                </div>
+            </div>
+        </form>
+        <div class="panel panel-primary panel-bordered">
+            <div class="panel-heading">
+                <h3 class="panel-title">Asistentes a la Reunión</h3>
+                <div class="panel-actions">
+                </div>
+            </div>
+            <div class="panel-body">
+                <form id="frmCCL_ADR_Asistentes">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txtCCL_ADR_Asistentes_Nombre" class="control-label">Nombre</label>
+                                <input class="form-control guardar" id="txtCCL_ADR_Asistentes_Nombre" required="true">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txtCCL_ADR_Asistentes_Cargo" class="control-label">Cargo</label>
+                                <input class="form-control guardar" id="txtCCL_ADR_Asistentes_Cargo">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label for="txtCCL_ADR_Asistentes_Telefono" class="control-label">Telefono</label>
+                                <input class="form-control guardar" id="txtCCL_ADR_Asistentes_Telefono">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txtCCL_ADR_Asistentes_Correo" class="control-label">Correo Electrónico</label>
+                                <input type="email" class="form-control guardar" id="txtCCL_ADR_Asistentes_Correo">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-1">
+                            <br>
+                            <button type="submit" class="btn btn-icon btn-primary"><i class="icon fa-plus"></i></button>
+                        </div>
+                    </div>
+                </form>
+
+                <table id="tblCCL_ADR_Asistentes" class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>NOMBRE</th>
+                            <th>CARGO</th>
+                            <th>TELEFONO</th>
+                            <th>CORREO</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel panel-primary panel-bordered">
+            <div class="panel-heading">
+                <h3 class="panel-title">Compromisos de la Reunión</h3>
+                <div class="panel-actions">
+                </div>
+            </div>
+            <div class="panel-body">
+                <form id="frmCCL_ADR_Compromisos">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txtCCL_ADR_Compromisos_Descripcion" class="control-label">Descripción del Compromiso</label>
+                                <input class="form-control guardar" id="txtCCL_ADR_Compromisos_Descripcion" required="true">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="txtCCL_ADR_Compromisos_Responsable" class="control-label">Responsable</label>
+                                <input class="form-control guardar" id="txtCCL_ADR_Compromisos_Responsable">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txtCCL_ADR_Compromisos_Fecha" class="control-label">Fecha Estima de Ejecución</label>
+                                <input class="form-control datepicker guardar" id="txtCCL_ADR_Compromisos_Fecha" autocomplete="off">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-1">
+                            <br>
+                            <button type="submit" class="btn btn-icon btn-primary"><i class="icon fa-plus"></i></button>
+                        </div>
+                    </div>
+                </form>
+
+                <table id="tblCCL_ADR_Compromisos" class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Descripción Compromiso</th>
+                            <th>Responsable</th>
+                            <th>Fecha Estimada</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>  
+
+        <div id="cntCCL_ActasReunion_CajaArchivos" class="panel panel-bordered panel-primary xs-hidden">
+            <div class="panel-body">
+                <div>
+                    <h4></h4>
+                    <div id="cntCCL_ActasReunion_Archivos"></div>
+                </div>
+                
+            </div>
+        </div>       
+	</div>
+</div>
+
+<script>
+    $(document).ready(function()
+    {
+        $('#txtCCL_ADR_Fecha').val(obtenerFecha().substring(0, 10));
+        $("#modulo_CCL_ActasDeReunion_Acta_html .datepicker").val(obtenerFecha().substring(0, 10));
+
+        $("#modulo_CCL_ActasDeReunion_Acta_html .datepicker").datepicker({
+            clearBtn: true,
+            language: "es",
+            orientation: "top auto",
+            daysOfWeekHighlighted: "0",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        $('#frmCCL_ADR').on('submit', function(event)
+        {
+            event.preventDefault();
+            $(this).generarDatosEnvio('txtCCL_ADR_', function(datos)
+            {
+                datos = $.parseJSON(datos);
+                datos.idEmpresa = $('#txtInicio_idEmpresa').val();
+                datos.NoActa = $('#lblCCL_ADR_Numero').text();
+
+                $.post('../server/php/proyecto/ccl_Actas_GuardarDatos.php', datos, 
+                    function(data, textStatus, xhr) 
+                    {
+                        if (isNaN(data))
+                        {
+                          Mensaje('Error', data, 'danger');
+                        } else
+                        {
+                          Mensaje("!", 'Los datos han sido ingresados correctamente', 'success');
+                        }
+                    });
+            });
+        });
+
+        $('#frmCCL_ADR_Asistentes').on('submit', function(event)
+        {
+            event.preventDefault();
+            $(this).generarDatosEnvio('txtCCL_ADR_Asistentes_', function(datos)
+            {
+                datos = $.parseJSON(datos);
+                datos.id = 'NULL';
+                datos.Anio = $('#txtCCL_ADR_Fecha').val().substring(0, 10);
+                datos.idEmpresa = $('#txtInicio_idEmpresa').val();
+                datos.NoActa = $('#lblCCL_ADR_Numero').text();
+
+                $.post('../server/php/proyecto/ccl_Actas_GuardarAsistentes.php', datos, function(data, textStatus, xhr) {
+                    if (isNaN(data))
+                    {
+                      Mensaje('Error', data, 'danger');
+                    } else
+                    {
+                      datos.id = data;
+                      cpActas_AgregarAsistente(datos);
+                      $('#frmCCL_ADR_Asistentes')[0].reset();
+                    }
+                });
+            });
+        });
+
+        $('#frmCCL_ADR_Compromisos').on('submit', function(event)
+        {
+            event.preventDefault();
+            $(this).generarDatosEnvio('txtCCL_ADR_Compromisos_', function(datos)
+            {
+                datos = $.parseJSON(datos);
+                datos.id = 'NULL';
+                datos.Anio = $('#txtCCL_ADR_Fecha').val().substring(0, 10);
+                datos.idEmpresa = $('#txtInicio_idEmpresa').val();
+                datos.NoActa = $('#lblCCL_ADR_Numero').text();
+
+                $.post('../server/php/proyecto/ccl_Actas_GuardarCompromiso.php', datos, function(data, textStatus, xhr) {
+                    if (isNaN(data))
+                    {
+                      Mensaje('Error', data, 'danger');
+                    } else
+                    {
+                      datos.id = data;
+                      cpActas_AgregarCompromiso(datos);
+                      $('#frmCCL_ADR_Compromisos')[0].reset();
+                    }
+                });
+            });
+        });
+    });
+
+    function cpActas_AgregarAsistente(datos)
+    {
+        var tds = '<tr>';
+            tds += '<td>';
+              tds += '<button data-idAsistente="' + datos.id + '" class="btn btn-pure btn-danger icon wb-close btnCCL_ADR_QuitarAsistente"></button>';
+            tds += '</td>';
+            tds += '<td>' + datos.Nombre + '</td>';
+            tds += '<td>' + datos.Cargo + '</td>';
+            tds += '<td>' + datos.Telefono + '</td>';
+            tds += '<td>' + datos.Correo + '</td>';
+          tds += '</tr>';
+
+          $('#tblCCL_ADR_Asistentes').append(tds);
+    }
+
+    function cpActas_AgregarCompromiso(datos)
+    {
+        var tds = '<tr>';
+            tds += '<td>';
+              tds += '<button data-idAsistente="' + datos.id + '" class="btn btn-pure btn-danger icon wb-close btnCCL_ADR_QuitarCompromiso"></button>';
+            tds += '</td>';
+            tds += '<td>' + datos.Descripcion + '</td>';
+            tds += '<td>' + datos.Responsable + '</td>';
+            tds += '<td>' + datos.Fecha + '</td>';
+          tds += '</tr>';
+
+          $('#tblCCL_ADR_Compromisos').append(tds);
+    }
+
+    function cpActas_CargarActa(idActa)
+    {
+        $('.txtCCL_Empresa').text(Empresa.Nombre);
+        $('.txtCCL_EmpresaNit').text(Empresa.NIT);
+        $('#frmCCL_ADR')[0].reset();
+        $('#txtCCL_ADR_Logo').attr('src', '../server/php/' + Empresa.Ruta + '/' + Empresa.Archivo);
+        $('#cntCCL_ActasReunion_CajaArchivos').hide();
+        $("#modulo_CCL_ActasDeReunion_Acta_html .datepicker").val(obtenerFecha().substring(0, 10));
+        $('#tblCCL_ADR_Asistentes tbody tr').remove();
+        $('#tblCCL_ADR_Compromisos tbody tr').remove();
+
+        $.post('../server/php/proyecto/ccl_Actas_CargarActa.php', {Usuario: Usuario.id, idActa : idActa}, function(data, textStatus, xhr) {
+            if (data.d != 0)
+            {
+                $.each(data.d, function(index, val) 
+                {
+                    if ($('#txtCCL_ADR_' + index).length != 0)
+                    {
+                     $('#txtCCL_ADR_' + index).val(val);
+                    }
+                });
+            }
+
+            if (data.a !== undefined && data.a !== 0){
+                $.each(data.a, function(index, val) {
+                    cpActas_AgregarAsistente(val);
+                });
+            }
+
+            if (data.c != 0)
+            {
+                $.each(data.c, function(index, val) 
+                {
+                    cpActas_AgregarCompromiso(val);
+                });
+            }
+
+        }, 'json');
+        if (idActa != 0){
+            $('#cntCCL_ActasReunion_Archivos div').remove();
+            $('#cntCCL_ActasReunion_CajaArchivos').show();
+            $("#cntCCL_ActasReunion_Archivos").iniciarObjArchivos({objPrefijo : $("#txtInicio_idEmpresa"), Proceso: "CCL ActasReunion", Usuario: Usuario.id});
+
+            $("#cntCCL_ActasReunion_Archivos").cargarArchivos({Prefijo : idActa, Proceso : 'CCL ActasReunion'});
+
+        } 
+    }
+
+    
+</script>

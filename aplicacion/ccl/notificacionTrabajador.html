@@ -1,0 +1,169 @@
+<!-- Page -->
+<style>
+@media print{
+    .cntCCL_Notificacion button{
+       display: none !important;
+    }
+    .cntCCL_Notificacion #imgCCL_NotificacionTR_Logo{
+        display: block !important;
+        position: fixed;
+        top : 10px;
+    }
+
+    .cntCCL_Notificacion select, .cntCCL_Notificacion input{
+        outline: none !important;
+        border: none !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        text-indent: 1px !important;
+        text-overflow: '' !important;
+
+        width: calc(100% - 8em) !important;
+        display: inline !important;
+    }
+
+    .cntCCL_Notificacion .cntCCL_NotificacionEM_RepresentanteLegal{
+        margin-top: 6em !important;
+    }
+}
+</style>
+<div class="page cntCCL_Notificacion" style="min-height: 90vh;">
+	<div class="page-header">
+		<h3 class="page-title">Notificación</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button class="btn btn-warning lnkAbrirModulo" Titulo="COMITÉ DE CONVIVENCIA LABORAL" vinculo="ccl/home.html"><i class="icon fa-arrow-left"></i> Volver</button>
+                </div>
+            </div>
+        </div>
+        <div class="row hidden-xs">
+            <div class="form-group col-sm-12">
+                <label class="col-lg-12 col-md-4 control-label">Tipo
+                </label>
+                <div class="col-lg-12 col-md-8">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon fa-at" aria-hidden="true"></i>
+                        </span>
+                        <select class="form-control guardar" id="txtNotificacion_Tipo" required>
+                            <option value="1">Elección del Trabajador</option>
+                            <option value="2">Elección del Empleador</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img src="" height="100px" id="imgCCL_NotificacionTR_Logo">
+        <h1 class="text-center" id="lblCCL_NotificacionTR_Empresa"></h1>
+        <h3 class="text-center" id="lblCCL_NotificacionTR_Empresa_Direccion"></h3>
+        <h4 class="text-center" id="lblCCL_NotificacionTR_Empresa_Telefono"></h4>
+        <div id="cntNotificiacion_1" class="row cntNotificiacion col-sm-8 col-md-7">
+            <br>
+            <h4 class="text-center">COMUNICADO</h4>
+            <p><strong>DE: </strong> JURADO DE VOTACIÓN CCL</p>
+            <p><strong class="lblCCL_NotificacionTR_Para">PARA: </strong> <select id="txtCCL_NotificacionTR_Candidatos" class="form-control"></select></p>
+            <p><strong>Asunto:</strong> Notificación miembro del Comité Paritario de Seguridad y Salud en el Trabajo</p>
+            <p><strong>Fecha:</strong> <input id="txtCCL_NotificacionTR_Fecha" type="text" class="form-control datepicker" autocomplete="off"></p>
+            <br>
+            <p>Cordial Saludo</p>
+            <p>Me permito comunicarle que de acuerdo con las votaciones realizadas usted ha sido nombrado como Representante por parte de los trabajadores en el Comité Paritario de Seguridad y Salud en el Trabajo (CCL) de <span class="lblCCL_NotificacionTR_Empresa"></span>.</p>
+            <p>Le agradecemos comunicar por este mismo medio su aceptación a dicho nombramiento</p>
+            <br>
+            <p>Si está de acuerdo agradecemos firme esta notificación como muestra de su aceptación a ser miembro del comité</p>
+            <strong>Cordialmente</strong><br><br>
+            <div class="cntCCL_NotificacionEM_RepresentanteLegal">   
+                <strong>COMITÉ DIRECTIVO ELECCIONES CCL<br>Representante Legal</strong>
+            </div>
+        </div>
+
+        <div id="cntNotificiacion_2" class="row hide cntNotificiacion col-sm-8 col-md-7">
+            <br>
+            <h4 class="text-center">COMUNICADO</h4>
+            <p><strong>DE: </strong> JURADO DE VOTACIÓN CCL</p>
+            <p><strong class="">PARA: </strong> <select id="txtCCL_NotificacionEM_Candidatos" class="form-control"></select></p>
+            <p><strong>Asunto:</strong> Notificación miembro del Comité Paritario de Seguridad y Salud en el Trabajo</p>
+            <p><strong>Fecha:</strong> <input id="txtCCL_NotificacionEM_Fecha_2" type="text" class="form-control datepicker" autocomplete="off"></p>
+            <br>
+            <p>Cordial Saludo</p>
+            <p>Me permito comunicarle que la Gerencia de <span class="lblCCL_NotificacionTR_Empresa"></span> decidió nombrarlo como Representante por parte del empleador del Comité Paritario de Seguridad y Salud en el Trabajo (CCL).</p>
+            <p>Le agradecemos comunicar por este mismo medio su aceptación a dicho nombramiento</p>
+            <br>
+            <p>Si está de acuerdo agradecemos firme esta notificación como muestra de su aceptación a ser miembro del comité</p>
+            <strong>Cordialmente</strong><br><br>
+            <div class="cntCCL_NotificacionEM_RepresentanteLegal">
+                <strong>
+                    <span id="lblCCL_NotificacionEM_RepresentanteLegal"></span>
+                    <br>Representante Legal
+                </strong>
+            </div>
+            
+        </div>
+
+        <div class="col-sm-4 col-md-5 hidden-xs">
+            <div class="panel panel-bordered panel-primary">
+                <div class="panel-body">
+                    <div>
+                        <h4></h4>
+                        <div id="cntCCL_NotificacionTR_Archivos"></div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+            
+	</div>
+</div>
+
+<script>
+    $(document).ready(function()
+    {
+        $("#cntCCL_NotificacionTR_Archivos").iniciarObjArchivos({objPrefijo : $("#txtInicio_idEmpresa"), Proceso: "CCL NotificacionTR", Usuario: Usuario.id});
+
+        $("#txtCCL_NotificacionTR_Fecha, #txtCCL_NotificacionEM_Fecha_2").datepicker({
+            clearBtn: true,
+            language: "es",
+            orientation: "top auto",
+            daysOfWeekHighlighted: "0",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        $('#txtNotificacion_Tipo').on('change', function(){
+           $('.cntNotificiacion').hide();
+           var valor = $(this).val();
+           $('#cntNotificiacion_' + valor).slideDown();
+        });
+    });
+
+    function CCL_NotificacionTR_cargarArchivos() {
+        $("#cntCCL_NotificacionTR_Archivos").cargarArchivos({Prefijo : $("#txtInicio_idEmpresa").val(), Proceso : 'CCL NotificacionTR'});
+
+        $('#lblCCL_NotificacionTR_Empresa').text(Empresa.Nombre);
+        $('.lblCCL_NotificacionTR_Empresa').text(Empresa.Nombre);
+        $('#lblCCL_NotificacionTR_Empresa_Direccion').text(((Empresa.Direccion !== '0') ? Empresa.Direccion : ''));
+        $('#lblCCL_NotificacionTR_Empresa_Telefono').text(((Empresa.Telefono != '0') ? Empresa.Telefono : ''));
+        $('#imgCCL_NotificacionTR_Logo').attr('src', '../server/php/' + Empresa.Ruta + '/' + Empresa.Archivo);
+
+        $.post('../server/php/proyecto/ccl_CargarCandidatos.php', {
+            Usuario : Usuario.id, 
+            Empresa : $('#txtInicio_idEmpresa').val(),
+            Anio : $ ('#txtCCL_Anio').val()
+        }, function(data, textStatus, xhr) {
+            $('#txtCCL_NotificacionTR_Candidatos option').remove();
+            if (data != 0)
+            {
+                var tds = '';
+                $.each(data, function(index, val) {
+                     tds += '<option value="' + val.id + '">' + val.Nombre + '</option>';
+                });
+                $('#txtCCL_NotificacionTR_Candidatos').append(tds);
+                $('#txtCCL_NotificacionEM_Candidatos').append(tds);
+            }
+        }, 'json');
+
+
+    }
+</script>

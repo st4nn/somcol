@@ -1,0 +1,119 @@
+<div class="page" style="min-height: 90vh;">
+    <div class="page-header">
+        <h3 class="page-title"></h3>
+    </div>
+    <div class="page-content container-fluid">
+        <input type="hidden" id="txtEncuestaNuevo_idEncuesta">
+        <div class="panel panel-primary panel-bordered">
+            <h3 class="page-title">Resultados de Encuesta de calidad</h3>
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button class="btn btn-warning lnkAbrirModulo" Titulo="Encuestas de Calidad" vinculo="seg_calidad/home.html" data-callback="encuestas_cargar"><i class="icon fa-arrow-left"></i> Volver</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <h1 id="lblResultadosEncuesta_Titulo"></h1>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="panel panel-primary panel-bordered">
+            <div class="panel-heading"></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class='table-responsive'>
+                        <table id="tblResultadosEncuesta" class="table table-hover table-striped">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<script>
+  function cargarEncuesta_Resultados(idEncuesta){
+    $('#tblResultadosEncuesta').destruirDataTable();
+    
+    $('#tblResultadosEncuesta thead tr').remove();
+    $('#tblResultadosEncuesta tbody tr').remove();
+
+    $.post('../server/php/proyecto/encuesta_cargarResultado.php', {
+      idEmpresa: $('#txtInicio_idEmpresa').val(),
+      idEncuesta : idEncuesta
+    }, function(data, textStatus, xhr) {
+      let tds = '';
+      if (data.preguntas !== undefined){
+        if (data.preguntas.length > 0){
+          const
+            _arrPreguntas = {};
+
+          tds = '<tr>';
+            tds += `<th>Fecha de Diligenciamiento</th>`;
+
+          $.each(data.preguntas, function(index, val) {
+             tds += `<th>${val.titulo}</th>`;
+             _arrPreguntas[val.id] = {
+              tipo : val.tipo,
+              titulo : val.titulo,
+              opciones : {}
+             }
+
+             if (val.opciones){
+               $.each(val.opciones, function(index2, val2) {
+                  _arrPreguntas[val.id].opciones[val2.id] = val2.titulo;
+               });
+             }
+          });
+
+          tds += '</tr>';
+
+          $('#tblResultadosEncuesta thead').append(tds);
+
+          tds = '';
+
+          $.each(data.respuesta, function(index, val) {
+            tds += `<tr data-id="${val.id}">`;
+              tds += `<td>${val.fecha}</td>`;
+              let flag = true;
+              const _arrRespuestas = {};
+              
+              $.each(val.respuestas, function(index2, val2) {
+                _arrRespuestas[val2.id] = val2.respuesta;
+              });
+
+              $.each(_arrPreguntas, function(index2, val2) {
+                if (_arrRespuestas[index2] === undefined){
+                  tds += `<td></td>`;
+                } else{
+                  if (val2.tipo < 5){
+                    tds += `<td>${_arrRespuestas[index2]}</td>`;
+                  } else{
+                    const _arrRtas = _arrRespuestas[index2].split(',');
+                    tds += `<td>`;
+                    $.each(_arrRtas, function(index, val) {
+                      tds += (val2.opciones[val] !== undefined ? val2.opciones[val] : '') + '<br/>';
+                    });
+                    tds += `</td>`;
+                  }
+                }
+              });
+
+              if (flag){
+                tds += `<td></td>`;
+              }
+              tds += `</tr>`;
+          });
+
+          $('#tblResultadosEncuesta tbody').append(tds);          
+          $('#tblEncuestas_Home').crearDataTable('', function(){}, false);
+        }
+      }
+    }, 'json');
+  }
+</script>

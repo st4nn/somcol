@@ -1,0 +1,54 @@
+<!-- Page -->
+<style>
+	.rowPendiente{
+		background:  rgba(255, 0, 0, 0.1) !important;
+	}
+	.rowCompletado{
+		background:  rgba(0, 255, 0, 0.1) !important;
+	}
+</style>
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<h3 class="page-title">Resumen Planes de Acción</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+ 		<div class="panel">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button class="btn btn-warning lnkAbrirModulo" Titulo="COMITÉ DE CONVIVENCIA LABORAL" vinculo="ccl/home.html"><i class="icon fa-arrow-left"></i> Volver</button>
+                </div>
+            </div>
+        </div>
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
+ 				<h3 class="panel-title"></h3>
+				<div class="panel-actions">
+		      	</div>
+            </div>
+ 			<div class="panel-body">
+ 				<div class="row">
+ 					<canvas id="cntCCL_PlanDeAccion_Grafica" class="col-md-12"></canvas>
+ 				</div>
+ 				<div class="row">
+					<table id="tblCCL_PDA_Compromisos" class="table table-hover table-striped">
+						<thead>
+							<tr>
+								<th></th>
+								<th>Acta No</th>
+								<th>Fecha Acta</th>
+								<th>Descripción de la Acción</th>
+								<th>Responsable</th>
+								<th>Fecha Estimada de Realización</th>
+								<th>Fecha de Ejecución</th>
+								<th>Estado</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+ 				</div>
+ 			</div>
+ 		</div>
+	</div>
+</div>
+
+<script src="../js/CCL_PlanDeAccion.js"></script>

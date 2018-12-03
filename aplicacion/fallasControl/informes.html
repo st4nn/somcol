@@ -137,7 +137,7 @@
                 Desde : $('#txtFDC_Informes_Graficas_Desde').val(),
                 Hasta : $('#txtFDC_Informes_Graficas_Hasta').val()
             }, function(data, textStatus, xhr) {
-                var datos = {labels : [], data_Cantidad : [], data_Colores : []};
+                var datos = {labels : [''], data_Cantidad : [0], data_Colores : [0]};
                 $('#lblFDC_Informes_Graficas_Titulo').text(vFDC_Informes_TipoDeGrafica[(numGrafica)]);
                 $('#txtFDC_Informes_Graficas_NumGrafica').val(numGrafica);
                 var idx = numGrafica;
@@ -149,6 +149,7 @@
                 };
 
                 if (idx > 0){
+                    console.log(data);
                     $.each(data, function(index, val) 
                     {
                       datos.labels.push(val.Etiqueta);

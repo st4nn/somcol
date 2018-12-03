@@ -19,6 +19,7 @@
             GROUP BY 1
             ORDER BY 1;";
 
+
    $result = $link->query(utf8_decode($sql));
    $idx=0;
    if ( $result->num_rows > 0){

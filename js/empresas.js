@@ -231,6 +231,11 @@ $(document).ready(function()
 			            $('.cntHomeButtons .fIniButton i').css('background-color' , '#' + val.colorPrimario);
 			            $('.cntUbicacionModulo').css('background' , '#' + val.colorSecundario);
 
+			            localStorage.setItem('mj_somcol_colors', JSON.stringify({
+			              p : val.colorPrimario,
+			              s : val.colorSecundario
+			            }));
+
 			            inicio_CargarDashboard();
 			        });
 					cargarModulo("Inicio.html", 'Inicio');

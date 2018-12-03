@@ -1,0 +1,364 @@
+<style>
+	@media print{
+	    body{
+            font-size: 12px;  
+        }
+        
+	    button, form{
+	       display: none !important;
+	    }
+
+	    select, input{
+	        outline: none !important;
+	        border: none !important;
+	        -webkit-appearance: none !important;
+	        -moz-appearance: none !important;
+	        text-indent: 1px !important;
+	        display: inline !important;
+	    }
+
+	  #frmCCL_AEC{
+	    display: block !important;
+	  }
+	  
+	  #frmCCL_AEC .form-group{
+	    margin: 0;
+	  }
+	  #frmCCL_AEC .control-label{
+	    font-weight: 500;
+	    width: 16em;
+	  }
+	  #frmCCL_AEC .form-control{
+	    width: calc(100% - 17em) !important;
+	  }
+	  table {
+	    margin-top: -3em;
+	  }
+
+	  .panel{
+	    margin-top: -2.5em;
+	  }
+	  #txtCCL_AEC_Logo{
+	  	display: block !important;
+	    position: absolute;
+	    top : -90px;
+	  }
+
+	  .cntCoppast_Header{
+	  	display: block !important;
+	    position: absolute;
+	    top : -80px;
+	    left: 160px;
+	  }
+	  
+	  #cntCCL_AEC_Resultados{
+        display: inline-block !important;
+        width: 100% !important;
+      }
+    
+      .cntCCL_AEC_Resultados{
+        margin-top: 3em !important;
+      }
+      
+        #cntCCL_AEC_FirmasJurados {
+            display: inline-block !important;
+            width: 100% !important;
+        }
+        
+        .cntCCLJuradosFirma{
+    	    display: inline-block;
+    	    vertical-align: top;
+            margin: 8em 1em 1em 1em !important;
+            border-top: 1px solid rgba(0,0,0, 0.5) !important;
+            width: calc(50% - 2em) !important;
+        }
+	}
+	
+	#cntCCL_AEC_FirmasJurados{
+	    display: none;
+	}
+	
+	#cntCCL_AEC_FirmasJurados h3{
+	    text-align: left;
+	}
+	
+</style>
+<!-- Page -->
+
+<div class="page" style="min-height: 90vh;">
+	<img id="txtCCL_AEC_Logo" class="hide" height="80px" src="" alt="">
+	<div class="cntCoppast_Header hide">
+		<h5 class="txtCCL_Empresa"></h5>
+		<h6 class="txtCCL_EmpresaNit"></h6>
+	</div>
+	<div class="page-header">
+		<h3 class="page-title">Acta de Elección y Conformación</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+ 		<div class="panel">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button class="btn btn-warning lnkAbrirModulo" Titulo="CCL" vinculo="ccl/home.html"><i class="icon fa-arrow-left"></i> Volver</button>
+                </div>
+            </div>
+        </div>
+		<form id="frmCCL_AEC">
+	 		<div class="panel panel-primary panel-bordered">
+	 			<div class="panel-body">
+			 		<div class="row">
+				 		<div class="form-group col-sm-5 pull-right">
+				 			<div class="form-group">
+			                  <div class="input-group">
+			                    <input id="txtCCL_AEC_Anio" class="form-control guardar">
+			                    <span class="input-group-btn">
+			                      <button id="btnCCL_AEC_Actualizar" type="button" class="btn btn-primary">
+			                      	<i class="icon wb-refresh" aria-hidden="true"></i>
+			                      </button>
+			                    </span>
+			                  </div>
+			                </div>
+				        </div>
+			 		</div>
+
+			 		<div class="row">
+			 			<div class="col-sm-7">
+				 			<div class="form-group">
+					        	<label for="txtCCL_AEC_Responsable_SGSST" class="control-label">Responsable del SGSST</label>
+					        	<input class="form-control guardar" id="txtCCL_AEC_Responsable_SGSST">
+					        </div>
+			 			</div>
+
+			 			<div class="col-sm-5">
+				 			<div class="form-group">
+					        	<label for="txtCCL_AEC_Responsable_SGSST_Cargo" class="control-label">Cargo</label>
+					        	<input class="form-control guardar" type="text" id="txtCCL_AEC_Responsable_SGSST_Cargo">
+					        </div>
+			 			</div>
+			 		</div>
+
+			 		<div class="row">
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtCCL_AEC_Fecha_Apertura" class="control-label">Fecha de Apertura Convocatoria</label>
+					        	<input class="form-control datepicker guardar" id="txtCCL_AEC_Fecha_Apertura" autocomplete="off">
+					        </div>
+			 			</div>
+
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtCCL_AEC_Fecha_Cierre" class="control-label">Fecha de Cierre Convocatoria</label>
+					        	<input class="form-control datepicker guardar" id="txtCCL_AEC_Fecha_Cierre" autocomplete="off">
+					        </div>
+			 			</div>
+			 		</div>
+
+			 		<div class="row">
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtCCL_AEC_Fecha_AperturaVotaciones" class="control-label">Fecha de Apertura Votaciones</label>
+					        	<input class="form-control datepicker guardar" id="txtCCL_AEC_Fecha_AperturaVotaciones" autocomplete="off">
+					        </div>
+			 			</div>
+
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtCCL_AEC_Fecha_CierreVotaciones" class="control-label">Fecha de Cierre Votaciones</label>
+					        	<input class="form-control datepicker guardar" id="txtCCL_AEC_Fecha_CierreVotaciones" autocomplete="off">
+					        </div>
+			 			</div>
+			 		</div>
+
+			 		<div class="row">
+			 			<div class="col-sm-6">
+				 			<div class="form-group">
+					        	<label for="txtCCL_AEC_Fecha_Apertura" class="control-label">Fecha de Apertura Elecciones</label>
+					        	<input class="form-control datepicker guardar" id="txtCCL_AEC_Fecha_Elecciones" autocomplete="off">
+					        </div>
+			 			</div>
+			 		</div>
+
+			 		<button type="submit" class="btn btn-success btn-block">Guardar</button>
+	 			</div>
+	 		</div>
+		</form>
+
+		<div class="panel panel-primary panel-bordered">
+			 			<div class="panel-heading">
+ 				<h3 class="panel-title">Jurados de Votación</h3>
+				<div class="panel-actions">
+		      	</div>
+            </div>
+ 			<div class="panel-body">
+ 				<form id="frmCCL_AEC_Candidatos_Jurados" class="frmCCL_AEC_Candidatos" data-tipo='Jurados'>
+	 				<div class="row">
+	 					<div class="col-sm-5">
+	 						<div class="form-group">
+					        	<label for="txtCCL_AEC_Candidato_Jurados_Nombre" class="control-label">Nombre</label>
+					        	<input class="form-control txtCCL_AEC_Candidato_Nombre" id="txtCCL_AEC_Candidato_Jurados_Nombre" required="true">
+					        </div>
+	 					</div>
+
+	 					<div class="col-sm-3">
+	 						<div class="form-group">
+					        	<label for="txtCCL_AEC_Candidato_Jurados_Cargo" class="control-label">Cargo</label>
+					        	<input class="form-control txtCCL_AEC_Candidato_Cargo" id="txtCCL_AEC_Candidato_Jurados_Cargo">
+					        </div>
+	 					</div>
+
+	 					<div class="col-sm-3">
+	 						<div class="form-group">
+					        	<label for="txtCCL_AEC_Candidato_Jurados_Identificacion" class="control-label"># de Identificación</label>
+					        	<input class="form-control txtCCL_AEC_Candidato_Identificacion" id="txtCCL_AEC_Candidato_Jurados_Identificacion" required="true">
+					        </div>
+	 					</div>
+
+	 					<div class="col-sm-1">
+	 						<br>
+	 						<button type="submit" class="btn btn-icon btn-primary"><i class="icon fa-plus"></i></button>
+	 					</div>
+	 				</div>
+	 			</form>
+
+				<table id="tblCCL_AEC_Candidatos_Jurados" class="table table-hover table-striped">
+					<thead>
+						<tr>
+							<th></th>
+							<th>NOMBRE</th>
+							<th>CARGO</th>
+							<th># DE IDENTIFICACIÓN</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+ 			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-12">
+		 		<div class="panel panel-primary panel-bordered">
+		 			<div class="panel-heading">
+		 				<h3 class="panel-title">Candidatos por parte de los Trabajadores</h3>
+						<div class="panel-actions">
+				      	</div>
+		            </div>
+		 			<div class="panel-body">
+		 				<form id="frmCCL_AEC_Candidatos" class="frmCCL_AEC_Candidatos" data-tipo='Trabajador'>
+			 				<div class="row">
+			 					<div class="col-sm-5">
+			 						<div class="form-group">
+							        	<label for="txtCCL_AEC_Candidato_Nombre" class="control-label">Nombre</label>
+							        	<input class="form-control txtCCL_AEC_Candidato_Nombre" id="txtCCL_AEC_Candidato_Nombre" required="true">
+							        </div>
+			 					</div>
+
+			 					<div class="col-sm-3">
+			 						<div class="form-group">
+							        	<label for="txtCCL_AEC_Candidato_Cargo" class="control-label">Cargo</label>
+							        	<input class="form-control txtCCL_AEC_Candidato_Cargo" id="txtCCL_AEC_Candidato_Cargo">
+							        </div>
+			 					</div>
+
+			 					<div class="col-sm-3">
+			 						<div class="form-group">
+							        	<label for="txtCCL_AEC_Candidato_Identificacion" class="control-label"># de Identificación</label>
+							        	<input class="form-control txtCCL_AEC_Candidato_Identificacion" id="txtCCL_AEC_Candidato_Identificacion" required="true">
+							        </div>
+			 					</div>
+
+			 					<div class="col-sm-1">
+			 						<br>
+			 						<button type="submit" class="btn btn-icon btn-primary"><i class="icon fa-plus"></i></button>
+			 					</div>
+			 				</div>
+			 			</form>
+
+						<table id="tblCCL_AEC_Candidatos" class="table table-hover table-striped">
+							<thead>
+								<tr>
+									<th></th>
+									<th>NOMBRE</th>
+									<th>CARGO</th>
+									<th># DE IDENTIFICACIÓN</th>
+									<th># DE VOTOS</th>
+									<th>POSICIÓN</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+		 			</div>
+		 		</div>
+		 	</div>
+	 	</div>
+	 	<div class="row">
+		 	<div class="col-md-12 cntCCL_AEC_Resultados">
+		 		<div class="panel panel-primary panel-bordered">
+		 			<div class="panel-heading">
+		 				<h3 class="panel-title">Resultados</h3>
+						<div class="panel-actions">
+				      	</div>
+		            </div>
+		 			<div class="panel-body">
+		 				<canvas id="cntCCL_AEC_Resultados" class="col-md-12"></canvas>
+		 			</div>
+		 		</div>
+		 	</div>
+		</div>
+
+ 		<div class="panel panel-primary panel-bordered">
+ 			<div class="panel-heading">
+ 				<h3 class="panel-title">Representantes por parte del Empleador</h3>
+				<div class="panel-actions">
+		      	</div>
+            </div>
+ 			<div class="panel-body">
+ 				<form id="frmCCL_AEC_Candidatos_Empleador" class="frmCCL_AEC_Candidatos" data-tipo='Empleador'>
+	 				<div class="row">
+	 					<div class="col-sm-5">
+	 						<div class="form-group">
+					        	<label for="txtCCL_AEC_Candidato_Empleador_Nombre" class="control-label">Nombre</label>
+					        	<input class="form-control txtCCL_AEC_Candidato_Nombre" id="txtCCL_AEC_Candidato_Empleador_Nombre" required="true">
+					        </div>
+	 					</div>
+
+	 					<div class="col-sm-3">
+	 						<div class="form-group">
+					        	<label for="txtCCL_AEC_Candidato_Empleador_Cargo" class="control-label">Cargo</label>
+					        	<input class="form-control txtCCL_AEC_Candidato_Cargo" id="txtCCL_AEC_Candidato_Empleador_Cargo">
+					        </div>
+	 					</div>
+
+	 					<div class="col-sm-3">
+	 						<div class="form-group">
+					        	<label for="txtCCL_AEC_Candidato_Empleador_Identificacion" class="control-label"># de Identificación</label>
+					        	<input class="form-control txtCCL_AEC_Candidato_Identificacion" id="txtCCL_AEC_Candidato_Empleador_Identificacion" required="true">
+					        </div>
+	 					</div>
+
+	 					<div class="col-sm-1">
+	 						<br>
+	 						<button type="submit" class="btn btn-icon btn-primary"><i class="icon fa-plus"></i></button>
+	 					</div>
+	 				</div>
+	 			</form>
+
+				<table id="tblCCL_AEC_Candidatos_Empleador" class="table table-hover table-striped">
+					<thead>
+						<tr>
+							<th></th>
+							<th>NOMBRE</th>
+							<th>CARGO</th>
+							<th># DE IDENTIFICACIÓN</th>
+							<th>POSICIÓN</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+ 			</div>
+ 		</div>
+ 		<div id="cntCCL_AEC_FirmasJurados">
+ 		    <h3 class="page-title">Firma de los jurados</h3>
+ 		</div>
+	</div>
+</div>
+
+<script src="../js/CCL_ActaDeEleccionYConformacion.js"></script>

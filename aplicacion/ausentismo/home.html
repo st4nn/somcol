@@ -49,17 +49,17 @@
   }
 
   function ausentismo_AbrirHome(){
-    $.post('../server/php/proyecto/ausentismo_cargarGrafica_Home.php', {idUsuario : Usuario.id, idEmpresa: Usuario.idEmpresa}, function(data, textStatus, xhr) {
+    $.post('../server/php/proyecto/ausentismo_cargarGrafica_Home.php', {idUsuario : Usuario.id, idEmpresa: $('#txtInicio_idEmpresa').val()}, function(data, textStatus, xhr) {
       
       const colors = [
-        'rgba(255, 99, 132, 0.5)',
-        "rgba(255, 159, 64, 0.5)",
-        "rgba(255, 205, 86, 0.5)",
-        "rgba(75, 192, 192, 0.5)",
-        "rgba(54, 162, 235, 0.5)",
-        'rgba(192, 99, 132, 0.5)',
-        "rgba(159, 159, 64, 0.5)",
-        "rgba(64, 205, 86, 0.5)"
+        'rgba(255, 99, 132, 0.3)',
+        "rgba(255, 159, 64, 0.3)",
+        "rgba(255, 205, 86, 0.3)",
+        "rgba(75, 192, 192, 0.3)",
+        "rgba(54, 162, 235, 0.3)",
+        'rgba(192, 99, 132, 0.3)',
+        "rgba(159, 159, 64, 0.3)",
+        "rgba(64, 205, 86, 0.3)"
       ];
 
       var _data = [];
@@ -90,10 +90,19 @@
                   text: ''
               },
               scale: {
-                ticks: {
-                  beginAtZero: true
+                gridLines:{
+                  drawBorder : false,
+                  drawTicks : false,
+                  
+                  offsetGridLines : true
                 },
-                reverse: false
+                ticks: {
+                  beginAtZero: true,
+                  stepSize: 1,
+                  fontStyle : 'bold',
+                  fontSize : 14
+                },
+                reverse: true
               },
               animation: {
                   animateRotate: false,

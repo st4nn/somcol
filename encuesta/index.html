@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Satisfacción del Cliente</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta content="" name="description" />
+  <meta content="" name="author" />
+  
+  <link href="../votacion/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Lato|Poppins|Roboto" rel="stylesheet">
+  <link href="estilos.css" rel="stylesheet"/>
+</head>
+<body>
+  <div class="header">
+      <!-- BEGIN LOGO -->
+      <input type="hidden" id="txtIdEmpresa">
+      <input type="hidden" id="txtIdEncuesta">
+      <input type="hidden" id="txtIdRegistro">
+      <a href="../index.html" id="logo" class="center">
+          <img id="imgLogo" style="max-height: 50px;" src="" alt="logo" class="center" />
+          <h5 id="lblEmpresa"></h5>
+      </a>
+      <!-- END LOGO -->
+  </div>
+  <div id="workarea" class="workarea">
+    <h1 class="title" id="lblTitulo"></h1>
+
+    <div id="cntPreguntas">
+    </div>
+
+      
+
+    <button id="btnGuardar" class="guardar">guardar</button>
+  </div>
+  <div id="cntAgradecimiento">
+    <p>El formulario ha sido guardado, muchas gracias por participar</p>
+  </div>
+    
+  
+  <!-- BEGIN COPYRIGHT -->
+  <div id="login-copyright">
+      2018 &copy; somcol.
+  </div>
+  <!-- END COPYRIGHT -->
+  <!-- BEGIN JAVASCRIPTS -->
+  <script src="../votacion/js/jquery-1.8.3.min.js"></script>
+  <script src="../votacion/assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../votacion/js/jquery.blockui.js"></script>
+  <script src="../votacion/js/jStore.js"></script>
+  <script src="../votacion/js/scripts.js"></script>
+  <script src="encuesta.js"></script>
+  <script>
+    jQuery(document).ready(function() {     
+      //App.initLOCK();
+      $(document).on("ready", loginArranque);
+      function loginArranque(){
+        $('#cntAgradecimiento').hide();
+
+        localStorage.clear();
+        const datos = {
+          idEmpresa : getParameterByName('e'),
+          key : getParameterByName('p')
+        };
+        $.post('../votacion/php/cargarDatos.php', datos, function(data, textStatus, xhr) {
+          if (data != 0){
+            $("#lockform").slideDown();
+            const arrEmpresa = {Empresa : '', Logo : ''};
+            $.each(data, function(index, val) {
+               const _path = '../server/php/' + val.Ruta + '/' + val.Logo;
+               
+               arrEmpresa.Empresa = val.Nombre;
+               arrEmpresa.Logo = _path;
+
+               $('#imgLogo').attr('src', _path);
+               $('#lblEmpresa').text(val.Nombre);
+               $('#txtIdEmpresa').val(val.idEmpresa);
+            });
+            cargarEncuesta();
+          } 
+        }, 'json');
+      }
+    });
+
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+  </script>
+  <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

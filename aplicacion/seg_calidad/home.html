@@ -1,0 +1,160 @@
+<style>
+  #modulo_seg_calidad_home_html .btn-success.lnkAbrirModulo.mr-100{
+    margin-right: 70px;
+  }
+</style>
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+  <div class="page-header bg-white">
+    <h3 class="page-title">Satisfacción del Cliente</h3>
+    <div class="page-header-actions">
+        <button type="button" class="btn btn-sm btn-round lnkAbrirModulo" Titulo="Inicio" vinculo="Inicio.html" data-callback="inicio_CargarDashboard">
+          <i class="icon wb-home" aria-hidden="true"></i>
+          <span class="text hidden-xs">Inicio</span>
+        </button>
+      </div>
+  </div>
+  <div class="page-content container-fluid">
+      <div class="panel panel-primary panel-bordered">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button class="btn btn-success lnkAbrirModulo mr-100" Titulo="Nueva envuesta" vinculo="seg_calidad/nuevo.html" data-callback="encuestaNuevo"><i class="icon fa-plus"></i> Nuevo</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class='table-responsive'>
+                        <table id="tblEncuestas_Home" class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Titulo</th>
+                                    <th>Han ingresado</th>
+                                    <th>Han terminado</th>
+                                    <th>Link</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>     
+ </div>
+
+ <div class="modal fade" id="cntEncuestas_VerLink" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Vinculo a la encuesta</h4>
+          </div>
+          <div class="modal-body">
+              <div class="form-group">
+                <textarea id="txtEncuestas_VerLink_Link" type="text" class="form-control guardar" placeholder="Vinculo" readonly="true"></textarea>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <a href="#" id="lnkEncuestas_VerLink_Link" target="_blank" class="btn btn-info">Abrir</a>
+              <button type="button" data-dismiss="modal" class="btn btn-warning">Cerrar</button>
+          </div>
+        </div>
+    </div>
+</div>
+ <script>
+    function encuestas_cargar(){
+      $('#tblEncuestas_Home').destruirDataTable();
+      $('#tblEncuestas_Home tbody tr').remove();
+
+      $.post('../server/php/proyecto/encuesta_cargar.php', {
+          idEmpresa : $('#txtInicio_idEmpresa').val()
+      }, function(data, textStatus, xhr) {
+          if (data != 0){
+            data.forEach(function(val, index){
+                encuestasHome_AgregarFila(val);
+            }); 
+            $('#tblEncuestas_Home').crearDataTable('', function(){}, false);
+          }
+      }, 'json');
+    }
+
+    $(document).delegate('.btnEncuesta_Editar', 'click', function(event) {
+      event.preventDefault();
+      const
+        idEncuesta = $(this).attr('data-encuesta'),
+        fila = $(this).parent('td').parent('tr').find('td'),
+        titulo = $(fila[1]).text();
+
+      cargarModulo('seg_calidad/nuevo.html', 'Editar encuesta', function(){
+        $('#txtEncuestaNuevo_idEncuesta').val(idEncuesta);
+        $('#txtEncuesta_Agregar_Titulo').val(titulo);
+        checKEncuesta();
+      })
+    });
+
+    $(document).delegate('.btnEncuesta_Quitar', 'click', function(event) {
+      event.preventDefault();
+      const idEncuesta = $(this).attr('data-encuesta');
+      bootbox.confirm({
+            message : `Esta seguro de quitar esta encuesta?`,
+            buttons: {
+                confirm: {
+                    label: `Si, quitar`
+                },
+                cancel: {
+                    label: 'No',
+                }
+            },
+            callback : function(result){
+                if (result){
+                    $.post('../server/php/proyecto/encuesta_Quitar.php',{idEncuesta : idEncuesta}, 
+                    function(data, textStatus, xhr) {
+                      encuestas_cargar();
+                    });
+                }
+            }
+        });
+    });
+
+    function encuestasHome_AgregarFila(val){
+      let _finalizadas = val.Finalizadas;
+      if (parseInt(_finalizadas, 10) > 0){
+        _finalizadas = `<a href="#" class="btnEncuesta_Abrir" data-id="${val.id}">${val.Finalizadas}</a>`;
+      }
+      let tds = '';
+        tds += `<tr>`;
+          tds += `<td>`;
+              tds += `<button data-encuesta="${val.id}" class="btn btn-pure btn-info icon wb-edit btnEncuesta_Editar"></button>`;
+              tds += `<button data-encuesta="${val.id}" class="btn btn-pure btn-danger icon wb-close btnEncuesta_Quitar"></button>`;
+          tds += `</td>`;
+          tds += `<td>${val.Titulo}</td>`;
+          tds += `<td class="text-center">${val.Cantidad}</td>`;
+          tds += `<td class="text-center">${_finalizadas}</td>`;
+          tds += `<td><a href="#" target="_blank" data-link="${val.Link}" class="btnEncuesta_VerLink">Ver link</a></td>`;
+        tds += `</tr>`;
+
+      $('#tblEncuestas_Home tbody').append(tds);      
+    }
+
+    $(document).delegate('.btnEncuesta_VerLink', 'click', function(event) {
+      event.preventDefault();
+      $('#txtEncuestas_VerLink_Link').val('https://somcol.com.co/app/encuesta/?' + $(this).attr('data-link'));
+      $('#lnkEncuestas_VerLink_Link').attr('href', '../encuesta/?' + $(this).attr('data-link'));
+
+      $('#cntEncuestas_VerLink').modal('show');
+    });$(document).delegate('.btnEncuesta_Abrir', 'click', function(event){
+      event.preventDefault();
+      const
+        idEncuesta = $(this).attr('data-id'),
+        fila = $(this).parent('td').parent('tr').find('td'),
+        titulo = $(fila[1]).text();
+
+      cargarModulo('seg_calidad/resultados.html', 'Ver resultados', function(){
+        $('#lblResultadosEncuesta_Titulo').text(titulo);
+        cargarEncuesta_Resultados(idEncuesta);
+      });
+    });
+
+ </script>

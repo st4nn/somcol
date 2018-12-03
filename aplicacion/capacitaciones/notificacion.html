@@ -15,7 +15,7 @@
             display: block !important;
             position: absolute;
             top : -80px;
-            left: 110px;
+            left: 210px;
         }
 
         #modulo_capacitaciones_notificacion_html table{
@@ -103,7 +103,7 @@
 
                     tds = `<div>
                             <p>${_titulog} <strong>${per.Nombres} ${per.Apellidos}</strong>, identificad${_vg} con el documento número: <strong>${per.Cedula}</strong>, quien actualmente se encuentra registrad${_vg} en el Cargo de <strong>${per.Cargo}</strong> ${temasEnunciado}
-                            </p>`;
+                            </p><br><br>`;
 
                     if (temas.length > 0){
                         tds += `<table class="table table-hover table-striped">
@@ -125,10 +125,23 @@
                                     </tr> `;
                         });
                         tds += `    </tbody>
-                                </table>`;    
+                                </table>`;   
+                        tds += `<br><br><br><br><br>
+                        <div class="col-xs-6">
+                                    Firma del trabajador <br><br><br><br>
+                                    _______________________________________________<br>
+                                    ${per.Nombres} ${per.Apellidos} <br>
+                                    ${per.Cedula}
+                                </div>`; 
+
+                        tds += `<div class="col-xs-6">
+                                    Lider del SGSST/RRHH <br><br><br><br>
+                                    _______________________________________________<br>
+                                </div>`; 
                     }
                     tds += `</div>`;
                 }
+                $('#cntCapacitaciones_Notificacion div').remove();
                 $('#cntCapacitaciones_Notificacion').append(tds);
             }, 'json');
         }

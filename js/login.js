@@ -5,6 +5,12 @@ function ready_login()
   $("#btnLogin_Entrar").on("click", frmLogin_submit);
   $("#frmLogin").on("submit", frmLogin_submit);
 
+  const colors = JSON.parse(localStorage.getItem('mj_somcol_colors'));
+  if (colors !== null){
+    console.log(colors);
+    $('body').css('background-color',  `#${colors.p}`);
+  }
+
   /**
    * Fragmento para controlar si la sesión está activa
   **/

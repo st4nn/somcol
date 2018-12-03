@@ -1,0 +1,362 @@
+<div class="page" style="min-height: 90vh;">
+    <div class="page-header">
+        <h3 class="page-title"></h3>
+    </div>
+    <div class="page-content container-fluid">
+        <input type="hidden" id="txtEncuestaNuevo_idEncuesta">
+        <div class="panel panel-primary panel-bordered">
+            <h3 class="page-title">Encuesta de calidad</h3>
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button class="btn btn-warning lnkAbrirModulo" Titulo="Encuestas de Calidad" vinculo="seg_calidad/home.html" data-callback="encuestas_cargar"><i class="icon fa-arrow-left"></i> Volver</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <form id="frmEncuesta_Agregar">
+                    <input id="txtPersonal_Agregar_id" type="hidden" class="form-control guardar">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="txtEncuesta_Agregar_Titulo" class="control-label">Título para la encuesta</label>
+                                <input class="form-control guardar" id="txtEncuesta_Agregar_Titulo">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="btnEncuestaNuevo_Iniciar" type="submit" class="btn btn-success btn-block text-center"> Iniciar</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="cntEncuestasNuevo_Opciones" class="row">
+            <div class="col-md-6">
+                <div class="panel panel-primary panel-bordered">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Preguntas</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form id="frmEncuestaNuevo_AgregarPregunta">
+                            <div class="form-group">
+                                <label for="txtEncuesta_Agregar_Pregunta_Titulo" class="control-label">Título para la pregunta</label>
+                                <input class="form-control guardar" id="txtEncuesta_Agregar_Pregunta_Titulo">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="txtEncuesta_Agregar_Pregunta_Tipo" class="control-label">Tipo de pregunta</label>
+                                <select class="form-control guardar" id="txtEncuesta_Agregar_Pregunta_Tipo"></select>
+                            </div>
+
+                            <button type="submit" class="btn btn-success btn-block text-center"> Agregar</button>
+                        </form>
+                        <table id="tblEncuestaNuevo_Preguntas" class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Titulo</th>
+                                    <th>Tipo</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-primary panel-bordered">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Opciones</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form id="frmEncuestaNuevo_PreguntaCambiarTitulo">
+                            <input type="hidden" class="guardar" id="txtEncuestaNuevo_PreguntaCambiarTitulo_id">
+                            <div class="form-group">
+                                <label for="txtEncuestaNuevo_PreguntaCambiarTitulo_Titulo" class="control-label">Titulo de la Pregunta</label>
+                                <input class="form-control guardar" id="txtEncuestaNuevo_PreguntaCambiarTitulo_Titulo">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block text-center"> Actualizar</button>
+                        </form>
+                        <form id="frmEncuestaNuevo_AgregarOpcion">
+                            <input type="hidden" class="guardar" id="txtEncuesta_Agregar_Pregunta_Opcion_idPregunta">
+                            <div class="form-group">
+                                <label for="txtEncuesta_Agregar_Pregunta_Opcion_Titulo" class="control-label">Agregar Opción</label>
+                                <input class="form-control guardar" id="txtEncuesta_Agregar_Pregunta_Opcion_Titulo">
+                            </div>
+
+                            <button type="submit" class="btn btn-success btn-block text-center"> Agregar</button>
+                        </form>
+                        <table id="tblEncuestaNuevo_Opciones" class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Titulo</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const Encuesta_Tipos = [
+        'Texto corto',
+        'Texto Largo',
+        'Numero',
+        'Fecha',
+        'De elección con una sola respuesta',
+        'De elección con multiple respuesta'
+    ];
+
+    $(document).ready(function(){     
+        Encuesta_Tipos.forEach(function(val, index){
+            $('#txtEncuesta_Agregar_Pregunta_Tipo').append(`<option value="${(index + 1)}">${val}</option>`);
+        })
+
+        $('#frmEncuesta_Agregar').on('submit', function(evento){
+            evento.preventDefault();
+            $(this).generarDatosEnvio('txtEncuesta_Agregar_', function(datos){
+                datos = $.parseJSON(datos);
+                datos.idEmpresa = $('#txtInicio_idEmpresa').val();
+                datos.id = $('#txtEncuestaNuevo_idEncuesta').val();
+
+                $.post('../server/php/proyecto/encuesta_nueva.php', datos, function(data, textStatus, xhr) {
+                    if (isNaN(data)){
+                      Mensaje('Error', data, 'danger');
+                    } else{
+                        $('#txtEncuestaNuevo_idEncuesta').val(data.trim());
+                      Mensaje('', 'Ya puede iniciar la edición de la encuesta', 'success');
+                      checKEncuesta();
+                    }
+                });
+            });
+        });
+
+        $('#frmEncuestaNuevo_AgregarPregunta').on('submit', function(evento){
+            evento.preventDefault();
+            $(this).generarDatosEnvio('txtEncuesta_Agregar_Pregunta_', function(datos){
+                datos = $.parseJSON(datos);
+                datos.idEmpresa = $('#txtInicio_idEmpresa').val();
+                datos.idEncuesta = $('#txtEncuestaNuevo_idEncuesta').val();
+
+                $.post('../server/php/proyecto/encuesta_nuevaPregunta.php', datos, function(data, textStatus, xhr) {
+                    if (isNaN(data)){
+                      Mensaje('Error', data, 'danger');
+                    } else{
+                        datos.id = parseInt(data, 10);
+                        $('#frmEncuestaNuevo_AgregarPregunta')[0].reset();
+                        $('#tblEncuestaNuevo_Opciones tbody tr').remove();
+                        $('#frmEncuestaNuevo_AgregarOpcion')[0].reset();
+                        $('#frmEncuestaNuevo_AgregarOpcion').hide();
+                        encuestaNuevoAgregarPregunta(datos);
+                    }
+                });
+            });
+        });
+
+        $('#frmEncuestaNuevo_AgregarOpcion').on('submit', function(evento){
+            evento.preventDefault();
+            $(this).generarDatosEnvio('txtEncuesta_Agregar_Pregunta_Opcion_', function(datos){
+                datos = $.parseJSON(datos);
+                datos.idEmpresa = $('#txtInicio_idEmpresa').val();
+                datos.idEncuesta = $('#txtEncuestaNuevo_idEncuesta').val();
+
+                $.post('../server/php/proyecto/encuesta_nuevaOpcion.php', datos, function(data, textStatus, xhr) {
+                    if (isNaN(data)){
+                      Mensaje('Error', data, 'danger');
+                    } else{
+                        datos.id = parseInt(data, 10);
+                        $('#frmEncuestaNuevo_AgregarOpcion')[0].reset();
+                        encuestaNuevoAgregarOpcion(datos);
+                    }
+                });
+            });
+        });
+
+        $(document).delegate('.btnEncuestaNuevo_QuitarPregunta', 'click', function(event) {
+            event.preventDefault();
+
+            const 
+                idPregunta = $(this).attr('data-idPregunta'),
+                fila = $(this).parent('td').parent('tr');
+            bootbox.confirm({
+                message : `Esta seguro de quitar esta Pregunta?`,
+                buttons: {
+                    confirm: {
+                        label: `Si, quitar`
+                    },
+                    cancel: {
+                        label: 'No',
+                    }
+                },
+                callback : function(result){
+                    if (result){
+                        $.post('../server/php/proyecto/encuesta_QuitarPregunta.php',{idPregunta : idPregunta}, 
+                        function(data, textStatus, xhr) {
+                            $(fila).remove();
+                            checKEncuesta();
+                        });
+                    }
+                }
+            });
+        });
+
+        $(document).delegate('.btnEncuestaNuevo_QuitarOpcion', 'click', function(event) {
+            event.preventDefault();
+
+            const 
+                fila = $(this).parent('td').parent('tr'),
+                idOpcion = $(this).attr('data-idOpcion');
+
+            bootbox.confirm({
+                message : `Esta seguro de quitar esta Opción?`,
+                buttons: {
+                    confirm: {
+                        label: `Si, quitar`
+                    },
+                    cancel: {
+                        label: 'No',
+                    }
+                },
+                callback : function(result){
+                    if (result){
+                        $.post('../server/php/proyecto/encuesta_QuitarOpcion.php',{idOpcion : idOpcion}, 
+                        function(data, textStatus, xhr) {
+                            $(fila).remove();
+                        });
+                    }
+                }
+            });
+        });
+
+        $('#frmEncuestaNuevo_PreguntaCambiarTitulo').on('submit', function(evento){
+            evento.preventDefault();
+            $(this).generarDatosEnvio('txtEncuestaNuevo_PreguntaCambiarTitulo_', function(datos){
+                datos = $.parseJSON(datos);
+                datos.idEmpresa = $('#txtInicio_idEmpresa').val();
+                datos.idEncuesta = $('#txtEncuestaNuevo_idEncuesta').val();
+
+                $.post('../server/php/proyecto/encuesta_nuevaPregunta.php', datos, function(data, textStatus, xhr) {
+                    if (isNaN(data)){
+                      Mensaje('Error', data, 'danger');
+                    } else{
+                        encuestaCargarPreguntas();
+                    }
+                });
+            });
+        });
+
+        
+
+        
+    });
+
+    function checKEncuesta(){
+        $('#frmEncuestaNuevo_AgregarPregunta')[0].reset();
+        $('#tblEncuestaNuevo_Opciones tbody tr').remove();
+        $('#frmEncuestaNuevo_AgregarOpcion')[0].reset();
+        $('#frmEncuestaNuevo_AgregarOpcion').hide();
+
+
+        if ($('#txtEncuestaNuevo_idEncuesta').val() === ''){
+            $('#cntEncuestasNuevo_Opciones').hide();
+            $('#btnEncuestaNuevo_Iniciar').text('Iniciar');
+        } else{
+            encuestaCargarPreguntas();
+            $('#btnEncuestaNuevo_Iniciar').text('Guardar');
+            $('#cntEncuestasNuevo_Opciones').slideDown();
+        }
+    }
+
+    function encuestaNuevo(){
+        $('#frmEncuesta_Agregar')[0].reset();
+        $('#txtEncuestaNuevo_idEncuesta').val('');
+        checKEncuesta();        
+    }
+
+    function encuestaCargar(){
+        $('#btnEncuestaNuevo_Iniciar').text('Guardar');
+    }
+
+    function encuestaCargarPreguntas(){
+
+        $('#tblEncuestaNuevo_Preguntas tbody tr').remove();
+
+        $.post('../server/php/proyecto/encuesta_cargarPreguntas.php', {
+            idEmpresa : $('txtInicio_idEmpresa').val(),
+            idEncuesta : $('#txtEncuestaNuevo_idEncuesta').val()
+        }, function(data, textStatus, xhr) {
+            if (data != 0){
+                data.forEach(function(val, index){
+                    encuestaNuevoAgregarPregunta(val);
+                }); 
+            }
+        }, 'json');
+    }
+
+    function encuestaNuevoAgregarPregunta(val){
+        let tds = '';
+        tds += `<tr>`;
+            tds += `<td>`;
+                tds += `<button data-idPregunta="${val.id}" class="btn btn-pure btn-danger icon wb-close btnEncuestaNuevo_QuitarPregunta"></button>`;
+                
+                tds += `<button data-idPregunta="${val.id}" data-tipoPregunta="${val.Tipo}" class="btn btn-pure btn-info icon wb-edit btnEncuestaNuevo_EditarPregunta"></button>`;
+            tds += `</td>`;
+            tds += `<td>${val.Titulo}</td>`;
+            tds += `<td>${Encuesta_Tipos[(parseInt(val.Tipo, 10) - 1)]}</td>`;
+        tds += `</tr>`;
+        $('#tblEncuestaNuevo_Preguntas tbody').append(tds);
+    }
+
+    $(document).delegate('.btnEncuestaNuevo_EditarPregunta', 'click', function(e){
+        e.preventDefault();
+        const
+            fila = $(this).parent('td').parent('tr'),
+            campos = $(fila).find('td'),
+            titulo = $(campos[1]).text(),
+            idPregunta = $(this).attr('data-idPregunta'),
+            tipoPregunta = $(this).attr('data-tipoPregunta');
+
+        $('#txtEncuestaNuevo_PreguntaCambiarTitulo_id').val(idPregunta);
+        $('#txtEncuestaNuevo_PreguntaCambiarTitulo_Titulo').val(titulo);
+
+        $('#frmEncuestaNuevo_AgregarOpcion').slideDown();
+        encuestaNuevoCargarOpciones(idPregunta, tipoPregunta);
+    });
+
+    function encuestaNuevoCargarOpciones(idPregunta, Tipo, Titulo){
+        $('#tblEncuestaNuevo_Opciones tbody tr').remove();
+        $('#txtEncuesta_Agregar_Pregunta_Opcion_idPregunta').val(idPregunta);
+
+        if (Tipo >= 5){
+            $('#frmEncuestaNuevo_AgregarOpcion').slideDown();
+           $.post('../server/php/proyecto/encuesta_cargarOpciones.php', {
+                idEmpresa : $('txtInicio_idEmpresa').val(),
+                idEncuesta : $('#txtEncuestaNuevo_idEncuesta').val(),
+                idPregunta : idPregunta
+            }, function(data, textStatus, xhr) {
+                if (data != 0){
+                    data.forEach(function(val, index){
+                        encuestaNuevoAgregarOpcion(val);
+                    }); 
+                }
+            }, 'json');
+        } else{
+            $('#frmEncuestaNuevo_AgregarOpcion').hide();
+        }
+
+    }
+
+     function encuestaNuevoAgregarOpcion(val){
+        let tds = '';
+        tds += `<tr>`;
+            tds += `<td>`;
+                tds += `<button data-idOpcion="${val.id}" class="btn btn-pure btn-danger icon wb-close btnEncuestaNuevo_QuitarOpcion"></button>`;
+            tds += `</td>`;
+            tds += `<td>${val.Titulo}</td>`;
+        tds += `</tr>`;
+        $('#tblEncuestaNuevo_Opciones tbody').append(tds);
+    }
+</script>

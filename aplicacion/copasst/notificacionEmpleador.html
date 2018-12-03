@@ -1,0 +1,92 @@
+<!-- Page -->
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<h3 class="page-title">Notificación</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button class="btn btn-warning lnkAbrirModulo" Titulo="COPASST" vinculo="copasst/home.html"><i class="icon fa-arrow-left"></i> Volver</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8 col-md-7">
+                <img src="" height="100px" id="imgCopasst_NotificacionEM_Logo">
+                <h1 class="text-center" id="lblCopasst_NotificacionEM_Empresa"></h1>
+                <h3 class="text-center" id="lblCopasst_NotificacionEM_Empresa_Direccion"></h3>
+                <h4 class="text-center" id="lblCopasst_NotificacionEM_Empresa_Telefono"></h4>
+                <br>
+                <h4 class="text-center">MEMORANDO</h4>
+                <p><strong>DE: </strong> JURADO DE VOTACIÓN COPPASST</p>
+                <p><strong class="">PARA: </strong> <select id="txtCopasst_NotificacionEM_Candidatos" class="form-control"></select></p>
+                <p><strong>Asunto:</strong> Notificación miembro del Comité Paritario de Seguridad y Salud en el Trabajo</p>
+                <p><strong>Fecha:</strong> <input id="txtCopasst_NotificacionEM_Fecha" type="text" class="form-control datepicker"></p>
+                <br>
+                <p>Cordial Saludo</p>
+                <p>Me permito comunicarle que la Gerencia del Consorcio CEISMA decidió nombrarlo como Representante por parte del empleador del Comité Paritario de Seguridad y Salud en el Trabajo (COPASST) del consorcio.</p>
+                <p>Le agradecemos comunicar por este mismo medio su aceptación a dicho nombramiento</p>
+                <br>
+                <p>Si está de acuerdo agradecemos firme esta notificación como muestra de su aceptación a ser miembro del comité</p>
+                <strong>Cordialmente</strong><br><br>
+                <strong><span id="lblCopasst_NotificacionEM_RepresentanteLegal"></span><br>Representante Legal</strong>
+
+            </div>
+        	<div class="col-sm-4 col-md-5 hidden-xs">
+            	<div class="panel panel-bordered panel-primary">
+            		<div class="panel-body">
+            			<div>
+            				<h4></h4>
+            				<div id="cntCopasst_NotificacionEM_Archivos"></div>
+            			</div>
+            			
+            		</div>
+            	</div>
+        	</div>
+        </div>
+            
+	</div>
+</div>
+
+<script>
+    $(document).ready(function()
+    {
+        $("#cntCopasst_NotificacionEM_Archivos").iniciarObjArchivos({objPrefijo : $("#txtInicio_idEmpresa"), Proceso: "Copast NotificacionEM", Usuario: Usuario.id});
+
+        $("#txtCopasst_NotificacionEM_Fecha").datepicker({
+            clearBtn: true,
+            language: "es",
+            orientation: "top auto",
+            daysOfWeekHighlighted: "0",
+            autoclose: true,
+            todayHighlight: true
+        });
+    });
+
+    function copasst_NotificacionEM_cargarArchivos()
+    {
+        $("#cntCopasst_NotificacionEM_Archivos").cargarArchivos({Prefijo : $("#txtInicio_idEmpresa").val(), Proceso : 'Copast NotificacionEM'});
+
+        $('#lblCopasst_NotificacionEM_Empresa').text(Empresa.Nombre);
+        $('#lblCopasst_NotificacionEM_Empresa_Direccion').text(Empresa.Direccion);
+        $('#lblCopasst_NotificacionEM_Empresa_Telefono').text(Empresa.Telefono);
+        $('#lblCopasst_NotificacionEM_RepresentanteLegal').text(Empresa.RepresentanteLegal);
+        $('#imgCopasst_NotificacionEM_Logo').attr('src', '../server/php/' + Empresa.Ruta + '/' + Empresa.Archivo);
+
+        $.post('../server/php/proyecto/cp_CargarCandidatos.php', {Usuario : Usuario.id, Empresa : $('#txtInicio_idEmpresa').val()}, function(data, textStatus, xhr) 
+        {
+            $('#txtCopasst_NotificacionEM_Candidatos option').remove();
+            if (data != 0)
+            {
+                var tds = '';
+                $.each(data, function(index, val) {
+                     tds += '<option value="' + val.id + '">' + val.Nombre + '</option>';
+                });
+                $('#txtCopasst_NotificacionEM_Candidatos').append(tds);
+            }
+        }, 'json');
+
+
+    }
+</script>

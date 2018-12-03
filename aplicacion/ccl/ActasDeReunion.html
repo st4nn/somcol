@@ -1,0 +1,115 @@
+<!-- Page -->
+<style>
+    .cntCCLActasDeReunion_Ficha .fa-thumb-tack
+    {
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        -moz-transform: rotate(60deg);
+        -webkit-transform: rotate(60deg);
+        -ms--transform: rotate(60deg);
+        transform: rotate(60deg);
+        margin-left: 1em;
+
+        color:red;
+    }
+</style>
+<div class="page" style="min-height: 90vh;">
+	<div class="page-header">
+		<h3 class="page-title">Actas de Reunión</h3>
+	</div>
+ 	<div class="page-content container-fluid">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-actions">
+                    <button class="btn btn-warning lnkAbrirModulo" Titulo="Comite de Convivencia Laboral" vinculo="ccl/home.html"><i class="icon fa-arrow-left"></i> Volver</button>
+                </div>
+            </div>
+        </div>
+
+    	<div id='cntCCLActasDeReunion_Fichas' class="col-sm-12">
+            
+    	</div>
+            
+	</div>
+</div>
+
+<script>
+    $(document).ready(function()
+    {
+        $(document).delegate('.btnCCLActasDeReunion_VerActa', 'click', function(event) 
+        {
+            var idActa = $(this).attr('data-idActa');
+            var idBDActa = $(this).attr('data-idBDActa');
+            event.preventDefault();
+            cargarModulo('ccl/ActasDeReunion_Acta.html', 'Acta de Reunión', function()
+            {
+                $('#lblCCL_ADR_Numero').text(idActa);
+                cpActas_CargarActa(idBDActa);
+            });
+        });
+    });
+
+    function CCL_ActasReunion_cargarActas()
+    {
+        $('#cntCCLActasDeReunion_Fichas div').remove();
+        var tds = '<div class="row">';
+        for (var i = 0; i < 8; i++) 
+        {
+            if (i%3 == 0)
+            {
+                tds += '</div><div class="row">';
+            }
+            tds += '<div class="col-sm-4 cntCCLActasDeReunion_Ficha" data-NoActa="' + (i+1) + '">';
+              tds += '<!-- Widget -->';
+              tds += '<div class="widget widget-shadow text-center font-size-16">';
+                tds += '<div class="widget-content">';
+                  tds += '<div class="bg-yellow-700 padding-30 white ">';
+                    tds += '<div>';
+                      tds += '<i class="font-size-30 icon fa-thumb-tack"></i>';
+                    tds += '</div>';
+                    tds += '<div>';
+                      tds += '<span class="font-size-20">Acta No.';
+                        tds += '<span class="font-size-30">' + (i+1) + '</span>';
+                      tds += '</span>';
+                    tds += '</div>';
+                    tds += '<div class="cntCCLActasDeReunion_Ficha_Mensaje"></div>';
+                    tds += '<div><i><small class="cntCCLActasDeReunion_Ficha_Fecha"></small></i></div>';
+                    tds += '<button type="button" data-idActa="' + (i+1) + '" data-idBDActa="0" class="btn btn-direction btn-up btn-warning btn-outline hide btnCCLActasDeReunion_VerActa">Ver Acta</button>';
+                  tds += '</div>';
+                tds += '</div>';
+              tds += '</div>';
+              tds += '<!-- End Widget -->';
+            tds += '</div>';
+        }
+        tds += '</div>';
+
+        $('#cntCCLActasDeReunion_Fichas').append(tds);
+
+        var idx = 0;
+
+        $.post('../server/php/proyecto/ccl_CargarActas_home.php', {
+            Usuario: Usuario.id, 
+            idEmpresa : $('#txtInicio_idEmpresa').val(),
+            Anio : $ ('#txtCCL_Anio').val()
+        }, function(data, textStatus, xhr) {
+            if (data != 0){
+                var obj;
+                $.each(data, function(index, val) {
+                     obj = $('.cntCCLActasDeReunion_Ficha[data-NoActa="' + val.NoActa + '"]');
+                     $(obj).find('.cntCCLActasDeReunion_Ficha_Mensaje').text(val.Objetivo);
+                     $(obj).find('.cntCCLActasDeReunion_Ficha_Fecha').text(val.Fecha);
+                     $(obj).find('.btnCCLActasDeReunion_VerActa').slideDown();
+                     $(obj).find('.btnCCLActasDeReunion_VerActa').attr('data-idBDActa', val.id);
+                     idx++;
+                });
+                $('.btnCCLActasDeReunion_VerActa[data-idActa="' + (idx+1)+ '"]').text('Diligenciar Acta');
+                $('.btnCCLActasDeReunion_VerActa[data-idActa="' + (idx+1)+ '"]').slideDown();
+            } else{
+                $('.btnCCLActasDeReunion_VerActa[data-idActa="1"]').text('Diligenciar Acta');
+                $('.btnCCLActasDeReunion_VerActa[data-idActa="1"]').slideDown();
+            }
+        }, 'json');
+    }
+</script>

@@ -166,7 +166,7 @@
                 Desde : $('#txtAusentismo_Graficas_Desde').val(),
                 Hasta : $('#txtAusentismo_Graficas_Hasta').val()
             }, function(data, textStatus, xhr) {
-                var datos = {labels : [], data_Cantidad : [], data_Dias : []};
+                var datos = {labels : [''], data_Cantidad : [0], data_Dias : [0]};
                 $('#lblAusentismo_Graficas_Titulo').text(vAusentismo_TipoDeGrafica[(numGrafica)]);
                 $('#txtAusentismo_Graficas_NumGrafica').val(numGrafica);
                 var idx = numGrafica;
@@ -216,9 +216,20 @@
                         data: barChartData,
                         options: {
                             maintainAspectRatio : false,
-                            responsive: true
-                        },
-                        scaleStartValue: 0
+                            responsive: true,
+                            scales: {
+                                lineWidth: 2,
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true
+                                    },
+                                    gridLines: {
+                                        color : 'rgba(0,0,0,0.4)'
+                                    }
+                                }]
+                            }
+                        }
                     });
 
                     window.cntAustentismo_Grafica_.canvas.parentNode.style.height = '380px';
@@ -288,6 +299,9 @@
                                     display: true,
                                     scaleLabel: {
                                         display: true
+                                    },
+                                    gridLines: {
+                                        color : 'rgba(0,0,0,0.4)'
                                     }
                                 }],
                                 yAxes: [{
@@ -295,6 +309,9 @@
                                     scaleLabel: {
                                         display: true,
                                         labelString: 'Cantidad de Registros'
+                                    },
+                                    gridLines: {
+                                        color : 'rgba(0,0,0,0.4)'
                                     },
                                     ticks: {
                                         suggestedMin: 0,

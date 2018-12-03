@@ -1,5 +1,9 @@
 <style>
 	@media print{
+	    body{
+            font-size: 12px;  
+        }
+        
 	    button, form{
 	       display: none !important;
 	    }
@@ -44,9 +48,40 @@
 	  	display: block !important;
 	    position: absolute;
 	    top : -80px;
-	    left: 110px;
+	    left: 160px;
 	  }
+	  
+	  #cntCopasst_AEC_Resultados{
+        display: inline-block !important;
+        width: 100% !important;
+      }
+    
+      .cntCopasst_AEC_Resultados{
+        margin-top: 3em !important;
+      }
+      
+        #cntCopasst_AEC_FirmasJurados {
+            display: inline-block !important;
+            width: 100% !important;
+        }
+        
+        .cntCopasstJuradosFirma{
+    	    display: inline-block;
+    	    vertical-align: top;
+            margin: 8em 1em 1em 1em !important;
+            border-top: 1px solid rgba(0,0,0, 0.5) !important;
+            width: calc(50% - 2em) !important;
+        }
 	}
+	
+	#cntCopasst_AEC_FirmasJurados{
+	    display: none;
+	}
+	
+	#cntCopasst_AEC_FirmasJurados h3{
+	    text-align: left;
+	}
+	
 </style>
 <!-- Page -->
 
@@ -329,6 +364,9 @@
 					<tbody></tbody>
 				</table>
  			</div>
+ 		</div>
+ 		<div id="cntCopasst_AEC_FirmasJurados">
+ 		    <h3 class="page-title">Firma de los jurados</h3>
  		</div>
 	</div>
 </div>

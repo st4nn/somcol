@@ -1,4 +1,28 @@
 <!-- Page -->
+<style type="text/css">
+  @page {
+    size: A4;
+  }
+  p.fillPrintTextarea{
+    display: none;
+  }
+
+  @media print{
+    html, body {
+        width: 210mm;
+        height: 297mm;        
+    }
+
+    textarea.fillPrintTextarea{
+      display: none !important;
+    } 
+
+    p.fillPrintTextarea{
+      display : block !important;
+      width: 100%;
+    }
+  }
+</style>
 <div class="page" style="min-height: 90vh; 
 
    background: #ece9e6; /* fallback for old browsers */
@@ -50,6 +74,18 @@
             <i class="icon fa-users"></i>
             <h4>COPASST</h4>
         </div>
+
+        <div class="fIniButton lnkAbrirModulo" vinculo="ccl/home.html" Titulo="Comité de Convivencia Laboral">
+            <i class="icon fa-thumbs-up"></i>
+            <h4>Comité de Convivencia</h4>
+        </div>
+
+        <div class="fIniButton lnkAbrirModulo" vinculo="seg_calidad/home.html" Titulo="Encuestas de Calidad" data-callback="encuestas_cargar">
+            <i class="icon fa-star-half-empty"></i>
+            <h4>Satisfacción del Cliente</h4>
+        </div>
+
+        
       
         <div class="fIniButton lnkAbrirModulo" vinculo="ausentismo/home.html" Titulo="Ausentismo" data-callback="ausentismo_AbrirHome">
             <i class="icon fa-user-times"></i>

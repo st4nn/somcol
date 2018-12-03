@@ -19,11 +19,13 @@ $(document).ready(function()
         id : _id, 
         Usuario : Usuario.id
       }, function(data, textStatus, xhr) {
-        const _tr = $(self).parent('td').parent('tr');
+
+        cpActas_CargarCompromisos();
+        /*const _tr = $(self).parent('td').parent('tr');
         $(_tr).removeClass('rowPendiente');
         $(_tr).addClass('rowCompletado');
         const _arrTd = $(_tr).find('td');
-        $(_arrTd[7]).text('Completado');
+        $(_arrTd[7]).text('Completado');*/
      }, 'json');
   });
 });

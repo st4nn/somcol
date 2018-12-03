@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+   <meta charset="utf-8" />
+   <title>Votación COPASST 2015</title>
+   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+   <meta content="" name="description" />
+   <meta content="" name="author" />
+   <link href="../votacion/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+   <link href="../votacion/assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+   <link href="../votacion/assets/bootstrap/css/bootstrap-fileupload.css" rel="stylesheet" />
+   <link href="../votacion/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+   <link href="../votacion/css/style.css" rel="stylesheet" />
+   <link href="../votacion/css/style_responsive.css" rel="stylesheet" />
+   <link href="../votacion/css/style_default.css" rel="stylesheet" id="style_color" />
+
+   <link href="../votacion/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
+   <link rel="stylesheet" type="text/css" href="../votacion/assets/uniform/css/uniform.default.css" />
+
+       <link rel="stylesheet" type="text/css" href="../votacion/assets/jquery-ui/jquery-ui-1.10.1.custom.min.css"/>
+       <style type="text/css">
+        #tblResultados img
+        {
+          width: 96px;
+  
+        }
+  
+       </style>
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+   <!-- BEGIN HEADER -->
+   <div id="header" class="navbar navbar-inverse navbar-fixed-top">
+       <!-- BEGIN TOP NAVIGATION BAR -->
+       <div class="navbar-inner">
+           <div class="container-fluid">
+               <!-- BEGIN LOGO -->
+               <a class="brand" href="index.html">
+                   <img src="" alt="" />
+               </a>
+               <!-- END LOGO -->
+           </div>
+       </div>
+       <!-- END TOP NAVIGATION BAR -->
+   </div>
+   <!-- END HEADER -->
+   <!-- BEGIN CONTAINER -->
+   <div id="container" class="row-fluid sidebar-closed">
+      <!-- BEGIN PAGE -->  
+      <div id="main-content">
+         <!-- BEGIN PAGE CONTAINER-->
+         <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->   
+            <div class="row-fluid">
+               <div class="span12">
+                  <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                   <h3 class="page-title">
+                     <h2><small>total Votos:</small><span class="badge badge-important" id="lblTotalVotos">0</span><h2>
+                     <!--<span>Nombre del que Vota</span>-->
+                  </h3>
+                   <!-- END PAGE TITLE & BREADCRUMB-->
+               </div>
+            </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row-fluid">
+                <table class="table table-borderless" id="tblResultados">
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <!-- END PAGE CONTENT-->         
+         </div>
+         <!-- END PAGE CONTAINER-->
+      </div>
+      <!-- END PAGE -->  
+   </div>
+   <!-- END CONTAINER -->
+   <!-- BEGIN FOOTER -->
+   <div id="footer">
+      <div class="span pull-right">
+         <span class="go-top"><i class="icon-arrow-up"></i></span>
+      </div>
+   </div>
+   <!-- END FOOTER -->
+   <!-- BEGIN JAVASCRIPTS -->    
+   <!-- Load javascripts at bottom, this will reduce page load time -->
+   <script src="../votacion/js/jquery-1.8.3.min.js"></script>
+   <script src="../votacion/assets/bootstrap/js/bootstrap.min.js"></script>
+   <script src="../votacion/js/jquery.blockui.js"></script>
+   <!-- ie8 fixes -->
+   <!--[if lt IE 9]>
+   <script src="js/excanvas.js"></script>
+   <script src="js/respond.js"></script>
+   <![endif]-->
+   <script type="text/javascript" src="../votacion/assets/chosen-bootstrap/chosen/chosen.jquery.min.js"></script>
+   <script type="text/javascript" src="../votacion/assets/uniform/jquery.uniform.min.js"></script>
+   <script src="../votacion/assets/jquery-ui/jquery-ui-1.10.2.custom.min.js"></script>
+   <script src="../votacion/js/jStore.js"></script>
+   <script src="../votacion/js/scripts.js"></script>
+   
+   <script>
+      jQuery(document).ready(function() {       
+         // initiate layout and plugins
+         App.init();
+         $(document).on("ready", resultados);
+         function resultados()
+         {
+          const datos = {
+            idEmpresa : getParameterByName('e'),
+            Anio : getParameterByName('a'),
+            key : getParameterByName('p')
+          };
+           $.post("php/cargarTabla.php", {
+              Tabla : "votaciones_ccl", 
+              idEmpresa : datos.idEmpresa, 
+              Anio : datos.Anio,
+              p : datos.key
+            }, function(data)
+            {
+              $("#tblResultados tbody tr").remove();
+              var tds = "";
+              var total = 0;
+              $.each(data, function(index, val) 
+              {
+                total += parseInt(val.votos);
+              });
+              $.each(data, function(index, val) 
+              {
+                  tds +='<tr>';
+                      tds +='<td class="span1">';
+                        tds += '<img with="35" height="35" src="' + val.foto + '" alt="">';
+                        tds += '<span class="label label-warning span12">' + val.Nombre + '</span>';
+                      tds += '</td>';
+                      tds +='<td class="span2">';
+                        tds += '<span class="label label-info" id="' + val.idCandidato + '_votos">' + val.votos + ' Votos</span>';
+                      tds += '</td>';
+                      tds +='<td>';
+                          tds +='<div class="progress progress-success progress-striped">';
+                              tds +='<div id="' + val.idCandidato + '_total" style="width: ' + ((val.votos/total)*100) + '%" class="bar"></div>';
+                          tds +='</div>';
+                      tds +='</td>';
+                  tds +='</tr>';
+              });
+              $("#tblResultados tbody").append(tds);
+              $("#lblTotalVotos").text(total);
+              //setInterval(hacerPush, 120000);
+            }, "json");
+
+			function hacerPush()
+			{
+				$.post("php/cargarTabla.php", {Tabla : "votaciones"}, function(data)
+	            {
+	              var tds = "";
+	              var total = 0;
+	              $.each(data, function(index, val) 
+	              {
+	                total += parseInt(val.votos);
+	              });
+	              $.each(data, function(index, val) 
+	              {
+	                    $('#' + val.idCandidato + '_votos').text(val.votos + ' Votos');
+	                    $('#' + val.idCandidato + '_total').attr('style', 'width: ' + ((val.votos/total)*100) + '%');
+	              });
+
+	              $("#lblTotalVotos").text(total);
+
+	            }, "json");
+			}
+         }
+      });
+
+      function getParameterByName(name) {
+          name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+          var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+          results = regex.exec(location.search);
+          return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+   </script>
+   <!-- END JAVASCRIPTS -->   
+</body>
+<!-- END BODY -->
+</html>

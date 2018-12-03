@@ -97,7 +97,7 @@
 
         $.post('../server/php/proyecto/cp_cargarLink.php', {
             Anio : $('#txtCopasst_Anio').val(),
-            idEmpresa : Usuario.idEmpresa
+            idEmpresa : $('#txtInicio_idEmpresa').val()
         }, function(data, textStatus, xhr) {
             $('#txtCopasst_Tarjeton_LinkVotacion').text('https://somcol.com.co/app/votacion/?' + data);
             $('#txtCopasst_Tarjeton_LinkResultados').text('https://somcol.com.co/app/votacion/resultados.html?' + data);

@@ -94,8 +94,7 @@
             idEmpresa : $('#txtInicio_idEmpresa').val(),
             Anio : $ ('#txtCopasst_Anio').val()
         }, function(data, textStatus, xhr) {
-            if (data != 0)
-            {
+            if (data != 0){
                 var obj;
                 $.each(data, function(index, val) {
                      obj = $('.cntCopasstActasDeReunion_Ficha[data-NoActa="' + val.NoActa + '"]');
@@ -107,6 +106,9 @@
                 });
                 $('.btnCopasstActasDeReunion_VerActa[data-idActa="' + (idx+1)+ '"]').text('Diligenciar Acta');
                 $('.btnCopasstActasDeReunion_VerActa[data-idActa="' + (idx+1)+ '"]').slideDown();
+            } else{
+                $('.btnCopasstActasDeReunion_VerActa[data-idActa="1"]').text('Diligenciar Acta');
+                $('.btnCopasstActasDeReunion_VerActa[data-idActa="1"]').slideDown();
             }
         }, 'json');
     }

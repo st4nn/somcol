@@ -24,8 +24,7 @@
             
    $result = $link->query(utf8_decode($sql));
    $idx = 0;
-   if ( $result->num_rows > 0)
-   {
+   if ( $result->num_rows > 0){
       $Resultado = array();
       while ($row = mysqli_fetch_assoc($result))
       {
@@ -38,8 +37,7 @@
       }
          mysqli_free_result($result);  
          echo json_encode($Resultado);
-   } else
-   {
+   } else{
       echo 0;
    }
 ?>

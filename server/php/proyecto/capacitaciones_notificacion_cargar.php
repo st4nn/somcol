@@ -9,7 +9,7 @@
    $sql = "SELECT 
                personal.*
             FROM
-               Personal
+               personal
             WHERE 
                personal.idEmpresa = '$idEmpresa'
                AND personal.Cedula = '$Cedula';";

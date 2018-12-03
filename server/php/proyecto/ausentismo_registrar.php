@@ -3,7 +3,7 @@
    $link = Conectar();
 
    $id = addslashes($_POST['id']);
-   $id = addslashes($_POST['Prefijo']);
+   $Prefijo = addslashes($_POST['Prefijo']);
    $idEmpresa = addslashes($_POST['idEmpresa']);
    $idUsuario = addslashes($_POST['Usuario']);
 
@@ -46,8 +46,8 @@
       $sql = "INSERT INTO au_registro(id, Prefijo, idEmpresa, idUsuario, idPersonal, Edad, TipoEvento, IncapacidadTipo, FechaInicial, FechaFinal, CodigoDiagnostico, Observaciones, RangoDeEdad, DiasDeIncapacidad, Dia, Mes, Anio, DiaDeLaSemana, Trimestre) VALUES 
       (
          $id, 
-         '" . $idEmpresa . "',
          '" . $Prefijo . "',
+         '" . $idEmpresa . "',
          '" . $idUsuario . "',
          '" . $idPersonal . "',
          '" . $Edad . "',
@@ -83,6 +83,7 @@
       DiaDeLaSemana = VALUES(DiaDeLaSemana),
       Trimestre = VALUES(Trimestre),
       fechaCargue = '" . date('Y-m-d H:i:s') . "';";
+
 
       $link->query(utf8_decode($sql));
 

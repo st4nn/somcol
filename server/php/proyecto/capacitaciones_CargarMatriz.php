@@ -8,7 +8,7 @@
    $sql = "SELECT 
                DISTINCT personal.Cargo
             FROM
-               Personal
+               personal
             WHERE 
                personal.idEmpresa = '$idEmpresa';";
 
